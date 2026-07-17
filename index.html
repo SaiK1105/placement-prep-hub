@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Prep Hub</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3;
+    --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; --gold:#d29922;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  header{padding:72px 0 48px;text-align:center;background:radial-gradient(ellipse at top,#1f2a44 0%,var(--bg) 65%)}
+  header h1{font-size:2.6rem;letter-spacing:-.02em}
+  header h1 span{color:var(--accent)}
+  header p{color:var(--muted);max-width:560px;margin:12px auto 0;font-size:1.05rem}
+  .badges{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .badge{border:1px solid var(--border);border-radius:999px;padding:4px 14px;font-size:.8rem;color:var(--muted)}
+  section{padding:40px 0}
+  h2{font-size:1.35rem;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:22px;font-size:.95rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;display:block;color:inherit;text-decoration:none;transition:.15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card .icon{font-size:1.5rem}
+  .card h3{margin:8px 0 4px;font-size:1.02rem}
+  .card p{color:var(--muted);font-size:.86rem}
+  .tag{display:inline-block;margin-top:10px;font-size:.72rem;padding:2px 10px;border-radius:999px;border:1px solid var(--border);color:var(--green)}
+  .tag.mock{color:var(--gold)}
+  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:.85rem}
+  footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>🎯 Placement <span>Prep Hub</span></h1>
+    <p>Interactive practice tools I built, company-wise online-assessment prep, and structured DSA drilling — my campus placement season, turned into a system.</p>
+    <div class="badges">
+      <span class="badge">⚡ Self-built HTML tools</span>
+      <span class="badge">🏢 Company-wise prep</span>
+      <span class="badge">🧠 DSA drills</span>
+      <span class="badge">🔄 Updated as I sit for more companies</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>🛠️ Practice Tools</h2>
+  <p class="sub">Built from scratch — open in any browser, no setup.</p>
+  <div class="grid">
+    <a class="card" href="Placement%20Training/mental_math_trainer.html">
+      <div class="icon">🧮</div>
+      <h3>Mental Math Trainer</h3>
+      <p>Timed speed-arithmetic practice for aptitude rounds.</p>
+      <span class="tag">Trainer</span>
+    </a>
+    <a class="card" href="Placement%20Training/dsa_a2z_drill.html">
+      <div class="icon">🗂️</div>
+      <h3>DSA Drill — A2Z Protocol</h3>
+      <p>Structured drill tracker following an A2Z problem sheet.</p>
+      <span class="tag">Tracker</span>
+    </a>
+    <a class="card" href="Placement%20Training/dsa_drill_expanded.html">
+      <div class="icon">📈</div>
+      <h3>DSA Drill — Expanded</h3>
+      <p>144-problem expanded edition with progress tracking.</p>
+      <span class="tag">Tracker</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>🏢 Company-Wise Prep</h2>
+  <p class="sub">Targeted OA plans, predicted mock papers, and research notes per company. New entries added each drive.</p>
+  <div class="grid">
+    <a class="card" href="Companies/Morgan_Stanley/morgan_stanley_oa_prep_plan_mock_paper.html">
+      <div class="icon">🏦</div>
+      <h3>Morgan Stanley</h3>
+      <p>1-day OA prep plan + mock paper. Research notes in repo.</p>
+      <span class="tag mock">OA Mock</span>
+    </a>
+    <a class="card" href="Companies/Presidio/presidio_oa_prep_plan_mock_paper.html">
+      <div class="icon">☁️</div>
+      <h3>Presidio — Prep Plan</h3>
+      <p>OA prep plan + mock paper.</p>
+      <span class="tag mock">OA Mock</span>
+    </a>
+    <a class="card" href="Companies/Presidio/presidio_predicted_OA_mock2.html">
+      <div class="icon">🎯</div>
+      <h3>Presidio — Predicted OA</h3>
+      <p>Second predicted online-assessment mock.</p>
+      <span class="tag mock">OA Mock</span>
+    </a>
+    <a class="card" href="Companies/Presidio/aptitude_sprint_60min.html">
+      <div class="icon">⏱️</div>
+      <h3>Presidio — 60-Min Sprint</h3>
+      <p>One-hour aptitude sprint session.</p>
+      <span class="tag">Sprint</span>
+    </a>
+    <a class="card" href="Companies/Tredence/tredence_prep_hq.html">
+      <div class="icon">📊</div>
+      <h3>Tredence — Prep HQ</h3>
+      <p>Analyst-role prep headquarters with OA countdown plan.</p>
+      <span class="tag">Prep HQ</span>
+    </a>
+    <a class="card" href="Companies/Swym/swym_oa_prep_plan_mock_paper.html">
+      <div class="icon">🛒</div>
+      <h3>Swym</h3>
+      <p>1-night OA prep plan + mock paper.</p>
+      <span class="tag mock">OA Mock</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>💡 The Approach</h2>
+  <p class="sub" style="max-width:720px">Rather than passively reading prep material, every company gets researched, every weak area gets a purpose-built drill tool, and everything gets tracked. Fellow students: feel free to fork and adapt any of these tools for your own prep.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">Built during the 2026–27 placement season · <a href="https://github.com/">View source on GitHub</a></div>
+</footer>
+
+</body>
+</html>
