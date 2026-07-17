@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morgan Stanley OA Prep - 1-Day Plan + Mock Paper</title>
+<style>
+:root {
+  --bg: #0b0f14;
+  --panel: #111822;
+  --panel2: #16202d;
+  --ink: #eef6ff;
+  --muted: #aec1d2;
+  --accent: #81d4fa;
+  --accent2: #c7f59b;
+  --warn: #ffd166;
+  --bad: #ff9aa2;
+  --line: #2a3a4d;
+  --code: #071019;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+body { font-family: "Comic Sans MS", "Segoe Print", "Trebuchet MS", "Segoe UI", Arial, sans-serif; line-height: 1.55; }
+header { padding: 28px 20px 18px; background: linear-gradient(120deg, #0f1722, #182335); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 46px); letter-spacing: 0.2px; }
+.subtitle { color: var(--muted); max-width: 980px; }
+.badge { display: inline-block; border: 1px solid var(--line); background: #101820; color: var(--accent2); padding: 5px 10px; border-radius: 999px; margin: 4px 6px 4px 0; font-size: 13px; }
+nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+nav button { background: var(--panel2); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; cursor: pointer; font: inherit; }
+nav button.active, nav button:hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(129,212,250,.15) inset; }
+main { max-width: 1160px; margin: 0 auto; padding: 22px; }
+.page { display: none; animation: fade .2s ease-in; }
+.page.active { display: block; }
+@keyframes fade { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin: 16px 0; box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+.note { border-left: 5px solid var(--warn); background: #191a15; }
+.good { border-left: 5px solid var(--accent2); }
+.warn { border-left: 5px solid var(--bad); }
+h2 { margin: 10px 0 12px; font-size: 30px; }
+h3 { margin: 18px 0 8px; color: var(--accent); }
+h4 { margin: 14px 0 6px; color: var(--accent2); }
+a { color: var(--accent); }
+ul { padding-left: 23px; }
+li { margin: 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; overflow: hidden; border-radius: 12px; }
+th, td { border: 1px solid var(--line); padding: 10px; vertical-align: top; }
+th { background: #1a2634; color: var(--accent2); text-align: left; }
+tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+code, pre { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace; }
+pre { background: var(--code); border: 1px solid var(--line); color: #e9f7ff; padding: 14px; border-radius: 14px; overflow-x: auto; white-space: pre; }
+.q { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin: 12px 0; background: #0f1722; }
+.q .meta { color: var(--muted); font-size: 13px; }
+details { margin-top: 10px; border: 1px dashed var(--line); border-radius: 12px; padding: 10px; background: rgba(255,255,255,.02); }
+summary { cursor: pointer; color: var(--warn); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.kpi { background: #0f1722; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+.kpi strong { display:block; color: var(--accent2); font-size: 22px; }
+.footer { color: var(--muted); font-size: 13px; margin: 30px 0; }
+@media print {
+  header { position: static; }
+  nav { display: none; }
+  .page { display: block !important; break-after: page; }
+  body { background: white; color: black; font-family: Arial, sans-serif; }
+  .card, .q, pre, details { background: white; color: black; border-color: #aaa; box-shadow: none; }
+  a { color: black; }
+}
+</style>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+  const btn = document.querySelector('button[data-page="' + id + '"]');
+  if (btn) btn.classList.add('active');
+  location.hash = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.addEventListener('load', () => {
+  const id = location.hash ? location.hash.slice(1) : 'plan';
+  showPage(document.getElementById(id) ? id : 'plan');
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Morgan Stanley OA Prep</h1>
+  <div class="subtitle">One-day sprint plan + evidence-based expected mock paper for the Technology Apprenticeship / Application Development Track. Built on your uploaded JD, your research notes and public candidate reports. Use this to prepare ethically; actual OA questions can change.</div>
+  <div style="margin-top:10px">
+    <span class="badge">Dark mode</span><span class="badge">Single HTML, multi-page tabs</span><span class="badge">Question paper + answer key</span><span class="badge">Updated: 1-day sprint on 10 July, OA 11 July 11 AM</span>
+  </div>
+  <nav>
+    <button data-page="plan" onclick="showPage('plan')">Main: 1-Day Plan</button>
+    <button data-page="format" onclick="showPage('format')">OA Format</button>
+    <button data-page="found" onclick="showPage('found')">Questions Found</button>
+    <button data-page="aptitude" onclick="showPage('aptitude')">Mock: Aptitude</button>
+    <button data-page="debugging" onclick="showPage('debugging')">Mock: Debugging</button>
+    <button data-page="coding" onclick="showPage('coding')">Mock: Coding</button>
+    <button data-page="lastday" onclick="showPage('lastday')">Last-Minute Notes</button>
+    <button data-page="sources" onclick="showPage('sources')">Sources</button>
+  </nav>
+</header>
+<main>
+<section id="plan" class="page">
+  <div class="card warn">
+    <h2>Reality check before the sprint</h2>
+    <p>I cannot verify or provide a leaked/future proprietary OA paper. This file separates <b>publicly reported questions</b> from a <b>high-probability mock paper</b>. Treat it as a targeted practice paper, not a guarantee.</p>
+  </div>
+  <div class="grid">
+    <div class="kpi"><strong>Most likely sections</strong>Debugging + Aptitude/Reasoning/SJT + 3 Coding</div>
+    <div class="kpi"><strong>Highest weight</strong>Coding / DSA, especially DP + tree/two-pointer patterns</div>
+    <div class="kpi"><strong>Target score</strong>2 coding solid + 5/7 debugging + high accuracy in aptitude</div>
+    <div class="kpi"><strong>Language focus</strong>Java/C++/C#/C per JD; Java/C++ safest for implementation</div>
+  </div>
+
+  <div class="card note">
+    <h3>Compressed 1-day plan: OA is tomorrow, 11 July at 11:00 AM</h3>
+    <p>Everything below fits in one day (today, 10 July). Rule for the day: <b>no new topics</b> — only the high-probability patterns in this file. Depth on 5 patterns beats breadth on 20.</p>
+  </div>
+
+  <div class="card good">
+    <h3>Block 1 (start now, ~30 min) - Lock the format</h3>
+    <ul><li>15 min: Read the OA Format + Questions Found tabs. Memorize section timings: ~20 min debugging, ~40 min aptitude, 60 min for 3 coding.</li><li>15 min: Set up your test environment now, not tomorrow: laptop charged, stable internet, ID ready, quiet room booked, browser tested.</li></ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 2 (~3 hr) - DP scoring block (highest weight)</h3>
+    <ul><li>60 min: House Robber / Maximum Non-Adjacent Sum — solve, then re-derive the rolling-variable version from memory.</li><li>75 min: Stock Buy/Sell with at most K transactions — the buy[t]/sell[t] DP. This is directly reported in a candidate experience.</li><li>45 min: Longest Valid Parentheses (stack of indices approach). Skip LCS/Edit Distance if you're behind schedule.</li></ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 3 (~1.5 hr) - Sliding window + trees</h3>
+    <ul><li>45 min: Subarrays with exactly K distinct (atMost(K) - atMost(K-1)) and the removable-subarray prefix/suffix pattern.</li><li>45 min: Tree diameter + level-order input parsing with -1 as null. Practice building the tree from input once — OA input parsing wastes time if unpracticed.</li></ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 4 (~2.5 hr) - Full mock under strict timer</h3>
+    <ul><li>40 min: 24 aptitude/SJT questions from this mock. Hard stop at the timer.</li><li>20 min: 7 debugging questions. Aim 5+ correct.</li><li>60 min: 3 coding questions from the Mock: Coding tab. Write edge cases before code; submit partials if stuck.</li><li>30 min: Review every wrong answer and write a one-line rule for each mistake.</li></ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 5 (night, ~1 hr max) - Polish, then sleep</h3>
+    <ul><li>20 min: Read Last-Minute Notes tab: templates + edge cases + Morgan Stanley values for SJT.</li><li>20 min: Quick OOPs + SQL GROUP BY/HAVING/JOIN skim only if an interview may follow the OA soon.</li><li>20 min: Re-solve your single weakest pattern from today. Then stop. Sleep by 11 PM — accuracy tomorrow matters more than one extra problem tonight.</li></ul>
+  </div>
+
+  <div class="card good">
+    <h3>11 July - OA morning (before 11:00 AM)</h3>
+    <ul><li>Wake with enough buffer; eat something light. Log in / verify the test link by 10:30 AM.</li><li>9:30-10:15: Warm up with ONE easy array question and ONE debugging snippet from this file. Nothing new, nothing hard.</li><li>During OA: read constraints first, write edge cases before code, run sample and custom cases.</li><li>Coding: if stuck after 15 minutes, submit brute/partial and move on; return if time remains.</li><li>Aptitude/SJT: don't burn time on calculation-heavy questions; mark the best logical answer and move.</li></ul>
+  </div>
+
+  <div class="card warn">
+    <h3>Blind spots this plan was missing - fix these today</h3>
+    <ul>
+      <li><b>Full-program I/O, not LeetCode functions:</b> SHL/Aspiring Minds usually gives a blank editor with stdin/stdout, no autocomplete. You're coding in <b>Python</b>: use <code>sys.stdin.readline</code>, not plain <code>input()</code>, which can TLE at N = 2*10^5. Template in Last-Minute Notes. Also verify Python appears in the language dropdown the moment you access the test link - if not, tell yourself today, not at 11 AM.</li>
+      <li><b>Python speed, not overflow, is your risk:</b> ints don't overflow in Python, so ignore the long/int worry. Instead watch time limits: keep hot loops simple, and for Stock-K use the K &gt;= N/2 greedy shortcut. Details in Last-Minute Notes.</li>
+      <li><b>Recursion limit:</b> Python's default recursion limit is 1000 - a skewed 2*10^5-node tree crashes instantly. <code>sys.setrecursionlimit(300000)</code> at the top of every solution, and prefer iterative DFS for trees. Practice once today.</li>
+      <li><b>Platform rules:</b> SHL tests are usually one-way - no going back to previous questions or sections, each section separately timed, often webcam-proctored. Answer every aptitude question before moving on; there may be no review pass. Check your invite email today for browser requirements (some links need Chrome, camera/mic permission, or a lockdown setup) - don't discover this at 10:55 AM.</li>
+      <li><b>Debugging section constraint:</b> these platforms often restrict how much you can edit or expect a minimal fix. Change the fewest lines possible; never rewrite the whole snippet.</li>
+      <li><b>No calculator in aptitude:</b> do the mock's math section fully on paper today. Practice percentage/ratio shortcuts (e.g., +20% then -20% = -4%) rather than long division under pressure.</li>
+      <li><b>Pseudo-code MCQs:</b> some Morgan Stanley aptitude pools include trace-the-output pseudo-code questions. If you finish the mock early, trace 3-4 short loops by hand.</li>
+      <li><b>Logistics failure modes:</b> re-check the invite email (and spam folder) today for the exact link and any system-check step. Keep a mobile hotspot ready as backup internet, close all other apps/notifications, use the bathroom and keep water at the desk before starting - proctored tests may not let you leave the seat.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="format" class="page">
+  <div class="card">
+    <h2>Expected OA format</h2>
+    <p>The exact count can vary by hiring track and year. Public reports converge on three main parts.</p>
+    <table>
+      <tr><th>Section</th><th>Candidate-reported counts/timing</th><th>What to prioritize</th></tr>
+      <tr><td>Debugging / Fix-the-code</td><td>7 questions / 20 min, or 10 questions / 20 min in some reports</td><td>Array bounds, loop conditions, sort bugs, string comparison, recursion base cases, matrix loops.</td></tr>
+      <tr><td>Aptitude / Reasoning / SJT</td><td>10 questions / 20 min in some reports; 24 questions / 40 min in Apprenticeship/Code-to-Give style reports</td><td>Percentage, probability, sequence, syllogism, time-work, SJT aligned with values.</td></tr>
+      <tr><td>Coding / DSA</td><td>3 questions / 60 min repeatedly reported</td><td>DP, trees, sliding window/two pointers, stack, arrays/strings. Submit clean partials if stuck.</td></tr>
+    </table>
+  </div>
+  <div class="card note">
+    <h3>Role alignment from your JD</h3>
+    <p>The uploaded JD emphasizes excellent problem-solving, programming in at least one of Java/C++/C#/C, algorithms/data structures, OOPS and Unix. So your final prep should not be only aptitude - DSA and debugging matter most for this application-development track.</p>
+  </div>
+  <div class="card">
+    <h3>Section strategy</h3>
+    <ul>
+      <li><b>Coding:</b> Decide approach in 3-5 minutes, code in 20-25 minutes per problem, keep last 5 minutes for custom tests.</li>
+      <li><b>Debugging:</b> Read expected output first, then check boundaries, assignment vs comparison, wrong loop variable, wrong dimension.</li>
+      <li><b>Aptitude/SJT:</b> Accuracy matters. Skip calculation-heavy questions on first pass and return only if time remains.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="found" class="page">
+  <div class="card warn">
+    <h2>Questions found online / public reports</h2>
+    <p>These are public candidate reports, not official Morgan Stanley disclosures. Wording may be different in the real OA.</p>
+    <table>
+      <tr><th>Reported question/pattern</th><th>Paraphrased task</th><th>Pattern</th><th>Confidence note</th></tr>
+<tr><td>Longest Valid Parentheses</td><td>Reported in a Morgan Stanley OA candidate post. Given a parentheses string, return the length of the longest contiguous valid bracket substring.</td><td>Stack / DP</td><td>Public candidate report; not official.</td></tr>
+<tr><td>House Robber / Maximum Non-Adjacent Sum</td><td>Reported in a Morgan Stanley Code to Give OA post as a differently worded House Robber I problem. Given values in a line, maximize sum without taking adjacent positions.</td><td>1D DP</td><td>Public candidate report; not official.</td></tr>
+<tr><td>Count removable subarrays so remaining array is strictly increasing</td><td>Reported in a Code to Give OA post. Count contiguous subarrays that can be removed while the remaining array stays non-empty and strictly increasing.</td><td>Two pointers / prefix-suffix</td><td>Public candidate report; not official.</td></tr>
+<tr><td>Subarrays with exactly K distinct integers</td><td>Reported in a Code to Give OA post. Count subarrays with exactly K different numbers.</td><td>Sliding window</td><td>Public candidate report; not official.</td></tr>
+<tr><td>Maximum profit with at most K stock transactions</td><td>Listed in a Morgan Stanley Technology Analyst interview experience as one of the coding problems.</td><td>DP</td><td>Public candidate report; not official.</td></tr>
+<tr><td>Debugging: matrix addition, bubble sort, selection sort, string comparison</td><td>Reported as examples of syntax/logic debugging tasks in a Morgan Stanley Code to Give OA post.</td><td>Debugging basics</td><td>Public candidate report; not official.</td></tr>
+<tr><td>Debugging: reverse sign, logic/syntax fixes</td><td>Reported in a Morgan Stanley summer internship experience.</td><td>Debugging basics</td><td>Public candidate report; not official.</td></tr>
+
+    </table>
+  </div>
+  <div class="card good">
+    <h3>What I would bet on for your OA practice</h3>
+    <ol>
+      <li>At least one DP problem: House Robber / stock DP / edit-distance-like.</li>
+      <li>At least one array-string problem: sliding window, two pointers, stack.</li>
+      <li>One tree or graph-ish medium problem if the pool follows your uploaded research.</li>
+      <li>Debugging bugs will likely be small but easy to miss under time pressure.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="aptitude" class="page">
+  <div class="card">
+    <h2>Mock Section A - Aptitude / Reasoning / SJT</h2>
+    <p><b>Timer:</b> 40 minutes for 24 questions. Try to finish the first pass in 30 minutes and use 10 minutes for review.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q1</div>
+    <p><b>A price is increased by 20% and then decreased by 20%. What is the net percentage change?</b></p>
+    <ol type="A">
+      <li>0%</li><li>4% decrease</li><li>4% increase</li><li>8% decrease</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Let original be 100 -&gt; 120 -&gt; 96, so 4% decrease.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q2</div>
+    <p><b>A can finish a task in 12 days and B in 18 days. Working together, how many days will they take?</b></p>
+    <ol type="A">
+      <li>6</li><li>7.2</li><li>8</li><li>9</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Rate = 1/12 + 1/18 = 5/36, so time = 36/5 = 7.2 days.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q3</div>
+    <p><b>Two fair dice are thrown. Probability that the sum is 9?</b></p>
+    <ol type="A">
+      <li>1/6</li><li>1/9</li><li>1/12</li><li>2/9</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Outcomes: (3,6),(4,5),(5,4),(6,3) = 4/36 = 1/9.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q4</div>
+    <p><b>A:B = 3:5 and A+B = 64. Find B-A.</b></p>
+    <ol type="A">
+      <li>8</li><li>12</li><li>16</li><li>24</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - 8 parts = 64, one part = 8. Difference = 2 parts = 16.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q5</div>
+    <p><b>Find the next number: 2, 6, 12, 20, 30, ?</b></p>
+    <ol type="A">
+      <li>36</li><li>40</li><li>42</li><li>44</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Terms are n(n+1): 1*2,2*3,..., so next = 6*7 = 42.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q6</div>
+    <p><b>Statements: All analysts are coders. Some coders are interns. Conclusion I: Some analysts are interns. Conclusion II: Some coders are analysts.</b></p>
+    <ol type="A">
+      <li>Only I follows</li><li>Only II follows</li><li>Both follow</li><li>Neither follows</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - All analysts are coders means some coders can be analysts. I does not necessarily follow.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q7</div>
+    <p><b>How many distinct arrangements are possible for the letters in LEVEL?</b></p>
+    <ol type="A">
+      <li>20</li><li>30</li><li>60</li><li>120</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 5!/(2!*2!) = 30.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q8</div>
+    <p><b>Average of 6 numbers is 45. If one number is removed, the average becomes 42. Find the removed number.</b></p>
+    <ol type="A">
+      <li>54</li><li>57</li><li>60</li><li>63</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Initial sum = 270; remaining sum = 210; removed = 60? Wait: 42*5=210, 270-210=60. Correct answer C.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q9</div>
+    <p><b>Compound interest on Rs.10,000 at 10% per annum for 2 years, compounded annually, is:</b></p>
+    <ol type="A">
+      <li>Rs.1,000</li><li>Rs.2,000</li><li>Rs.2,100</li><li>Rs.2,200</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Amount = 10000*1.1^2 = 12100, interest = 2100.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q10</div>
+    <p><b>A 120 m train crosses a pole in 6 seconds. Its speed is:</b></p>
+    <ol type="A">
+      <li>60 km/h</li><li>72 km/h</li><li>80 km/h</li><li>90 km/h</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Speed = 120/6 = 20 m/s = 72 km/h.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q11</div>
+    <p><b>A is the sister of B. B is the father of C. C is the brother of D. How is A related to D?</b></p>
+    <ol type="A">
+      <li>Mother</li><li>Aunt</li><li>Sister</li><li>Grandmother</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - B is D&#x27;s father; A is B&#x27;s sister, so A is D&#x27;s aunt.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q12</div>
+    <p><b>Odd one out: 121, 144, 169, 196, 226</b></p>
+    <ol type="A">
+      <li>121</li><li>169</li><li>196</li><li>226</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: D</b> - All except 226 are perfect squares.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q13</div>
+    <p><b>A team resolves 60 tickets in week 1, 75 in week 2, and 90 in week 3. If the same pattern continues, week 4 tickets = ?</b></p>
+    <ol type="A">
+      <li>100</li><li>105</li><li>110</li><li>120</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Increase by 15 each week.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q14</div>
+    <p><b>Analogy: Client : Service :: Bug : ?</b></p>
+    <ol type="A">
+      <li>Compile</li><li>Fix</li><li>Deploy</li><li>Branch</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - A client receives service; a bug receives a fix.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q15</div>
+    <p><b>A statement says: &#x27;No customer data should be logged in plain text.&#x27; Which action best follows it?</b></p>
+    <ol type="A">
+      <li>Log everything temporarily</li><li>Mask or hash sensitive fields before logging</li><li>Ask QA to ignore logs</li><li>Delete all logs</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - This aligns with security and doing the right thing.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q16</div>
+    <p><b>What is the time complexity of: for i=1; i&lt;=n; i*=2 { for j=1; j&lt;=n; j++ { ... } } ?</b></p>
+    <ol type="A">
+      <li>O(n)</li><li>O(n log n)</li><li>O(n^2)</li><li>O(log n)</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Outer loop runs log n times; inner loop runs n times.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q17</div>
+    <p><b>Which OOP concept hides internal state and exposes behavior through methods?</b></p>
+    <ol type="A">
+      <li>Inheritance</li><li>Polymorphism</li><li>Encapsulation</li><li>Abstraction only</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Encapsulation bundles data and controlled access methods.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q18</div>
+    <p><b>In SQL, which clause filters groups after aggregation?</b></p>
+    <ol type="A">
+      <li>WHERE</li><li>GROUP BY</li><li>HAVING</li><li>ORDER BY</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - HAVING filters aggregate groups; WHERE filters rows before grouping.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q19</div>
+    <p><b>Find the next letter: A, C, F, J, O, ?</b></p>
+    <ol type="A">
+      <li>S</li><li>T</li><li>U</li><li>V</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Gaps are +2,+3,+4,+5,+6, so O + 6 = U.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q20</div>
+    <p><b>Five people sit in a row. P is left of Q. R is right of Q. S is left of P. Who can be leftmost?</b></p>
+    <ol type="A">
+      <li>P</li><li>Q</li><li>R</li><li>S</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: D</b> - Given S &lt; P &lt; Q &lt; R, S can be leftmost.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q21</div>
+    <p><b>An article sold for Rs.120 gives 20% profit. Cost price is:</b></p>
+    <ol type="A">
+      <li>Rs.96</li><li>Rs.100</li><li>Rs.110</li><li>Rs.115</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - CP = 120/1.2 = 100.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q22</div>
+    <p><b>Remainder when 7^103 is divided by 6:</b></p>
+    <ol type="A">
+      <li>0</li><li>1</li><li>3</li><li>5</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 7 ≡ 1 mod 6, so 7^103 ≡ 1.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q23</div>
+    <p><b>A teammate is stuck near submission time. Best workplace response?</b></p>
+    <ol type="A">
+      <li>Ignore them</li><li>Do their work secretly</li><li>Understand blocker, help unblock, and inform lead if risk remains</li><li>Blame them later</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Collaborative, transparent and responsible.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q24</div>
+    <p><b>You notice a production metric dashboard is wrong but the demo is in 10 minutes. What should you do first?</b></p>
+    <ol type="A">
+      <li>Hide the chart</li><li>Flag the issue clearly, give the reliable part of the data, and start rollback/fix</li><li>Pretend it is correct</li><li>Delete the dashboard</li>
+    </ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Do the right thing; communicate risk and act.</p></details>
+  </div>
+
+</section>
+
+<section id="debugging" class="page">
+  <div class="card">
+    <h2>Mock Section B - Debugging / Fix the Code</h2>
+    <p><b>Timer:</b> 20 minutes for 7 questions. Expected workflow: identify the bug, change the minimum number of lines, run mentally on edge cases.</p>
+    <p><b>Python note:</b> even if you code Section C in Python, debugging snippets are often served in C/C++/Java and you must fix them in that language. You don't need to write Java - just read it. The bugs are language-agnostic (bounds, comparisons, base cases). The one Java-specific rule to remember: compare strings with <code>.equals()</code>, never <code>==</code>.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q1</div>
+    <h3>Reverse Sign</h3>
+    <pre>int reverseSign(int x) {
+    if (x &lt; 0) return x;
+    return -x;
+}
+// Expected: reverseSign(-8) = 8, reverseSign(5) = -5</pre>
+    <details><summary>Expected fix</summary><p>Change `return x;` to `return -x;` or simply return `-x` for all integer x except edge-case INT_MIN.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q2</div>
+    <h3>Matrix Addition</h3>
+    <pre>for (int i = 0; i &lt; rows; i++) {
+    for (int j = 0; j &lt; rows; j++) {
+        C[i][j] = A[i][j] + B[i][j];
+    }
+}
+// A, B, C have dimensions rows x cols</pre>
+    <details><summary>Expected fix</summary><p>Inner loop should use `j &lt; cols`, not `j &lt; rows`.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q3</div>
+    <h3>Bubble Sort Boundary</h3>
+    <pre>for (int i = 0; i &lt; n; i++) {
+    for (int j = 0; j &lt; n - i; j++) {
+        if (arr[j] &gt; arr[j+1]) swap(arr[j], arr[j+1]);
+    }
+}</pre>
+    <details><summary>Expected fix</summary><p>Inner loop should be `j &lt; n - i - 1` to avoid arr[j+1] out of bounds.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q4</div>
+    <h3>Selection Sort Min Index</h3>
+    <pre>for (int i = 0; i &lt; n; i++) {
+    int minIndex = i;
+    for (int j = i+1; j &lt; n; j++) {
+        if (arr[j] &lt; arr[minIndex]) minIndex = i;
+    }
+    swap(arr[i], arr[minIndex]);
+}</pre>
+    <details><summary>Expected fix</summary><p>Inside the if, set `minIndex = j`, not `i`.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q5</div>
+    <h3>Java String Comparison</h3>
+    <pre>boolean isMorgan(String s) {
+    return s == &quot;Morgan&quot;;
+}</pre>
+    <details><summary>Expected fix</summary><p>Use `return &quot;Morgan&quot;.equals(s);` to compare content and avoid null issues.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q6</div>
+    <h3>Factorial Base Case</h3>
+    <pre>long fact(int n) {
+    if (n == 1) return 1;
+    return n * fact(n - 1);
+}
+// Expected: fact(0) = 1</pre>
+    <details><summary>Expected fix</summary><p>Base case should be `if (n &lt;= 1) return 1;`.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Debug Q7</div>
+    <h3>Binary Search Loop</h3>
+    <pre>int search(vector&lt;int&gt;&amp; a, int target) {
+    int l = 0, r = a.size() - 1;
+    while (l &lt; r) {
+        int mid = (l + r) / 2;
+        if (a[mid] == target) return mid;
+        else if (a[mid] &lt; target) l = mid + 1;
+        else r = mid - 1;
+    }
+    return -1;
+}</pre>
+    <details><summary>Expected fix</summary><p>Use `while (l &lt;= r)` so the last remaining element is checked. Prefer `l + (r-l)/2` for mid.</p></details>
+  </div>
+
+</section>
+
+<section id="coding" class="page">
+  <div class="card">
+    <h2>Mock Section C - Coding / DSA</h2>
+    <p><b>Timer:</b> 60 minutes for 3 questions. Target: one easy/medium in 15-18 minutes, one medium in 20-25 minutes, then partial/optimized solution for the hardest.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">Found online pattern: House Robber variant; high-confidence DP drill.</div>
+    <h3>Coding Q1 - Maximum Non-Adjacent Bonus</h3>
+    <p><b>Statement:</b> You are given N project bonus values in an array. You may choose any projects, but you cannot choose two adjacent projects. Return the maximum total bonus.</p>
+    <p><b>Input:</b> First line N. Second line N integers.</p>
+    <p><b>Output:</b> Maximum obtainable sum.</p>
+    <p><b>Constraints:</b> 1 &lt;= N &lt;= 2*10^5, 0 &lt;= value[i] &lt;= 10^9</p>
+    <pre>Input: 6 / 5 5 10 100 10 5 -&gt; Output: 110</pre>
+    <details><summary>Expected approach</summary><p>DP with rolling variables: take = value[i] + dp[i-2], skip = dp[i-1]. Complexity O(N), memory O(1).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Found in public Morgan Stanley Technology Analyst experience; high-confidence DP drill.</div>
+    <h3>Coding Q2 - Max Stock Profit With At Most K Transactions</h3>
+    <p><b>Statement:</b> Given prices for N days and an integer K, find the maximum profit possible using at most K buy-sell transactions. You must sell before buying again.</p>
+    <p><b>Input:</b> First line N K. Second line N prices.</p>
+    <p><b>Output:</b> Maximum profit.</p>
+    <p><b>Constraints:</b> 1 &lt;= N &lt;= 10^5, 1 &lt;= K &lt;= 100, 0 &lt;= price[i] &lt;= 10^9</p>
+    <pre>Input: 6 2 / 10 22 5 75 65 80 -&gt; Output: 87</pre>
+    <details><summary>Expected approach</summary><p>DP over transactions with best buy state. For each t, update buy[t]=max(buy[t], sell[t-1]-price), sell[t]=max(sell[t], buy[t]+price). Complexity O(NK). If K&gt;=N/2, use unlimited-transactions greedy.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Expected from uploaded research: tree question likely; standard OA medium tree drill.</div>
+    <h3>Coding Q3 - Diameter of a Binary Tree</h3>
+    <p><b>Statement:</b> A binary tree is given in level order with -1 representing null. Return the diameter of the tree, defined as the maximum number of edges on any path between two nodes.</p>
+    <p><b>Input:</b> First line N, then N space-separated level-order values, using -1 for null.</p>
+    <p><b>Output:</b> Diameter in edges.</p>
+    <p><b>Constraints:</b> 0 &lt;= N &lt;= 2*10^5, node values fit in int</p>
+    <pre>Input: 7 / 1 2 3 4 5 -1 -1 -&gt; Output: 3 (path 4-2-1-3 or 5-2-1-3)</pre>
+    <details><summary>Expected approach</summary><p>DFS returns height. At each node, answer=max(answer, leftHeight+rightHeight). Complexity O(N). Use iterative traversal if recursion depth is risky.</p></details>
+  </div>
+
+  <div class="card note">
+    <h3>Backup high-priority coding drill list</h3>
+    <table><tr><th>Problem</th><th>One-line approach</th></tr>
+<tr><td>Longest valid parentheses substring</td><td>Stack indices or DP. Keep last invalid index. O(N).</td></tr>
+<tr><td>Count subarrays with exactly K distinct integers</td><td>exactly(K) = atMost(K) - atMost(K-1). O(N).</td></tr>
+<tr><td>Count removable subarrays leaving strictly increasing array</td><td>Build increasing prefix/suffix, then two pointers to count removals. O(N).</td></tr>
+<tr><td>Tree max path sum</td><td>Postorder DFS; keep best path through current node. O(N).</td></tr>
+<tr><td>Edit distance / LCS style DP</td><td>2D DP; optimize rows if memory tight.</td></tr>
+
+    </table>
+  </div>
+</section>
+
+<section id="lastday" class="page">
+  <div class="card good">
+    <h2>Last-minute notes</h2>
+    <h3>Coding templates to remember</h3>
+    <ul>
+      <li><b>Sliding window:</b> maintain frequency map, move left while invalid, count windows.</li>
+      <li><b>DP rolling:</b> only keep previous states when recurrence uses i-1/i-2.</li>
+      <li><b>Tree DFS:</b> function returns local value; global variable stores best answer.</li>
+      <li><b>Binary search:</b> use <code>while (l <= r)</code> for exact search and avoid overflow in mid.</li>
+    </ul>
+    <h3>Python stdin/stdout boilerplate (memorize - SHL editors are blank)</h3>
+    <pre>import sys
+input = sys.stdin.readline          # fast input; input() alone can TLE at 2*10^5
+
+n = int(input())
+a = list(map(int, input().split()))
+
+ans = 0
+# ... solve ...
+
+print(ans)</pre>
+    <p>If all input comes at once or line structure is messy: <code>data = sys.stdin.read().split()</code> and walk it with an index. No overflow worries in Python - ints are arbitrary precision.</p>
+    <h3>Python recursion trap (skewed tree, N = 2*10^5)</h3>
+    <pre>import sys
+sys.setrecursionlimit(300000)   # default is only 1000 - a chain tree crashes without this</pre>
+    <p>Even with the higher limit, deep recursion can still crash on some judges. Safest: write tree DFS <b>iteratively</b> with an explicit stack. Practice diameter iteratively once today.</p>
+    <h3>Python speed rule</h3>
+    <p>Python is ~30-50x slower than C++. O(N) and O(N log N) at N = 2*10^5 are fine. O(NK) at 10^5 * 100 = 10^7 (Stock K-transactions) is borderline: keep the inner loop dead simple (plain lists, no function calls inside), and remember the shortcut - if K &gt;= N/2, switch to the unlimited-transactions greedy which is O(N).</p>
+  <div class="card">
+    <h3>Common edge cases</h3>
+    <ul>
+      <li>Empty input / N=0 if allowed.</li>
+      <li>N=1 or K=0.</li>
+      <li>All equal values, strictly increasing, strictly decreasing.</li>
+      <li>Large values causing int overflow: use long/long long.</li>
+      <li>Tree with only one node; skewed tree causing recursion depth issues.</li>
+    </ul>
+  </div>
+  <div class="card note">
+    <h3>Morgan Stanley values for SJT / interview</h3>
+    <p>When workplace questions appear, choose options that protect clients and data, communicate transparently, collaborate, and do not hide mistakes. A strong answer usually aligns with: do the right thing, put clients first, lead with exceptional ideas, commit to diversity and inclusion, and give back.</p>
+  </div>
+</section>
+
+<section id="sources" class="page">
+  <div class="card">
+    <h2>Sources used</h2>
+    <p>Mix of official sources, your uploaded files, and public candidate reports. Candidate reports are useful for pattern prediction but are not official guarantees.</p>
+    <table>
+      <tr><th>Source</th><th>Link / location</th><th>Used for</th></tr>
+<tr><td>Morgan Stanley - Students &amp; Graduates / official careers</td><td><a href="https://www.morganstanley.com/people-opportunities/students-graduates" target="_blank" rel="noopener">Open</a></td><td>Official careers context, values and technology career framing.</td></tr>
+<tr><td>Morgan Stanley - Core Values / official</td><td><a href="https://www.morganstanley.com/about-us/morgan-stanley-core-values" target="_blank" rel="noopener">Open</a></td><td>Official five values: do the right thing, put clients first, lead with exceptional ideas, commit to diversity and inclusion, give back.</td></tr>
+<tr><td>Uploaded JD - Technology Apprenticeship Program, Application Development Track</td><td>local upload: Apprenticeship_Technology_JD.pdf</td><td>Role expects problem-solving, at least one of Java/C++/C#/C, algorithms/data structures, OOPS and Unix.</td></tr>
+<tr><td>Uploaded research.txt</td><td>local upload: research.txt</td><td>Candidate-research notes: SHL platform, DSA/debugging/aptitude, 2 DP + 1 tree pattern, Java preference, interviews with OOPs/SQL/core.</td></tr>
+<tr><td>GeeksforGeeks - Morgan Stanley SDE Intern interview experience</td><td><a href="https://www.geeksforgeeks.org/interview-experiences/morgan-stanley-interview-experience-for-sde-intern/" target="_blank" rel="noopener">Open</a></td><td>Reports OA with aptitude/reasoning, 6-7 debugging questions and 3 coding questions.</td></tr>
+<tr><td>GeeksforGeeks - Morgan Stanley Technology Analyst on-campus 2022</td><td><a href="https://www.geeksforgeeks.org/interview-experiences/morgan-stanley-interview-experience-for-technology-analyst-on-campus-2022/" target="_blank" rel="noopener">Open</a></td><td>Reports 10 reasoning questions in 20 min and 3 coding questions in 60 min; mentions stock-profit-k-transactions.</td></tr>
+<tr><td>GeeksforGeeks - Morgan Stanley Summer Internship on-campus</td><td><a href="https://www.geeksforgeeks.org/interview-experiences/morgan-stanley-interview-experience-summer-internship-on-campus/" target="_blank" rel="noopener">Open</a></td><td>Reports 1h20m Aspiring Minds/SHL OA with aptitude, debugging and coding; debugging includes reverse sign, logic/syntax fixes.</td></tr>
+<tr><td>LeetCode Discuss - Morgan Stanley OA SDE Intern/Full-time</td><td><a href="https://leetcode.com/discuss/post/1417818/morgan-stanley-oa-sde-intern-full-time-b-oqt5/" target="_blank" rel="noopener">Open</a></td><td>Candidate report: aptitude 10/20m, debugging 7/20m, coding 3/60m; mentions Longest Valid Parentheses.</td></tr>
+<tr><td>LeetCode Discuss - Morgan Stanley Code to Give OA</td><td><a href="https://leetcode.com/discuss/post/6459996/morgan-stanley-code-to-give-online-asses-y74n/" target="_blank" rel="noopener">Open</a></td><td>Candidate report: debugging 10/20m, aptitude 24/40m, coding 3/60m; mentions House Robber, removable subarrays, K-distinct subarrays.</td></tr>
+<tr><td>LinkedIn candidate post - Morgan Stanley Apprenticeship Program 2025</td><td><a href="https://www.linkedin.com/posts/neeraja-gurram-491073254_%F0%9D%90%8C%F0%9D%90%B2-%F0%9D%90%92%F0%9D%90%9E%F0%9D%90%A5%F0%9D%90%9E%F0%9D%90%9C%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%8F%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%9C%F0%9D%90%9E%F0%9D%90%AC%F0%9D%90%AC-activity-7353070007511101440-WlpW" target="_blank" rel="noopener">Open</a></td><td>Candidate report for Apprenticeship 2025: 7 debugging, 24 aptitude and 3 medium coding questions.</td></tr>
+<tr><td>SHL Direct - Practice tests</td><td><a href="https://www.shl.com/shldirect/en/practice-tests/" target="_blank" rel="noopener">Open</a></td><td>SHL practice assessment types and examples.</td></tr>
+
+    </table>
+  </div>
+  <div class="footer">Generated on 2026-07-09 01:22 local sandbox time. Save this file locally and open it in any browser.</div>
+</section>
+</main>
+</body>
+</html>

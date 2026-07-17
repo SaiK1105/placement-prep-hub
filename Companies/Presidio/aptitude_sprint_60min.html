@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ 60-Min Aptitude Sprint — Presidio</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 25px; font-weight: 500; color: #f0efea; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; color: #f0efea; margin: 4px 0 10px; }
+  h3 { font-size: 15px; font-weight: 600; color: #f0efea; margin: 16px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 4px 0 14px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 16px; }
+  nav button { font: inherit; font-size: 12.5px; font-weight: 500; padding: 7px 12px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: #b8b5ad; cursor: pointer; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin: 10px 0; }
+  .trick { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .trick b.f { color: #cbc3f0; font-family: Consolas, monospace; }
+  ol.q > li { margin-bottom: 13px; }
+  details { margin: 14px 0; border: 1px solid #3f3e3a; border-radius: 12px; padding: 10px 14px; background: #30302e; }
+  summary { cursor: pointer; font-weight: 600; color: #e0987d; font-size: 14px; }
+  .pill { display: inline-block; background: #383836; color: #b8b5ad; border-radius: 16px; padding: 2px 10px; font-size: 11.5px; font-weight: 600; margin: 0 4px 4px 0; }
+  .small { font-size: 12px; color: #8e8b83; }
+  .timer { display: flex; align-items: center; gap: 10px; margin: 8px 0 14px; }
+  .timer .t { font-family: Consolas, monospace; font-size: 26px; font-weight: 700; color: #90a883; min-width: 92px; }
+  .timer .t.low { color: #c4635a; }
+  .timer button { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; }
+  .timer button:hover { background: #c96442; }
+  .ref { background: #383430; border-left: 3px solid #d3a13f; padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; margin: 8px 0; color: #d8d5cc; }
+  code { background: #1f1e1c; border-radius: 5px; font-family: Consolas, monospace; font-size: 13px; color: #cbc3f0; padding: 1px 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>⚡ 60-Minute Aptitude Sprint</h1>
+<div class="sub">6 blocks × 10 minutes · tricks first (2 min), then drill (8 min) · answers hidden per block<br>
+📖 Source: <b>Placement Training → Placement material → "100 aptitude tricks" PDF</b> — every block cites its Shortcut # for deeper study.</div>
+
+<nav id="nav">
+  <button data-p="b1" class="on">1️⃣ % &amp; Profit</button>
+  <button data-p="b2">2️⃣ Ratio &amp; Avg</button>
+  <button data-p="b3">3️⃣ Time &amp; Work</button>
+  <button data-p="b4">4️⃣ Speed &amp; Trains</button>
+  <button data-p="b5">5️⃣ Series &amp; Codes</button>
+  <button data-p="b6">6️⃣ Seating &amp; Blood</button>
+</nav>
+
+<!-- BLOCK 1 -->
+<div class="page on" id="b1">
+  <h2>Block 1 · Percentages + Profit &amp; Loss</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF: Shortcuts #18–23 (Percentage) and #24–29 (Profit, Loss &amp; Discount)</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b class="f">P% = (SP−CP)/CP × 100</b> — loss% divides by CP too (your PDF's #24 uses SP−CP over CP; watch questions that sneak in "of SP").</li>
+      <li><b>Two successive changes</b> (#25): net% = <b class="f">a + b + ab/100</b> (profit +, loss −). Mark up 40%, discount 20% → 40 − 20 − 8 = <b>+12%</b>. Instant answer, no CP needed.</li>
+      <li><b>Chain of sales</b> (#26): final SP = CP × (multipliers). 10% loss → ×0.9, 40% profit → ×1.4.</li>
+      <li><b>x% of y = y% of x</b> — 8% of 50 = 50% of 8 = 4. Free speed.</li>
+      <li>Fraction ↔ % anchors: 1/8=12.5%, 1/6≈16.67%, 1/3≈33.3%, 3/8=37.5%, 5/8=62.5%.</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min · ~80 sec each)</h3>
+  <ol class="q">
+    <li>An item marked 60% above cost is sold at 25% discount. Profit %?</li>
+    <li>A trader sells two watches at ₹960 each — one at 20% profit, one at 20% loss. Net result?</li>
+    <li>Price of sugar rises 25%. By what % must a family cut consumption to keep spending equal?</li>
+    <li>A sells to B at 20% profit, B sells to C at 10% loss. C paid ₹5400. A's cost price?</li>
+    <li>After two successive discounts of 10% and 20%, a shirt costs ₹1440. Marked price?</li>
+    <li>65% of a number is 156. What is 35% of it?</li>
+  </ol>
+  <details><summary>🔑 Block 1 answers</summary>
+    <p>1) ×1.6 ×0.75 = 1.2 → <b>20% profit</b> (or #25: 60−25−15=20)<br>
+    2) Same SP, equal ±20% → always a loss: #25 gives −(20²/100) = <b>4% loss</b><br>
+    3) Increase 25% = ×5/4 → cut = 1−4/5 = <b>20%</b><br>
+    4) CP × 1.2 × 0.9 = 5400 → CP = 5400/1.08 = <b>₹5000</b><br>
+    5) MP × 0.9 × 0.8 = 1440 → MP = <b>₹2000</b><br>
+    6) number = 156/0.65 = 240 → 35% = <b>84</b> (or trick: 35% = 156×(35/65) = 84)</p>
+  </details>
+</div>
+
+<!-- BLOCK 2 -->
+<div class="page" id="b2">
+  <h2>Block 2 · Ratio &amp; Proportion + Averages</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF: Shortcuts #1–8 (Ratio &amp; Proportion), #13–17 (Average), #30–33 (Ages)</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b>Splitting in ratio</b> (#1): a:b share of N = <b class="f">a/(a+b) × N</b>. Three-way works the same.</li>
+      <li><b>Ratio + LCM/HCF:</b> numbers = 3x, 5x → LCM = 15x, HCF = x. (Presidio mock had exactly this.)</li>
+      <li><b>Average shift</b> (#13–17): one member leaves and average drops → removed value = <b class="f">old avg + n(change)</b> pattern. Total-first thinking beats formula memorizing: work with sums.</li>
+      <li><b>Ages</b> (#30–33): translate English → equation immediately. "5 years ago A was twice B" → A−5 = 2(B−5).</li>
+      <li><b>Weighted mix:</b> if averages of groups differ, answer sits closer to the bigger group (alligation, #10–12).</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min)</h3>
+  <ol class="q">
+    <li>Divide ₹1440 among A, B, C in ratio 2:3:4. C gets?</li>
+    <li>Two numbers are in ratio 4:7, HCF is 6. Their LCM?</li>
+    <li>Average of 11 results is 50. Average of first six is 49, last six is 52. The 6th result?</li>
+    <li>The average age of a class of 30 is 15. Including the teacher it becomes 15.5. Teacher's age?</li>
+    <li>A is twice as old as B. 10 years ago A was four times B. A's present age?</li>
+    <li>Ratio of boys to girls is 7:5. If there are 84 boys, total students?</li>
+  </ol>
+  <details><summary>🔑 Block 2 answers</summary>
+    <p>1) 4/9 × 1440 = <b>₹640</b><br>
+    2) Numbers 24 &amp; 42 → LCM = <b>168</b> (= 4×7×6)<br>
+    3) 6×49 + 6×52 − 11×50 = 294+312−550 = <b>56</b><br>
+    4) 31×15.5 − 30×15 = 480.5−450 = <b>30.5 years</b><br>
+    5) A=2B; A−10 = 4(B−10) → 2B−10 = 4B−40 → B=15, <b>A=30</b><br>
+    6) 84/7 = 12 → total 12×12 = <b>144</b></p>
+  </details>
+</div>
+
+<!-- BLOCK 3 -->
+<div class="page" id="b3">
+  <h2>Block 3 · Time &amp; Work</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF: Shortcuts #50–60 (Time &amp; Work), #61+ (Pipes &amp; Cisterns — same logic, filling = work)</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b>Rate thinking:</b> A in 12 days → A does <b class="f">1/12 per day</b>. Together: add rates. (Presidio mock Q2 was exactly this.)</li>
+      <li><b>LCM method (faster than fractions):</b> A=12d, B=18d → take work = LCM 36 units. A does 3/day, B does 2/day → together 5/day → 36/5 = 7.2 days. No fraction juggling.</li>
+      <li><b>Work ∝ time, ∝ men</b> (#50–52): the universal formula <b class="f">M₁D₁/W₁ = M₂D₂/W₂</b> solves "how many men/days" instantly.</li>
+      <li><b>Leaving mid-way:</b> compute work done → remaining work → remaining rate.</li>
+      <li><b>Pipes:</b> inlet = +rate, leak/outlet = −rate. Same LCM method.</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min)</h3>
+  <ol class="q">
+    <li>A does a work in 15 days, B in 20 days. Together?</li>
+    <li>12 men build a wall in 18 days. How many days for 9 men?</li>
+    <li>A and B together finish in 8 days; A alone in 12. B alone?</li>
+    <li>A does a job in 10 days. After A works 4 days, B finishes the rest in 9 days. B alone would take?</li>
+    <li>Pipe A fills a tank in 6 hrs, pipe B empties it in 9 hrs. Both open — time to fill?</li>
+    <li>If 20 men working 8 hrs/day finish in 15 days, how many days for 24 men at 10 hrs/day?</li>
+  </ol>
+  <details><summary>🔑 Block 3 answers</summary>
+    <p>1) LCM 60: 4+3=7/day → 60/7 ≈ <b>8.57 days</b><br>
+    2) M₁D₁=M₂D₂: 12×18/9 = <b>24 days</b><br>
+    3) 1/8 − 1/12 = 1/24 → <b>24 days</b><br>
+    4) A did 4/10 → 6/10 left in 9 days → B rate = (3/5)/9 = 1/15 → <b>15 days</b><br>
+    5) 1/6 − 1/9 = 1/18 → <b>18 hours</b><br>
+    6) 20×8×15 = 24×10×D → D = 2400/240 = <b>10 days</b></p>
+  </details>
+</div>
+
+<!-- BLOCK 4 -->
+<div class="page" id="b4">
+  <h2>Block 4 · Speed, Distance &amp; Trains</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF: Shortcuts #34–39 (Time, Speed &amp; Distance), #40–45 (Trains), #46–49 (Boats)</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b>km/h ↔ m/s:</b> <b class="f">× 5/18</b> one way, <b class="f">× 18/5</b> back. 72 km/h = 20 m/s. Memorize: 36→10, 54→15, 72→20, 90→25.</li>
+      <li><b>Train past a pole</b> (#40): time = <b class="f">L_train / speed</b>. Past a platform (#41): <b class="f">(L_train + L_platform) / speed</b>.</li>
+      <li><b>Relative speed</b> (#34–35, #42–43): opposite directions → <b>add</b>; same direction → <b>subtract</b>. Crossing trains: total length / relative speed.</li>
+      <li><b>Average speed for equal distances</b> (#36): <b class="f">2xy/(x+y)</b> — never (x+y)/2!</li>
+      <li><b>Boats</b> (#46–49): downstream = b+s, upstream = b−s; boat = (down+up)/2, stream = (down−up)/2.</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min)</h3>
+  <ol class="q">
+    <li>A 180 m train at 54 km/h crosses a pole in?</li>
+    <li>A 200 m train crosses a 300 m platform in 25 s. Speed in km/h?</li>
+    <li>Two trains, 150 m and 250 m, run at 45 and 27 km/h in opposite directions. Time to cross?</li>
+    <li>A car covers half a trip at 40 km/h, half at 60 km/h. Average speed?</li>
+    <li>A boat goes 30 km downstream in 2 hrs and back in 3 hrs. Speed of the stream?</li>
+    <li>A thief 100 m ahead runs at 8 km/h; police chase at 10 km/h. Catch time?</li>
+  </ol>
+  <details><summary>🔑 Block 4 answers</summary>
+    <p>1) 54→15 m/s → 180/15 = <b>12 s</b><br>
+    2) 500 m / 25 s = 20 m/s = <b>72 km/h</b><br>
+    3) Rel = 72 km/h = 20 m/s → 400/20 = <b>20 s</b><br>
+    4) 2×40×60/100 = <b>48 km/h</b><br>
+    5) Down 15, up 10 → stream = (15−10)/2 = <b>2.5 km/h</b><br>
+    6) Rel = 2 km/h = 5/9 m/s → 100/(5/9) = <b>180 s = 3 min</b></p>
+  </details>
+</div>
+
+<!-- BLOCK 5 -->
+<div class="page" id="b5">
+  <h2>Block 5 · Number Series &amp; Coding-Decoding</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF: Progressions section · plus "Series (aptitude) q_a" PDF in the same folder</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b>Series checklist (run in order, 10 sec each):</b> ① differences constant? ② differences of differences? ③ ratio (×2, ×3, ×1.5)? ④ squares/cubes (±1)? ⑤ alternating/two interleaved series? ⑥ primes?</li>
+      <li>Know by sight: squares to 20² (400), cubes to 12³ (1728), primes to 100.</li>
+      <li><b>Coding-decoding:</b> write A=1…Z=26 on rough paper FIRST — worth 30 seconds. Check: shift (+k), reverse (A↔Z: sum=27), position values.</li>
+      <li><b>Letter series:</b> convert to numbers, then it's a number series.</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min)</h3>
+  <ol class="q">
+    <li>3, 7, 15, 31, 63, __ ?</li>
+    <li>2, 3, 5, 7, 11, 13, __ ?</li>
+    <li>1, 4, 9, 61, 52, 63, __ ? (tricky — think digits)</li>
+    <li>5, 11, 23, 47, 95, __ ?</li>
+    <li>If TABLE is coded as UBCMF, CHAIR is coded as?</li>
+    <li>If REASON is coded as 5 and BELIEVED as 7, what is GOVERNMENT?</li>
+    <li>J, F, M, A, M, __ ? (think outside numbers)</li>
+  </ol>
+  <details><summary>🔑 Block 5 answers</summary>
+    <p>1) ×2+1 → <b>127</b><br>
+    2) primes → <b>17</b><br>
+    3) squares with digits reversed: 1,4,9,16→61,25→52,36→63,49→ <b>94</b><br>
+    4) ×2+1 → <b>191</b><br>
+    5) +1 each letter → <b>DIBJS</b><br>
+    6) letters − 1 → GOVERNMENT (10 letters) → <b>9</b><br>
+    7) months: Jan Feb Mar Apr May → <b>J (June)</b></p>
+  </details>
+</div>
+
+<!-- BLOCK 6 -->
+<div class="page" id="b6">
+  <h2>Block 6 · Seating, Blood Relations &amp; Syllogisms</h2>
+  <div class="timer"><span class="t" data-sec="600">10:00</span><button onclick="startT(this)">▶ start block</button></div>
+  <div class="ref">📖 Your PDF folder: "Comprehensive interview material" &amp; "500 most asked apti ques" cover these with worked examples</div>
+  <div class="card trick">
+    <h3 style="margin-top:0">2-min trick recap</h3>
+    <ul>
+      <li><b>Seating: ALWAYS draw.</b> Row → line of boxes; circle → clock face. Facing north: left = your left. Facing south: flipped! Fill certain positions first, then constraints.</li>
+      <li><b>Blood relations: build a tree, don't chain in your head.</b> "My grandfather's only son" = my father. Then "daughter of my father" = my sister (Presidio mock Q8).</li>
+      <li><b>Syllogisms: draw Venn circles.</b> "All A are B" = A inside B. "Some B are C" = overlap. A conclusion is valid only if it's true in EVERY possible diagram.</li>
+      <li><b>Direction puzzles:</b> draw compass, track (x,y) from origin. Final distance = Pythagoras.</li>
+    </ul>
+  </div>
+  <h3>Drill (8 min)</h3>
+  <ol class="q">
+    <li>Six people in a row facing north: P is 3rd from left; Q is 2nd right of P; R is at an end but not next to Q; S is between P and Q. Where is R?</li>
+    <li>Around a circular table, 5 friends face the center. A sits between B and C; D is to the immediate right of B. Who is to the immediate left of A? (take "right/left" as the seated person's own right/left)</li>
+    <li>Pointing to a man, Sita says: "His mother is the only daughter of my mother." How is Sita related to the man?</li>
+    <li>A walks 5 km north, turns right and walks 3 km, turns right again and walks 5 km. How far and in which direction from start?</li>
+    <li>All cups are bottles. Some bottles are jugs. Conclusions: I. Some cups are jugs. II. Some jugs are bottles. Which follow(s)?</li>
+    <li>A is B's brother, C is A's mother, D is C's father, E is B's son. How is D related to E?</li>
+  </ol>
+  <details><summary>🔑 Block 6 answers</summary>
+    <p>1) Positions 1–6: P=3, Q=5, S=4, R at an end not next to Q → not 6 → <b>position 1 (extreme left)</b><br>
+    2) Circle facing center: D immediate right of B, A between B and C → going clockwise D, B, A, C, E → immediate left of A (= clockwise neighbor) is <b>B</b>… draw it! With 5 seats: right of B = D means D is B's right-hand neighbor; A between B and C ⇒ order around: D-B-A-C-E → A's left = <b>B</b><br>
+    3) "Only daughter of my mother" = Sita herself → she is his <b>mother</b><br>
+    4) Net: 3 km east of start → <b>3 km, East</b><br>
+    5) I doesn't have to be true; II always true → <b>only II</b><br>
+    6) D = C's father = grandfather of A&amp;B → E is B's son → D is E's <b>great-grandfather</b></p>
+  </details>
+</div>
+
+</div>
+<script>
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  window.scrollTo({ top: 0 });
+});
+let iv = null;
+function startT(btn) {
+  const t = btn.parentElement.querySelector('.t');
+  if (iv) clearInterval(iv);
+  let s = parseInt(t.dataset.sec);
+  btn.textContent = '↻ restart';
+  iv = setInterval(() => {
+    s--;
+    const m = Math.floor(s/60), sec = String(s%60).padStart(2,'0');
+    t.textContent = m + ':' + sec;
+    t.classList.toggle('low', s <= 120);
+    if (s <= 0) { clearInterval(iv); t.textContent = "⏰ up!"; }
+  }, 1000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Drill — A2Z Protocol</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 90px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 25px; font-weight: 500; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; margin: 18px 0 10px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 14px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 5px 0 15px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 16px; }
+  nav button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 13px; border-radius: 10px; border: none; background: transparent; color: #b8b5ad; cursor: pointer; position: relative; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  nav button .badge { position: absolute; top: -5px; right: -4px; background: #d97757; color: #fff; font-size: 10px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .grid4 { grid-template-columns: 1fr 1fr; } }
+  .stat { background: #30302e; border-radius: 12px; padding: 12px 14px; text-align: center; }
+  .stat .n { font-family: ui-serif, Georgia, serif; font-size: 26px; font-weight: 500; }
+  .stat .l { font-size: 11px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; }
+  code { background: #1f1e1c; border-radius: 5px; font-family: Consolas, monospace; font-size: 13px; color: #cbc3f0; padding: 1px 6px; }
+  .small { font-size: 12.5px; color: #8e8b83; }
+  .diff { font-size: 11px; font-weight: 700; border-radius: 12px; padding: 2px 10px; text-transform: uppercase; letter-spacing: .5px; }
+  .diff.E { background: #333a2e; color: #b5cda5; }
+  .diff.M { background: #3d382b; color: #dcbf83; }
+  .diff.H { background: #40302d; color: #e0a49c; }
+  .ptag { font-size: 11.5px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; }
+  .timer { font-family: Consolas, monospace; font-size: 34px; font-weight: 700; color: #90a883; }
+  .timer.low { color: #c4635a; }
+  .btnrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .btn { font: inherit; font-size: 13.5px; font-weight: 600; padding: 9px 16px; border-radius: 10px; border: 1px solid #45443f; background: #383836; color: #e6e4dd; cursor: pointer; }
+  .btn:hover { border-color: #6b6961; }
+  .btn.solid { background: #d97757; border-color: #d97757; color: #fff; }
+  .btn.solid:hover { background: #c96442; }
+  .btn.good { background: #333a2e; border-color: #90a883; color: #cfe0c2; }
+  .btn.bad { background: #40302d; border-color: #c4635a; color: #eab8b1; }
+  .reveal { display: none; margin-top: 12px; padding: 12px 15px; border-radius: 0 10px 10px 0; background: #383430; border-left: 3px solid #d97757; font-size: 13.5px; color: #d8d5cc; }
+  .reveal.show { display: block; animation: fade .3s; }
+  .topicrow { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid #3f3e3a; border-radius: 12px; margin: 8px 0; background: #30302e; cursor: pointer; }
+  .topicrow:hover { border-color: #6b6961; }
+  .topicrow.cur { border-color: #d97757; }
+  .topicrow .tn { flex: 1; font-weight: 600; font-size: 14px; }
+  .topicrow .prog { font-size: 12.5px; color: #8e8b83; }
+  .bar { height: 7px; border-radius: 5px; background: #3f3e3a; overflow: hidden; width: 110px; }
+  .bar div { height: 100%; background: #d97757; }
+  .plist { border-top: 1px solid #3f3e3a; margin-top: 8px; padding-top: 8px; display: none; }
+  .plist.show { display: block; }
+  .pitem { display: flex; gap: 8px; align-items: center; font-size: 13px; padding: 5px 2px; color: #b8b5ad; }
+  .pitem .st { min-width: 20px; }
+  .patline { padding: 10px 14px; border-left: 3px solid #90a883; background: #30302e; border-radius: 0 10px 10px 0; margin: 8px 0; font-size: 13.5px; }
+  .patline .t { font-weight: 600; color: #f0efea; }
+  ul li { margin-bottom: 7px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>DSA Drill <span style="color:#d97757">· A2Z protocol</span></h1>
+<div class="sub">Timed attempts → honest outcomes → misses come back in 2–3 days → patterns get collected. 3 problems a day wins placements.</div>
+
+<nav id="nav">
+  <button data-p="today" class="on">Today</button>
+  <button data-p="map">Roadmap</button>
+  <button data-p="due" id="duetab">Re-solve</button>
+  <button data-p="pat">Pattern book</button>
+  <button data-p="proto">Protocol</button>
+</nav>
+
+<div class="page on" id="today">
+  <div class="grid4">
+    <div class="stat"><div class="n" id="s-today">0/3</div><div class="l">today</div></div>
+    <div class="stat"><div class="n" id="s-streak">0</div><div class="l">day streak</div></div>
+    <div class="stat"><div class="n" id="s-solved">0</div><div class="l">solved</div></div>
+    <div class="stat"><div class="n" id="s-due">0</div><div class="l">due</div></div>
+  </div>
+  <div id="arena"></div>
+</div>
+
+<div class="page" id="map">
+  <h2>Roadmap</h2>
+  <p class="small">The first ~60% of this order covers ~90% of campus OA questions. Click a topic to make it current; click again to see its problems. Trees is pre-selected — Tredence's OA on Monday includes tree questions.</p>
+  <div id="topics"></div>
+</div>
+
+<div class="page" id="due">
+  <h2>Re-solve queue</h2>
+  <p class="small">Problems you needed help with, back for a from-scratch attempt. Clearing this queue daily is where retrieval speed is actually built.</p>
+  <div id="duebox"></div>
+</div>
+
+<div class="page" id="pat">
+  <h2>Pattern book</h2>
+  <p class="small">One line per solved problem — this list is what you skim before any OA. Aim to collect ~30 patterns, not 450 solutions.</p>
+  <div id="patbox"></div>
+</div>
+
+<div class="page" id="proto">
+  <h2>The protocol</h2>
+  <div class="card">
+    <ul>
+      <li><b>25 minutes, timer on, always.</b> The timer is the training — unlimited-time solving is a different (easier) sport than the one exams play.</li>
+      <li><b>Stuck at ~10 min?</b> Hit "show approach", read it, close your eyes, implement from memory. Never copy code.</li>
+      <li><b>Be honest with the three buttons.</b> "Solved myself" only counts if you wrote it without the approach. Assisted and failed problems return in 2–3 days — that's a feature, not a punishment.</li>
+      <li><b>One pattern line per solve.</b> Read it back weekly. You're building a mental index, not a completed checklist.</li>
+      <li><b>3 problems a day.</b> One easy warm-up, two mediums. Sustainable beats heroic — 6-7 weeks covers everything campus placements ask.</li>
+      <li><b>Bring beaten problems to Claude.</b> Paste your failed attempt in chat for an interviewer-style review.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script>
+const TOPICS = [
+  ['trees','Trees'],['arrays','Arrays'],['hashing','Hashing'],['twoptr','Two Pointers / Sliding Window'],['strings','Strings'],['binsearch','Binary Search'],['linkedlist','Linked List'],['stacks','Stacks & Queues'],['recursion','Recursion & Backtracking'],['graphs','Graphs'],['dp','DP Basics']
+];
+const P = [
+['t1','trees','E','Height of binary tree','Return the max depth. Tree 3(9,20(15,7)) → 3.','What is the height in terms of the children\'s heights?','Recursion: height = 1 + max(height(left), height(right)); base case null → 0.','tree height → 1 + max of children (recursion)'],
+['t2','trees','E','Inorder traversal','Return inorder (left, node, right) values of a binary tree.','Recurse left, visit, recurse right.','Recursive: inorder(l) + [val] + inorder(r). Iterative: stack, push lefts, pop, go right.','inorder → left, node, right; BST inorder = sorted'],
+['t3','trees','M','Level order traversal','Return values level by level: 3(9,20(15,7)) → [[3],[9,20],[15,7]].','Which data structure processes things in arrival order?','BFS with a queue: process whole queue = one level, append children, repeat.','level order → queue, process one full level per loop'],
+['t4','trees','M','Diameter of binary tree','Longest path between any two nodes (may not pass root).','At each node, what path passes through it?','At each node diameter candidate = leftHeight + rightHeight; compute heights recursively, track max.','diameter → maxover(nodes) of Lheight + Rheight'],
+['t5','trees','M','Lowest common ancestor','Find LCA of nodes p and q in a binary tree.','If p and q are in different subtrees of a node, what is that node?','Recurse: if node is p/q/null return it; if both sides return non-null, node is LCA; else return the non-null side.','LCA → both sides answer ⇒ this node'],
+['t6','trees','M','Validate BST','Check every node: left subtree < node < right subtree.','Is checking only the immediate children enough? (No.)','Pass down (min, max) bounds: node must be within; left gets (min, node), right gets (node, max).','validate BST → pass min/max bounds down'],
+['a1','arrays','E','Two sum','Indices of two numbers summing to target. [2,7,11,15], t=9 → [0,1].','What do you wish you could look up instantly?','Hash map value→index; for each x check if target−x already seen.','pair with target sum → hash map of seen'],
+['a2','arrays','E','Best time to buy/sell stock','One buy then one sell for max profit. [7,1,5,3,6,4] → 5.','Track something as you sweep left to right.','Sweep once: track min price so far, profit = price − minSoFar, keep max.','max profit one pass → track min-so-far'],
+['a3','arrays','M','Maximum subarray (Kadane)','Max sum of contiguous subarray. [-2,1,-3,4,-1,2,1,-5,4] → 6.','Is the running sum helping or hurting?','cur = max(x, cur+x); best = max(best, cur). Start both at a[0] for all-negative safety.','max subarray → Kadane: extend or restart'],
+['a4','arrays','M','Product of array except self','Output[i] = product of all except a[i], no division. [1,2,3,4] → [24,12,8,6].','What does everything to my left multiply to?','Two passes: prefix products left→right, then multiply suffix products right→left.','except-self → prefix pass × suffix pass'],
+['a5','arrays','M','Majority element','Element appearing > n/2 times. [2,2,1,1,1,2,2] → 2.','Pairs of different elements cancel out.','Boyer–Moore: keep candidate + count; same → +1, different → −1, 0 → new candidate.','majority > n/2 → Boyer–Moore voting'],
+['a6','arrays','H','Next permutation','Rearrange to the next lexicographically greater permutation, in place. [1,2,3] → [1,3,2].','Find where the descending tail starts.','From right find first a[i] < a[i+1]; swap with smallest larger element in the tail; reverse the tail.','next permutation → break-point, swap, reverse tail'],
+['h1','hashing','E','Contains duplicate','Does the array contain any repeated value?','What structure gives O(1) membership checks?','Add to a set while scanning; if already present → true.','seen before? → set'],
+['h2','hashing','E','First non-repeating character','First char appearing exactly once, else \'_\'. "swiss" → \'w\'.','Count first, then re-scan in order.','Counter pass, then first char with count 1. Order comes from the second scan.','first unique → count map + ordered rescan'],
+['h3','hashing','M','Subarray sum equals K','Count subarrays summing to k. [1,1,1], k=2 → 2.','sum(i..j) = prefix(j) − prefix(i−1).','Running prefix sum + map of prefix counts; at each step add count of (prefix − k) seen.','subarray sum = k → prefix sums in a hash map'],
+['h4','hashing','M','Longest consecutive sequence','Longest run of consecutive ints in any order. [100,4,200,1,3,2] → 4.','When is a number the START of a run?','Set of all; for each x with no x−1 present, walk x+1, x+2… count. O(n).','longest consecutive → set + only start from run-starts'],
+['h5','hashing','M','Group anagrams','Group words that are anagrams. ["eat","tea","tan","ate"] → [[eat,tea,ate],[tan]].','What key is identical for all anagrams?','Map sorted(word) → list. Or 26-count tuple as key for O(n·k).','anagram grouping → canonical key (sorted word)'],
+['h6','hashing','M','Longest subarray with 0 sum','Length of longest subarray summing to zero.','Two equal prefix sums mean what in between?','Map prefix→first index; same prefix seen again ⇒ zero-sum span; track max length.','zero-sum span → repeated prefix sum'],
+['w1','twoptr','E','Valid palindrome','Ignoring non-alphanumerics and case, is the string a palindrome?','One pointer each end.','Two pointers in/out skipping non-alnum, compare lowercased chars.','palindrome check → two ends inward'],
+['w2','twoptr','M','Container with most water','Two lines forming max-area container. [1,8,6,2,5,4,8,3,7] → 49.','Which pointer is pointless to keep?','Two ends; area = width × min(h); move the shorter side inward — the taller can only lose width.','max container → move the shorter pointer'],
+['w3','twoptr','M','3Sum','All unique triplets summing to 0.','Fix one number; what remains?','Sort; for each i, two-pointer the rest for −a[i]; skip duplicates as you move.','3sum → sort + fix one + two-pointer'],
+['w4','twoptr','M','Longest substring without repeating chars','"abcabcbb" → 3 ("abc").','Grow right; what forces left to move?','Sliding window + set/map: expand right, shrink left past the duplicate, track max window.','no-repeat window → slide, shrink past duplicate'],
+['w5','twoptr','M','Max consecutive ones with k flips','Longest run of 1s if you may flip at most k zeros.','The window is valid while… what?','Window keeps ≤ k zeros: expand right, if zeros > k move left. Max window size.','at most k bad → window with a violation counter'],
+['w6','twoptr','H','Trapping rain water','Water trapped between bars. [0,1,0,2,1,0,1,3,2,1,2,1] → 6.','Water at i depends on maxes on both sides.','Two pointers with leftMax/rightMax; advance the smaller side, add max−height.','rain water → two pointers + running maxes'],
+['s1','strings','E','Valid anagram','Are s and t anagrams? "listen","silent" → true.','Counting beats sorting.','Counter equality, or 26-int array +1/−1. O(n) vs sort\'s O(n log n).','anagram → frequency count compare'],
+['s2','strings','E','Longest common prefix','["flower","flow","flight"] → "fl".','Compare column by column.','Vertical scan: char j of word 0 vs all words; stop at first mismatch.','common prefix → vertical scan'],
+['s3','strings','E','Roman to integer','"MCMXCIV" → 1994.','When is a numeral subtractive?','Sum values; if value < next value, subtract it instead of adding.','roman → subtract when smaller than next'],
+['s4','strings','M','Find first occurrence (strStr)','Index of needle in haystack, −1 if absent.','Slide and compare (that\'s acceptable here).','Window compare O(n·m) passes; mention KMP/rolling-hash as the optimized path.','substring search → slide-compare; KMP if pushed'],
+['s5','strings','M','Longest palindromic substring','"babad" → "bab" or "aba".','Every palindrome has a center.','Expand around all 2n−1 centers (odd + even), track the longest. O(n²), O(1) space.','longest palindrome → expand around centers'],
+['s6','strings','M','String compression','"aaabbc" → "a3b2c1" (or counts >1 rules per variant).','Count runs.','Run-length encode with two pointers: scan a run, write char + count.','compression → run-length two-pointer'],
+['b1','binsearch','E','Classic binary search','Find target index in sorted array, −1 if absent.','Halve the space each step.','lo/hi, mid = (lo+hi)//2; go left/right by comparison. Watch lo ≤ hi and mid±1.','sorted + find → binary search, mind boundaries'],
+['b2','binsearch','E','Floor of square root','isqrt(28) → 5, without sqrt().','Search the answer space.','Binary search x in [1,n] for largest x with x·x ≤ n.','numeric floor → BS on answer space'],
+['b3','binsearch','M','First and last occurrence','Positions of target\'s first & last in sorted array with dups.','Binary search twice with different tie-breaking.','Two BS: on equality keep searching left (first) / right (last).','boundaries with dups → biased binary searches'],
+['b4','binsearch','M','Search in rotated sorted array','[4,5,6,7,0,1,2], t=0 → 4.','One half is always sorted.','BS; decide which half is sorted, check if target lies in it, recurse to the proper half.','rotated search → identify the sorted half'],
+['b5','binsearch','M','Peak element','Any i with a[i] > neighbors.','Climb the slope.','BS: if a[mid] < a[mid+1] peak is right, else left (including mid).','peak → binary search uphill'],
+['b6','binsearch','H','Koko eating bananas (BS on answer)','Min eating speed to finish piles in h hours.','Can you CHECK a speed quickly?','Binary search the answer k; feasibility check = sum(ceil(pile/k)) ≤ h. Min feasible k.','min value that works → BS on answer + feasibility check'],
+['l1','linkedlist','E','Reverse a linked list','1→2→3 becomes 3→2→1.','Three pointers walking together.','prev/cur/next: point cur.next at prev, advance all. Return prev.','reverse LL → prev/cur/next walk'],
+['l2','linkedlist','E','Middle of linked list','Return the middle node (second if even).','Two speeds.','Slow 1 step, fast 2 steps; when fast ends, slow is middle.','middle → slow/fast pointers'],
+['l3','linkedlist','M','Detect cycle','Does the list loop?','Same trick, different question.','Floyd: slow/fast — if they ever meet, cycle. (Meet point helps find cycle start too.)','cycle → Floyd tortoise & hare'],
+['l4','linkedlist','M','Merge two sorted lists','Merge keeping order. 1→2→4 + 1→3→4.','Like the merge step of merge sort.','Dummy head; repeatedly attach the smaller front; append leftover.','merge sorted lists → dummy head + smaller-first'],
+['l5','linkedlist','M','Remove Nth node from end','One pass, remove nth from the end.','Give one pointer a head start.','Lead pointer n steps ahead; move both; when lead hits end, trail is before the target.','nth from end → offset two pointers'],
+['l6','linkedlist','M','Palindrome linked list','Is 1→2→2→1 a palindrome, O(1) space?','Combine two earlier tricks.','Find middle (slow/fast), reverse second half, compare halves, (optionally restore).','LL palindrome → middle + reverse half + compare'],
+['k1','stacks','E','Valid parentheses','"({[]})" → true, "(]" → false.','What must the most recent opener match?','Stack: push openers; on closer, pop and check the pair; empty at end.','bracket matching → stack'],
+['k2','stacks','E','Queue using two stacks','Implement enqueue/dequeue with stacks.','Two reversals make forward order.','Push to inStack; on pop, if outStack empty, pour inStack into it; pop outStack.','queue via stacks → lazy pour-over'],
+['k3','stacks','M','Min stack','push/pop/top/getMin all O(1).','Remember the min at every level.','Each entry stores (value, minSoFar); or a parallel min-stack.','O(1) min → store min alongside each push'],
+['k4','stacks','M','Next greater element','For each item, the next larger to its right. [2,1,5] → [5,5,-1].','Who is still waiting for an answer?','Monotonic decreasing stack: pop everyone smaller than current — current is their answer.','next greater → monotonic stack'],
+['k5','stacks','E','Evaluate postfix','"2 3 4 * +" → 14.','Operands wait; operators act.','Stack: push numbers; operator pops two, computes, pushes result.','postfix → stack of operands'],
+['k6','stacks','H','Largest rectangle in histogram','Max rectangle area in bar heights. [2,1,5,6,2,3] → 10.','For each bar: how far can it extend?','Monotonic stack of indices; on pop, area = height × (right−left−1) span.','histogram rectangle → monotonic stack spans'],
+['r1','recursion','E','Fibonacci (recursive → memo)','f(n) = f(n−1)+f(n−2); make it not exponential.','Same calls repeat — cache them.','Memoize (dict/lru_cache) → O(n). Gateway drug to DP.','repeated subcalls → memoize'],
+['r2','recursion','M','Subsets (power set)','All subsets of [1,2,3] → 8 sets.','Each element: in or out.','Recursion include/exclude per index; or iterate: each new element doubles existing subsets.','subsets → include/exclude branching'],
+['r3','recursion','M','Permutations','All orderings of [1,2,3] → 6.','Choose, recurse, un-choose.','Backtracking: swap or used[] marker, recurse on remaining, undo.','permutations → backtrack choose/undo'],
+['r4','recursion','M','Combination sum','Numbers may repeat; combos summing to target. [2,3,6,7], 7 → [[2,2,3],[7]].','After picking x, can you pick x again?','Backtrack with start index (stay on i to allow reuse); prune when remaining < 0.','combination sum → backtrack with start index'],
+['r5','recursion','M','Rat in a maze','Count/print paths from (0,0) to (n−1,n−1) through open cells.','Mark, explore 4 ways, unmark.','DFS with visited marking, try D/L/R/U, backtrack. Classic grid backtracking.','grid paths → DFS + mark/unmark'],
+['r6','recursion','H','N-Queens','Place n queens so none attack. n=4 → 2 solutions.','What invalidates a column choice?','Row by row; track used columns and both diagonals (r−c, r+c) in sets; backtrack.','n-queens → row recursion + col/diag sets'],
+['g1','graphs','E','BFS traversal','Level-order traversal of a graph from source.','Queue + don\'t revisit.','Queue + visited set; pop, push unvisited neighbors.','graph BFS → queue + visited'],
+['g2','graphs','E','DFS traversal','Depth-first traversal from source.','Go deep, then back up.','Recursion (or explicit stack) + visited set.','graph DFS → recursion + visited'],
+['g3','graphs','M','Number of islands','Count connected groups of 1s in a grid.','Each unvisited 1 starts something.','Scan grid; each unvisited land cell → +1 island and flood-fill (BFS/DFS) its whole component.','connected components → flood fill per unseen cell'],
+['g4','graphs','M','Rotten oranges','Minutes until all oranges rot (rot spreads 4-way per minute). −1 if impossible.','All sources start together.','Multi-source BFS: enqueue ALL rotten first, level = minute, count fresh remaining.','simultaneous spread → multi-source BFS levels'],
+['g5','graphs','M','Cycle detection (undirected)','Does the graph contain a cycle?','A visited neighbor that isn\'t your parent means…','DFS tracking parent; visited non-parent neighbor ⇒ cycle. (Or union-find.)','undirected cycle → DFS with parent check'],
+['g6','graphs','M','Topological sort','Order courses given prerequisite pairs; detect impossibility.','Who has no prerequisites right now?','Kahn\'s: in-degree count, queue of 0-in-degree, pop & decrement. Leftover nodes ⇒ cycle.','dependency order → Kahn\'s in-degree BFS'],
+['d1','dp','E','Climbing stairs','1 or 2 steps at a time; ways to reach step n.','Where can the last step come from?','ways(n) = ways(n−1) + ways(n−2) — Fibonacci in disguise. Two variables suffice.','count paths with small steps → fib recurrence'],
+['d2','dp','M','House robber','Max sum, no two adjacent. [2,7,9,3,1] → 12.','Rob it or skip it.','dp[i] = max(dp[i−1], dp[i−2] + a[i]); two rolling variables.','no-adjacent max → take/skip recurrence'],
+['d3','dp','M','Coin change (min coins)','Fewest coins to make amount; −1 if impossible. [1,2,5], 11 → 3.','Best way to make 11 uses the best way to make 11−coin.','dp[x] = 1 + min(dp[x−c]) over coins; dp[0]=0; fill upward.','min coins → bottom-up over amounts'],
+['d4','dp','M','Longest increasing subsequence','[10,9,2,5,3,7,101,18] → 4.','What ends at each index?','dp[i] = 1 + max(dp[j]) for j<i with a[j]<a[i] — O(n²). Mention patience/BS O(n log n).','LIS → best-ending-here; BS for n log n'],
+['d5','dp','M','Longest common subsequence','LCS("abcde","ace") → 3.','Compare last characters.','2D dp: match ⇒ 1+diag; else max(up, left). Classic table fill.','LCS → 2D table, match takes diagonal'],
+['d6','dp','M','0/1 Knapsack','Max value under weight cap, each item once.','Take or leave each item.','dp[w] loop items then weights DESCENDING (1D), dp[w] = max(dp[w], dp[w−wt]+val).','knapsack 0/1 → take/leave, reverse weight loop']
+];
+
+const KEY = 'dsa-a2z-drill';
+let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '' };
+try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const DAY = 86400000;
+const todayStr = () => new Date().toISOString().slice(0, 10);
+if (S.todayDate !== todayStr()) { S.todayDate = todayStr(); S.doneToday = 0; save(); }
+
+const rec = id => S.st[id] || {};
+const dueList = () => P.filter(p => { const r = rec(p[0]); return (r.s === 'assisted' || r.s === 'failed') && r.due <= Date.now(); });
+
+function bumpStreak() {
+  const t = todayStr();
+  if (S.last === t) return;
+  const y = new Date(Date.now() - DAY).toISOString().slice(0, 10);
+  S.streak = (S.last === y) ? S.streak + 1 : 1;
+  S.last = t;
+}
+
+function outcome(id, kind, isResolve) {
+  const r = rec(id);
+  if (kind === 'solved') {
+    r.s = 'solved'; r.due = 0;
+  } else if (kind === 'assisted') {
+    r.s = 'assisted'; r.due = Date.now() + 2 * DAY;
+  } else {
+    r.s = 'failed'; r.due = Date.now() + 1 * DAY;
+  }
+  r.n = (r.n || 0) + 1;
+  S.st[id] = r;
+  S.doneToday++;
+  bumpStreak();
+  save();
+  refresh();
+  if (isResolve) startDueUI(); else nextProblemUI();
+}
+
+let tick = null;
+function problemCard(p, isResolve) {
+  clearInterval(tick);
+  const [id, topic, diff, name, stmt, hint, appr, pat] = p;
+  const tName = TOPICS.find(t => t[0] === topic)[1];
+  const d = document.createElement('div');
+  d.className = 'card';
+  let revealed = false;
+  d.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div><span class="ptag">${tName}${isResolve ? ' · re-solve' : ''}</span><h3 style="margin:2px 0 0">${name} <span class="diff ${diff}">${diff === 'E' ? 'easy' : diff === 'M' ? 'medium' : 'hard'}</span></h3></div>
+      <div class="timer" id="tm">25:00</div>
+    </div>
+    <p style="margin:10px 0 4px">${stmt}</p>
+    <div class="reveal" id="rv-h">💡 ${hint}</div>
+    <div class="reveal" id="rv-a">🧭 ${appr}<br><span class="small">Now close this mentally and implement from memory.</span></div>
+    <div class="btnrow">
+      <button class="btn" id="bh">show hint</button>
+      <button class="btn" id="ba">show approach</button>
+      <button class="btn good" id="b1">✓ solved myself</button>
+      <button class="btn" id="b2">needed the approach</button>
+      <button class="btn bad" id="b3">couldn't solve</button>
+    </div>
+    <p class="small" style="margin-top:10px">Solve on your own editor/paper. Be honest — the buttons train the schedule.</p>`;
+  d.querySelector('#bh').onclick = () => d.querySelector('#rv-h').classList.add('show');
+  d.querySelector('#ba').onclick = () => { d.querySelector('#rv-a').classList.add('show'); revealed = true; };
+  d.querySelector('#b1').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve);
+  d.querySelector('#b2').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'assisted', isResolve); };
+  d.querySelector('#b3').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'failed', isResolve); };
+  let s = 1500;
+  const tm = d.querySelector('#tm');
+  tick = setInterval(() => {
+    s--;
+    tm.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    tm.classList.toggle('low', s <= 300);
+    if (s <= 0) { clearInterval(tick); tm.textContent = '⏰ call it'; }
+  }, 1000);
+  return d;
+}
+
+function nextProblemUI() {
+  const arena = document.getElementById('arena');
+  const due = dueList();
+  if (due.length) {
+    arena.innerHTML = `<div class="card" style="border-left:3px solid #d97757;border-radius:0 14px 14px 0"><b>${due.length} re-solve${due.length > 1 ? 's' : ''} due.</b> Protocol says: clear these before new problems — they're the highest-value reps you own. <div class="btnrow"><button class="btn solid" onclick="goDue()">start re-solves</button><button class="btn" onclick="newProblem()">skip to new (not recommended)</button></div></div>`;
+    return;
+  }
+  newProblem();
+}
+function newProblem() {
+  const arena = document.getElementById('arena');
+  const pool = P.filter(p => p[1] === S.cur && !rec(p[0]).s);
+  if (!pool.length) {
+    const idx = TOPICS.findIndex(t => t[0] === S.cur);
+    const nxt = TOPICS[idx + 1];
+    arena.innerHTML = `<div class="card"><b>🎉 ${TOPICS[idx][1]} complete.</b> ${nxt ? `Next up: <b>${nxt[1]}</b>.` : 'Roadmap finished — you monster.'} <div class="btnrow">${nxt ? `<button class="btn solid" onclick="setTopic('${nxt[0]}')">start ${nxt[1]}</button>` : ''}</div></div>`;
+    return;
+  }
+  arena.innerHTML = '';
+  arena.appendChild(problemCard(pool[0], false));
+}
+function goDue() {
+  document.querySelector('[data-p="due"]').click();
+}
+function startDueUI() {
+  const box = document.getElementById('duebox');
+  const due = dueList();
+  if (!due.length) { box.innerHTML = '<div class="card">Queue clear. 🌱 Go get new problems in Today.</div>'; return; }
+  box.innerHTML = '';
+  box.appendChild(problemCard(due[0], true));
+}
+function setTopic(t) { S.cur = t; save(); refresh(); document.querySelector('[data-p="today"]').click(); nextProblemUI(); }
+
+function refresh() {
+  document.getElementById('s-today').textContent = S.doneToday + '/3';
+  document.getElementById('s-streak').textContent = S.streak;
+  document.getElementById('s-solved').textContent = P.filter(p => rec(p[0]).s === 'solved').length;
+  const due = dueList().length;
+  document.getElementById('s-due').textContent = due;
+  document.getElementById('duetab').innerHTML = 'Re-solve' + (due ? `<span class="badge">${due}</span>` : '');
+  const tb = document.getElementById('topics');
+  tb.innerHTML = '';
+  TOPICS.forEach(([tid, tname]) => {
+    const probs = P.filter(p => p[1] === tid);
+    const done = probs.filter(p => rec(p[0]).s === 'solved').length;
+    const row = document.createElement('div');
+    row.className = 'topicrow' + (tid === S.cur ? ' cur' : '');
+    row.innerHTML = `<span class="tn">${tname}${tid === S.cur ? ' <span style="color:#e0987d">· current</span>' : ''}${tid === 'trees' ? ' 🌳' : ''}</span><div class="bar"><div style="width:${Math.round(done / probs.length * 100)}%"></div></div><span class="prog">${done}/${probs.length}</span>`;
+    const pl = document.createElement('div');
+    pl.className = 'plist';
+    pl.innerHTML = probs.map(p => { const r = rec(p[0]); const ic = r.s === 'solved' ? '✅' : r.s === 'assisted' ? '🟡' : r.s === 'failed' ? '🔴' : '⚪'; return `<div class="pitem"><span class="st">${ic}</span>${p[3]} <span class="diff ${p[2]}" style="margin-left:auto">${p[2]}</span></div>`; }).join('');
+    row.onclick = () => {
+      if (S.cur !== tid) { setTopic(tid); }
+      else pl.classList.toggle('show');
+    };
+    tb.appendChild(row); tb.appendChild(pl);
+  });
+  const pb = document.getElementById('patbox');
+  const learned = P.filter(p => rec(p[0]).s === 'solved');
+  pb.innerHTML = learned.length ? learned.map(p => `<div class="patline"><span class="t">${p[3]}:</span> ${p[7]}</div>`).join('') : '<div class="card small">Empty for now — every problem you solve yourself adds its pattern line here.</div>';
+}
+
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  if (b.dataset.p === 'due') startDueUI();
+  if (b.dataset.p === 'today') nextProblemUI();
+  window.scrollTo({ top: 0 });
+});
+refresh();
+nextProblemUI();
+</script>
+</body>
+</html>

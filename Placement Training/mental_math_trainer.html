@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧮 Mental Math Trainer — Placement Edition</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 25px; font-weight: 500; color: #f0efea; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; color: #f0efea; margin: 4px 0 12px; }
+  h3 { font-size: 15px; font-weight: 600; color: #f0efea; margin: 18px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 4px 0 14px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 16px; }
+  nav button { font: inherit; font-size: 12.5px; font-weight: 500; padding: 7px 12px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: #b8b5ad; cursor: pointer; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin: 10px 0; }
+  .card.mint { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.blue { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; }
+  .step .n { background: #d97757; color: #fff; font-weight: 700; border-radius: 50%; min-width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { border: 1px solid #3f3e3a; padding: 7px 10px; text-align: left; font-size: 14px; }
+  th { background: #30302e; color: #b8b5ad; }
+  code { background: #1f1e1c; border-radius: 5px; font-family: Consolas, monospace; font-size: 13.5px; color: #cbc3f0; padding: 1px 7px; }
+  .big { font-size: 17px; color: #f0efea; font-weight: 600; }
+  .small { font-size: 12px; color: #8e8b83; }
+  ul li { margin-bottom: 7px; }
+  .arena { text-align: center; padding: 26px 16px; }
+  .qtext { font-size: 34px; font-weight: 700; color: #f0efea; margin: 18px 0; font-family: Consolas, monospace; }
+  .arena input { font: inherit; font-size: 24px; text-align: center; width: 180px; padding: 10px; border-radius: 12px; border: 1px solid #45443f; background: #1f1e1c; color: #f0efea; }
+  .arena input:focus { outline: none; border-color: #d97757; }
+  .arena .go { font: inherit; font-size: 15px; font-weight: 600; padding: 10px 22px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; margin: 12px 6px 0; }
+  .arena .go:hover { background: #c96442; }
+  .modes { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin: 10px 0; }
+  .modes button { font: inherit; font-size: 12.5px; font-weight: 500; padding: 6px 13px; border-radius: 10px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .modes button:hover { border-color: #6b6961; }
+  .modes button.on { background: #d97757; color: #fff; border-color: #d97757; }
+  .fb { font-size: 17px; font-weight: 600; min-height: 28px; margin-top: 10px; }
+  .fb.good { color: #90a883; }
+  .fb.bad { color: #c4635a; }
+  .scorebar { display: flex; gap: 16px; justify-content: center; font-size: 14px; color: #8e8b83; margin-top: 14px; }
+  .scorebar b { color: #e0987d; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🧮 Mental Math Trainer</h1>
+<div class="sub">From "mad mental math" → placement-ready. Learn the 5 moves, memorize the anchors, then live in the Drill Arena.</div>
+
+<nav id="nav">
+  <button data-p="m1" class="on">🖐️ The 5 moves</button>
+  <button data-p="m2">📊 Memorize these</button>
+  <button data-p="m3">⚡ Speed tricks</button>
+  <button data-p="m4">🎮 Drill arena</button>
+  <button data-p="m5">📅 Daily routine</button>
+</nav>
+
+<!-- ============ 5 MOVES ============ -->
+<div class="page on" id="m1">
+  <h2>The only 5 moves you need</h2>
+  <p class="small">Every placement calculation is one of these five. Learn the move, not the answer.</p>
+
+  <div class="card mint">
+    <div class="step"><div class="n">1</div><div>
+      <span class="big">The 10% anchor</span> — to find any % of a number, first find 10% (just shift the decimal), then scale.<br>
+      <code>30% of 240</code> → 10% is 24 → ×3 → <b>72</b><br>
+      <code>5% of 380</code> → 10% is 38 → half → <b>19</b><br>
+      <code>35% of 400</code> → 10%=40 → ×3=120, +half of 40=20 → <b>140</b><br>
+      <span class="small">1% works the same: shift twice. 7% of 300 → 1%=3 → ×7 → 21.</span>
+    </div></div>
+  </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">2</div><div>
+      <span class="big">Percent = multiplier</span> — you already know this one (you got 1.5 × 0.9 = 135 right!).<br>
+      +20% → <code>×1.2</code> · −25% → <code>×0.75</code> · chain them for successive changes.<br>
+      And for two changes there's the instant formula: <code>a + b + ab/100</code> → +40, −20 → 40−20−8 = <b>+12%</b>.
+    </div></div>
+  </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">3</div><div>
+      <span class="big">Break it apart</span> — big multiplications become small ones.<br>
+      <code>23 × 14</code> → 23×10 + 23×4 → 230 + 92 → <b>322</b><br>
+      <code>18 × 12</code> → 18×10 + 18×2 → 180+36 → <b>216</b><br>
+      <span class="small">Always left to right: big chunk first, then the small one. Left-to-right is HOW mental math works — school taught you right-to-left because paper is patient. Your head isn't.</span>
+    </div></div>
+  </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">4</div><div>
+      <span class="big">Round, then fix</span> — compute with a friendly number, then repair the damage.<br>
+      <code>49 × 6</code> → 50×6 = 300, minus one 6 → <b>294</b><br>
+      <code>397 + 258</code> → 400+258 = 658, minus 3 → <b>655</b><br>
+      <code>75 × 12</code> → 75×12 is ¾ of 1200 → <b>900</b>
+    </div></div>
+  </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">5</div><div>
+      <span class="big">Halve &amp; double</span> — trade a hard factor for an easy one.<br>
+      <code>16 × 35</code> → 8 × 70 → <b>560</b><br>
+      <code>25 × 48</code> → 100 × 12 → <b>1200</b> (25 = 100/4, so quarter the other number)<br>
+      <code>5 × anything</code> → ×10, then halve. 5 × 86 → 860/2 → <b>430</b>
+    </div></div>
+  </div>
+</div>
+
+<!-- ============ MEMORIZE ============ -->
+<div class="page" id="m2">
+  <h2>Memorize these cold (30 min total, lifetime payoff)</h2>
+
+  <h3>Fractions ↔ Percentages — THE most valuable table in aptitude</h3>
+  <table>
+    <tr><th>Fraction</th><th>%</th><th>Fraction</th><th>%</th></tr>
+    <tr><td>1/2</td><td>50%</td><td>1/8</td><td>12.5%</td></tr>
+    <tr><td>1/3</td><td>33.33%</td><td>3/8</td><td>37.5%</td></tr>
+    <tr><td>2/3</td><td>66.67%</td><td>5/8</td><td>62.5%</td></tr>
+    <tr><td>1/4</td><td>25%</td><td>7/8</td><td>87.5%</td></tr>
+    <tr><td>3/4</td><td>75%</td><td>1/9</td><td>11.11%</td></tr>
+    <tr><td>1/5</td><td>20%</td><td>1/11</td><td>9.09%</td></tr>
+    <tr><td>1/6</td><td>16.67%</td><td>1/12</td><td>8.33%</td></tr>
+    <tr><td>1/7</td><td>≈14.28%</td><td>1/16</td><td>6.25%</td></tr>
+  </table>
+  <p class="small">Why it matters: "increase by 16.67%" = ×7/6. "Loss of 9.09%" = ×10/11. Fractions turn ugly percentage math into clean multiplication — this is the single biggest speed unlock.</p>
+
+  <h3>Squares 11–20 (asked constantly)</h3>
+  <table>
+    <tr><td>11²=121</td><td>12²=144</td><td>13²=169</td><td>14²=196</td><td>15²=225</td></tr>
+    <tr><td>16²=256</td><td>17²=289</td><td>18²=324</td><td>19²=361</td><td>20²=400</td></tr>
+  </table>
+
+  <h3>Cubes 1–12</h3>
+  <table>
+    <tr><td>1</td><td>8</td><td>27</td><td>64</td><td>125</td><td>216</td><td>343</td><td>512</td><td>729</td><td>1000</td><td>1331</td><td>1728</td></tr>
+  </table>
+
+  <h3>Speed conversions (trains questions)</h3>
+  <table>
+    <tr><th>km/h</th><td>36</td><td>54</td><td>72</td><td>90</td><td>108</td></tr>
+    <tr><th>m/s</th><td>10</td><td>15</td><td>20</td><td>25</td><td>30</td></tr>
+  </table>
+  <p class="small">Rule: km/h × 5/18 = m/s. But these five pairs cover 90% of train questions — know them by sight.</p>
+
+  <h3>Divisibility rules (for simplifying ratios fast)</h3>
+  <ul>
+    <li><b>3:</b> digit sum divisible by 3 · <b>4:</b> last two digits · <b>6:</b> even + rule of 3</li>
+    <li><b>8:</b> last three digits · <b>9:</b> digit sum divisible by 9 · <b>11:</b> alternating digit sum</li>
+  </ul>
+</div>
+
+<!-- ============ TRICKS ============ -->
+<div class="page" id="m3">
+  <h2>⚡ Speed tricks by operation</h2>
+
+  <div class="card blue">
+    <h3 style="margin-top:0">Multiply by 11</h3>
+    <p><code>52 × 11</code> → write 5_2, middle = 5+2 → <b>572</b>. Carry if needed: <code>68×11</code> → 6_(14)_8 → <b>748</b>.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">Multiply by 9 / 99</h3>
+    <p><code>47 × 9</code> → 47×10 − 47 → <b>423</b>. Same idea: ×99 = ×100 − once.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">Squares ending in 5 (magic one)</h3>
+    <p><code>35²</code> → first digit × (itself+1), stick 25 on: 3×4=12 → <b>1225</b>. <code>75²</code> → 7×8=56 → <b>5625</b>. Ten seconds saved, every time.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">Squares near a known one</h3>
+    <p><code>21²</code> = 20² + 20 + 21 = <b>441</b>. <code>19²</code> = 20² − 20 − 19 = <b>361</b>. (n±1)² without the formula stress.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">Percent flip</h3>
+    <p><code>x% of y = y% of x</code>. 4% of 75 feels hard → 75% of 4 = <b>3</b>. Instant.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">Division by 5, 25, 125</h3>
+    <p>÷5 → ×2 then ÷10: <code>435 ÷ 5</code> → 870/10 → <b>87</b>. ÷25 → ×4 ÷100. ÷125 → ×8 ÷1000.</p>
+  </div>
+  <div class="card amber">
+    <h3 style="margin-top:0">The exam meta-trick: estimate → eliminate</h3>
+    <p>MCQs don't need exact answers. <code>289 × 31</code>? That's ≈ 290×30 ≈ 8700 — if only one option is near 8700, you're done. Options are your friends; check them before calculating precisely.</p>
+  </div>
+</div>
+
+<!-- ============ ARENA ============ -->
+<div class="page" id="m4">
+  <h2>🎮 Drill Arena</h2>
+  <p class="small">Pick a mode, hit Enter to answer. Aim: 10 in a row under 15 seconds each. Your streak &amp; best are saved.</p>
+  <div class="modes" id="modes">
+    <button data-m="pct" class="on">% of number</button>
+    <button data-m="mult">2-digit ×</button>
+    <button data-m="sq">squares</button>
+    <button data-m="chain">profit chains</button>
+    <button data-m="frac">fraction ↔ %</button>
+    <button data-m="mix">🎲 mix</button>
+  </div>
+  <div class="card arena">
+    <div class="qtext" id="qtext">press start ▶</div>
+    <div><input type="number" step="any" id="ans" placeholder="answer" disabled></div>
+    <button class="go" id="startbtn" onclick="nextQ(true)">▶ start</button>
+    <div class="fb" id="fb"></div>
+    <div class="scorebar">
+      <span>streak <b id="streak">0</b></span>
+      <span>best <b id="best">0</b></span>
+      <span>solved <b id="solved">0</b></span>
+      <span>avg <b id="avg">–</b>s</span>
+    </div>
+    <div class="small" id="hint" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- ============ ROUTINE ============ -->
+<div class="page" id="m5">
+  <h2>📅 The 5-minute daily routine</h2>
+  <p>Mental math is a muscle, not knowledge — 5 minutes daily beats 2 hours once. Until placements end:</p>
+  <div class="card">
+    <ul>
+      <li><b>Min 1–2:</b> Drill Arena, "% of number" — beat yesterday's streak.</li>
+      <li><b>Min 3:</b> One column of the fraction↔% table out loud, from memory.</li>
+      <li><b>Min 4:</b> Five two-digit multiplications (Arena "2-digit ×").</li>
+      <li><b>Min 5:</b> One "profit chain" (Arena) — the exact skill Presidio MCQs test.</li>
+    </ul>
+  </div>
+  <div class="card amber">
+    <b>Real-life reps (free practice):</b> mess prices (add your tray total before the cashier does), cricket strike rates, splitting bills, discount tags in shops. Every number you see is a rep.
+  </div>
+  <div class="card mint">
+    <b>Exam-day rule:</b> if a calculation takes more than 3 steps in your head, you're solving it the wrong way — look for the trick (fraction form, round-and-fix, or estimate-and-eliminate). Placement questions are DESIGNED to have a shortcut.
+  </div>
+</div>
+
+</div>
+<script>
+// tabs
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  window.scrollTo({ top: 0 });
+});
+
+// ================= drill arena =================
+const R = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = arr => arr[R(0, arr.length - 1)];
+let mode = 'pct', cur = null, t0 = 0, streak = 0, solved = 0, times = [];
+let best = 0;
+try { best = parseInt(localStorage.getItem('mm-best') || '0'); } catch(e) {}
+document.getElementById('best').textContent = best;
+
+document.querySelectorAll('#modes button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#modes button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  mode = b.dataset.m;
+  nextQ(true);
+});
+
+const GENS = {
+  pct() {
+    const p = pick([5, 10, 15, 20, 25, 30, 40, 50, 60, 75]);
+    const n = pick([40, 60, 80, 120, 160, 200, 240, 300, 320, 400, 480, 500]);
+    return { q: p + '% of ' + n + ' = ?', a: p * n / 100, h: '10% anchor: 10% of ' + n + ' is ' + (n/10) };
+  },
+  mult() {
+    const a = R(12, 29), b = R(11, 19);
+    return { q: a + ' × ' + b + ' = ?', a: a * b, h: 'break apart: ' + a + '×10 + ' + a + '×' + (b-10) };
+  },
+  sq() {
+    const n = pick([11,12,13,14,15,16,17,18,19,21,25,35,45,55,65,75]);
+    return { q: n + '² = ?', a: n * n, h: n % 10 === 5 ? 'ends in 5: ' + Math.floor(n/10) + '×' + (Math.floor(n/10)+1) + ' then 25' : 'near a square you know ± n' };
+  },
+  chain() {
+    const up = pick([10, 20, 25, 30, 40, 50]);
+    const dn = pick([10, 20, 25, 50]);
+    const cp = pick([100, 200, 400]);
+    return { q: 'CP ' + cp + ', +' + up + '% then −' + dn + '%. Final price?', a: cp * (1 + up/100) * (1 - dn/100), h: '× ' + (1+up/100) + ' then × ' + (1-dn/100) };
+  },
+  frac() {
+    const map = [['1/8', 12.5], ['3/8', 37.5], ['5/8', 62.5], ['1/6', 16.67], ['1/3', 33.33], ['2/3', 66.67], ['1/12', 8.33], ['1/16', 6.25], ['1/9', 11.11], ['1/11', 9.09]];
+    const m = pick(map);
+    return Math.random() < .5
+      ? { q: m[0] + ' as % = ?', a: m[1], h: 'the sacred table 😄', tol: .2 }
+      : { q: m[1] + '% of 144 = ?', a: Math.round(eval(m[0]) * 144 * 100) / 100, h: 'use the fraction: ' + m[0] + ' × 144', tol: .6 };
+  },
+  mix() { return GENS[pick(['pct','mult','sq','chain','frac'])](); }
+};
+
+function nextQ(fresh) {
+  const inp = document.getElementById('ans');
+  cur = GENS[mode]();
+  document.getElementById('qtext').textContent = cur.q;
+  document.getElementById('fb').textContent = '';
+  document.getElementById('fb').className = 'fb';
+  document.getElementById('hint').textContent = '';
+  document.getElementById('startbtn').textContent = '⏭ skip';
+  inp.disabled = false; inp.value = ''; inp.focus();
+  t0 = Date.now();
+  if (fresh) { streak = 0; document.getElementById('streak').textContent = 0; }
+}
+
+document.getElementById('ans').addEventListener('keydown', e => {
+  if (e.key !== 'Enter' || !cur) return;
+  const v = parseFloat(e.target.value);
+  if (isNaN(v)) return;
+  const tol = cur.tol || 0.01;
+  const dt = Math.round((Date.now() - t0) / 100) / 10;
+  const fb = document.getElementById('fb');
+  if (Math.abs(v - cur.a) <= tol) {
+    streak++; solved++; times.push(dt);
+    if (streak > best) { best = streak; try { localStorage.setItem('mm-best', best); } catch(e) {} }
+    fb.textContent = '✔ correct · ' + dt + 's';
+    fb.className = 'fb good';
+    setTimeout(() => nextQ(false), 700);
+  } else {
+    fb.textContent = '✘ it was ' + (Math.round(cur.a * 100) / 100);
+    fb.className = 'fb bad';
+    document.getElementById('hint').textContent = '💡 ' + cur.h;
+    streak = 0;
+    setTimeout(() => nextQ(false), 2200);
+  }
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('best').textContent = best;
+  document.getElementById('solved').textContent = solved;
+  document.getElementById('avg').textContent = times.length ? (Math.round(times.reduce((a,b)=>a+b,0) / times.length * 10) / 10) : '–';
+});
+</script>
+</body>
+</html>

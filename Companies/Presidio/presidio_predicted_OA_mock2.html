@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presidio — Predicted OA (Mock 2)</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 24px; font-weight: 500; color: #f0efea; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 19px; font-weight: 500; color: #f0efea; margin: 24px 0 8px; border-bottom: 1px solid #3f3e3a; padding-bottom: 4px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 4px 0 10px; }
+  .timerbar { position: sticky; top: 0; z-index: 10; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); border-bottom: 1px solid #3f3e3a; padding: 10px 0; display: flex; align-items: center; gap: 14px; }
+  .timerbar .t { font-family: Consolas, monospace; font-size: 26px; font-weight: 700; color: #90a883; }
+  .timerbar .t.low { color: #c4635a; }
+  .timerbar button { font: inherit; font-size: 12.5px; font-weight: 600; padding: 7px 14px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; }
+  .timerbar button:hover { background: #c96442; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 12px 16px; margin: 10px 0; }
+  .note { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; background: #383430; }
+  ol.q > li { margin-bottom: 13px; }
+  code, pre { background: #1f1e1c; border-radius: 5px; font-family: Consolas, monospace; font-size: 13px; color: #cbc3f0; }
+  code { padding: 1px 6px; }
+  pre { padding: 11px; overflow-x: auto; border: 1px solid #3f3e3a; margin: 6px 0; color: #d8d5cc; }
+  details { margin: 20px 0; border: 1px solid #3f3e3a; border-radius: 12px; padding: 12px 16px; background: #30302e; }
+  summary { cursor: pointer; font-weight: 600; color: #e0987d; }
+  .small { font-size: 12px; color: #8e8b83; }
+  h3 { font-size: 15px; font-weight: 600; color: #f0efea; margin: 14px 0 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🏢 Presidio Campus Recruitment — Online Assessment</h1>
+<div class="sub"><b>Predicted paper (Mock 2)</b> · drafted in the style of Presidio's real OA: 30 MCQs + 2 pseudocode + 2 SQL + 2 coding + 1 design theory · 90 minutes<br>
+⚠️ This is a <i>prediction</i> built from reported past patterns — not a leaked paper. Treat it as your 5 AM warm-up.</div>
+
+<div class="timerbar"><span class="t" id="tt">90:00</span><button onclick="startT()">▶ start 90-min timer</button><span class="small">Section A target: done by 45:00 on this clock</span></div>
+
+<div class="card note"><b>Instructions (as on the real portal):</b> No going back once submitted per section on some portals — but assume free navigation here. Rough sheets allowed. Keep webcam mindset: eyes on screen, no phone.</div>
+
+<h2>Section A — 30 MCQs (~45 min)</h2>
+<h3>Quantitative Aptitude</h3>
+<ol class="q">
+<li>Compound interest on ₹10,000 at 10% p.a. for 2 years: (a) ₹2000 (b) ₹2100 (c) ₹2200 (d) ₹1210</li>
+<li>Single discount equivalent to successive discounts of 20% and 10%: (a) 30% (b) 28% (c) 29% (d) 27%</li>
+<li>A, B, C can do a work in 10, 15, 30 days. Working together: (a) 4 days (b) 5 days (c) 6 days (d) 5.5 days</li>
+<li>A car goes to a city at 30 km/h and returns at 60 km/h. Average speed: (a) 45 (b) 40 (c) 42 (d) 48 km/h</li>
+<li>A father is 4× his son's age. In 20 years he'll be 2×. Father's present age: (a) 36 (b) 40 (c) 44 (d) 48</li>
+<li>A 40 L mixture has milk:water 7:3. Add 8 L water — new ratio: (a) 7:5 (b) 7:4 (c) 2:1 (d) 3:2</li>
+<li>A town of 8,000 grows 5% one year, 10% the next. Final population: (a) 9200 (b) 9240 (c) 9300 (d) 9140</li>
+<li>A boat covers 20 km downstream in 2 hrs and 12 km upstream in 2 hrs. Speed of the stream: (a) 1 (b) 2 (c) 3 (d) 4 km/h</li>
+</ol>
+<h3>Logical Reasoning</h3>
+<ol class="q" start="9">
+<li>4, 9, 19, 39, 79, __ : (a) 149 (b) 159 (c) 158 (d) 160</li>
+<li>Odd one out: 3, 5, 7, 9, 11: (a) 3 (b) 7 (c) 9 (d) 11</li>
+<li>If MOBILE → NPCJMF, then LAPTOP → : (a) MBQUPQ (b) MBQUQP (c) MBUQPQ (d) KZOSNO</li>
+<li>A man walks 4 km north, then 3 km east. Distance from start: (a) 7 km (b) 5 km (c) 4 km (d) 6 km</li>
+<li>All roses are flowers. Some flowers are red. Conclusions — I: Some flowers are roses. II: Some roses are red. (a) only I (b) only II (c) both (d) neither</li>
+<li>Today is Monday. The day after 61 days: (a) Friday (b) Saturday (c) Sunday (d) Thursday</li>
+</ol>
+<h3>Code Output (C / Java)</h3>
+<ol class="q" start="15">
+<li>Called three times, what's the full output?
+<pre>void fun() {
+    static int c = 0;
+    c++;
+    printf("%d ", c);
+}</pre> (a) 1 1 1 (b) 1 2 3 (c) 0 1 2 (d) 3 3 3</li>
+<li><pre>int a[] = {2, 4, 6, 8};
+printf("%d", *(a+1) + *(a+3));</pre> (a) 10 (b) 12 (c) 14 (d) 6</li>
+<li><pre>printf("%c", 'A' + 2);</pre> (a) A2 (b) 67 (c) C (d) error</li>
+<li>Java:
+<pre>static void swap(int x, int y) {
+    int t = x; x = y; y = t;
+}
+// in main: a=5, b=10; swap(a,b);
+System.out.println(a + " " + b);</pre> (a) 10 5 (b) 5 10 (c) 5 5 (d) error</li>
+<li>Java:
+<pre>Parent p = new Child();
+p.show();  // show() overridden in Child</pre> Which runs? (a) Parent's (b) Child's (c) compile error (d) both</li>
+<li><pre>int i = 5;
+while (i --&gt; 0)
+    printf("%d ", i);</pre> How many numbers print? (a) 4 (b) 5 (c) 6 (d) infinite</li>
+</ol>
+<h3>DBMS &amp; SQL</h3>
+<ol class="q" start="21">
+<li>An index on a table primarily: (a) speeds INSERT (b) speeds SELECT, slows INSERT/UPDATE (c) reduces storage (d) enforces ACID</li>
+<li>The ACID property ensuring concurrent transactions don't interfere: (a) Atomicity (b) Consistency (c) Isolation (d) Durability</li>
+<li>A LEFT JOIN returns: (a) only matching rows (b) all left-table rows, NULLs for non-matches (c) all right-table rows (d) the cartesian product</li>
+<li>A primary key is: (a) any unique column (b) a chosen candidate key — unique and NOT NULL (c) always auto-increment (d) a foreign key</li>
+</ol>
+<h3>OS, Networks &amp; Shell</h3>
+<ol class="q" start="25">
+<li>NOT a process state: (a) ready (b) running (c) compiled (d) waiting</li>
+<li>Virtual memory mainly provides: (a) faster CPU (b) illusion of more RAM using disk (c) disk compression (d) cache coherence</li>
+<li>Key difference — mutex vs semaphore: (a) none (b) mutex has ownership/binary locking; semaphore can count &amp; signal (c) semaphores are faster (d) mutex works across machines</li>
+<li>HTTPS default port: (a) 80 (b) 8080 (c) 443 (d) 22</li>
+<li>IP routing happens at which OSI layer: (a) 2 (b) 3 (c) 4 (d) 7</li>
+<li>Command to count lines in a file: (a) <code>grep -n</code> (b) <code>wc -l</code> (c) <code>ls -l</code> (d) <code>cat -n</code></li>
+</ol>
+
+<h2>Section B — Pseudocode (2)</h2>
+<ol class="q">
+<li>What prints?
+<pre>x = 1, y = 0
+while x &lt; 20:
+    y = y + x
+    x = x * 2
+print(x, y)</pre></li>
+<li>What is g(6)?
+<pre>function g(n):
+    if n &lt;= 1: return n
+    return g(n-1) + g(n-2)</pre></li>
+</ol>
+
+<h2>Section C — SQL (2)</h2>
+<p class="small">Tables: <code>employees(emp_id, name, dept_id, salary)</code> · <code>departments(dept_id, dept_name)</code></p>
+<ol class="q">
+<li>List employees who earn <b>more than the average salary of their own department</b>.</li>
+<li>Show <b>every department</b> with its employee count — including departments that have zero employees.</li>
+</ol>
+
+<h2>Section D — Coding (2, any language)</h2>
+<ol class="q">
+<li><b>Move Zeros:</b> shift all zeros to the end, keeping other elements in order. <code>[0,1,0,3,12]</code> → <code>[1,3,12,0,0]</code>. In place preferred.</li>
+<li><b>Anagram Check:</b> return true if two strings are anagrams. <code>"listen","silent"</code> → true. What's your time complexity?</li>
+</ol>
+
+<h2>Section E — Design Theory (1)</h2>
+<ol class="q"><li>You're building a <b>hotel-listing platform</b>: hotels have wildly varying fields (amenities, room types, seasonal pricing), traffic is read-heavy, bookings must never double-book a room. SQL, NoSQL, or both? Justify in 5–8 lines.</li></ol>
+
+<details><summary>🔑 Answer key with full explanations — after the timer, not before</summary>
+<h3>Quantitative Aptitude</h3>
+<p><b>1 → (b) ₹2100.</b> CI = amount − principal. Amount = 10000 × 1.1 × 1.1 = 10000 × 1.21 = 12100. CI = 12100 − 10000 = 2100. <span class="small">Trick: for 2 years, CI% = a + a + a²/100 = 10+10+1 = 21%.</span></p>
+<p><b>2 → (b) 28%.</b> Successive-change formula: a + b + ab/100 with both negative → −20 −10 + (−20)(−10)/100 = −30 + 2 = −28% net, i.e. a single 28% discount. <span class="small">Common trap: answering 30% (just adding).</span></p>
+<p><b>3 → (b) 5 days.</b> LCM method: work = LCM(10,15,30) = 30 units. Rates: A=3, B=2, C=1 per day → together 6/day → 30/6 = 5 days. <span class="small">No fractions needed if you pick LCM units.</span></p>
+<p><b>4 → (b) 40 km/h.</b> Equal distances → harmonic mean: 2xy/(x+y) = 2×30×60/90 = 40. <span class="small">Never (30+60)/2 = 45 — that's the trap option.</span></p>
+<p><b>5 → (b) 40.</b> Let son = s, father = 4s. In 20 yrs: 4s+20 = 2(s+20) → 4s+20 = 2s+40 → 2s = 20 → s=10, father = 40. <span class="small">Translate English to equation immediately; don't juggle in your head.</span></p>
+<p><b>6 → (a) 7:5.</b> 40 L at 7:3 → milk 28 L, water 12 L. Add 8 L water → 28:20 → divide by 4 → 7:5. <span class="small">Only the water changes; milk stays 28.</span></p>
+<p><b>7 → (b) 9240.</b> Multipliers: 8000 × 1.05 × 1.10 = 8400 × 1.10 = 9240. <span class="small">Same multiplier chain you use for profit questions.</span></p>
+<p><b>8 → (b) 2 km/h.</b> Downstream speed = 20/2 = 10; upstream = 12/2 = 6. Stream = (down − up)/2 = (10−6)/2 = 2. <span class="small">Boat speed would be (10+6)/2 = 8.</span></p>
+<h3>Logical Reasoning</h3>
+<p><b>9 → (b) 159.</b> Each term = previous × 2 + 1: 4→9→19→39→79→159. <span class="small">When differences look messy, test ×2±k next.</span></p>
+<p><b>10 → (c) 9.</b> 3, 5, 7, 11 are prime; 9 = 3×3 is not. </p>
+<p><b>11 → (a) MBQUPQ.</b> MOBILE→NPCJMF is each letter +1. LAPTOP: L→M, A→B, P→Q, T→U, O→P, P→Q → MBQUPQ. <span class="small">Write A=1…Z=26 on rough paper first — 30 seconds well spent.</span></p>
+<p><b>12 → (b) 5 km.</b> North 4 and east 3 are perpendicular → distance = √(4²+3²) = 5. The classic 3-4-5 triangle. <span class="small">Direction from start: north-east.</span></p>
+<p><b>13 → (a) only I.</b> "All roses are flowers" guarantees some flowers are roses (I true). II fails: the red flowers might all be non-roses — draw the Venn: red circle can overlap flowers without touching roses. <span class="small">A conclusion must be true in EVERY possible diagram.</span></p>
+<p><b>14 → (b) Saturday.</b> 61 mod 7 = 5 (since 56 is divisible by 7). Monday + 5 days = Saturday. <span class="small">Always mod 7 first, never count 61 days.</span></p>
+<h3>Code Output</h3>
+<p><b>15 → (b) 1 2 3.</b> <code>static</code> variables initialize once and persist across calls — c survives between calls, incrementing each time. A normal local would print 1 1 1.</p>
+<p><b>16 → (b) 12.</b> <code>*(a+1)</code> = a[1] = 4 and <code>*(a+3)</code> = a[3] = 8 → 4+8 = 12. Pointer arithmetic moves by whole elements, not bytes.</p>
+<p><b>17 → (c) C.</b> 'A' is 65; 65+2 = 67 = 'C'. The <code>%c</code> format prints it as a character. <span class="small">With %d it would print 67 — watch the specifier.</span></p>
+<p><b>18 → (b) 5 10.</b> Java is strictly <b>pass-by-value</b>: swap gets copies of a and b; swapping copies changes nothing outside. <span class="small">Yes, even objects — the reference itself is passed by value.</span></p>
+<p><b>19 → (b) Child's.</b> Overriding + a Parent reference to a Child object → the <b>runtime type</b> (Child) decides which method runs. That's runtime polymorphism / dynamic dispatch.</p>
+<p><b>20 → (b) 5.</b> <code>i --&gt; 0</code> is just <code>(i--) &gt; 0</code> written cheekily ("goes-to operator" joke). Checks i&gt;0 with old value, then decrements: prints 4 3 2 1 0 — five numbers.</p>
+<h3>DBMS</h3>
+<p><b>21 → (b).</b> An index is a lookup structure (usually B-tree) that makes SELECTs fast, but every INSERT/UPDATE must also update the index — writes get slower. Classic trade-off question.</p>
+<p><b>22 → (c) Isolation.</b> A=all-or-nothing, C=valid state to valid state, <b>I=concurrent transactions don't see each other's half-done work</b>, D=committed data survives crashes.</p>
+<p><b>23 → (b).</b> LEFT JOIN keeps every row of the left table; where the right side has no match, its columns come back NULL. <span class="small">That's exactly why it's used for "including zero" counts (see C2).</span></p>
+<p><b>24 → (b).</b> A table can have several candidate keys (all unique+not-null capable); the primary key is the one you choose. Auto-increment is a convenience, not a requirement.</p>
+<h3>OS, Networks &amp; Shell</h3>
+<p><b>25 → (c) compiled.</b> Process states are about execution: new, ready, running, waiting, terminated. Compilation happens before a process ever exists.</p>
+<p><b>26 → (b).</b> Virtual memory lets programs use more memory than physical RAM by paging to disk — each process sees its own large address space.</p>
+<p><b>27 → (b).</b> A mutex is a lock with ownership (the locker must unlock, binary). A semaphore is a counter — can allow N holders and be signalled by a different thread. <span class="small">One-liner: mutex = key to one toilet; semaphore = N parking slots.</span></p>
+<p><b>28 → (c) 443.</b> HTTP=80, HTTPS=443, SSH=22, DNS=53, SMTP=25. Memorize these five.</p>
+<p><b>29 → (b) Layer 3.</b> IP addressing/routing = Network layer. L2=switches/MAC, L4=TCP/UDP, L7=HTTP.</p>
+<p><b>30 → (b) wc -l.</b> "word count" with -l counts lines. grep -n shows line numbers of matches; cat -n numbers output; ls -l is long listing.</p>
+<p class="small">Score guide: 24+ strong · 18–23 fine, review misses · &lt;18 focus your morning skim on weak areas only.</p>
+<h3>Section B — Pseudocode</h3>
+<p><b>B1 → 32 31.</b> Trace a table of (x, y) per loop pass:<br>
+start x=1,y=0 → pass 1: y=0+1=1, x=2 → pass 2: y=1+2=3, x=4 → pass 3: y=3+4=7, x=8 → pass 4: y=7+8=15, x=16 → pass 5 (16&lt;20 still true): y=15+16=31, x=32 → now 32&lt;20 fails, loop ends. Print x then y: <b>32 31</b>. <span class="small">Trap: forgetting the pass where x=16 (it's still &lt;20), or printing y before x.</span></p>
+<p><b>B2 → 8.</b> This is Fibonacci: g(0)=0, g(1)=1, then each = sum of previous two. Build up, don't recurse in your head: 0, 1, 1, 2, 3, 5, 8 → g(6) = <b>8</b>. <span class="small">Whenever you see g(n-1)+g(n-2), write the sequence forward — far faster and safer than tracing the recursion tree.</span></p>
+<h3>Section C — SQL</h3>
+<p><b>C1 — the key idea is a <i>correlated</i> subquery:</b> the inner query re-computes the average <i>for each employee's own department</i> because it references the outer row (<code>e.dept_id</code>).</p>
+<pre>SELECT e.name
+FROM employees e
+WHERE e.salary &gt; (SELECT AVG(salary) FROM employees
+                  WHERE dept_id = e.dept_id);</pre>
+<p class="small">Why not a plain subquery? <code>WHERE salary &gt; (SELECT AVG(salary) FROM employees)</code> compares against the <i>company-wide</i> average — wrong question. The correlation (<code>WHERE dept_id = e.dept_id</code>) is what scopes it per department. If asked for an alternative: JOIN against a derived table of per-dept averages — same result, often faster on big tables.</p>
+<p><b>C2 — two ideas working together:</b> ① LEFT JOIN keeps departments with no employees (their employee columns come back NULL); ② <code>COUNT(e.emp_id)</code> counts only non-NULL values, so empty departments correctly show 0.</p>
+<pre>SELECT d.dept_name, COUNT(e.emp_id) AS emp_count
+FROM departments d
+LEFT JOIN employees e ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;</pre>
+<p class="small">Trap: <code>COUNT(*)</code> would return 1 for an empty department (it counts the row itself, NULLs and all). And an INNER JOIN would drop empty departments entirely. This exact pattern — "including zero" — is a panel favorite.</p>
+<h3>Section D — Coding</h3>
+<p><b>D1 — Move Zeros (two-pointer "writer" technique), O(n) time, O(1) space:</b></p>
+<pre>def move_zeros(a):
+    w = 0                       # w = where the next non-zero should go
+    for i in range(len(a)):     # i = reader, scans everything
+        if a[i] != 0:
+            a[w], a[i] = a[i], a[w]   # move non-zero forward
+            w += 1
+    return a</pre>
+<p class="small">How it works: <code>w</code> only advances when a non-zero is placed, so everything before <code>w</code> is the non-zeros <i>in original order</i>, and the zeros naturally end up swapped to the back. Dry-run [0,1,0,3,12]: i=1 swaps 1 to front → [1,0,0,3,12]; i=3 swaps 3 → [1,3,0,0,12]; i=4 swaps 12 → [1,3,12,0,0]. Edge cases to mention: all zeros (loop does nothing harmful), no zeros (every element swaps with itself), empty array. The naive alternative — building a new list — is O(n) extra space; say why you avoided it.</p>
+<p><b>D2 — Anagram Check, O(n) time:</b></p>
+<pre>from collections import Counter
+def is_anagram(s, t):
+    return Counter(s) == Counter(t)</pre>
+<p class="small">Counter builds a frequency map of each string in O(n); equal maps = same letters with same counts = anagram. Mention the guard <code>len(s) != len(t) → False</code> as a fast exit. If asked "without libraries": use a dict (or a 26-slot array for lowercase), +1 for s, −1 for t, check all zeros. The sort-both-strings alternative works but is O(n log n) — say you chose the counter for linear time; interviewers ask complexity here, which is why the question includes it.</p>
+<h3>Section E — Design Theory</h3>
+<p><b>Best answer: both, split by responsibility.</b> Model answer with the reasoning spelled out:</p>
+<p>① <b>Bookings must be SQL.</b> "Never double-book a room" is a textbook ACID requirement: the check-availability + reserve steps must be one atomic transaction, and row-level locking / unique constraints make two simultaneous bookings of the same room impossible. Eventual consistency here = two families at one door.</p>
+<p>② <b>The catalog fits NoSQL (or MySQL JSON columns).</b> Hotels having wildly different amenities/room types/seasonal pricing is a schema-flexibility problem — a document per hotel absorbs the variety without endless nullable columns or table alterations.</p>
+<p>③ <b>Read-heavy traffic → cache + replicas.</b> Listings are read thousands of times per booking, so put Redis (or a CDN for images) in front and scale reads with replicas; the write-critical booking path stays small and strongly consistent.</p>
+<p class="small">Why this scores: the question is engineered to look like "pick one," but the mature answer is matching guarantees to requirements — consistency where money/inventory moves, flexibility where content varies, caching where reads dominate. If forced to choose exactly one: choose SQL and say the catalog flexibility can be handled with JSON columns — correctness of bookings outranks catalog convenience. (Bonus: you've effectively used this split in A.R.G.U.S-V — Redis cache in front of expensive computation — mention it.)</p>
+</details>
+
+<p class="small">Drafted to mirror reported Presidio OA structure (GeeksforGeeks/Glassdoor campus reports 2024–26). Actual questions will differ — the <i>distribution</i> is the prediction. Good luck tomorrow 🍀</p>
+
+</div>
+<script>
+let iv = null;
+function startT() {
+  const t = document.getElementById('tt');
+  if (iv) clearInterval(iv);
+  let s = 5400;
+  iv = setInterval(() => {
+    s--;
+    t.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+    t.classList.toggle('low', s <= 600);
+    if (s <= 0) { clearInterval(iv); t.textContent = '⏰ TIME'; }
+  }, 1000);
+}
+</script>
+</body>
+</html>

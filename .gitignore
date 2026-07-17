@@ -1,0 +1,23 @@
+# Whitelist: only curated, original content goes public
+/*
+!/.gitignore
+!/README.md
+!/Companies/
+!/Placement Training/
+
+# Resumes, JDs, third-party/personal docs stay private
+Companies/**/*.pdf
+Companies/**/*.docx
+Companies/**/*.doc
+
+# Copyrighted books and tool metadata
+Placement Training/APTITUDE/
+Placement Training/.claude/
+Placement Training/.remember/
+Placement Training/CLAUDE.md
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*

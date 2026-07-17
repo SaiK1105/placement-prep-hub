@@ -1,0 +1,94 @@
+Part 1: The Online Assessment (OA) The Platform: It’s on SHL. There are a bunch of sections, but don't freak out. Just focus on the coding. The "Fix the Code" Part: You’ll have to fix bugs in existing code. These are usually the same ones that pop up in AMCAT tests, so if you practice those beforehand, you'll breeze through this. The DSA Questions: You’ll probably get 3 questions. When I took it, it was 2 DP (Dynamic Programming) problems and 1 Tree problem. Tip: You don’t need to solve everything. If you get 2 questions perfectly right, you’re usually good. How to prep: Just grind the Hard DP and Tree problems from Striver’s sheet. Aptitude & OƯice StuƯ: The math/logic part is medium diƯiculty—don't waste too much time studying for it. There’s also a boring "oƯice roles" section. Don't worry if you don't finish it; just make sure the ones you do answer are correct. Part 2: The Interviews The Setup: Usually 2 rounds with one or more interviewers. Don't even think about cheating—these guys know everything and will catch you immediately. Round 1 (Technical): This is mostly basic DSA, OOPs, and SQL. Languages: Since it's a finance firm, they usually prefer Java first, then Python, then C++. The Notepad Test: They’ll make you write code on a blank notepad. If you get stuck, just ask for help! If they give you a hint, act like you just figured it out—that’s a huge plus point. SQL: Usually pretty simple, but it depends on your luck. Ask a Question: When they ask if you have questions, ask something specific about the company. Don't just ask generic stuƯ about AI. Round 2 (HR & Values): This is all about "Why Morgan Stanley?" and scenario questions (like "what would you do if...")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+According to selected candidates(I talked with some of them):
+
+online test: 3 section(dsa, quant aptitude, debugging) --> more weightage on dsa section
+
+interview: complete knowledge of resume, strong understanding on core subjects(oops, os, dbms), some sql query(leetcode medium), medium dsa question(dp, 2-pointer,greedy,etc..)
+if you mention anything in your resume you need to have strong knowledge of it.
+
+
+
+
+
+
+Morgan Stanley Apprenticeship OA — What To Expect
+OA Format & Sections
+Platform: SHL is used for the Online Assessment. "It’s on SHL."
+
+Sections: Expect three main parts: coding (DSA), debugging/fix-the-code, and aptitude/office-roles. "Three sections: debugging (7 questions, easy), aptitude (logical reasoning, quant, verbal, significantly harder), and coding (3 medium to hard problems)."
+
+Debugging / Fix The Code: Debugging/fix-the-code appears and is typically easy if you practice common AMCAT-style bugs. "The 'Fix the Code' Part: You’ll have to fix bugs in existing code... these are usually the same ones that pop up in AMCAT tests."
+
+Coding (DSA) Expectations & Weight
+Number & Difficulty: Usually three coding problems; difficulty ranges from medium to hard and weight on shortlisting is high. "You’ll probably get 3 questions. When I took it, it was 2 DP (Dynamic Programming) problems and 1 Tree problem."
+
+Performance Criteria: Partial solutions with good logic can still advance you — fully solving all problems isn’t strictly necessary. "I did not finish all the coding problems but still advanced. Partial solutions with sound logic appear to be evaluated rather than just pass/fail."
+
+Common Topics: DP, trees, arrays/strings, two-pointer/greedy show up in posts about the process. "…2 DP (Dynamic Programming) problems and 1 Tree problem." and "medium dsa question(dp, 2-pointer,greedy,etc..)"
+
+Aptitude & Other Non-DSA Parts
+Aptitude Difficulty: Aptitude (math/logic) can be medium-to-hard but usually receives less focus than DSA. "The math/logic part is medium difficulty—don't waste too much time studying for it."
+
+Office-Roles / Misc: There’s an "office roles" or personality section; it’s low priority — answer the ones you do correctly. "There’s also a boring 'office roles' section. Don't worry if you don't finish it; just make sure the ones you do answer are correct."
+
+Shortlisting, Fairness & Outcomes
+Shortlisting Factors: OA performance matters, but college CGPA / shortlist processes also influence interview invitations. "Morgan stanley shortlists people with high cg, so if you are in top 10-20 in batch with good cg then you have good chance"
+
+Integrity Concerns: Cheating concerns were raised by students, but opinions vary; some say cheating occurs, others say most students are fair and cheating risks permanent block. "Simple answer. NO. It's not fair at all. And don't expect it to get better. Cheating is common everywhere now..." and "If you get caught once, then you’re permanently blocked, so don’t worry 😅"
+
+Stipend & PPO: Community reports mention a ~1 L/month stipend for apprenticeship and performance-based PPOs are common. "1L/Month stipend" and "Performance based ppo."
+
+Interview Follow-ups After OA
+Interview Rounds: If shortlisted, expect 1–2 technical rounds plus HR/values round; interviews test resume, core CS subjects, SQL, and medium DSA. "Round 1 (Technical): ... basic DSA, OOPs, and SQL." and "interview: complete knowledge of resume, strong understanding on core subjects(oops, os, dbms), some sql query(leetcode medium), medium dsa question..."
+
+Notepad / Live Coding: You may be asked to code on a notepad/whiteboard and should be ready to ask for clarification/hints. "The Notepad Test: They’ll make you write code on a blank notepad. If you get stuck, just ask for help!"
+
+Evaluation Nuances: Companies may take weeks/months to issue offers; background checks and portal statuses can remain "reviewing" for long periods. "It took a little over 3 months for them to send the offer letter and then there's a background check process." and "my application status on the portal still shows 'reviewing your candidacy'..."
+
+Quick Preparation Checklist
+Practice Hard DP & Tree problems: Focus Striver/hard DP + tree problems. "How to prep: Just grind the Hard DP and Tree problems from Striver’s sheet."
+
+Debugging/AMCAT-style bugs: Solve common code-fix/debug questions. "You’ll have to fix bugs in existing code... these are usually the same ones that pop up in AMCAT tests."
+
+Aptitude Basics: Polish medium-level quant/logic problems but prioritize DSA. "The math/logic part is medium difficulty—don't waste too much time studying for it."
+
+Resume & CS Fundamentals: Be ready to discuss resume lines and core topics (OOPs, OS, DBMS, SQL). "if you mention anything in your resume you need to have strong knowledge of it."
+
+Communities for Further Discussion
+r/Btechtards
+
+r/vitpune
+
+r/PlacementsPrep
+
+r/jobs
+
+r/recruitinghell
+
+r/InternshipsIndia
+
+r/InterviewCoderHQ
+
+
+
+
+MYprompt -- hey i have OA for Morgan Stanley on 11th july today its 9th july ,i uploaded my research do your own research also about what questions are gonna be asked in oa exact questions i want not just topics ,full question paper with all the three parts 
+
+@Web search
+
+ ,at the end add the full plan with the question paper to a HTML file having the prep plan ,expected question,questions found (HTML file style--> 1.font--Simple Note making 2.dark mode and all fonts visible 3.multpage main page with the two day plan and other pages with questions and all)

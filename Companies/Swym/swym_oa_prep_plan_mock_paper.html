@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swym OA Prep - 1-Night Plan + Mock Paper</title>
+<style>
+:root {
+  --bg: #0b0f14;
+  --panel: #111822;
+  --panel2: #16202d;
+  --ink: #eef6ff;
+  --muted: #aec1d2;
+  --accent: #6fe3c1;
+  --accent2: #c7f59b;
+  --warn: #ffd166;
+  --bad: #ff9aa2;
+  --line: #2a3a4d;
+  --code: #071019;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+body { font-family: "Comic Sans MS", "Segoe Print", "Trebuchet MS", "Segoe UI", Arial, sans-serif; line-height: 1.55; }
+header { padding: 28px 20px 18px; background: linear-gradient(120deg, #0f1722, #14282a); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 46px); letter-spacing: 0.2px; }
+.subtitle { color: var(--muted); max-width: 980px; }
+.badge { display: inline-block; border: 1px solid var(--line); background: #101820; color: var(--accent2); padding: 5px 10px; border-radius: 999px; margin: 4px 6px 4px 0; font-size: 13px; }
+nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+nav button { background: var(--panel2); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; cursor: pointer; font: inherit; }
+nav button.active, nav button:hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(111,227,193,.15) inset; }
+main { max-width: 1160px; margin: 0 auto; padding: 22px; }
+.page { display: none; animation: fade .2s ease-in; }
+.page.active { display: block; }
+@keyframes fade { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin: 16px 0; box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+.note { border-left: 5px solid var(--warn); background: #191a15; }
+.good { border-left: 5px solid var(--accent2); }
+.warn { border-left: 5px solid var(--bad); }
+h2 { margin: 10px 0 12px; font-size: 30px; }
+h3 { margin: 18px 0 8px; color: var(--accent); }
+h4 { margin: 14px 0 6px; color: var(--accent2); }
+a { color: var(--accent); }
+ul { padding-left: 23px; }
+li { margin: 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; overflow: hidden; border-radius: 12px; }
+th, td { border: 1px solid var(--line); padding: 10px; vertical-align: top; }
+th { background: #1a2634; color: var(--accent2); text-align: left; }
+tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+code, pre { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace; }
+pre { background: var(--code); border: 1px solid var(--line); color: #e9f7ff; padding: 14px; border-radius: 14px; overflow-x: auto; white-space: pre; }
+.q { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin: 12px 0; background: #0f1722; }
+.q .meta { color: var(--muted); font-size: 13px; }
+details { margin-top: 10px; border: 1px dashed var(--line); border-radius: 12px; padding: 10px; background: rgba(255,255,255,.02); }
+summary { cursor: pointer; color: var(--warn); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.kpi { background: #0f1722; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+.kpi strong { display:block; color: var(--accent2); font-size: 22px; }
+.footer { color: var(--muted); font-size: 13px; margin: 30px 0; }
+@media print {
+  header { position: static; }
+  nav { display: none; }
+  .page { display: block !important; break-after: page; }
+  body { background: white; color: black; font-family: Arial, sans-serif; }
+  .card, .q, pre, details { background: white; color: black; border-color: #aaa; box-shadow: none; }
+  a { color: black; }
+}
+</style>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+  const btn = document.querySelector('button[data-page="' + id + '"]');
+  if (btn) btn.classList.add('active');
+  location.hash = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.addEventListener('load', () => {
+  const id = location.hash ? location.hash.slice(1) : 'plan';
+  showPage(document.getElementById(id) ? id : 'plan');
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Swym OA Prep - Customer Experience Engineer</h1>
+  <div class="subtitle">One-night sprint plan + evidence-based mock paper for the Swym Customer Experience Engineer campus drive (SASTRA, 2027 batch). Built on your uploaded JD, the placement notice, public candidate reports, and Swym's own published hiring guide. Use this to prepare ethically; the actual OA can differ.</div>
+  <div style="margin-top:10px">
+    <span class="badge">Dark mode</span><span class="badge">Single HTML, multi-page tabs</span><span class="badge">Mock + answer key</span><span class="badge">Expert-predicted paper</span><span class="badge">PPT: 14 July 2:00 PM (report 1:45)</span><span class="badge">OA: 14 July, window 4-7 PM, 70 min</span><span class="badge">Interviews: 15 July, Thanjavur Main Campus</span><span class="badge">CTC revised: 10 &rarr; 15 LPA</span>
+  </div>
+  <nav>
+    <button data-page="plan" onclick="showPage('plan')">Main: Tonight's Plan</button>
+    <button data-page="format" onclick="showPage('format')">OA Format</button>
+    <button data-page="found" onclick="showPage('found')">Evidence Found</button>
+    <button data-page="predicted" onclick="showPage('predicted')">Predicted Qs</button>
+    <button data-page="tech" onclick="showPage('tech')">Mock: Technical</button>
+    <button data-page="verbal" onclick="showPage('verbal')">Mock: Verbal + Aptitude</button>
+    <button data-page="scenario" onclick="showPage('scenario')">Mock: Scenario Writing</button>
+    <button data-page="crib" onclick="showPage('crib')">Swym Crib Sheet</button>
+    <button data-page="interview" onclick="showPage('interview')">Interview (15 July)</button>
+    <button data-page="lastday" onclick="showPage('lastday')">Last-Minute Notes</button>
+    <button data-page="sources" onclick="showPage('sources')">Sources</button>
+  </nav>
+</header>
+<main>
+
+<section id="plan" class="page">
+  <div class="card warn">
+    <h2>Reality check before the sprint</h2>
+    <p>I cannot verify or provide a leaked/future proprietary OA paper, and nobody has publicly posted the 2026 "Customer Experience Engineer" campus test. This file separates <b>publicly reported evidence from past Swym drives</b> from a <b>high-probability mock paper</b> built on that evidence. Treat it as targeted practice, not a guarantee.</p>
+  </div>
+  <div class="grid">
+    <div class="kpi"><strong>Most likely sections</strong>Technical MCQs (HTML/CSS/JS) + Verbal/Grammar + Aptitude + Scenario-based descriptive writing</div>
+    <div class="kpi"><strong>Highest weight</strong>Written English + JS/CSS fundamentals. The JD calls outstanding written English "non-negotiable".</div>
+    <div class="kpi"><strong>Target</strong>Near-perfect verbal, 80%+ technical MCQs, one clean well-structured scenario answer</div>
+    <div class="kpi"><strong>Wildcard</strong>A few easy DSA/pseudocode questions appeared when Swym also hired software engineers in the same drive</div>
+  </div>
+
+  <div class="card note">
+    <h3>Compressed plan: tonight (13 July) + tomorrow morning. Test window opens 4 PM tomorrow.</h3>
+    <p>Rule for tonight: <b>no new topics</b> — only the high-probability areas in this file. Depth on grammar + JS gotchas + Swym product knowledge beats breadth on 20 CS subjects. The PPT (2:00 PM) ends close to the test window, so tomorrow afternoon is logistics + light review only.</p>
+  </div>
+
+  <div class="card good">
+    <h3>Block 1 (start now, ~30 min) - Lock the format + logistics</h3>
+    <ul>
+      <li>15 min: Read the OA Format and Evidence Found tabs. Note the pattern: technical MCQs + verbal + aptitude + descriptive scenario answers.</li>
+      <li>15 min: Set up now, not tomorrow: laptop charged, stable internet + mobile hotspot backup, quiet room booked, webcam working (in case it's proctored), and confirm you can log in to your SASTRA mail — credentials arrive there before 4 PM tomorrow.</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 2 (~2 hr) - JavaScript + HTML/CSS core</h3>
+    <ul>
+      <li>60 min: Work through the Mock: Technical tab slowly, untimed, reading every explanation. These are the exact gotcha families campus MCQs recycle: hoisting/TDZ, event loop order, <code>map(parseInt)</code>, <code>==</code> coercion, <code>const</code> mutation, arrow-function <code>this</code>.</li>
+      <li>40 min: CSS block — specificity, box-sizing, <code>display:none</code> vs <code>visibility:hidden</code>, <code>position:absolute</code>, flexbox. These double as interview prep: Swym's documented interview exercise is live CSS editing in DevTools.</li>
+      <li>20 min: HTTP + status codes + PUT/PATCH + DevTools Network tab from the Last-Minute Notes tab.</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 3 (~1 hr) - Verbal/grammar (most under-prepared section)</h3>
+    <ul>
+      <li>20 min: Memorize the grammar quick rules in Last-Minute Notes (collective nouns, neither/either, fewer vs less, since vs for, affect/effect, its vs it's, third conditional).</li>
+      <li>25 min: Do the Verbal mock questions timed. A real Swym campus OA in Chennai (2023) was reported as <b>entirely</b> verbal/grammar — do not skip this block.</li>
+      <li>15 min: Write ONE scenario reply from the Scenario Writing tab under a timer. Compare against the model answer and rubric.</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 4 (~45 min) - Swym product cram + the DevTools drill</h3>
+    <ul>
+      <li>20 min: Memorize the Crib Sheet tab. "What apps do we have at Swym" is a <b>documented</b> Swym interview question — knowing the three apps cold is free marks.</li>
+      <li>25 min: Do the hands-on drill: open a live store that uses Wishlist Plus, open Chrome DevTools, find the <code>swym-</code> prefixed elements, live-edit their CSS. Steps in the Interview tab. This mirrors their real interview exercise.</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <h3>Block 5 (night, ~45 min max) - Aptitude pass, then sleep</h3>
+    <ul>
+      <li>25 min: Aptitude mock questions timed. These are speed marks — percentages, series, work-rate.</li>
+      <li>20 min: Re-read your single weakest area from tonight. Then stop. Sleep by 11:30 PM — a sharp brain tomorrow beats one more hour tonight.</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <h3>14 July - The day itself</h3>
+    <ul>
+      <li><b>Morning (before 12:30):</b> One full timed mock pass — 20 technical (25 min) + 12 verbal (12 min) + 8 aptitude (10 min) + 1 scenario reply (15 min) — then the <b>Predicted Qs tab</b> (debugging + judgment MCQs, the RC passage, and the predicted descriptive prompts: the closest thing in this file to the real paper). Review every miss and write a one-line rule for each.</li>
+      <li><b>1:45 PM:</b> Report at SoC Auditorium (SRC students: livestream from SRC campus). During the PPT, note speaker names, product names, and any metrics — companies sometimes reference PPT content in tests and interviews. Asking one good question also gets you noticed.</li>
+      <li><b>~3:30 PM:</b> Home/hostel. Light review only: Crib Sheet + grammar rules. Check SASTRA mail for credentials.</li>
+      <li><b>4:00-4:15 PM:</b> Log in early in the window. Do NOT wait until 6 PM — you lose your buffer if anything breaks. The link is personal; do not share it (the notice explicitly warns this).</li>
+      <li><b>During the 70 min:</b> Fast first pass on MCQs, flag doubts, reserve 15-18 min for the descriptive answer, and keep 3 min to proofread your writing — grammar errors in a written-English-focused test are expensive.</li>
+    </ul>
+  </div>
+
+  <div class="card warn">
+    <h3>Blind spots most candidates will have - your edge if you fix them tonight</h3>
+    <ul>
+      <li><b>Verbal is scoreable and everyone skips it:</b> engineering students grind DSA and bomb grammar. Evidence says Swym's campus OA leans heavily verbal for support-track roles. An hour tonight likely moves your rank more than anything else.</li>
+      <li><b>The descriptive answer is structure, not length:</b> acknowledge &rarr; plain-language cause &rarr; numbered steps &rarr; ownership + confirm. Rambling paragraphs lose; the rubric is in the Scenario tab.</li>
+      <li><b>Product knowledge is a real question:</b> a Dec 2025 candidate was asked to name Swym's apps and identify Swym elements on a Shopify dev site — and was told early to learn the products. Most of your batch won't know the apps exist.</li>
+      <li><b>AI-fluency may be probed:</b> Swym's own values post says the AI-enabled you beats the no-AI you, and their recent hiring rounds explicitly assess AI fluency. Have one concrete, specific story of using Claude/ChatGPT in real work (not "I use it sometimes").</li>
+      <li><b>They judge your typing, everywhere:</b> for this role, every free-text box IS the test — even a "describe yourself" field. No SMS-speak, no "u", "plz", "kindly do the needful". Full sentences, correct capitalization.</li>
+      <li><b>Easy DSA can appear:</b> when Swym hired Customer Service Engineers alongside Software Engineers (2022), the OT had 5 easy DSA questions. If they appear, they'll be palindrome/loop-trace level — the pseudocode drills in the Technical tab cover this. Don't panic-study algorithms tonight.</li>
+      <li><b>Logistics failure modes:</b> credentials land on SASTRA mail before 4 PM (check spam too), personal link, 70 min once started, possible webcam. Water, bathroom, phone on silent, hotspot ready — before you click start.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="format" class="page">
+  <div class="card">
+    <h2>Expected OA format (evidence-based)</h2>
+    <p>The exact 2026 paper is not public. Two real Swym campus drives were reported on Glassdoor, and the composite below is the safest bet for a 70-minute Customer Experience Engineer test.</p>
+    <table>
+      <tr><th>Evidence</th><th>What the test contained</th><th>Implication for you</th></tr>
+      <tr><td>On-campus drive, 2022 (hiring Customer Service Engineer + Associate Software Engineer together)</td><td>Online test: 5 easy-level DSA questions + technical MCQs + aptitude section + scenario-based descriptive questions; then two technical interview rounds</td><td>Prepare technical MCQs + aptitude + descriptive writing. Easy DSA is possible if the drive spans multiple roles.</td></tr>
+      <tr><td>Chennai campus placement, 2023 (fresher, support track)</td><td>Online assessment: only verbal/grammar questions; interview also focused on communication, with almost no technical questions</td><td>Verbal/grammar can dominate for CX-track hiring. Do not walk in unprepared for pure English sections.</td></tr>
+      <tr><td>Your JD (2026)</td><td>Non-negotiables: HTML/CSS/JS, outstanding written English, curiosity, communication. Strongly preferred: e-commerce platforms, REST APIs, DevTools, AI-tool comfort</td><td>Technical MCQs will center on web fundamentals, not core CS subjects like OS/DBMS.</td></tr>
+    </table>
+  </div>
+  <div class="card note">
+    <h3>Likely 70-minute composite</h3>
+    <table>
+      <tr><th>Section</th><th>Probable shape</th><th>Suggested pacing</th></tr>
+      <tr><td>Technical MCQs</td><td>HTML/CSS/JS output-prediction and concept questions; possibly a few HTTP/API/DevTools items; possibly 3-5 easy pseudocode/DSA</td><td>~25 min. First pass fast, flag and return.</td></tr>
+      <tr><td>Verbal / grammar</td><td>Error spotting, sentence correction, fill-in-the-blank, ordering, comprehension</td><td>~12-15 min. Accuracy over speed.</td></tr>
+      <tr><td>Aptitude / reasoning</td><td>Percentages, series, work-rate, logical puzzles</td><td>~10 min. Skip calculation-heavy ones first pass.</td></tr>
+      <tr><td>Scenario-based descriptive</td><td>Write a support reply / explain a technical issue to a non-technical merchant / situational judgment in writing</td><td>~15-18 min + 3 min proofread. This is where you differentiate.</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Section strategy</h3>
+    <ul>
+      <li><b>Technical MCQs:</b> read code snippets character-by-character; campus MCQs live on tiny details (quotes in JSON, radix in parseInt, <code>==</code> vs <code>===</code>).</li>
+      <li><b>Verbal:</b> read the full sentence aloud in your head; most errors are subject-verb agreement or tense. Trust the simpler, cleaner option.</li>
+      <li><b>Descriptive:</b> write the 4-part structure as a skeleton first (acknowledge / cause / steps / confirm), then fill it. Proofread once.</li>
+      <li><b>If DSA appears:</b> easy level only — trace loops on paper, look for palindrome/reverse/count patterns. Don't over-engineer.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="found" class="page">
+  <div class="card warn">
+    <h2>Evidence found online / public reports</h2>
+    <p>These are public candidate reports and Swym's own published material — not official disclosures of tomorrow's paper. Wording will differ in the real OA.</p>
+    <table>
+      <tr><th>Finding</th><th>Detail (paraphrased)</th><th>Source type</th><th>Confidence note</th></tr>
+      <tr><td>Campus OT composition, 2022</td><td>Drive for Customer Service Engineer + Associate Software Engineer: 5 easy DSA + technical MCQs + aptitude + scenario-based descriptive questions; two technical interview rounds followed. Interview DSA reported at "is a linked list a palindrome" level.</td><td>Glassdoor candidate report</td><td>Real drive, older role title; combined-role drive may explain the DSA.</td></tr>
+      <tr><td>Campus OA, Chennai 2023</td><td>Online assessment contained only verbal/grammar questions; the interview was also communication-focused with no technical questions.</td><td>Glassdoor candidate report</td><td>Real drive; strongly suggests verbal weighting for support-track hiring.</td></tr>
+      <tr><td>TSE campus interview, 2023</td><td>6+ rounds, ending with a discussion with the CEO. Candidate advises preparing Python, HTML, CSS, and technical situation-based questions.</td><td>Glassdoor candidate report</td><td>Single report; shows leadership-round possibility and situational focus.</td></tr>
+      <tr><td>TSE technical interview, Dec 2025 (most recent)</td><td>Live exercise: make simple CSS changes through the inspector; identify which elements on a Shopify development site come from Swym apps; asked "what apps do we have at Swym". Candidate was told early in the process to learn the products.</td><td>Glassdoor candidate report</td><td>Most recent and most role-relevant technical content found. Practice this exact drill.</td></tr>
+      <tr><td>CSM interview, 2025</td><td>Asked how to make API calls and problem-solving questions related to technical support issues — even in a non-engineering role.</td><td>Glassdoor candidate report</td><td>Signals API basics are fair game across their customer-facing roles.</td></tr>
+      <tr><td>Swym's official hiring guide, Jan 2026</td><td>Five stages: questionnaire &rarr; recruiter chat &rarr; role discussion with a teammate &rarr; practical real-world challenge (they want your thought process and questions, not just the final answer) &rarr; 45-min leadership alignment, no trick questions. Tips: do homework on the company, use STAR, be thoughtfully human not rehearsed, join from a laptop. Feedback within 48 hours.</td><td>Swym Stories blog (official)</td><td>Official, current. Campus flow is compressed (OA + on-campus interviews) but the same evaluators and values apply.</td></tr>
+      <tr><td>Swym values ("What makes a Swymmer")</td><td>Ownership, high agency, growth mindset, customer-first, data-aware decisions, sustainable ambition, pure passion, and AI-enabled working.</td><td>Swym Stories blog (official)</td><td>Use these words honestly in descriptive answers and interviews.</td></tr>
+      <tr><td>AI-fluency is formally assessed</td><td>A 2026 Swym lateral JD lists a written assignment + presentation round where AI-fluency is explicitly assessed; your campus JD lists comfort with AI tools (Claude/ChatGPT) as strongly preferred.</td><td>Public JD (foundit) + your uploaded JD</td><td>Prepare one concrete AI-workflow story.</td></tr>
+      <tr><td>Glassdoor aggregate stats</td><td>68% of reported Swym (India) interviews came via campus recruiting; average difficulty 2.86/5; Technical Support / Customer Support Engineer interviews rated the easiest; skills tests appear in ~25% of processes, personality tests ~13%.</td><td>Glassdoor aggregate</td><td>Directional only.</td></tr>
+      <tr><td>Swym CX team structure</td><td>CX org is structured as Technical Support Engineers + Customer Success Managers under a Director of CX; philosophy: CX is not just support, empathy in the first interaction with a stressed merchant matters, AI handles the repetitive so humans focus on judgment.</td><td>Swym's own podcast (Swymversations)</td><td>Great interview talking point; shows real homework.</td></tr>
+    </table>
+  </div>
+  <div class="card good">
+    <h3>What I would bet on for tomorrow</h3>
+    <ol>
+      <li>A verbal/grammar section that most of your batch under-prepares for.</li>
+      <li>Technical MCQs centered on JS behavior and CSS layout — not OS/DBMS/CN trivia.</li>
+      <li>At least one written scenario answer judged on structure, tone, and grammar.</li>
+      <li>Aptitude as a speed filter.</li>
+      <li>If shortlisted: a hands-on DevTools exercise on a Shopify site running Swym apps, product-knowledge questions, and STAR-style situational questions on 15 July.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="predicted" class="page">
+  <div class="card">
+    <h2>Expert-predicted questions</h2>
+    <p>These are the questions I would set if I were Swym's paper-setter for this exact role. Each one is triangulated from four signals: (1) the JD's literal skill list, (2) questions Swym has <b>actually asked</b> in documented interviews and OTs, (3) the real tickets a Swym CX Engineer handles daily (theme conflicts, missing buttons, email integrations, API errors), and (4) standard Indian campus OA conventions (RC passages, SJT, easy trace questions). Every question is tagged <b>HIGH</b>, <b>MEDIUM</b>, or <b>WILDCARD</b> likelihood with the reasoning in its meta line. If tomorrow's paper differs in wording, the underlying concepts tested will overlap heavily with these.</p>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 1 - Debugging-scenario MCQs (the role in question form)</h3>
+    <p><b>Why this set matters most:</b> the JD's first duty is "diagnose problems across HTML, CSS, JavaScript and our platform APIs", past Swym OTs had scenario questions, and their interviews are situational. If the paper has a technical section beyond generic MCQs, it looks like this. Timer: 12 min for 12.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">P1 - HIGH. This is Swym's #1 real-world ticket, and their documented interview exercise is built on it.</div>
+    <p><b>A merchant reports the wishlist button vanished right after they updated their theme. The most likely cause is:</b></p>
+    <ol type="A"><li>Swym's servers are down</li><li>The theme update replaced the theme's files, removing the app's snippet/embed</li><li>The merchant's internet connection</li><li>Shopify automatically uninstalled the app</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - Theme updates/replacements swap out template files; app embeds and code snippets must be re-enabled on the new theme. If the cause were servers (A), every merchant would be affected, not one. This exact cause-and-fix is the model scenario answer S1.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P2 - HIGH. "First diagnostic step" questions are the classic support-role screen; JD demands browser-console comfort.</div>
+    <p><b>The wishlist button is visible, but clicking it does nothing. Your FIRST diagnostic step:</b></p>
+    <ol type="A"><li>Reinstall the app</li><li>Open the browser Console and check for JavaScript errors</li><li>Ask the merchant to switch themes</li><li>Escalate to engineering</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - Cheapest, most informative first check. Reinstalling (A) is cargo-cult debugging; escalating first (D) violates the JD's "you don't escalate because something looks hard".</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P3 - HIGH. Reading an unfamiliar error is literally in the JD ("read unfamiliar code without freezing").</div>
+    <p><b>The Console shows: <code>Uncaught TypeError: Cannot read properties of undefined (reading 'addEventListener')</code> thrown from <code>theme.js</code>, before Swym's script has loaded. Most reasonable interpretation:</b></p>
+    <ol type="A"><li>Swym's app has a bug</li><li>A theme script is erroring — it may be breaking dependent code on the page and needs investigating first</li><li>The merchant's browser is outdated</li><li>The store's checkout is down</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - The error's source file is the theme's, and it fires before the app loads. Attribute the failure to where the evidence points, then verify — don't assume the app (A) or the user's setup (C) without data.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P4 - HIGH. Device-specific bugs are daily storefront reality; tests love this discriminator.</div>
+    <p><b>The button shows on desktop but is missing on mobile. Most likely cause:</b></p>
+    <ol type="A"><li>Mobile browsers don't run JavaScript</li><li>A CSS media query hides the element at small screen widths</li><li>The API blocks mobile devices</li><li>The phone needs to be restarted</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - Responsive CSS (e.g., <code>@media (max-width: 767px){ .swym-button { display:none } }</code>) is the overwhelmingly common cause. Verify in DevTools device mode.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P5 - MEDIUM-HIGH. The incognito test is a standard support diagnostic; expect it as a question or use it as an answer.</div>
+    <p><b>A feature works in an incognito window but not in the merchant's normal browser. Most likely explanation:</b></p>
+    <ol type="A"><li>The app is fundamentally broken</li><li>A browser extension (e.g., ad blocker) or stale cached files are interfering</li><li>Incognito mode has higher permissions</li><li>The merchant's account is suspended</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - Incognito disables most extensions and uses a fresh cache; if behavior differs, the delta IS the extension/cache. This one-line diagnostic is worth using in your descriptive answers too.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P6 - HIGH. Back in Stock Alerts is one of Swym's three apps; "emails not arriving" is its #1 ticket.</div>
+    <p><b>A merchant's back-in-stock emails aren't arriving. Which is the LEAST useful first check?</b></p>
+    <ol type="A"><li>Whether the shopper's signup was actually captured</li><li>Whether the email platform (ESP) integration is still connected</li><li>The recipient's spam folder and a test send</li><li>Rewriting the email template's marketing copy</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: D</b> - A, B, C follow the delivery pipeline (captured &rarr; handed to sender &rarr; delivered). Copy (D) affects conversion, not delivery. Note the "LEAST/EXCEPT" phrasing — read stems twice.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P7 - HIGH. Documented: Swym asks API questions even in non-engineering interviews.</div>
+    <p><b>In the Network tab, the app's API request returns 401. Best conclusion:</b></p>
+    <ol type="A"><li>Rate limit exceeded</li><li>Authentication credentials are missing or invalid</li><li>The server crashed</li><li>The resource has moved</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 401 = unauthenticated. (429 = rate limit, 5xx = server-side, 301 = moved.) Pair with Q16 in the Technical tab for the 401-vs-403 nuance.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P8 - MEDIUM. Tests the display/visibility/opacity trio at depth — a favorite discriminator, and a real "invisible button" bug.</div>
+    <p><b>After adding custom CSS, the wishlist icon is invisible, its space in the layout remains, and clicking that empty space still triggers the wishlist. Which property most likely caused this?</b></p>
+    <ol type="A"><li>display: none</li><li>visibility: hidden</li><li>opacity: 0</li><li>position: static</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - <code>opacity:0</code> = invisible + space kept + still clickable. <code>visibility:hidden</code> keeps space but does NOT receive clicks. <code>display:none</code> removes the space entirely. Three properties, three different fingerprints — memorize the triple.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P9 - HIGH. "Cannot reproduce" handling separates real support instinct from guessing; perfect SJT-technical hybrid.</div>
+    <p><b>You can't reproduce the merchant's issue on your test store. Best next step:</b></p>
+    <ol type="A"><li>Close the ticket as "cannot reproduce"</li><li>Ask for specifics — browser/device, exact URL, screenshot or screen recording, steps — and test on a preview of THEIR theme</li><li>Tell the merchant the problem is on their side</li><li>Escalate to engineering immediately</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - The issue may be theme-specific, device-specific, or account-specific. Gather a reproducible case first; escalate only with one (the JD: "translate merchant pain into precise, reproducible bug reports").</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P10 - HIGH. Safe-change workflow; the model answer S1 depends on it, and their interview probes exactly this judgment.</div>
+    <p><b>A fix requires editing the merchant's live theme code. Safest workflow:</b></p>
+    <ol type="A"><li>Edit the live theme directly, late at night</li><li>Duplicate the theme, apply and verify the fix on the copy, get the merchant's confirmation, then publish</li><li>Send the merchant the code and let them paste it</li><li>Uninstall and reinstall the app</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Never experiment on a live store. Duplicate &rarr; fix &rarr; preview &rarr; confirm &rarr; publish. Saying this sentence in an interview signals production-safety instinct most freshers lack.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P11 - MEDIUM. Standard web-security/console literacy; shows up in support screens because merchants hit it after migrations.</div>
+    <p><b>A store is on HTTPS, but one script is requested over http:// and the browser blocks it with a warning. This is called:</b></p>
+    <ol type="A"><li>CORS</li><li>Mixed content</li><li>Cross-site scripting (XSS)</li><li>A cache miss</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Secure pages loading insecure resources = mixed content; browsers block or warn. CORS (A) is about cross-origin requests lacking permissive headers — know both one-liners.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P12 - HIGH. Lifted almost verbatim from the JD's "identify patterns across tickets that signal platform-level gaps".</div>
+    <p><b>Five different merchants report the same bug this week. Beyond fixing each store, the best action is:</b></p>
+    <ol type="A"><li>Nothing extra — five tickets, five fixes</li><li>Write ONE precise, reproducible bug report identifying the pattern and flag it to Product, and publish a workaround note to the knowledge base</li><li>Tell later merchants to wait until earlier tickets close</li><li>Ask merchants to post reviews about the bug</li></ol>
+    <details><summary>Answer / why predicted</summary><p><b>Answer: B</b> - Pattern &rarr; platform signal &rarr; roadmap is the JD's stated loop; the KB step matches "turn resolved issues into reusable solutions". If a descriptive version of this appears, answer with exactly that chain.</p></details>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 2 - Shopify / e-commerce MCQs</h3>
+    <p><b>Why predicted:</b> "familiarity with e-commerce platforms (Shopify, BigCommerce) and how merchant storefronts are built" is the JD's first strongly-preferred skill, and their Dec 2025 interview ran on a Shopify dev site. MEDIUM-HIGH as OA questions, near-certain as interview topics. Timer: 5 min for 6.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">P13 - HIGH for interview, MEDIUM for OA. The single most basic Shopify fact.</div>
+    <p><b>Shopify themes are built using which templating language?</b></p>
+    <ol type="A"><li>Liquid</li><li>Jinja</li><li>Handlebars</li><li>Blade</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - Liquid (created by Shopify). Theme files mix Liquid tags like <code>{{ product.title }}</code> with HTML/CSS/JS — which is why theme edits can break app snippets.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P14 - HIGH. The mechanism behind Swym's most common ticket; tests whether you understand WHY P1 happens.</div>
+    <p><b>When a merchant switches to a new/updated theme, code customizations added to the OLD theme's files:</b></p>
+    <ol type="A"><li>Always carry over automatically</li><li>May be lost — the new theme has its own files, so app embeds/snippets must be re-enabled or re-added</li><li>Are emailed to the merchant</li><li>Move into Shopify checkout settings</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Each theme has its own code. This is why "duplicate your theme before updating" is the prevention tip in the model scenario answer.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P15 - MEDIUM. Modern Shopify architecture; a sharp answer here reads as genuine platform familiarity.</div>
+    <p><b>In modern Shopify (Online Store 2.0) themes, apps typically add their UI to a storefront through:</b></p>
+    <ol type="A"><li>App blocks and app embeds toggled in the Theme Editor</li><li>Editing the checkout's core code</li><li>FTP access to Shopify's servers</li><li>The Shopify POS hardware</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - OS 2.0 apps expose blocks/embeds the merchant enables in the Theme Editor (no manual code pasting). Older "vintage" themes needed injected snippets — knowing both eras explains many support tickets.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P16 - HIGH. Vocabulary check + PPT alignment; "storefront" appears throughout the JD.</div>
+    <p><b>In e-commerce, the "storefront" refers to:</b></p>
+    <ol type="A"><li>The customer-facing website shoppers browse</li><li>The merchant's admin dashboard</li><li>The warehouse management system</li><li>The payment gateway</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - Storefront = what shoppers see; admin = what merchants use. Swym's apps live on the storefront, configured from the admin.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P17 - HIGH. This is Swym's entire pitch turned into a question; expect it in the PPT, OA or interview in some form.</div>
+    <p><b>Which of these is an example of FIRST-PARTY intent data?</b></p>
+    <ol type="A"><li>A third-party cookie tracking a shopper across many websites</li><li>A shopper subscribing to a back-in-stock alert on the brand's own store</li><li>Purchasing an email list from a data broker</li><li>Browser fingerprinting by an ad network</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Volunteered, consented, collected on the brand's own property, about a specific product — the shopper raising her hand. A, C, D are third-party/inferred and are exactly what the post-cookie shift kills.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P18 - MEDIUM. Differentiator fact about Swym's flagship; doubles as a "what makes Wishlist Plus special" interview answer.</div>
+    <p><b>With Swym's Shopify POS integration, a store associate in a physical shop can:</b></p>
+    <ol type="A"><li>See and use a walk-in customer's online wishlist to assist them in-store</li><li>Change the website's theme from the cash register</li><li>Issue refunds for other brands</li><li>Nothing — POS and online are unrelated</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - Online-to-offline continuity: the associate pulls up the customer's wishlist/browsing signals at the POS and helps them complete the journey in person.</p></details>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 3 - Judgment + AI-workflow (SJT) MCQs</h3>
+    <p><b>Why predicted:</b> past Swym OTs had scenario questions, Glassdoor shows personality tests in ~13% of their processes, the JD's #1 non-negotiable is "genuinely happy about helping people", and AI-fluency is formally assessed in their hiring. Choose the option that matches Swym's published values (ownership, customer-first, human-in-the-loop AI). Timer: 8 min for 9.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">P19 - HIGH. Angry-customer SJT is near-universal in support hiring; Swym's philosophy makes the right answer unambiguous.</div>
+    <p><b>A merchant writes in ALL CAPS, blames you personally, and demands an instant fix. The best opening line of your reply:</b></p>
+    <ol type="A"><li>"Please calm down so we can proceed."</li><li>"As per our policy, resolution takes 24-48 hours."</li><li>Acknowledge their urgency and frustration specifically, and state you're on it right now</li><li>Ignore the tone entirely and paste troubleshooting steps</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Empathy first, then action. "Calm down" escalates; policy-quoting deflects; steps-without-acknowledgment feels robotic. Swym's Director of CX frames the first interaction with a stressed merchant as the defining moment.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P20 - HIGH. Ownership is Swymmer value #1; this is the cleanest way to test it.</div>
+    <p><b>You realize a fix YOU shipped yesterday broke something else on a merchant's store. They haven't noticed yet. You:</b></p>
+    <ol type="A"><li>Wait and see if they notice</li><li>Proactively inform them, own the mistake, fix it, and explain what you've changed so it won't recur</li><li>Quietly fix it and never mention it</li><li>Attribute it to their theme</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Ownership + transparency. C is tempting but fails the trust bar ("trust is sacred" is literally in the JD's culture section); A and D are disqualifying.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P21 - HIGH. "I don't know" handling — the honesty screen every support interview runs.</div>
+    <p><b>A merchant asks something you genuinely don't know. Best response:</b></p>
+    <ol type="A"><li>Give a confident guess — sounding sure builds trust</li><li>Say you'll find out, commit to a specific time you'll get back to them, then actually do it</li><li>Ignore that part of their question</li><li>Immediately escalate the whole ticket</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Honest + time-bound + followed through. Confident wrong answers (A) are the cardinal support sin.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P22 - HIGH. Taken directly from the JD's "What doesn't fit" list — they WILL test this mindset somewhere.</div>
+    <p><b>According to the role's philosophy, success is best measured by:</b></p>
+    <ol type="A"><li>Number of tickets closed per hour</li><li>Merchants genuinely helped — "merchant left better equipped than before"</li><li>Shortest possible replies</li><li>Number of escalations avoided at any cost</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - The JD verbatim rejects "operators who measure success by tickets closed rather than merchants helped." Use this exact framing in descriptive answers.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P23 - HIGH. Human-in-the-loop is Swym's stated operating model; AI-judgment SJT is their signature theme.</div>
+    <p><b>Your AI assistant drafts a merchant reply that includes a claim about a feature you're not certain exists. You:</b></p>
+    <ol type="A"><li>Send it — the AI is usually right</li><li>Verify the claim against the product/docs first, correct if needed, then send</li><li>Stop using AI for drafting altogether</li><li>Send it with a disclaimer that AI wrote it</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Agents draft, humans own quality sign-off — Swym's model verbatim. A ships hallucinations to merchants; C throws away leverage; D outsources accountability.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P24 - MEDIUM-HIGH. "Operate with leverage, not volume" is a JD heading; expect it tested as a choice.</div>
+    <p><b>You notice you've manually written near-identical replies to the same how-to question 15 times this month. The most "Swym" response is:</b></p>
+    <ol type="A"><li>Keep answering manually — personal touch matters most</li><li>Create a knowledge-base article + a reviewed template/automation for the repeatable part, and spend saved time on complex tickets</li><li>Stop answering that question</li><li>Forward all such tickets to a teammate</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - "Automate the repeatable shape of support work. Spend your human attention on the problems that actually need it" — the JD, almost word for word.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P25 - MEDIUM. Escalation judgment — the JD defines the line explicitly.</div>
+    <p><b>Per the JD, the right time to escalate an issue to engineering is:</b></p>
+    <ol type="A"><li>Whenever it looks hard</li><li>After you've genuinely diagnosed it and the problem truly requires engineering — with a reproducible report attached</li><li>Never — CX must solve everything</li><li>Whenever the merchant is angry</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - "You don't escalate because something looks hard; you escalate when the problem genuinely requires it." Attach repro steps — that's the bridge-to-Product duty.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P26 - MEDIUM. Disagreement SJT; maps to their "growth mindset / raise the bar" value and a documented behavioral theme.</div>
+    <p><b>A senior teammate proposes a workaround you believe will break the mobile layout. You:</b></p>
+    <ol type="A"><li>Stay silent — they're senior</li><li>Raise your concern with your reasoning (and a quick test/screenshot if possible), then commit to whatever the team decides</li><li>Implement your own approach without telling anyone</li><li>Mention the disagreement to the merchant</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Speak up with data, disagree constructively, then align. C breaks trust; D is unprofessional; A fails the high-agency value.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P27 - MEDIUM. Remote-first communication — their hiring guide is oddly specific that "calls are not communication".</div>
+    <p><b>In a remote-first team, you finish investigating a tricky issue at 7 PM. Teammates in other time zones will pick it up. Best move:</b></p>
+    <ol type="A"><li>Wait for tomorrow's call to explain verbally</li><li>Write a clear, persistent written update (findings, what's ruled out, next steps) in the ticket/channel before logging off</li><li>Send a voice note saying "almost done"</li><li>Assume someone will figure it out from the ticket history</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Their guide: remote-first needs communication that is "persistent" — written, asynchronous, complete. This is also just excellent support hygiene.</p></details>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 4 - Reading comprehension (near-certain if the paper is verbal-heavy)</h3>
+    <p><b>Why predicted:</b> the Chennai campus OA was reported as entirely verbal, and Indian campus verbal sections almost always include an RC passage. I've set the passage on Swym's own thesis — even if RC doesn't appear, reading this passage twice IS your PPT and interview revision. Timer: 6 min for the passage + 4 questions.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">RC - Read once slowly, once fast. Answer from the passage only.</div>
+    <h3>Passage</h3>
+    <p><i>For two decades, online brands rented their understanding of shoppers. Third-party cookies quietly followed people across the web, letting retailers retarget a visitor who had browsed a product and left. That era is closing: major browsers have been deprecating third-party cookies, and privacy regulation has made cross-site tracking both harder and riskier. The consequence is a power shift. Brands can no longer buy attention built on inferred behavior; they must earn signals on their own storefronts. When a shopper saves a product to a wishlist or subscribes to a restock alert, she is not being tracked — she is volunteering her intent. This first-party intent data is consented, precise, and durable, and it flows directly into the brand's own marketing tools. In a post-cookie world, the retailers who win will be those whose on-site experiences make shoppers want to raise their hands.</i></p>
+
+    <p><b>RC1. The primary purpose of the passage is to:</b></p>
+    <ol type="A"><li>Explain how third-party cookies are implemented technically</li><li>Describe the shift from cross-site tracking to consented, first-party intent data and why it changes who wins in retail</li><li>Argue that privacy regulation has failed</li><li>Compare email marketing with SMS marketing</li></ol>
+    <details><summary>Answer</summary><p><b>Answer: B</b> - The passage's arc: old model (tracking) &rarr; forces ending it &rarr; new model (volunteered intent) &rarr; who wins. A is too narrow; C and D aren't discussed.</p></details>
+
+    <p><b>RC2. According to the passage, first-party intent data is valuable because it is:</b></p>
+    <ol type="A"><li>Cheaper to purchase from data brokers</li><li>Collected automatically by browsers</li><li>Consented, precise, and declared by the shopper rather than inferred</li><li>Impossible for competitors to imitate</li></ol>
+    <details><summary>Answer</summary><p><b>Answer: C</b> - Directly stated ("consented, precise, and durable"; "volunteering her intent"). A contradicts the passage (it's earned, not bought); B and D are unsupported.</p></details>
+
+    <p><b>RC3. In the passage, "deprecating" most nearly means:</b></p>
+    <ol type="A"><li>Phasing out / withdrawing support for</li><li>Criticizing publicly</li><li>Reducing the price of</li><li>Encrypting</li></ol>
+    <details><summary>Answer</summary><p><b>Answer: A</b> - Tech usage of "deprecate": to mark for removal/end of support. (The everyday sense "express disapproval" is the trap option B.)</p></details>
+
+    <p><b>RC4. Which activity below would the author classify as first-party intent capture?</b></p>
+    <ol type="A"><li>An ad network fingerprinting a browser</li><li>A shopper subscribing to a back-in-stock alert on the brand's site</li><li>Buying a rented email list</li><li>A cookie recording visits across unrelated websites</li></ol>
+    <details><summary>Answer</summary><p><b>Answer: B</b> - Direct, consented, on the brand's own property. Everything else is third-party or inferred.</p></details>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 5 - Wildcards (Python)</h3>
+    <p><b>Why predicted:</b> one 2023 campus TSE report explicitly advised preparing Python alongside HTML/CSS. WILDCARD likelihood — 5 minutes of prep, cheap insurance.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">W1 - WILDCARD. The most-recycled Python one-liner in campus MCQs.</div>
+    <p><b>What does <code>print("swym"[::-1])</code> output?</b></p>
+    <ol type="A"><li>swym</li><li>myws</li><li>Error</li><li>s</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - <code>[::-1]</code> is slice-with-step -1 = reversed string. Also know: <code>len()</code>, <code>.upper()</code>, <code>.split()</code>, list vs tuple (mutable vs immutable).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">W2 - WILDCARD. Truthiness gotcha that pairs with the JS falsy list you already learned.</div>
+    <p><b>What does <code>bool("false")</code> return in Python?</b></p>
+    <ol type="A"><li>False</li><li>True</li><li>Error</li><li>None</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Any NON-EMPTY string is truthy — even the string "false". Only <code>""</code>, <code>0</code>, <code>None</code>, empty collections and <code>False</code> itself are falsy.</p></details>
+  </div>
+
+  <div class="card good">
+    <h3>Predicted Set 6 - Descriptive prompts they're most likely to set</h3>
+    <p><b>Why predicted:</b> scenario-based descriptive questions are documented in a past Swym OT; the JD's written-English bar plus their questionnaire-style Stage 1 make short written answers near-certain somewhere in the pipeline (OA, pre-interview form, or interview). Practice P-D1 and P-D2 in writing; outline the rest aloud.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">P-D1 - HIGH. Some version of "why us / why this role" appears in nearly every campus pipeline; theirs doubles as the waiting-room screen.</div>
+    <h3>Prompt: "Why do you want to join Swym as a Customer Experience Engineer?" (100-150 words)</h3>
+    <details><summary>Model answer + structure (adapt with YOUR true story — borrowed stories read as borrowed)</summary>
+      <pre>Structure: real helping moment (2-3 lines) -> why this role fits
+you specifically (2 lines) -> why Swym specifically (2-3 lines).
+
+Sample:
+"Last year I helped my cousin's small online store fix a signup
+popup that vanished the night before a restock drop — the theme
+update had removed it. The fix took twenty minutes; her relief
+lasted a week. That's when I understood what I want from work:
+technical problem-solving where every solve has a face. This role
+is exactly that — debugging across HTML, CSS and JS all day, but
+for real merchants with real launches. Swym specifically appeals
+to me because support here is part of the product's reputation —
+merchants name your support team in their reviews — and the
+AI-first setup means my attention goes to problems that genuinely
+need a human. I'd rather grow deep in that craft than treat it as
+a stopover."</pre>
+      <p><b>Scoring notes:</b> the last sentence answers their biggest fear (waiting-room mindset) without being asked. Mentioning reviews + AI-first proves homework. Keep it under 150 words — discipline is part of the written-English test.</p>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P-D2 - HIGH. "Explain a technical concept to a non-technical person" is the JD's stated skill; API is the most likely pick (documented API questions + their API-centric product).</div>
+    <h3>Prompt: "Explain what an API is to someone with no technical background." (80-120 words)</h3>
+    <details><summary>Model answer</summary>
+      <pre>"An API is like a waiter in a restaurant. You never walk into the
+kitchen yourself — you give the waiter a specific order, and he
+brings back exactly what you asked for. Software works the same
+way: when our wishlist app needs your store's product details, it
+doesn't rummage through Shopify's systems. It asks Shopify's API:
+'give me product 982', and receives a neat, structured answer.
+The menu of requests you're allowed to make is the API's
+documentation, and your API key is like your table number — it
+tells the kitchen who is asking and what they're allowed to
+order."</pre>
+      <p><b>Backup concepts to be ready to explain the same way:</b> browser cache (a notebook of already-fetched pages — fast, but sometimes outdated, which is why "hard refresh" fixes things), cookies (a wristband the site gives your browser so it recognizes you next visit), and a theme (the store's clothing — changing outfits can drop things kept in the old pockets).</p>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P-D3 - MEDIUM-HIGH. STAR behavioral in written form; their own guide tells candidates to expect failure/problem stories.</div>
+    <h3>Prompt: "Describe a time you helped someone solve a technical problem, or a time you failed and what you learned." (120-150 words)</h3>
+    <details><summary>Skeleton</summary>
+      <p><b>S</b>ituation (1-2 lines, specific: who, what broke, what was at stake) &rarr; <b>T</b>ask (1 line: what YOU had to achieve) &rarr; <b>A</b>ction (3-4 lines: the steps, including one dead end — dead ends prove real debugging) &rarr; <b>R</b>esult (1-2 lines: outcome + what you'd now do differently). Pick the story tonight; you'll reuse it on the 15th verbally.</p>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P-D4 - MEDIUM. The second-most-common real Swym ticket after missing buttons; also a great fairness test.</div>
+    <h3>Prompt: "A merchant writes: 'Your app has slowed down my site.' Respond." (120-150 words)</h3>
+    <details><summary>Model outline</summary>
+      <ul>
+        <li>Empathize with the stake (site speed = revenue) and thank them for flagging with specifics if given.</li>
+        <li>Explain honestly and simply: the app's script loads asynchronously, so it shouldn't block the page from appearing — but rather than assert that, offer to PROVE it.</li>
+        <li>Steps: duplicate the theme &rarr; disable the app embed on the copy &rarr; run a before/after speed test (e.g., PageSpeed) on both &rarr; share the numbers transparently.</li>
+        <li>Commit: if the data shows the app IS contributing, you'll escalate to engineering with the evidence; if not, help identify what else changed recently.</li>
+        <li><b>Why this wins:</b> it's the "guessing with data" Swymmer value — measure, don't argue.</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">P-D5 - MEDIUM. Triage/leverage essay; maps to "operate with leverage" and their BFCM (Black Friday) war-room reality.</div>
+    <h3>Prompt: "A Shopify platform change breaks a feature for many merchants at once; 30 tickets arrive in an hour. How do you handle it?" (120-150 words)</h3>
+    <details><summary>Model outline</summary>
+      <ul>
+        <li>Recognize the pattern fast: 30 similar tickets = ONE root cause, not 30 problems. Confirm on one store.</li>
+        <li>Send a prompt, honest holding update to ALL affected merchants (what's known, what's next, when they'll hear more) — silence is worse than "we're on it".</li>
+        <li>Fix or workaround once, verify, roll out; use templates/automation for the repeatable communication.</li>
+        <li>Publish a knowledge-base article; file one reproducible report to Product about the platform gap.</li>
+        <li>Close the loop: confirm with merchants, and note what monitoring would catch this earlier next time.</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="card note">
+    <h3>Predicted interview question bank (15 July) - ranked</h3>
+    <table>
+      <tr><th>Likelihood</th><th>Question</th><th>Why I predict it</th><th>Nail it by</th></tr>
+      <tr><td>Near-certain</td><td>"What does Swym do?" / "What apps do we have?"</td><td>Documented (Dec 2025) + their guide jokes about candidates who can't answer it</td><td>Three apps + one-liner + 50k merchants (Crib Sheet)</td></tr>
+      <tr><td>Near-certain</td><td>Live DevTools exercise: edit CSS in inspector; find which page elements come from Swym</td><td>Documented, verbatim, most recent interview report</td><td>Tonight's drill: <code>swym-</code> classes, <code>window._swat</code>, narrate your steps</td></tr>
+      <tr><td>Near-certain</td><td>"Why support/CX engineering and not a dev role?"</td><td>JD explicitly screens for it ("waiting room" anti-pattern)</td><td>P-D1's last sentence, said honestly</td></tr>
+      <tr><td>Near-certain</td><td>"Merchant says the button vanished / does nothing — walk me through your debugging"</td><td>Situational questions documented; it's the daily job</td><td>Clarify &rarr; reproduce &rarr; Console &rarr; Network &rarr; theme conflict &rarr; safe fix on duplicated theme &rarr; escalate with repro only if needed</td></tr>
+      <tr><td>Near-certain</td><td>"Tell me about yourself" + one STAR story (failure or problem solved)</td><td>Their official guide names STAR explicitly</td><td>P-D3 skeleton, 90 seconds, one dead-end included</td></tr>
+      <tr><td>High</td><td>"How do you use AI tools (Claude/ChatGPT) in your work?"</td><td>JD strongly-preferred + AI-fluency formally assessed + core company value</td><td>Concrete loop: paste error &rarr; ranked hypotheses &rarr; verify in DevTools &rarr; write own fix. Direct + verify, never outsource judgment</td></tr>
+      <tr><td>High</td><td>"Explain an API / cookie / cache to a non-technical merchant"</td><td>JD's translate-to-plain-language skill; API questions documented</td><td>P-D2's waiter analogy + backups</td></tr>
+      <tr><td>High</td><td>Status codes / GET vs POST / how do you make an API call</td><td>Documented even for their CSM interviews</td><td>Last-Minute Notes table; mention Postman or fetch() comfort</td></tr>
+      <tr><td>Medium</td><td>"What is Shopify? What's a theme? What happens on a theme update?"</td><td>JD strongly-preferred skill #1; their dev-site exercise assumes it</td><td>Liquid, storefront vs admin, files replaced &rarr; re-enable embeds (Set 2)</td></tr>
+      <tr><td>Medium</td><td>JS basics viva: == vs ===, let vs var, what is the DOM, event bubbling</td><td>JD non-negotiable; easiest fresher screen for the role</td><td>Technical tab Q1-Q10 one-liners</td></tr>
+      <tr><td>Medium</td><td>"What happens when you type a URL and press Enter?"</td><td>The classic web-fundamentals interview question; perfect fit for this role</td><td>DNS &rarr; TCP/TLS &rarr; HTTP request &rarr; response &rarr; parse HTML &rarr; fetch CSS/JS &rarr; render. 60 seconds, no rabbit holes</td></tr>
+      <tr><td>Medium</td><td>"An angry merchant insults you — how do you respond?" / role-play a reply</td><td>SJT staple + empathy-first CX philosophy</td><td>P19's logic: acknowledge specifics, never mirror tone, act</td></tr>
+      <tr><td>Medium</td><td>"A merchant demands a feature we don't have — what do you do?"</td><td>Ties to the JD's product-signal loop</td><td>Scenario S3: validate goal, honest no, real alternative, log + tell them it feeds the roadmap</td></tr>
+      <tr><td>Medium</td><td>Simple Python or logic question</td><td>One campus report advises preparing Python</td><td>W1/W2 + palindrome/reverse patterns from the Technical tab</td></tr>
+      <tr><td>HR/leadership round</td><td>"Where do you see yourself in 3-5 years?"</td><td>Standard HR + their waiting-room fear makes it a trap here</td><td>Growth WITHIN the craft: senior CX engineer, owning playbooks/KB, directing AI workflows — not "moving to dev"</td></tr>
+      <tr><td>HR/leadership round</td><td>"Remote-first: how will you stay effective and communicate?"</td><td>Their guide is explicit that persistent written communication (not calls) is the bar</td><td>P27's answer: written, complete, asynchronous updates by default</td></tr>
+      <tr><td>HR/leadership round</td><td>"Higher studies / other offers? Comfortable with the role long-term?"</td><td>Standard campus HR risk screen</td><td>Direct, honest, consistent with P-D1</td></tr>
+      <tr><td>HR/leadership round</td><td>"Any questions for us?"</td><td>Always asked; their guide praises candidates who ask real ones</td><td>The three questions in the Interview tab</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tech" class="page">
+  <div class="card">
+    <h2>Mock Section A - Technical MCQs</h2>
+    <p><b>Timer:</b> 25 minutes for 20 questions (Q1-Q10 JavaScript, Q11-Q15 HTML/CSS, Q16-Q19 HTTP/APIs/DevTools, Q20-Q22 easy pseudocode). Read snippets character-by-character.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q1 - JS type system classic; appears in nearly every web-fundamentals MCQ pool.</div>
+    <p><b>What does <code>typeof null</code> return?</b></p>
+    <ol type="A"><li>"null"</li><li>"object"</li><li>"undefined"</li><li>"number"</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - A historical JS quirk: <code>typeof null === "object"</code>. To actually test for null, use <code>value === null</code>.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q2 - Hoisting with var.</div>
+    <p><b>What is logged?</b></p>
+    <pre>console.log(x);
+var x = 10;</pre>
+    <ol type="A"><li>10</li><li>undefined</li><li>ReferenceError</li><li>null</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - <code>var</code> declarations are hoisted and initialized to <code>undefined</code>; the assignment happens later. With <code>let</code> this would throw a ReferenceError instead (see Q3).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q3 - Temporal dead zone with let.</div>
+    <p><b>What happens?</b></p>
+    <pre>function greet() {
+  console.log(msg);
+  let msg = "hi";
+}
+greet();</pre>
+    <ol type="A"><li>Logs "hi"</li><li>Logs undefined</li><li>ReferenceError</li><li>Logs null</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - <code>let</code> is hoisted but not initialized; accessing it before the declaration line is the "temporal dead zone" and throws a ReferenceError.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q4 - Event loop ordering; the single most recycled JS output question.</div>
+    <p><b>What is the output order?</b></p>
+    <pre>console.log("A");
+setTimeout(() =&gt; console.log("B"), 0);
+Promise.resolve().then(() =&gt; console.log("C"));
+console.log("D");</pre>
+    <ol type="A"><li>A B C D</li><li>A D B C</li><li>A D C B</li><li>A C D B</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Synchronous code first (A, D). Then microtasks (Promise callbacks: C) run before macrotasks (setTimeout: B), even with a 0 ms delay.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q5 - map + parseInt trap.</div>
+    <p><b>What does <code>['1','7','11'].map(parseInt)</code> return?</b></p>
+    <ol type="A"><li>[1, 7, 11]</li><li>[1, NaN, 3]</li><li>[1, NaN, NaN]</li><li>SyntaxError</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - <code>map</code> passes (value, index): <code>parseInt('1',0)</code> = 1, <code>parseInt('7',1)</code> = NaN (radix 1 invalid), <code>parseInt('11',2)</code> = 3 (binary). Fix: <code>arr.map(n =&gt; parseInt(n, 10))</code> or <code>arr.map(Number)</code>.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q6 - String/number coercion.</div>
+    <p><b>What do <code>'5' + 3</code> and <code>'5' - 3</code> evaluate to, respectively?</b></p>
+    <ol type="A"><li>8 and 2</li><li>"53" and 2</li><li>"53" and NaN</li><li>8 and "2"</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - <code>+</code> with a string concatenates ("53"); <code>-</code> has no string meaning, so JS coerces to numbers (2). Also memorize: <code>'5' == 5</code> is true (coercion), <code>'5' === 5</code> is false (strict).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q7 - const and mutation.</div>
+    <p><b>What happens?</b></p>
+    <pre>const items = [1, 2];
+items.push(3);
+console.log(items);</pre>
+    <ol type="A"><li>TypeError: assignment to constant</li><li>Logs [1, 2]</li><li>Logs [1, 2, 3]</li><li>SyntaxError</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - <code>const</code> prevents <i>reassignment</i> of the binding, not mutation of the object/array it points to. <code>items = []</code> would throw; <code>items.push()</code> is fine.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q8 - Arrow functions and this.</div>
+    <p><b>Which statement about arrow functions is TRUE?</b></p>
+    <ol type="A"><li>They have their own <code>this</code>, bound at call time</li><li>They inherit <code>this</code> from the enclosing lexical scope</li><li>They can be used as constructors with <code>new</code></li><li>They always return undefined</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Arrow functions don't get their own <code>this</code> (or <code>arguments</code>); they capture it from where they are defined. That's why they're handy in callbacks but wrong as object methods that need <code>this</code>, and they cannot be constructors.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q9 - Event bubbling; directly relevant to storefront debugging.</div>
+    <p><b>A click handler on a child button calls <code>event.stopPropagation()</code>. Both the button and its parent div have click handlers. What runs when the button is clicked?</b></p>
+    <ol type="A"><li>Only the parent's handler</li><li>Only the button's handler</li><li>Both handlers</li><li>Neither handler</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Events bubble child &rarr; parent by default; <code>stopPropagation()</code> halts the bubbling, so ancestors never receive it. (<code>preventDefault()</code> is different: it stops the default browser action, like following a link.) Real-world Swym relevance: a theme's handler swallowing clicks is a classic "wishlist button does nothing" root cause.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q10 - JSON strictness; a daily support reality when merchants paste configs.</div>
+    <p><b>What does <code>JSON.parse("{'name':'Ana'}")</code> do?</b></p>
+    <ol type="A"><li>Returns {name: "Ana"}</li><li>Returns null</li><li>Throws a SyntaxError</li><li>Returns the string unchanged</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - JSON requires double quotes around keys and string values. Single quotes are invalid JSON, so parsing throws. Valid: <code>JSON.parse('{"name":"Ana"}')</code>.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q11 - CSS specificity.</div>
+    <p><b>Which selector has the highest specificity?</b></p>
+    <ol type="A"><li><code>.btn</code></li><li><code>button</code></li><li><code>#submit</code></li><li><code>[type="submit"]</code></li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - ID (100) beats class/attribute (10 each) beats element (1). Inline styles beat all of them; <code>!important</code> overrides inline. Specificity conflicts between a theme's CSS and an app's CSS are bread-and-butter Swym support tickets.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q12 - display vs visibility.</div>
+    <p><b>Which property hides an element while STILL reserving its space in the layout?</b></p>
+    <ol type="A"><li>display: none</li><li>visibility: hidden</li><li>opacity: 1</li><li>position: absolute</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - <code>visibility:hidden</code> keeps the box in the layout (invisible but space reserved). <code>display:none</code> removes it from layout entirely. <code>opacity:0</code> is invisible but still clickable — a classic "invisible button" bug.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q13 - Box model with border-box.</div>
+    <p><b>An element has <code>box-sizing: border-box; width: 200px; padding: 20px; border: 5px solid;</code>. How wide does it render on screen?</b></p>
+    <ol type="A"><li>250px</li><li>240px</li><li>200px</li><li>150px</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - With border-box, the declared width INCLUDES padding and border, so on-screen width stays 200px (content shrinks to 150px). With the default <code>content-box</code>, it would render 250px wide.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q14 - Positioning context.</div>
+    <p><b><code>position: absolute</code> positions an element relative to:</b></p>
+    <ol type="A"><li>The viewport, always</li><li>Its nearest ancestor with a position other than static</li><li>Its direct parent, always</li><li>The body element, always</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - It anchors to the nearest <i>positioned</i> ancestor (relative/absolute/fixed/sticky); if none exists, the initial containing block (effectively the page). This is why an app's floating button can land in the wrong place on some themes.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q15 - HTML data attributes; Swym-style apps hang data on the DOM this way.</div>
+    <p><b>Given <code>&lt;button data-product-id="982"&gt;Add&lt;/button&gt;</code>, how do you read the id in JS from the element <code>el</code>?</b></p>
+    <ol type="A"><li><code>el.dataset.productId</code></li><li><code>el.data.product-id</code></li><li><code>el.productId</code></li><li><code>el.attributes.data.productId</code></li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - <code>data-*</code> attributes surface on <code>element.dataset</code> with kebab-case converted to camelCase. <code>el.getAttribute('data-product-id')</code> also works.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q16 - Status codes: 401 vs 403. API questions are documented even in Swym's non-engineering interviews.</div>
+    <p><b>A merchant's API key is valid, but their plan doesn't include the endpoint they're calling. The most appropriate response code is:</b></p>
+    <ol type="A"><li>401 Unauthorized</li><li>403 Forbidden</li><li>404 Not Found</li><li>400 Bad Request</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 401 = "we don't know who you are / credentials missing or invalid". 403 = "we know who you are, and you're not allowed". Plan/permission limits are 403.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q17 - Rate limiting.</div>
+    <p><b>An integration starts receiving HTTP 429 responses. What does 429 mean and what's the right client behavior?</b></p>
+    <ol type="A"><li>Server crashed; retry immediately in a tight loop</li><li>Too many requests; back off and retry later (honor Retry-After if present)</li><li>Payload too large; split the request</li><li>Authentication expired; refresh the token</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 429 = rate limited. Correct behavior: exponential backoff, respect the <code>Retry-After</code> header. Also memorize: 200 OK, 201 Created, 301 Moved Permanently, 400 Bad Request, 404 Not Found, 500 Internal Server Error, 502 Bad Gateway.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q18 - REST semantics.</div>
+    <p><b>Which method is designed for a PARTIAL update of a resource?</b></p>
+    <ol type="A"><li>GET</li><li>PUT</li><li>PATCH</li><li>POST</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - PATCH sends only the changed fields; PUT replaces the whole resource (and is idempotent); POST creates/submits; GET reads and should have no side effects.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q19 - DevTools; their documented interview exercise is inspector-based.</div>
+    <p><b>A merchant reports the wishlist popup never appears. To see whether the app's API request failed and read its response body, you open:</b></p>
+    <ol type="A"><li>Elements tab</li><li>Network tab</li><li>Application tab</li><li>Sources tab</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Network shows every request, its status code, headers, timing and response body. Elements = live DOM/CSS (where you'd do the CSS-edit exercise); Console = JS errors/logs; Application = storage/cookies. A CORS failure, by the way, is enforced by the <i>browser</i> and shows up as a console error — the server must send <code>Access-Control-Allow-Origin</code>.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q20 - Easy pseudocode (the 2022 drive had 5 easy DSA-style questions).</div>
+    <p><b>What does this check?</b></p>
+    <pre>s = "level"; ok = true
+for i in 0 .. len(s)/2:
+    if s[i] != s[len(s)-1-i]: ok = false</pre>
+    <ol type="A"><li>Whether s is sorted</li><li>Whether s is a palindrome</li><li>Whether s has duplicates</li><li>Whether s is lowercase</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - It compares mirrored characters from both ends — the standard palindrome check. "level" passes.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q21 - Loop trace.</div>
+    <p><b>How many times does the loop body run?</b></p>
+    <pre>count = 0
+for (i = 1; i &lt;= 12; i = i * 2) { count++ }</pre>
+    <ol type="A"><li>3</li><li>4</li><li>5</li><li>12</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - i takes 1, 2, 4, 8 (then 16 &gt; 12 stops) &rarr; 4 iterations. Doubling loops run about log&#8322;(n) times.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">Q22 - Complexity.</div>
+    <p><b>Time complexity of: <code>for(i=n; i&gt;0; i=i/2){ print(i) }</code>?</b></p>
+    <ol type="A"><li>O(n)</li><li>O(n log n)</li><li>O(log n)</li><li>O(n&sup2;)</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Halving each step means ~log&#8322;(n) iterations. (A doubly-nested full loop over n would be O(n&sup2;); a loop of n with an inner log loop is O(n log n).)</p></details>
+  </div>
+</section>
+
+<section id="verbal" class="page">
+  <div class="card">
+    <h2>Mock Section B - Verbal / Grammar (12 Qs, 12 min)</h2>
+    <p>Evidence says this section can dominate a Swym support-track OA. Accuracy target: 11/12+.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">V1 - Subject-verb agreement with collective nouns.</div>
+    <p><b>Spot the error: "The team of engineers were assigned to the new merchant yesterday."</b></p>
+    <ol type="A"><li>team of</li><li>were assigned</li><li>to the new merchant</li><li>No error</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - The head noun is "team" (singular): "The team ... was assigned." The prepositional phrase "of engineers" doesn't change the number.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V2 - Neither/either are singular.</div>
+    <p><b>"Neither of the two fixes ___ deployed yet."</b></p>
+    <ol type="A"><li>have been</li><li>has been</li><li>were</li><li>are</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - "Neither" is grammatically singular: neither ... has been. Same for "either of", "each of", "every one of".</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V3 - since vs for.</div>
+    <p><b>"The merchant has been waiting ___ Friday for a reply."</b></p>
+    <ol type="A"><li>for</li><li>since</li><li>from</li><li>till</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - "Since" + a point in time (Friday, 4 PM, 2024); "for" + a duration (three days, two hours).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V4 - Pronoun case and order.</div>
+    <p><b>Choose the correct sentence:</b></p>
+    <ol type="A"><li>Me and my teammate resolved the ticket.</li><li>My teammate and me resolved the ticket.</li><li>My teammate and I resolved the ticket.</li><li>I and my teammate resolved the ticket.</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Subject position needs "I", and convention puts the other person first. Test: drop the teammate — "I resolved the ticket", not "Me resolved".</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V5 - Third conditional; extremely common error-spotting item.</div>
+    <p><b>Correct the sentence: "If I would have seen the alert, I would have responded sooner."</b></p>
+    <ol type="A"><li>If I would see the alert, I would have responded sooner.</li><li>If I had seen the alert, I would have responded sooner.</li><li>If I have seen the alert, I would respond sooner.</li><li>The sentence is already correct.</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Third conditional: If + past perfect (had seen), then would have + past participle. "Would have" never goes in the if-clause.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V6 - its vs it's.</div>
+    <p><b>Choose the correct sentence:</b></p>
+    <ol type="A"><li>The app updated it's settings automatically.</li><li>The app updated its settings automatically.</li><li>Its going to work after the update.</li><li>The app and it's settings were reset.</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - "its" = possessive; "it's" = "it is / it has". If you can't expand it to "it is", don't use the apostrophe.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V7 - affect vs effect.</div>
+    <p><b>"The theme change didn't ___ checkout, but it had a visible ___ on the product page."</b></p>
+    <ol type="A"><li>effect / affect</li><li>affect / effect</li><li>affect / affect</li><li>effect / effect</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Affect = verb (to influence); effect = noun (the result). Mnemonic: <b>A</b>ffect = <b>A</b>ction.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V8 - fewer vs less.</div>
+    <p><b>"___ tickets were raised this week, so we spent ___ time firefighting."</b></p>
+    <ol type="A"><li>Less / fewer</li><li>Fewer / less</li><li>Lesser / less</li><li>Fewer / fewer</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Fewer for countable things (tickets, bugs, emails); less for uncountable (time, effort, traffic).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V9 - Plain, professional register; exactly what the JD means by "outstanding written English".</div>
+    <p><b>Pick the best rewrite of: "We are in receipt of your esteemed email and the same is being looked into by the concerned team."</b></p>
+    <ol type="A"><li>Your esteemed email has been received and necessary action shall be initiated.</li><li>We've received your email and our team is looking into it now.</li><li>The concerned team is in receipt of the same and doing the needful.</li><li>Received. Will check.</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Modern support English is warm, direct, and plain. A and C are stiff Indian-officialese ("the same", "doing the needful", "concerned team") — avoid these in the OA and in real replies. D is too curt for a first response.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V10 - Sentence ordering (para-jumble), support-flow flavored.</div>
+    <p><b>Arrange into a coherent reply: (P) Thanks for flagging this — I can see how frustrating it is right before your sale. (Q) We traced the issue to a conflict introduced by the recent theme update. (R) I've applied a fix on your unpublished test theme. (S) Could you take a quick look and confirm it appears correctly before we push it live?</b></p>
+    <ol type="A"><li>Q P R S</li><li>P Q R S</li><li>P R Q S</li><li>Q R S P</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Natural support arc: empathize (P) &rarr; explain cause (Q) &rarr; action taken (R) &rarr; next step/confirmation (S). This IS the template for your descriptive answer.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V11 - Vocabulary in context.</div>
+    <p><b>"If the workaround doesn't hold, we'll escalate this to our engineering team." Here, "escalate" most nearly means:</b></p>
+    <ol type="A"><li>cancel the ticket</li><li>raise it to a higher level of attention</li><li>make the problem worse</li><li>delay the resolution</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - In support, escalation = routing an issue upward for deeper expertise. (Colloquially "escalate" can mean intensify — context decides; here it's the support sense.)</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">V12 - Translate jargon to plain language; a core JD skill and a plausible OA question.</div>
+    <p><b>Best plain-language version of: "The script's DOM injection is deferred until post-hydration, so the CTA renders asynchronously."</b></p>
+    <ol type="A"><li>The button's script is deferred pending hydration completion of the DOM.</li><li>The wishlist button loads a moment after the rest of the page finishes loading.</li><li>Asynchronous rendering delays CTA injection post-hydration.</li><li>The DOM is hydrated before the CTA is injected asynchronously.</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - The only option a non-technical merchant can act on. Rule: name what the USER sees ("the button", "the page"), not how the system works internally.</p></details>
+  </div>
+
+  <div class="card">
+    <h2>Mock Section C - Aptitude / Reasoning (8 Qs, 10 min)</h2>
+    <p>Speed marks. No calculator — practice on paper tonight.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">A1 - Number series.</div>
+    <p><b>3, 6, 11, 18, 27, ?</b></p>
+    <ol type="A"><li>36</li><li>38</li><li>40</li><li>34</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Differences: +3, +5, +7, +9 &rarr; next +11 &rarr; 38.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A2 - Successive percentage change.</div>
+    <p><b>A plan's price is increased by 20% and later decreased by 20%. Net change?</b></p>
+    <ol type="A"><li>0%</li><li>-2%</li><li>-4%</li><li>+4%</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - 1.20 &times; 0.80 = 0.96 &rarr; 4% decrease. Shortcut: +a then -a gives -a&sup2;/100.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A3 - Work rate.</div>
+    <p><b>A resolves a backlog alone in 12 days; B alone in 18 days. Working together, they finish in:</b></p>
+    <ol type="A"><li>7.2 days</li><li>8 days</li><li>6.5 days</li><li>9 days</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: A</b> - Rate = 1/12 + 1/18 = 5/36 per day &rarr; 36/5 = 7.2 days. Formula: xy/(x+y).</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A4 - Percentage.</div>
+    <p><b>Of 480 tickets last month, 15% needed escalation. How many were escalated?</b></p>
+    <ol type="A"><li>60</li><li>66</li><li>72</li><li>84</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - 10% = 48, 5% = 24 &rarr; 72. Build percentages from 10% and 5% blocks to stay fast without a calculator.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A5 - Averages.</div>
+    <p><b>Five replies took 4, 6, 5, 9 and 6 minutes. Average handling time?</b></p>
+    <ol type="A"><li>5.5 min</li><li>6 min</li><li>6.5 min</li><li>7 min</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - Sum = 30, 30/5 = 6.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A6 - Blood relations.</div>
+    <p><b>Pointing at a photo, Ravi says, "She is the daughter of my grandfather's only son." Who is she to Ravi?</b></p>
+    <ol type="A"><li>Mother</li><li>Cousin</li><li>Sister</li><li>Aunt</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - Grandfather's only son = Ravi's father. His daughter = Ravi's sister.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A7 - Probability.</div>
+    <p><b>A bag has 3 red and 2 blue tokens. One token is drawn at random. P(blue)?</b></p>
+    <ol type="A"><li>1/5</li><li>2/5</li><li>3/5</li><li>1/2</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: B</b> - 2 favorable out of 5 total = 2/5.</p></details>
+  </div>
+
+  <div class="q">
+    <div class="meta">A8 - Odd one out.</div>
+    <p><b>17, 19, 23, 27, 29 — which is the odd one out?</b></p>
+    <ol type="A"><li>17</li><li>23</li><li>27</li><li>29</li></ol>
+    <details><summary>Answer / quick check</summary><p><b>Answer: C</b> - All are prime except 27 (3&sup3;).</p></details>
+  </div>
+</section>
+
+<section id="scenario" class="page">
+  <div class="card">
+    <h2>Mock Section D - Scenario-based descriptive writing</h2>
+    <p><b>Timer:</b> 15-18 minutes for ONE answer in the real test (write S1 tonight; do S2 tomorrow morning). Scenario-based descriptive questions are documented in a past Swym campus OT, and the JD makes written English a non-negotiable — assume this section decides the shortlist.</p>
+  </div>
+
+  <div class="card note">
+    <h3>The 4-part reply skeleton (memorize)</h3>
+    <ol>
+      <li><b>Acknowledge + empathize</b> - one sentence that shows you read their situation ("right before your sale" beats "sorry for the inconvenience").</li>
+      <li><b>Cause in plain language</b> - what happened, named by what the merchant sees, not internal jargon.</li>
+      <li><b>Action + numbered next steps</b> - what you did / what they should do, as steps.</li>
+      <li><b>Ownership + confirm</b> - who's on it, when they'll hear back, and an invitation to verify.</li>
+    </ol>
+    <p>Swym's own philosophy: the bar isn't "issue resolved", it's "merchant left better equipped than before". End replies one notch above the fix — a tip, a doc link, or what to check next time.</p>
+  </div>
+
+  <div class="q">
+    <div class="meta">S1 - The classic Swym ticket. Write this one tonight, timed at 15 minutes.</div>
+    <h3>Prompt</h3>
+    <p>A merchant writes: "Your wishlist button has COMPLETELY DISAPPEARED from our store after we updated our theme. Our biggest sale of the year starts tomorrow. This is unacceptable — fix it NOW." Write your first reply.</p>
+    <details><summary>Model answer + what makes it work</summary>
+      <pre>Hi Priya,
+
+Thanks for flagging this right away — I completely understand how
+stressful a missing wishlist button is the day before your biggest
+sale, and this is my top priority.
+
+Here's what happened: theme updates replace your store's template
+files, which removes the small snippet that displays our wishlist
+button. Your customers' saved wishlists are untouched — only the
+button's placement was lost.
+
+What happens next:
+1. I'm re-adding the button to your updated theme right now.
+2. I'll first apply it to an unpublished copy of your theme so
+   nothing changes on your live store without your approval.
+3. Once you confirm it looks right, we'll publish — well before
+   your sale begins.
+
+I'll update you within the hour with a preview link. One tip for
+the future: if you duplicate your theme before updating, we can
+carry the button over in advance so this never blocks a launch.
+
+Best,
+Arjun | Swym Customer Experience</pre>
+      <p><b>Why this scores:</b> names their actual stakes (sale tomorrow), gives a plain-language cause, reassures about data, numbered steps, a concrete time commitment ("within the hour" — never promise a fix ETA you can't control, promise an <i>update</i>), and ends with a forward-looking tip. Zero jargon, zero blame ("theme updates replace files", not "you broke it"), zero officialese.</p>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">S2 - Explaining a technical cause to a non-technical person. Do this one tomorrow morning.</div>
+    <h3>Prompt</h3>
+    <p>A merchant asks why their back-in-stock alert emails stopped sending. You've found the cause: their email platform (Klaviyo) integration was disconnected when they migrated their account last week. Explain the issue and the fix in language a non-developer can act on.</p>
+    <details><summary>Model answer outline</summary>
+      <ul>
+        <li><b>Acknowledge:</b> alerts silently not reaching customers is exactly the kind of thing that's hard to spot — good catch, and the subscriber list is safe.</li>
+        <li><b>Cause, plain:</b> "Our app collects the back-in-stock signups, and your email platform (Klaviyo) does the actual sending. When your Klaviyo account was migrated last week, the connection between the two was reset — so signups are still being collected, but nothing is being handed over to send."</li>
+        <li><b>Steps:</b> 1) In your Swym admin, open Integrations &rarr; Klaviyo. 2) Click Reconnect and sign in to your NEW Klaviyo account. 3) Send yourself a test alert (I can trigger one for you). 4) I'll then re-queue the alerts that were missed during the gap so those customers still get notified.</li>
+        <li><b>Confirm:</b> offer to hop on it together; commit to confirming the missed-alert re-send within a stated window.</li>
+      </ul>
+      <p><b>Key move:</b> the analogy of "we collect, your email tool sends" — one sentence that makes the whole architecture understandable to a non-developer.</p>
+    </details>
+  </div>
+
+  <div class="q">
+    <div class="meta">S3 - Stretch: saying no gracefully. Common situational-judgment prompt.</div>
+    <h3>Prompt</h3>
+    <p>A merchant demands a feature your product doesn't have (e.g., sending wishlist reminders over WhatsApp). How do you respond?</p>
+    <details><summary>Model answer outline</summary>
+      <ul>
+        <li>Validate the goal behind the ask ("reaching shoppers where they actually read messages makes total sense").</li>
+        <li>Be honest that it isn't available today — never fake a roadmap date.</li>
+        <li>Offer the closest real alternative (e.g., SMS/push reminders via an existing integration) with setup steps.</li>
+        <li>Log it as a feature request, tell them you've done so, and explain that merchant signal genuinely feeds the product roadmap (this is literally in your JD: "your signal feeds the product roadmap").</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="card good">
+    <h3>Self-grading rubric (score yourself /10)</h3>
+    <table>
+      <tr><th>Criterion</th><th>Points</th></tr>
+      <tr><td>Opens with specific empathy (references THEIR situation, not generic "sorry for the inconvenience")</td><td>2</td></tr>
+      <tr><td>Cause explained in plain language a non-developer can follow</td><td>2</td></tr>
+      <tr><td>Numbered, actionable next steps; safe-first approach (test theme before live)</td><td>2</td></tr>
+      <tr><td>Ownership: named commitment to a follow-up time; invites confirmation</td><td>1</td></tr>
+      <tr><td>Leaves merchant better equipped (tip / doc / prevention advice)</td><td>1</td></tr>
+      <tr><td>Flawless grammar, no officialese ("do the needful", "the same", "kindly revert"), no blame, no fake promises</td><td>2</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="crib" class="page">
+  <div class="card">
+    <h2>Swym crib sheet - memorize before the PPT</h2>
+    <p>"What apps do we have at Swym" is a documented interview question. This page is your answer bank for the PPT, the OA's situational questions, and the 15 July interviews.</p>
+  </div>
+
+  <div class="card good">
+    <h3>The three apps (know these cold)</h3>
+    <table>
+      <tr><th>App</th><th>What it does</th><th>Signal</th></tr>
+      <tr><td><b>Wishlist Plus</b> (flagship)</td><td>Shoppers save/organize favorites (no login needed — guest wishlists persist on-device), multiple lists, save-for-later from cart, shareable lists, Shopify POS integration so in-store staff can see a customer's online wishlist. Triggers: wishlist reminder (~24h), price-drop alert, low-stock and back-in-stock emails.</td><td>~4.7 stars, 1,400+ reviews, "Built for Shopify" badge</td></tr>
+      <tr><td><b>Back in Stock Alerts</b></td><td>Shoppers subscribe on out-of-stock/pre-order items (product or variant level) and get auto-notified on restock via email/SMS/push. Recovers lost sales from stock-outs.</td><td>~4.7 stars, 400+ reviews</td></tr>
+      <tr><td><b>Gift Lists and Registries</b></td><td>Shareable gift registries for occasions (weddings, baby showers) that drive full-price purchases.</td><td>~4.6 stars</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Platform + tech facts</h3>
+    <ul>
+      <li><b>Platforms:</b> Shopify and Shopify Plus (primary), BigCommerce, Magento; headless and mobile-app builds supported.</li>
+      <li><b>Integrations:</b> Klaviyo, Attentive, Tapcart on Pro+ plans; enterprise tier adds Braze, Iterable, Ometria, dotdigital, Listrak, Emarsys, Bloomreach and others. Intent data flows into the merchant's email/SMS/CRM stack.</li>
+      <li><b>APIs:</b> full JavaScript APIs and REST APIs so merchants can customize/extend the experience — this is exactly where CX Engineers debug.</li>
+      <li><b>How it works on a store:</b> the app injects a script into the merchant's theme; Swym's elements typically carry <code>swym-</code> prefixed classes/ids (e.g., the wishlist page link is <code>#swym-wishlist</code>), and a global <code>window._swat</code> object exposes the JS API (e.g., <code>window._swat.ui.open()</code> opens the wishlist). Knowing this makes the "find the Swym elements in DevTools" exercise trivial.</li>
+      <li><b>Support contact merchants use:</b> support@swymcorp.com. Reviews repeatedly praise fast, hands-on support — the team you're joining IS a selling point of the product.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>The business story (for "what do we do?" and "why Swym?")</h3>
+    <ul>
+      <li><b>One-liner:</b> Swym builds the interactive layer of retail — wishlists, back-in-stock and registry experiences that turn anonymous browsers into known, marketable shopper intent.</li>
+      <li><b>Scale (from your JD):</b> 50,000+ merchants, 500+ agency partners, customers across 100+ countries, 10+ years serving demanding brands.</li>
+      <li><b>Why now:</b> third-party cookies are dying, so retargeting is getting harder. A wishlist or restock signup is <b>first-party intent data</b> — the shopper explicitly telling the brand what they want. Swym sits on that data moat as commerce shifts to intent-led engagement.</li>
+      <li><b>Evolution:</b> from a portfolio of standalone apps into one intent-led engagement platform (your JD's words — expect this framing in the PPT).</li>
+      <li><b>AI-first operating model:</b> human-in-the-loop — AI agents research, draft, and execute the repeatable; humans own judgment, relationships, and sign-off. CX Engineers direct AI teammates rather than grinding a ticket queue.</li>
+      <li><b>CX team structure:</b> Technical Support Engineers + Customer Success Managers under a Director of Customer Experience; philosophy: CX is not just support — empathy in the very first interaction with a stressed merchant, and turning tickets into product signal.</li>
+    </ul>
+  </div>
+
+  <div class="card note">
+    <h3>Swymmer values (from their official hiring guide) - mirror these honestly</h3>
+    <p>Ownership of outcomes; high agency ("nothing stops you — context and know-how can be acquired"); growth mindset and raising the collective bar; customer-first (internal or external); data-aware decisions ("guessing with data"); sustainable ambition (hard work with healthy boundaries); pure passion for something; and AI-enabled working — their post is explicit that the AI-enabled version of you beats the version without it. Their hiring guide also promises feedback within 48 hours of each stage.</p>
+  </div>
+</section>
+
+<section id="interview" class="page">
+  <div class="card">
+    <h2>Interview prep - 15 July, Thanjavur Main Campus (if shortlisted)</h2>
+    <p>Only students shortlisted in the OA attend. Evidence below is from documented Swym interviews — prepare tonight's DevTools drill and the four answers, and you're ahead of the field.</p>
+  </div>
+
+  <div class="card good">
+    <h3>The DevTools drill (25 min tonight) - mirrors their documented interview exercise</h3>
+    <ol>
+      <li>Open a live store that runs Wishlist Plus (Swym's site showcases customers — Escentual is one; or find any store with a heart/wishlist icon powered by Swym).</li>
+      <li>Open Chrome DevTools (F12) &rarr; Elements tab &rarr; Ctrl+F and search the DOM for <code>swym</code>. Note the <code>swym-</code> prefixed classes/ids and the injected script tags.</li>
+      <li>In Console, type <code>window._swat</code> — the Swym JS API object. Try <code>window._swat.ui.open()</code> to pop the wishlist.</li>
+      <li>Practice live CSS edits in the inspector: change the wishlist button's background-color, hide it with <code>display:none</code>, bring it back, nudge its position. Narrate out loud what you're doing — they explicitly value hearing your thought process.</li>
+      <li>Open the Network tab, filter by "swym", reload, and skim what requests the app makes and their status codes.</li>
+    </ol>
+    <p>The Dec 2025 interview literally asked: simple CSS changes through the inspector + identify which elements come from Swym apps + name Swym's apps. You'll have done all three the night before.</p>
+  </div>
+
+  <div class="card">
+    <h3>Four answers to script tonight (STAR where relevant)</h3>
+    <ul>
+      <li><b>"Why customer experience engineering, not a pure dev role?"</b> The JD explicitly screens out people treating support as a waiting room. Build an honest answer joining two threads: a real moment you enjoyed helping someone with something technical + why merchant-facing debugging (varied, human, high-leverage) genuinely appeals over heads-down feature work. Never say "as a stepping stone".</li>
+      <li><b>"Tell me about a problem you debugged / a time you failed."</b> STAR: Situation, Task, Action, Result — Swym's own guide recommends exactly this to stop rambling. Pick one story with a real root cause you found through curiosity.</li>
+      <li><b>"How do you use AI tools in your work?"</b> They assess AI fluency. Give a concrete workflow (e.g., "I paste the failing snippet and error into Claude, ask for three hypotheses ranked by likelihood, verify each in DevTools, then write my own fix") — showing you direct AI and verify output, not outsource thinking.</li>
+      <li><b>"What does Swym do / what apps do we have?"</b> Crib Sheet tab. Their recruiter's guide jokes that "I think you sell swimsuits?" ends the interview early.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Shape of the rounds (from reports)</h3>
+    <ul>
+      <li>Expect situational questions ("merchant says the button vanished — walk me through your debugging"): clarify &rarr; reproduce &rarr; Console errors &rarr; Network tab &rarr; theme-conflict check &rarr; escalate with a reproducible report if genuinely needed. Say the steps in that order.</li>
+      <li>Communication check: they may ask you to explain something technical in plain language — use the V12/S2 skill.</li>
+      <li>Multiple rounds are possible; one campus TSE report describes 6+ rounds ending in a chat with the CEO. Their official guide says the leadership round is 45 minutes, real talk, no trick questions.</li>
+      <li>Basic API questions are documented even for non-engineering roles ("how do you make an API call") — know GET/POST, headers, an API key's role, and status codes.</li>
+      <li>One light warm-up question is documented too ("what's your favourite subject in college") — have a genuine, non-rehearsed answer.</li>
+    </ul>
+  </div>
+
+  <div class="card note">
+    <h3>Questions worth asking THEM</h3>
+    <ul>
+      <li>"How do CX Engineers hand product signal to the roadmap — is there a formal loop from tickets to Product?" (mirrors the JD)</li>
+      <li>"What does the AI-teammate setup look like day-to-day for a new CX Engineer — what's automated today vs. owned by humans?"</li>
+      <li>"What separates a good first-year CX Engineer here from a great one?"</li>
+    </ul>
+  </div>
+</section>
+
+<section id="lastday" class="page">
+  <div class="card good">
+    <h2>Last-minute notes</h2>
+    <h3>Status codes to know cold</h3>
+    <table>
+      <tr><th>Code</th><th>Meaning</th><th>Support translation</th></tr>
+      <tr><td>200 / 201</td><td>OK / Created</td><td>Request worked / resource created</td></tr>
+      <tr><td>301</td><td>Moved permanently</td><td>URL changed; update links</td></tr>
+      <tr><td>400</td><td>Bad request</td><td>Malformed input (often broken JSON)</td></tr>
+      <tr><td>401</td><td>Unauthorized</td><td>Missing/invalid credentials — "we don't know you"</td></tr>
+      <tr><td>403</td><td>Forbidden</td><td>Known but not allowed (plan/permissions)</td></tr>
+      <tr><td>404</td><td>Not found</td><td>Wrong endpoint/resource id</td></tr>
+      <tr><td>429</td><td>Too many requests</td><td>Rate limited — back off, honor Retry-After</td></tr>
+      <tr><td>500 / 502</td><td>Server error / bad gateway</td><td>Problem on the server side, not the merchant</td></tr>
+    </table>
+    <h3>JS gotchas, one line each</h3>
+    <ul>
+      <li><code>typeof null</code> &rarr; "object"; <code>typeof undefined</code> &rarr; "undefined"; <code>typeof NaN</code> &rarr; "number"; <code>NaN === NaN</code> is false.</li>
+      <li><code>0.1 + 0.2 === 0.3</code> &rarr; false (floating point).</li>
+      <li>Microtasks (Promises) run before macrotasks (setTimeout), after sync code.</li>
+      <li><code>var</code> hoists as undefined; <code>let/const</code> hoist into the TDZ (ReferenceError before declaration).</li>
+      <li><code>const</code> blocks reassignment, not mutation.</li>
+      <li>Arrow functions: no own <code>this</code>/<code>arguments</code>; can't be constructors.</li>
+      <li><code>==</code> coerces; <code>===</code> doesn't. Falsy values: 0, "", null, undefined, NaN, false.</li>
+      <li><code>&lt;script defer&gt;</code> runs after HTML parsing, in order; <code>async</code> runs whenever it arrives, order not guaranteed.</li>
+      <li>JSON needs double quotes; <code>JSON.stringify</code> drops keys whose value is <code>undefined</code>.</li>
+    </ul>
+    <h3>Grammar quick rules (the verbal section in 10 lines)</h3>
+    <ul>
+      <li>Collective nouns (team, staff, committee) &rarr; singular verb in standard test English.</li>
+      <li>Neither/either/each/every one + of &rarr; singular verb.</li>
+      <li>Since + point in time; for + duration.</li>
+      <li>Fewer + countable; less + uncountable.</li>
+      <li>Affect = verb; effect = noun (usually).</li>
+      <li>its = possessive; it's = it is.</li>
+      <li>Third conditional: If + had + V3, would have + V3 — never "if I would have".</li>
+      <li>Subject pronouns after "and": "my teammate and I" (subject), "with my teammate and me" (object).</li>
+      <li>Who = subject, whom = object; that vs which: "which" takes a comma.</li>
+      <li>Ban from your writing: "do the needful", "kindly revert", "the same", "prepone" — plain modern English only.</li>
+    </ul>
+    <h3>The reply skeleton (for any descriptive question)</h3>
+    <pre>1. Acknowledge THEIR specific situation (one sentence, real empathy)
+2. Cause in plain language (what they SEE, not internal jargon)
+3. Numbered next steps (safe-first: test theme before live)
+4. Ownership + when they'll hear from you + invite confirmation
+Bonus: one tip that leaves them better equipped than before</pre>
+  </div>
+  <div class="card note">
+    <h3>Test-day checklist (14 July)</h3>
+    <ul>
+      <li>SASTRA mail open by 3:30 PM; credentials arrive before 4 PM (check spam). Link is personal — do not share it.</li>
+      <li>Laptop charged + charger plugged; mobile hotspot ready as backup; quiet room; webcam/mic working in case of proctoring; ID card at desk.</li>
+      <li>Log in 4:00-4:15 PM. Starting early preserves your buffer inside the 4-7 PM window; 70 minutes once you begin.</li>
+      <li>Pacing: MCQs fast first pass &rarr; flag doubts &rarr; descriptive answer with 15-18 min &rarr; last 3 min proofread the writing.</li>
+      <li>Every free-text field is a writing sample. Capital letters, full stops, no SMS-speak.</li>
+      <li>Water, bathroom, phone on silent — before you click start.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sources" class="page">
+  <div class="card">
+    <h2>Sources used</h2>
+    <p>Mix of your uploaded files, Swym's official material, and public candidate reports. Candidate reports are useful for pattern prediction but are not official guarantees of tomorrow's paper.</p>
+    <table>
+      <tr><th>Source</th><th>Link / location</th><th>Used for</th></tr>
+      <tr><td>Uploaded JD - Customer Experience Engineer (Swym, 2027 batch)</td><td>local upload: Swym_JD_2027_Batch.pdf</td><td>Role non-negotiables (HTML/CSS/JS, written English, curiosity), preferred skills (Shopify, REST, DevTools, AI tools), scale numbers, AI-first operating model, anti-patterns ("support as a waiting room").</td></tr>
+      <tr><td>SASTRA placement notice (your message)</td><td>local</td><td>PPT 2 PM / report 1:45, SoC Auditorium + SRC livestream, OA window 4-7 PM, 70 min, credentials via SASTRA mail before 4 PM, personal link, interviews 15 July at Thanjavur Main Campus, CTC revised to 15 LPA, OD attendance.</td></tr>
+      <tr><td>Glassdoor - Swym (India) interview questions</td><td><a href="https://www.glassdoor.co.in/Interview/Swym-India-Interview-Questions-E4615945.htm" target="_blank" rel="noopener">Open</a></td><td>Dec 2025 TSE interview (CSS via inspector, identify Swym elements on a Shopify dev site, "what apps do we have"), Jul 2023 TSE campus report (6+ rounds, CEO chat, prep Python/HTML/CSS/situational), CSM API questions, aggregate stats (68% campus recruiting, difficulty 2.86/5, support interviews rated easiest).</td></tr>
+      <tr><td>Glassdoor - SWYM interview questions (older company page)</td><td><a href="https://www.glassdoor.co.in/Interview/SWYM-Interview-Questions-E3979999.htm" target="_blank" rel="noopener">Open</a></td><td>2022 on-campus OT composition (5 easy DSA + technical MCQs + aptitude + scenario descriptive; two tech rounds; palindrome-linked-list level) and Chennai 2023 verbal/grammar-only campus OA report.</td></tr>
+      <tr><td>Swym Stories - "Swymming, Not Sinking: A Guide to Our Interview Process" (official, Jan 2026)</td><td><a href="https://stories.getswym.com/p/swymming-not-sinking-a-guide-to-our" target="_blank" rel="noopener">Open</a></td><td>Official 5-stage process, practical challenge round, STAR advice, homework expectation, laptop-over-phone, 48-hour feedback, Swymmer values incl. AI-enabled working.</td></tr>
+      <tr><td>Swym Stories - "The (Customer) Experience Engine" (official podcast page)</td><td><a href="https://stories.getswym.com/p/the-customer-experience-engine" target="_blank" rel="noopener">Open</a></td><td>CX org structure (TSEs + CSMs, Director of CX), empathy-first philosophy, AI handling repetitive work.</td></tr>
+      <tr><td>Swym - official site + pricing</td><td><a href="https://www.getswym.com/" target="_blank" rel="noopener">Open</a> / <a href="https://www.getswym.com/pricing" target="_blank" rel="noopener">Pricing</a></td><td>Product positioning, features, platforms (Shopify/Shopify Plus/BigCommerce/Magento), integrations (Klaviyo, Attentive, Tapcart; enterprise ESPs), JS + REST APIs.</td></tr>
+      <tr><td>Shopify App Store - Swym Corporation apps</td><td><a href="https://apps.shopify.com/partners/developer-ca6a967f09890f68" target="_blank" rel="noopener">Open</a></td><td>The three apps with ratings: Wishlist Plus (~4.7, 1,400+ reviews, Built for Shopify), Back in Stock Alerts (~4.7, 400+), Gift Lists and Registries (~4.6).</td></tr>
+      <tr><td>Swym help docs</td><td><a href="https://swymit.com/help/install-configure/" target="_blank" rel="noopener">Open</a></td><td>Trigger details (wishlist reminder ~24h, price-drop, back-in-stock), theme editor configuration, and the <code>window._swat.ui.open()</code> / <code>#swym-wishlist</code> details used in the DevTools drill.</td></tr>
+      <tr><td>Public Swym lateral JD (2026)</td><td><a href="https://www.foundit.in/job/product-lifecycle-marketer-swym-india-53501673" target="_blank" rel="noopener">Open</a></td><td>Their lateral round structure including a written assignment where AI-fluency is explicitly assessed.</td></tr>
+    </table>
+  </div>
+  <div class="footer">Generated on 2026-07-13 for the 14 July 2026 Swym OA (window 4-7 PM, 70 min) and 15 July interviews. Save this file locally and open it in any browser. Print-friendly: use your browser's print dialog to get all tabs as pages.</div>
+</section>
+</main>
+</body>
+</html>

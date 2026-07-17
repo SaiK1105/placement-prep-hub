@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presidio Prep HQ — Sai's Game Plan</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px 80px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 26px; font-weight: 500; color: #f0efea; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 21px; font-weight: 500; color: #f0efea; margin: 26px 0 10px; }
+  h3 { font-size: 16px; font-weight: 600; color: #f0efea; margin: 20px 0 8px; }
+  p { margin-bottom: 10px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 4px 0 16px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 12px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 18px; }
+  nav button { font: inherit; font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: #b8b5ad; cursor: pointer; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+  .card.mint { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.pink { border-left: 3px solid #c4635a; border-radius: 0 14px 14px 0; }
+  .card.blue { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .big { font-size: 30px; font-weight: 700; color: #f0efea; }
+  .funnel { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 14px 0; }
+  .funnel div { border-radius: 10px; padding: 8px 14px; text-align: center; font-size: 13px; font-weight: 600; }
+  .f1 { background: #383836; width: 100%; }
+  .f2 { background: #45443f; width: 70%; }
+  .f3 { background: #56544c; width: 45%; }
+  .f4 { background: #d97757; width: 24%; color: #fff; }
+  .bar { display: flex; height: 34px; border-radius: 10px; overflow: hidden; margin: 10px 0; font-size: 12px; font-weight: 600; }
+  .bar div { display: flex; align-items: center; justify-content: center; }
+  .bar .mcq { background: #45443f; flex: 1; }
+  .bar .rest { background: #d97757; flex: 1; color: #fff; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { border: 1px solid #3f3e3a; padding: 8px 10px; text-align: left; font-size: 14px; }
+  th { background: #30302e; color: #b8b5ad; }
+  code, pre { background: #1f1e1c; border-radius: 6px; font-family: Consolas, monospace; font-size: 13px; color: #cbc3f0; }
+  code { padding: 1px 6px; }
+  pre { padding: 12px; overflow-x: auto; border: 1px solid #3f3e3a; margin: 8px 0; color: #d8d5cc; }
+  ol.q > li { margin-bottom: 15px; }
+  ul li { margin-bottom: 6px; }
+  label.chk { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; cursor: pointer; }
+  label.chk:hover { background: #383836; }
+  label.chk input { margin-top: 4px; accent-color: #d97757; }
+  label.chk.done span { text-decoration: line-through; color: #8e8b83; }
+  .pill { display: inline-block; background: #383836; color: #b8b5ad; border-radius: 16px; padding: 2px 12px; font-size: 12px; font-weight: 600; margin: 0 6px 6px 0; }
+  .small { font-size: 12px; color: #8e8b83; }
+  .talk { background: #383430; border-left: 3px solid #d97757; padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; color: #d8d5cc; }
+  .arrowflow { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 10px 0; font-size: 13px; font-weight: 500; color: #b8b5ad; }
+  .arrowflow span { background: #30302e; border: 1px solid #3f3e3a; padding: 6px 12px; border-radius: 10px; }
+  .arrowflow em { color: #e0987d; font-style: normal; font-weight: 600; }
+  a { color: #e0987d; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🎯 Presidio Prep HQ</h1>
+<div class="sub">Built for S Sai Kumar · SASTRA CSE (AI&amp;DS) '27 · Test day: <b style="color:#e0987d">Wed 16 July</b></div>
+
+<nav id="nav">
+  <button data-p="p1" class="on">🏠 Start here</button>
+  <button data-p="p2">🧠 The test, ELI5</button>
+  <button data-p="p3">📅 Your plan</button>
+  <button data-p="p4">📝 Mock paper</button>
+  <button data-p="p5">🔑 Answers</button>
+  <button data-p="p6">🎤 Interviews</button>
+  <button data-p="p7">✅ Day-of</button>
+</nav>
+
+<!-- ============ PAGE 1: START HERE ============ -->
+<div class="page on" id="p1">
+  <div class="talk"><b>Real talk.</b> MS and Swym stung — but that was data, not a verdict. Presidio's test is a <i>breadth + speed</i> game, and your profile is genuinely strong for their interview rounds. The job today and tomorrow is simple: don't lose easy marks, and don't get stuck.</div>
+
+  <h2>What's happening?</h2>
+  <div class="arrowflow"><span>📢 PPT<br><em>16 July morning</em></span> → <span>💻 Online Test<br><em>16 July, 90 min</em></span> → <span>🎤 Interviews<br><em>16–17 July</em></span> → <span>🎉 Offer</span></div>
+  <p class="small">Location: SASTRA Thanjavur campus. Bring your own laptop — full checklist on the last page.</p>
+
+  <h2>The funnel (why every mark matters)</h2>
+  <div class="funnel">
+    <div class="f1">~everyone eligible takes the test</div>
+    <div class="f2">score cutoff</div>
+    <div class="f3">+ resume / LinkedIn / GitHub screen</div>
+    <div class="f4">shortlist (one drive: 467 → 10)</div>
+  </div>
+  <p class="small">Yes, they actually look at GitHub (<code>github.com/SaiK1105</code>) and LinkedIn before shortlisting. Pin A.R.G.U.S-V with a killer README tonight.</p>
+
+  <h2>Your scorecard (from your resume)</h2>
+  <div class="grid2">
+    <div class="card mint">
+      <h3 style="margin-top:0">💪 Your superpowers</h3>
+      <ul>
+        <li><b>SQL &amp; DBMS</b> — you're an AI/DS student; the 2 SQL questions + DBMS MCQs should be free marks for you.</li>
+        <li><b>Python coding</b> — the 2 coding questions allow any language. Arrays/strings in Python = home turf.</li>
+        <li><b>Projects that stand out</b> — A.R.G.U.S-V (LangGraph agents) and the FOMC pipeline are 10x more interesting than the average campus CRUD app. Interviewers will bite.</li>
+        <li><b>Leadership story ready</b> — SIH team lead is the perfect HR-round anchor.</li>
+      </ul>
+    </div>
+    <div class="card pink">
+      <h3 style="margin-top:0">⚠️ Your danger zones</h3>
+      <ul>
+        <li><b>C/Java output MCQs</b> — you think in Python. ~6 MCQs will be "what does this C/Java code print". This is your #1 drill priority tonight.</li>
+        <li><b>Resume breadth</b> — you list MERN, Redis, Java, C++, CI/CD… interviewers pick ANY of these. Every skill on the page must survive 2 follow-up questions.</li>
+        <li><b>Speed under pressure</b> — the likely MS/Swym killer. 90 sec per MCQ. Skip-and-return is the whole strategy.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2: THE TEST ELI5 ============ -->
+<div class="page" id="p2">
+  <h2>🧠 The test, explained like you're 5</h2>
+  <p>Imagine a 90-minute buffet with two halves. First half: 30 quick bites (MCQs). Second half: 7 proper dishes you cook yourself (writing code &amp; queries). People fail by spending 10 minutes chewing one bite.</p>
+
+  <h3>Your 90 minutes, visually</h3>
+  <div class="bar"><div class="mcq">⏱️ 0–45 min · 30 MCQs (~90 sec each)</div><div class="rest">⏱️ 45–90 min · code + SQL + pseudocode</div></div>
+
+  <h3>What each section actually is</h3>
+  <table>
+    <tr><th>Section</th><th>ELI5</th><th>Your take</th></tr>
+    <tr><td><b>~30 MCQs</b></td><td>Rapid-fire quiz: school math (profit%, trains, work), puzzles (seating, series, coding-decoding), "what does this C/Java print", DBMS/OS/networks/bash one-liners</td><td>⚠️ Drill C/Java outputs. Aptitude = tricks, not formulas.</td></tr>
+    <tr><td><b>2 Pseudocode</b></td><td>They show fake code, you trace it line by line and say what it prints. Like being a human debugger.</td><td>😊 You debug AI code for fun. Just trace on paper, don't rush.</td></tr>
+    <tr><td><b>2 SQL</b></td><td>Write real MySQL. Almost always: a JOIN + GROUP BY/HAVING, and a "second highest" style trick.</td><td>💪 Free marks for you. Practice writing by hand though.</td></tr>
+    <tr><td><b>2 Coding</b></td><td>Array/string problems, any language. They care about edge cases (empty input, index 0, negatives).</td><td>💪 Use Python. State edge cases in comments.</td></tr>
+    <tr><td><b>1 Theory (sometimes)</b></td><td>"Would you use MySQL or NoSQL for a banking app? Why?" — a paragraph, not code.</td><td>💪 Data-systems thinking = your major. Easy win.</td></tr>
+  </table>
+
+  <h3>The one rule</h3>
+  <div class="card amber"><b>⭐ Star → Skip → Return.</b> The moment a question passes ~90 seconds, mark it and move. Coming back with 10 spare minutes beats drowning early. This single habit is likely the entire difference from your last two OAs.</div>
+</div>
+
+<!-- ============ PAGE 3: PLAN ============ -->
+<div class="page" id="p3">
+  <h2>📅 Your plan (tick things off — it saves)</h2>
+  <p class="small">You already own all the material for this — it's in your Placement Training folder.</p>
+
+  <h3>🌙 Tonight — Tue 14 July (~3 hrs)</h3>
+  <div class="card" id="tonight">
+    <label class="chk"><input type="checkbox" data-k="t1"><span><b>60 min · Aptitude sprint</b> — profit%, ratios, time&amp;work, trains, series, seating, blood relations. Use <i>100 aptitude tricks</i> PDF. Timed: 60 sec/question.</span></label>
+    <label class="chk"><input type="checkbox" data-k="t2"><span><b>45 min · SQL by hand</b> — joins, GROUP BY + HAVING, subqueries, LIMIT/OFFSET. Write, don't read.</span></label>
+    <label class="chk"><input type="checkbox" data-k="t3"><span><b>45 min · C/Java output drills</b> — your danger zone: pointers, <code>x++ vs ++x</code>, sizeof, string pool, static, overriding. Use <i>C programs input/outputs</i> + <i>100 C programs</i> PDFs.</span></label>
+    <label class="chk"><input type="checkbox" data-k="t4"><span><b>30 min · GitHub + LinkedIn polish</b> — pin A.R.G.U.S-V &amp; FOMC repos, give both proper READMEs (what/why/how/demo). Shortlisting looks at these!</span></label>
+  </div>
+
+  <h3>☀️ Tomorrow — Wed 15 July</h3>
+  <div class="card">
+    <label class="chk"><input type="checkbox" data-k="w1"><span><b>Morning · 90 min mock</b> (📝 tab) under strict exam conditions. Timer on, phone in another room.</span></label>
+    <label class="chk"><input type="checkbox" data-k="w2"><span><b>Midday · 60 min review</b> — every wrong answer becomes tonight's syllabus. Score honestly (guide in 🔑 tab).</span></label>
+    <label class="chk"><input type="checkbox" data-k="w3"><span><b>Afternoon · 60 min core CS rapid-fire</b> — process vs thread, deadlock's 4 conditions, paging/thrashing, TCP vs UDP, OSI, DNS:53, <code>grep chmod ps</code> + pipes.</span></label>
+    <label class="chk"><input type="checkbox" data-k="w4"><span><b>Evening · 45 min interview warmup</b> — 1 pattern-printing + 2 array problems in Python; rehearse your 2-min A.R.G.U.S-V pitch OUT LOUD twice (script in 🎤 tab).</span></label>
+    <label class="chk"><input type="checkbox" data-k="w5"><span><b>Night · logistics + sleep</b> — print resumes, charge laptop, test webcam &amp; hotspot. A rested brain outscores a crammed one. Every time.</span></label>
+  </div>
+</div>
+
+<!-- ============ PAGE 4: MOCK ============ -->
+<div class="page" id="p4">
+  <h2>📝 Mock paper — 90 minutes, no mercy</h2>
+  <p class="small">Section A: max 45 min · Sections B–E: the rest. Answers are on the 🔑 tab — opening it early only cheats you.</p>
+
+  <h3>Section A — MCQs (30)</h3>
+  <ol class="q">
+    <li>A shopkeeper marks an item 40% above cost, gives 20% discount. Profit%? (a) 8 (b) 12 (c) 16 (d) 20</li>
+    <li>A does a job in 12 days, B in 18. Together: (a) 7.2 (b) 7.5 (c) 8 (d) 6.8 days</li>
+    <li>240 m train crosses a pole in 12 s. Speed (km/h): (a) 60 (b) 72 (c) 80 (d) 90</li>
+    <li>Ratio 3:5, LCM 300. HCF? (a) 10 (b) 15 (c) 20 (d) 30</li>
+    <li>SI on ₹8000 at 7.5% for 2 yrs: (a) 1100 (b) 1200 (c) 1250 (d) 1300</li>
+    <li>Avg of 5 numbers = 27; remove one → 25. Removed: (a) 25 (b) 30 (c) 35 (d) 40</li>
+    <li>2, 6, 12, 20, 30, __ (a) 40 (b) 42 (c) 44 (d) 46</li>
+    <li>"She is the daughter of my grandfather's only son" — she is my: (a) mother (b) sister (c) aunt (d) cousin</li>
+    <li>CODING → DPEJOH, so PYTHON → (a) QZUIPO (b) QZUIOP (c) OZUIPO (d) QZVIPO</li>
+    <li>Row facing north: A left of B, right of C; D right of B; E extreme left. Middle? (a) A (b) B (c) C (d) D</li>
+    <li>All engineers are readers. Some readers are writers. I: some engineers are writers. II: some writers are readers. (a) I (b) II (c) both (d) neither</li>
+    <li>Clock at 3:15 — angle between hands: (a) 0° (b) 7.5° (c) 15° (d) 30°</li>
+    <li>C: <pre>int x = 5;
+printf("%d %d", x++, ++x);</pre> (a) 5 7 (b) 6 7 (c) undefined behavior (d) 5 6</li>
+    <li>C: <pre>char s[] = "hello";
+printf("%d", (int)sizeof(s));</pre> (a) 5 (b) 6 (c) 4 (d) 8</li>
+    <li>Java: <pre>String a = "abc"; String b = "abc";
+System.out.print(a == b);
+System.out.print(a.equals(b));</pre> (a) truetrue (b) falsetrue (c) truefalse (d) falsefalse</li>
+    <li>Java: <pre>int[] arr = {1,2,3};
+System.out.println(arr.length + "" + arr[1]);</pre> (a) 32 (b) 5 (c) 3 2 (d) error</li>
+    <li>C: <code>int *p = arr;</code> with <code>arr = {10,20,30}</code>. <code>*(p+2)</code>? (a) 10 (b) 20 (c) 30 (d) garbage</li>
+    <li>NOT a Java access modifier: (a) private (b) protected (c) friendly (d) public</li>
+    <li>Filters groups <i>after</i> aggregation: (a) WHERE (b) HAVING (c) GROUP BY (d) FILTER</li>
+    <li>Normal form removing partial dependency: (a) 1NF (b) 2NF (c) 3NF (d) BCNF</li>
+    <li>All-or-nothing transaction property: (a) Consistency (b) Isolation (c) Atomicity (d) Durability</li>
+    <li>DELETE vs TRUNCATE — true statement: (a) both always roll back (b) TRUNCATE is DML (c) DELETE can use WHERE (d) DELETE resets identity</li>
+    <li>NOT a deadlock condition: (a) mutual exclusion (b) hold &amp; wait (c) preemption (d) circular wait</li>
+    <li>Thrashing = (a) idle CPU (b) excessive paging (c) full disk (d) cache overflow</li>
+    <li>Can cause starvation: (a) Round Robin (b) FCFS (c) Priority scheduling (d) none</li>
+    <li>Connectionless protocol: (a) TCP (b) UDP (c) FTP (d) HTTP</li>
+    <li>DNS port: (a) 25 (b) 53 (c) 80 (d) 443</li>
+    <li>Runtime polymorphism via: (a) overloading (b) overriding (c) constructors (d) static</li>
+    <li>Shows running processes: (a) <code>ls</code> (b) <code>ps</code> (c) <code>pwd</code> (d) <code>cat</code></li>
+    <li><code>chmod 754</code> — "others" get: (a) rwx (b) rw- (c) r-x (d) r--</li>
+  </ol>
+
+  <h3>Section B — Pseudocode (2)</h3>
+  <ol class="q">
+    <li>What prints?
+<pre>x = 0
+for i = 1 to 5:
+    if i mod 2 == 0:
+        x = x + i * i
+    else:
+        x = x - i
+print(x)</pre></li>
+    <li>f(4) = ?
+<pre>function f(n):
+    if n &lt;= 1: return 1
+    return n * f(n - 2)</pre></li>
+  </ol>
+
+  <h3>Section C — SQL (2)</h3>
+  <p class="small">Tables: <code>employees(emp_id, name, dept_id, salary)</code> · <code>departments(dept_id, dept_name)</code></p>
+  <ol class="q">
+    <li>Second highest salary.</li>
+    <li>Department name + average salary, only where avg &gt; 50,000, highest first.</li>
+  </ol>
+
+  <h3>Section D — Coding (2, use Python)</h3>
+  <ol class="q">
+    <li><b>Balanced Sub-Sum:</b> index where left sum == right sum, else -1. <code>[1,7,3,6,5,6]</code> → 3. Edge cases: empty, index 0, negatives.</li>
+    <li><b>First Non-Repeating Char:</b> first char appearing exactly once, else '_'. <code>"swiss"</code> → 'w'.</li>
+  </ol>
+
+  <h3>Section E — Design theory (1)</h3>
+  <ol class="q"><li>Banking app: MySQL or NoSQL? 5–8 lines. Hit: ACID, transactions, schema, consistency.</li></ol>
+</div>
+
+<!-- ============ PAGE 5: ANSWERS ============ -->
+<div class="page" id="p5">
+  <h2>🔑 Answer key</h2>
+  <div class="card amber"><b>Score yourself honestly:</b> Section A: 24+/30 → you're in shape · 18–23 → drill your misses tonight · &lt;18 → tomorrow is fundamentals only, nothing new.</div>
+
+  <h3>Section A</h3>
+  <p>1-b (100→140→112) · 2-a (1/12+1/18=5/36) · 3-b (20 m/s × 3.6) · 4-c (15x=300) · 5-b · 6-c (135−100) · 7-b (n²+n) · 8-b · 9-a (+1 each letter) · 10-a (order: E C A B D) · 11-b · 12-b · 13-c ⚠️ (modifying x twice without a sequence point = <b>undefined behavior</b> — classic trap; compilers may print "5 7" but UB is the right answer) · 14-b (sizeof counts '\0') · 15-a (string pool interning) · 16-a ("3"+"2" concatenates) · 17-c · 18-c ("friendly" isn't a keyword) · 19-b · 20-b · 21-c · 22-c · 23-c (deadlock needs <i>no</i> preemption) · 24-b · 25-c · 26-b · 27-b · 28-b · 29-b · 30-d (7=rwx, 5=r-x, 4=r--)</p>
+
+  <h3>Section B</h3>
+  <p>B1: −1 → +4=3 → −3=0 → +16=16 → −5=<b>11</b> · B2: f(4)=4·f(2)=4·2·f(0)=<b>8</b></p>
+
+  <h3>Section C</h3>
+  <pre>-- C1
+SELECT MAX(salary) FROM employees
+WHERE salary &lt; (SELECT MAX(salary) FROM employees);
+-- or:
+SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1;
+
+-- C2
+SELECT d.dept_name, AVG(e.salary) AS avg_sal
+FROM employees e JOIN departments d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+HAVING AVG(e.salary) &gt; 50000
+ORDER BY avg_sal DESC;</pre>
+
+  <h3>Section D</h3>
+  <pre># D1 — O(n) time, O(1) space
+def pivot_index(a):
+    total, left = sum(a), 0
+    for i, v in enumerate(a):
+        if left == total - left - v:
+            return i
+        left += v
+    return -1
+
+# D2
+from collections import Counter
+def first_unique(s):
+    c = Counter(s)
+    for ch in s:
+        if c[ch] == 1:
+            return ch
+    return '_'</pre>
+
+  <h3>Section E</h3>
+  <p><b>MySQL.</b> Money movement needs ACID transactions (debit + credit commit together or not at all), strong consistency (never a stale balance), a stable schema, and foreign-key integrity. NoSQL's eventual consistency suits logs/analytics at scale — fine as a side store — but the core ledger belongs in an RDBMS. Bonus maturity point: "MySQL for the ledger, NoSQL for logs/analytics."</p>
+</div>
+
+<!-- ============ PAGE 6: INTERVIEWS ============ -->
+<div class="page" id="p6">
+  <h2>🎤 Interview rounds — personalized to YOUR resume</h2>
+  <div class="talk"><b>The rule they play by:</b> anything on your resume is fair game. Yours lists MERN, Redis, Java, C++, CI/CD, LangGraph, NLP/ML. Tonight, make sure every one of those survives two follow-up questions — or be ready to say "I've used it at project level" honestly.</div>
+
+  <h3>Round: Technical (2 panelists)</h3>
+  <div class="card blue">
+    <b>What they'll probe from YOUR resume specifically:</b>
+    <ul>
+      <li><b>React/Node (MERN)</b> — past panels lean web-dev. Revise: components/props/state, hooks (useState/useEffect), virtual DOM, what Express middleware is, REST verbs.</li>
+      <li><b>Redis</b> — you used it in A.R.G.U.S-V: why Redis over a DB for caching? TTL? In-memory means what trade-off?</li>
+      <li><b>LangGraph/agents</b> — be able to draw your pipeline on paper in 30 seconds: ingest → transcribe/segment → embed → retrieve → answer.</li>
+      <li><b>DBMS + SQL</b> — joins, indexes (why they speed reads, slow writes), normalization 1–3NF.</li>
+      <li><b>DSA warm-ups</b> — one <b>pattern printing</b> + one <b>array</b> question live. Practice 3 patterns tonight: pyramid, diamond, number triangle.</li>
+    </ul>
+  </div>
+  <div class="card mint">
+    <b>Your 2-minute A.R.G.U.S-V pitch (rehearse out loud):</b>
+    <p>"Long videos are painful to search — watching a 2-hour video to find one answer wastes hours. I built A.R.G.U.S-V, a Python system where LangGraph-orchestrated LLM agents ingest a YouTube video and answer deep natural-language questions about it. <b>[How]</b> It converts video into structured, query-ready data with multimodal retrieval and semantic search, cached in Redis, deployed via a CI/CD pipeline. <b>[Challenge]</b> The hard part was controlling agent scope — early versions hallucinated across segments, so I redesigned prompts for scoped outputs and validated every AI-generated layer myself. <b>[Outcome]</b> Hours of manual review became a single query."</p>
+    <p class="small">Then stop talking. Let them pull the thread they find interesting.</p>
+  </div>
+  <div class="card amber"><b>Golden rule:</b> never a flat "I don't know." Think out loud — "I haven't used X in production, but based on Y I'd reason that…" They grade reasoning, not trivia.</div>
+
+  <h3>Round: Application Development (3 hours)</h3>
+  <div class="card">
+    <ul>
+      <li>Past task: build a <b>hotel listing website</b> + handle surprise change requests. Reviewers read every file and quiz you on your code.</li>
+      <li><b>Your play:</b> React frontend + Node/Express backend (it's on your resume, and it's their stack taste) — or Python/Flask if the panel is language-agnostic. Decide tonight, don't decide there.</li>
+      <li>Internet allowed for reference, <b>zero copy-paste</b>. Ironic tip for an AI-native dev: this round is YOU without agents — practice one small CRUD app by hand tomorrow if time permits.</li>
+      <li>Order of work: working CRUD → clean file structure → then polish. Working &gt; pretty.</li>
+    </ul>
+  </div>
+
+  <h3>Round: HR (panel of ~4, casual)</h3>
+  <div class="card">
+    <ul>
+      <li>Real past questions: "rate your hostel food", "review your college", "how did you prepare for Presidio", "plans if selected". Zero tech. Just be a relaxed, positive human.</li>
+      <li>Your anchor story: <b>SIH team lead</b> — led problem analysis → architecture → pitch, cleared inter-college rounds, built a mental-health app with full anonymity. It shows leadership + empathy + delivery. Work it in naturally once.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PAGE 7: DAY-OF ============ -->
+<div class="page" id="p7">
+  <h2>✅ Day-of checklist — 16 July</h2>
+  <div class="card mint" id="dayof">
+    <label class="chk"><input type="checkbox" data-k="d1"><span>Laptop <b>fully charged</b> + charger packed</span></label>
+    <label class="chk"><input type="checkbox" data-k="d2"><span>Webcam tested (they require it working)</span></label>
+    <label class="chk"><input type="checkbox" data-k="d3"><span>Stable Wi-Fi plan + <b>phone hotspot backup</b> (recharged data)</span></label>
+    <label class="chk"><input type="checkbox" data-k="d4"><span>A4 sheets for rough work</span></label>
+    <label class="chk"><input type="checkbox" data-k="d5"><span><b>Multiple printed resumes</b> (they asked for several copies)</span></label>
+    <label class="chk"><input type="checkbox" data-k="d6"><span>College ID + water bottle</span></label>
+    <label class="chk"><input type="checkbox" data-k="d7"><span>Reach venue <b>early</b>; know your allotted room from the eligible-students list</span></label>
+  </div>
+  <div class="card amber"><b>Between PPT and the test:</b> skim your own rough notes only. Starting a new topic 20 minutes before an exam is how confidence dies. You've prepped — trust it.</div>
+  <div class="card blue"><b>During the test, remember the one rule:</b> ⭐ star → skip → return. And breathe. You only need to be in the top handful, not perfect.</div>
+  <p class="small" style="margin-top:16px">Pattern sourced from GeeksforGeeks Presidio campus experiences (2024–26) &amp; Glassdoor. Drives vary — adapt on the day. Good luck, Sai 🍀</p>
+</div>
+
+</div>
+<script>
+// tabs
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  window.scrollTo({ top: 0 });
+});
+// persistent checkboxes
+const CK = 'presidio-prep-checks';
+let checks = {};
+try { checks = JSON.parse(localStorage.getItem(CK) || '{}'); } catch (e) {}
+document.querySelectorAll('label.chk input').forEach(c => {
+  if (checks[c.dataset.k]) { c.checked = true; c.closest('label').classList.add('done'); }
+  c.onchange = () => {
+    checks[c.dataset.k] = c.checked;
+    c.closest('label').classList.toggle('done', c.checked);
+    try { localStorage.setItem(CK, JSON.stringify(checks)); } catch (e) {}
+  };
+});
+</script>
+</body>
+</html>

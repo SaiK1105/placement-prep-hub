@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tredence Prep HQ v2 — OA 21 July</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 26px 18px 90px; }
+  h1 { font-family: ui-serif, Georgia, 'Times New Roman', serif; font-size: 27px; font-weight: 500; color: #f0efea; letter-spacing: -.01em; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 21px; font-weight: 500; color: #f0efea; margin: 22px 0 10px; }
+  h3 { font-size: 15px; font-weight: 600; color: #f0efea; margin: 16px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13.5px; margin: 6px 0 16px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 18px; }
+  nav button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 13px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: #b8b5ad; cursor: pointer; position: relative; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  nav button .badge { position: absolute; top: -5px; right: -4px; background: #d97757; color: #fff; font-size: 10px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+  .card.mint { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.pink { border-left: 3px solid #c4635a; border-radius: 0 14px 14px 0; }
+  .card.blue { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .grid2, .grid4 { grid-template-columns: 1fr 1fr; } }
+  .stat { background: #30302e; border-radius: 12px; padding: 13px 14px; text-align: center; }
+  .stat .n { font-family: ui-serif, Georgia, serif; font-size: 27px; font-weight: 500; color: #f0efea; }
+  .stat .l { font-size: 11px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; }
+  code, pre { background: #1f1e1c; border-radius: 6px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 13px; color: #cbc3f0; }
+  code { padding: 1px 6px; }
+  pre { padding: 12px; overflow-x: auto; border: 1px solid #3f3e3a; margin: 8px 0; color: #d8d5cc; }
+  .small { font-size: 12.5px; color: #8e8b83; }
+  ul li { margin-bottom: 6px; }
+  .qbox { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 17px 19px; margin: 12px 0; }
+  .qbox .topic { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: #8e8b83; margin-bottom: 7px; }
+  .qbox .qt { font-size: 15px; margin-bottom: 12px; color: #f0efea; }
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+  .opts button { font: inherit; font-size: 14px; text-align: left; padding: 10px 14px; border-radius: 10px; border: 1px solid #45443f; background: #383836; color: #e6e4dd; cursor: pointer; transition: border-color .12s, background .12s; }
+  .opts button:hover:not(:disabled) { border-color: #d97757; background: #3d3733; }
+  .opts button.right { background: #333a2e; border-color: #90a883; color: #cfe0c2; }
+  .opts button.wrong { background: #40302d; border-color: #c4635a; color: #eab8b1; }
+  .opts button:disabled { cursor: default; }
+  .expl { display: none; margin-top: 12px; padding: 12px 15px; border-radius: 0 10px 10px 0; background: #383430; border-left: 3px solid #d97757; font-size: 13.5px; color: #d8d5cc; }
+  .expl.show { display: block; animation: fade .3s; }
+  .qmeta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .nextbtn { font: inherit; font-size: 13.5px; font-weight: 600; padding: 8px 20px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; display: none; }
+  .nextbtn:hover { background: #c96442; }
+  .nextbtn.show { display: inline-block; }
+  .qtimer { font-family: Consolas, monospace; font-weight: 700; font-size: 17px; color: #90a883; }
+  .qtimer.low { color: #c4635a; }
+  .modes { display: flex; gap: 7px; flex-wrap: wrap; margin: 10px 0; }
+  .modes button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 10px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .modes button:hover { border-color: #6b6961; }
+  .modes button.on { background: #d97757; color: #fff; border-color: #d97757; }
+  .bar { height: 8px; border-radius: 6px; background: #3f3e3a; overflow: hidden; margin-top: 6px; }
+  .bar div { height: 100%; background: #d97757; border-radius: 6px; }
+  .topicrow { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 13px; }
+  .topicrow .tn { width: 90px; color: #b8b5ad; font-weight: 600; }
+  .topicrow .pct { width: 46px; text-align: right; color: #8e8b83; }
+  .topicrow .bar { flex: 1; margin-top: 0; }
+  .go { font: inherit; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; margin: 8px 6px 0 0; }
+  .go:hover { background: #c96442; }
+  .go.ghost { background: transparent; border: 1px solid #45443f; color: #b8b5ad; }
+  .go.ghost:hover { background: #30302e; }
+  details { margin: 12px 0; border: 1px solid #3f3e3a; border-radius: 12px; padding: 12px 16px; background: #30302e; }
+  summary { cursor: pointer; font-weight: 600; color: #e0987d; font-size: 14px; }
+  .talk { background: #383430; border-left: 3px solid #d97757; padding: 13px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; color: #d8d5cc; }
+  .arrowflow { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 10px 0; font-size: 12.5px; font-weight: 500; color: #b8b5ad; }
+  .arrowflow span { background: #30302e; border: 1px solid #3f3e3a; padding: 6px 12px; border-radius: 10px; }
+  .arrowflow em { color: #e0987d; font-style: normal; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { border: 1px solid #3f3e3a; padding: 8px 11px; text-align: left; font-size: 13.5px; }
+  th { background: #30302e; color: #b8b5ad; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Tredence Prep HQ <span style="color:#d97757">v2</span></h1>
+<div class="sub">Analyst (DE) · ₹12.5 LPA · HackerEarth OA: <b style="color:#e0987d">Mon 21 July</b> · Built on retrieval practice — you answer, it remembers, misses come back.</div>
+
+<nav id="nav">
+  <button data-p="home" class="on">🏠 Home</button>
+  <button data-p="learn">📖 Learn</button>
+  <button data-p="drill">⚡ Drill</button>
+  <button data-p="weak" id="weaktab">🔁 Weak spots</button>
+  <button data-p="mock">📝 Mock</button>
+  <button data-p="code">💻 Coding</button>
+  <button data-p="talk">🎤 Interviews</button>
+</nav>
+
+<!-- HOME -->
+<div class="page on" id="home">
+  <div class="grid4">
+    <div class="stat"><div class="n" id="s-days">–</div><div class="l">days to OA</div></div>
+    <div class="stat"><div class="n" id="s-streak">0</div><div class="l">best streak</div></div>
+    <div class="stat"><div class="n" id="s-acc">–</div><div class="l">accuracy</div></div>
+    <div class="stat"><div class="n" id="s-due">0</div><div class="l">due for review</div></div>
+  </div>
+  <div class="card mint">
+    <h3 style="margin-top:0">📈 Accuracy by topic</h3>
+    <div id="topicbars"></div>
+    <div class="small" style="margin-top:6px">Bars fill as you drill. Weakest topic = tomorrow's first 10 minutes.</div>
+  </div>
+  <div class="card amber" id="todayplan"></div>
+  <div class="talk"><b>Why Tredence fits you:</b> their JD literally says <i>"Use AI tools such as Claude, GitHub Copilot to expedite delivery."</i> Your AI-native profile is a selling point here. Lead with the FOMC pipeline — data pipelines + business insight is their whole business.</div>
+  <div class="arrowflow"><span>🧪 OA HackerEarth<br><em>21 July · ~2 hrs</em></span> → <span>🗣️ AI communication</span> → <span>🎤 Tech ×2<br><em>SQL + guesstimates</em></span> → <span>👔 HR</span> → <span>🎉 ₹12.5 LPA</span></div>
+  <details><summary>📚 Your Placement material folder — what to use</summary>
+    <ul style="margin-top:8px">
+      <li><b>PSEUDOCODE PAPERS/</b> — 3 full tests, exactly Tredence's MCQ style (mock day)</li>
+      <li><b>Dbms interview questions .pdf</b> (×3) — interview theory Q&amp;A</li>
+      <li><b>DSA Handwritten guide.pdf</b> + <b>Imp coding questions with solutions.pdf</b> — trees/coding day</li>
+      <li><b>HR interview handwritten notes.pdf</b> · <b>Interview questions (161pgs).pdf</b> — behavioral rounds</li>
+      <li class="small">100 python interview questions.pdf is scanned (no text search) · CTCI = long-term reps, not this week</li>
+    </ul>
+  </details>
+</div>
+
+<!-- LEARN -->
+<div class="page" id="learn">
+  <h2>📖 Learn — concept, then prove it</h2>
+  <p class="small">Each card ends with a real question. Answering it is what makes it stick — reading alone decays in days.</p>
+  <div id="learncards"></div>
+</div>
+
+<!-- DRILL -->
+<div class="page" id="drill">
+  <h2>⚡ Drill</h2>
+  <p class="small">Pick a topic, or 🎲 Mixed for exam-style interleaving with a 90-second clock. Instant feedback, every attempt remembered.</p>
+  <div class="modes" id="drillmodes">
+    <button data-m="mix" class="on">🎲 Mixed (timed)</button>
+    <button data-m="sql">SQL</button>
+    <button data-m="python">Python</button>
+    <button data-m="oop">OOP</button>
+    <button data-m="pseudo">Pseudocode</button>
+    <button data-m="apti">Aptitude</button>
+  </div>
+  <div id="drillbox"><button class="go" onclick="startDrill()">▶ start drilling</button></div>
+  <div class="small" id="drillscore"></div>
+</div>
+
+<!-- WEAK -->
+<div class="page" id="weak">
+  <h2>🔁 Weak spots — your personal review deck</h2>
+  <p class="small">Every question you miss lands here and comes back on a spacing schedule (again today → +1 day → +3 days). Clear the queue daily; this tab is where the real learning happens.</p>
+  <div id="weakbox"></div>
+</div>
+
+<!-- MOCK -->
+<div class="page" id="mock">
+  <h2>📝 Mock — 20 MCQs, exam conditions</h2>
+  <p class="small">40 minutes, no feedback until the end (that's deliberate — the real OA doesn't pat your back either). Coding section is in 💻. Best for Saturday morning.</p>
+  <div id="mockbox"><button class="go" onclick="startMock()">▶ start mock (40:00)</button></div>
+</div>
+
+<!-- CODING -->
+<div class="page" id="code">
+  <h2>💻 Coding — the 3 predicted questions (80 min)</h2>
+  <p class="small">Attempt on your own machine first. Brute force → submit → optimize. Reveal solutions only after a real attempt.</p>
+  <div class="card">
+    <h3 style="margin-top:0">1 · Math — Digital Root</h3>
+    <p>Sum the digits of N until one digit remains. 9875 → 29 → 11 → 2. N up to 10¹⁸.</p>
+    <details><summary>Solution + explanation</summary>
+      <pre># loop version — passes
+def digital_root(n):
+    while n >= 10:
+        n = sum(int(d) for d in str(n))
+    return n
+# O(1): 1 + (n-1) % 9  ("casting out nines" — digit sums preserve mod 9)</pre>
+      <p class="small">Mention the mod-9 shortcut in a comment — free sophistication points.</p>
+    </details>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">2 · Arrays — Best Sale Window (max subarray)</h3>
+    <p>Max sum of any contiguous subarray. [2,-8,3,-2,4,-10] → 5. Handle all-negative.</p>
+    <details><summary>Solution + explanation</summary>
+      <pre>def max_subarray(a):
+    best = cur = a[0]
+    for x in a[1:]:
+        cur = max(x, cur + x)   # extend the run, or restart here
+        best = max(best, cur)
+    return best</pre>
+      <p class="small">Kadane's: at each element, "is the running sum helping (cur+x) or hurting (restart at x)?" Starting at a[0], not 0, makes all-negative arrays correct. Brute O(n²) first for partials, then this.</p>
+    </details>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">3 · Trees — Level Sum</h3>
+    <p>Return the sum of nodes at each level. Tree 1(2, 3(4,5)) → [1, 5, 9].</p>
+    <details><summary>Solution + explanation</summary>
+      <pre>from collections import deque
+def level_sums(root):
+    if not root: return []
+    out, q = [], deque([root])
+    while q:
+        out.append(sum(n.val for n in q))
+        q = deque(c for n in q for c in (n.left, n.right) if c)
+    return out</pre>
+      <p class="small">Level-batch BFS: sum the whole queue (one level), rebuild from children. Same skeleton solves level-order print, max-per-level, zigzag — one pattern, four questions.</p>
+    </details>
+  </div>
+</div>
+
+<!-- INTERVIEWS -->
+<div class="page" id="talk">
+  <h2>🎤 Interviews — their trademark rounds</h2>
+  <div class="card blue">
+    <h3 style="margin-top:0">The guesstimate (they open with this)</h3>
+    <p>Past question: <i>"Estimate iPhones in your village."</i> They grade structure, not the number:</p>
+    <p><b>① Base</b> (population 5,000) → <b>② Segment</b> (smartphone users ~60% = 3,000) → <b>③ Filter</b> (iPhone share rural ~4% ≈ 120) → <b>④ Sanity check</b> out loud ("one per 40 people — let me stress-test that 4%").</p>
+    <p class="small">Say every assumption aloud, invite correction, round aggressively. Practice: "coffee cups sold daily in Thanjavur", "ATMs in Tamil Nadu".</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">The puzzle</h3>
+    <p>Reported: <b>torch &amp; bridge</b> (1/2/5/10 min, 2 cross max, torch travels — answer <b>17</b>: send the slow pair together). Skim GfG's top-20 puzzles; they use variations. Think aloud — silence is the only wrong answer.</p>
+  </div>
+  <div class="card mint">
+    <h3 style="margin-top:0">SQL grilling — reported verbatim questions</h3>
+    <ul>
+      <li>COUNT(*) vs COUNT(col) vs COUNT(DISTINCT) with NULLs — drilled in ⚡</li>
+      <li>COALESCE behavior · logical execution order · top-N per group windows</li>
+      <li>Your Presidio war stories: conditional aggregation + double-join trap — you can teach these now</li>
+    </ul>
+  </div>
+  <div class="card mint">
+    <h3 style="margin-top:0">Project pitch — lead with FOMC here</h3>
+    <p>"Central-bank communications move markets but they're unstructured — text, audio, visuals. I built a Python pipeline that ingests Fed transcripts and multimodal signals, applies NLP, and produces structured, queryable datasets. That's Tredence's shape of work: raw data → engineered pipeline → business decision. Hardest part was aligning signals across modalities; the outcome is queryable insight instead of hours of reading."</p>
+    <p class="small">A.R.G.U.S-V second, emphasizing data engineering (ingestion, Redis, CI/CD). Per their JD: yes, say you build with Claude and agentic workflows — here it's a feature.</p>
+  </div>
+  <div class="card amber">
+    <h3 style="margin-top:0">AI communication round</h3>
+    <p>Recorded verbal screen. Complete sentences, steady pace, zero fillers. Any behavioral prompt → situation → action → result in 45–60s. Your SIH story fits every variant of challenge/teamwork/leadership.</p>
+  </div>
+</div>
+
+</div>
+<script>
+/* ============ QUESTION BANK ============ */
+const BANK = [
+// SQL
+{id:'s1',t:'sql',mock:1,q:`orders: (1,'A',100),(2,'B',NULL),(3,'A',200),(4,NULL,150).<br><code>SELECT COUNT(*), COUNT(customer), COUNT(DISTINCT customer)</code> returns?`,o:['4, 4, 3','4, 3, 2','3, 3, 2','4, 3, 3'],a:1,e:`COUNT(*) counts rows incl. NULLs = 4. COUNT(customer) skips the NULL customer = 3. DISTINCT customer = {A,B} = 2. <b>Reported Tredence interview question — verbatim.</b>`},
+{id:'s2',t:'sql',mock:1,q:`<code>SELECT COALESCE(NULL, NULL, 5, 2);</code> returns?`,o:['NULL','2','5','error'],a:2,e:`COALESCE returns the <b>first non-NULL</b> argument, left to right → 5.`},
+{id:'s3',t:'sql',mock:1,q:`amount values: 100, NULL, 200, 150.<br><code>WHERE amount &gt; 120</code> keeps how many rows?`,o:['1','2','3','2 plus a NULL row'],a:1,e:`200 and 150 pass. NULL &gt; 120 is <i>unknown</i>, not true — NULLs never survive comparisons.`},
+{id:'s4',t:'sql',mock:1,q:`Values 100, 100, 90: RANK() gives 1,1,3. DENSE_RANK() gives?`,o:['1,1,3','1,1,2','1,2,3','1,2,2'],a:1,e:`RANK skips positions after ties; DENSE_RANK doesn't. Hook: <b>DENSE = no gaps</b>.`},
+{id:'s5',t:'sql',mock:1,q:`Which executes FIRST in SQL's logical order?`,o:['SELECT','WHERE','FROM','ORDER BY'],a:2,e:`FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY. This is why WHERE can't see SELECT aliases.`},
+{id:'s6',t:'sql',mock:1,q:`UNION vs UNION ALL — which is true?`,o:['identical','UNION removes duplicates, UNION ALL keeps them','UNION ALL removes duplicates','UNION is always faster'],a:1,e:`UNION dedupes (and pays a sort cost); UNION ALL just concatenates — faster when duplicates are acceptable.`},
+{id:'s7',t:'sql',mock:1,q:`Number rows per department by salary (highest = 1)?`,o:['RANK() OVER(dept)','ROW_NUMBER() OVER(PARTITION BY dept ORDER BY salary DESC)','GROUP BY dept','COUNT() OVER dept'],a:1,e:`PARTITION BY restarts numbering per department; ORDER BY sets the order. The standard "top-N per group" tool.`},
+{id:'s8',t:'sql',mock:1,q:`<code>WHERE amount = NULL</code> returns?`,o:['rows with NULL amount','always zero rows','error','all rows'],a:1,e:`Nothing equals NULL — not even NULL. Comparisons give <i>unknown</i>. Use <code>IS NULL</code>.`},
+{id:'s9',t:'sql',q:`Find customers appearing more than once in orders?`,o:['WHERE COUNT(*) > 1','GROUP BY customer HAVING COUNT(*) > 1','SELECT DISTINCT customer','ORDER BY COUNT(*)'],a:1,e:`Aggregate filters live in HAVING (after grouping). WHERE runs before groups exist — it can't see COUNT.`},
+{id:'s10',t:'sql',q:`<code>SELECT 5 + NULL;</code> returns?`,o:['5','0','NULL','error'],a:2,e:`Any arithmetic with NULL is NULL — unknown in, unknown out. Same reason COALESCE exists.`},
+{id:'s11',t:'sql',q:`departments with ZERO employees must appear with count 0. Which combo works?`,o:['INNER JOIN + COUNT(*)','LEFT JOIN + COUNT(*)','LEFT JOIN + COUNT(e.emp_id)','WHERE emp_id IS NULL'],a:2,e:`LEFT JOIN keeps empty departments; COUNT(column) skips NULLs → 0. COUNT(*) would count the NULL row as 1 — off-by-one trap.`},
+{id:'s12',t:'sql',q:`Which window function gives the PREVIOUS row's value?`,o:['LEAD()','LAG()','FIRST_VALUE()','NTILE()'],a:1,e:`LAG looks back, LEAD looks forward. Classic for "compare each month to the previous month".`},
+// OOP
+{id:'o1',t:'oop',mock:1,q:`Python: which is TRUE?`,o:['lists immutable, tuples mutable','both mutable','lists mutable, tuples immutable','both immutable'],a:2,e:`Lists mutate; tuples don't. Bonus: tuples can be dict keys (hashable), lists can't. <b>Reported Tredence question.</b>`},
+{id:'o2',t:'oop',mock:1,q:`Child class redefines a parent method, same signature. This is:`,o:['overloading','overriding','encapsulation','abstraction'],a:1,e:`Same signature + child replaces parent = overriding (runtime). Overloading = same name, different parameters.`},
+{id:'o3',t:'oop',mock:1,q:`Hiding internal state, exposing it only via methods:`,o:['inheritance','polymorphism','encapsulation','abstraction'],a:2,e:`Bundle data + methods, hide internals = encapsulation. Abstraction hides <i>complexity</i> behind an interface — related, different emphasis.`},
+{id:'o4',t:'oop',mock:1,q:`Python: <code>self.x = 5</code> inside __init__ creates a:`,o:['class variable','instance variable','global','static'],a:1,e:`self.x belongs to each object. Class variables sit in the class body, shared by all instances.`},
+// PSEUDO
+{id:'p1',t:'pseudo',mock:1,q:`<pre>s = 0
+for i = 1 to 4:
+    for j = i to 4:
+        s = s + 1
+print(s)</pre>`,o:['16','10','12','8'],a:1,e:`Inner loop runs 4+3+2+1 = 10 times (j starts at i). Spotting the triangular number saves the full trace.`},
+{id:'p2',t:'pseudo',mock:1,q:`<pre>function f(n):
+    if n == 0: return 0
+    return n mod 10 + f(n div 10)
+print(f(437))</pre>`,o:['437','14','15','12'],a:1,e:`It's digit-sum by recursion: 7 + f(43) → 7+3+f(4) → 7+3+4 = 14.`},
+{id:'p3',t:'pseudo',mock:1,q:`<pre>w = "TREDENCE"  (1-indexed)
+r = ""
+for i = 1 to length(w):
+    if i mod 2 == 1: r = r + w[i]
+print(r)</pre>`,o:['TEEC','RDNE','TEDNC','TENC'],a:0,e:`Odd positions: T(1), E(3), E(5), C(7) → TEEC. Watch the indexing base — pseudocode is usually 1-indexed, Python 0-indexed.`},
+{id:'p4',t:'pseudo',mock:1,q:`<pre>x = 10, y = 3
+while y &gt; 0:
+    x = x - y
+    y = y - 1
+print(x)</pre>`,o:['4','3','5','7'],a:0,e:`x: 10−3=7 → 7−2=5 → 5−1=4. Track both variables in a two-column table — never in your head.`},
+{id:'p5',t:'pseudo',q:`<pre>a = 5, b = 8
+a = a + b
+b = a - b
+a = a - b
+print(a, b)</pre>`,o:['5 8','8 5','13 5','8 13'],a:1,e:`The no-temp swap: a=13, b=13−8=5, a=13−5=8 → swapped. Shows up constantly in pseudocode papers.`},
+{id:'p6',t:'pseudo',q:`<pre>c = 0
+for i = 1 to 30:
+    if i mod 3 == 0 and i mod 5 == 0:
+        c = c + 1
+print(c)</pre>`,o:['10','2','1','8'],a:1,e:`Divisible by both 3 and 5 = divisible by 15 → 15 and 30 → count 2. Translate conditions to LCM instantly.`},
+// PYTHON
+{id:'y1',t:'python',mock:1,q:`<code>a = [1,2,3,4,5]; print(a[::-1][1])</code>`,o:['5','4','2','error'],a:1,e:`a[::-1] reverses → [5,4,3,2,1]; index 1 = 4.`},
+{id:'y2',t:'python',mock:1,q:`<code>d = {'x': 1}; print(d.get('y', 7))</code>`,o:['KeyError','None','7','1'],a:2,e:`.get(key, default) returns the default when absent — no exception. The safe-lookup idiom.`},
+{id:'y3',t:'python',mock:1,q:`<pre>def f(val, lst=[]):
+    lst.append(val)
+    return lst
+f(1); print(f(2))</pre>`,o:['[2]','[1, 2]','[1]','error'],a:1,e:`Mutable-default trap: [] is created ONCE at definition and shared across calls. Fix: default None, create inside. Interview favorite.`},
+{id:'y4',t:'python',mock:1,q:`<code>a = [1,2]; b = [1,2]; print(a == b, a is b)</code>`,o:['True True','True False','False True','False False'],a:1,e:`== compares values (equal); <code>is</code> compares identity (two separate objects).`},
+{id:'y5',t:'python',q:`<code>print("hello".split("l"))</code>`,o:[`['he','o']`,`['he','','o']`,`['hel','lo']`,`error`],a:1,e:`Splitting on each 'l': "he" | "" (between the two l's) | "o". The empty string surprises everyone once.`},
+{id:'y6',t:'python',q:`<code>print([i*i for i in range(3)])</code>`,o:['[1, 4, 9]','[0, 1, 4]','[0, 1, 4, 9]','[1, 2, 3]'],a:1,e:`range(3) = 0,1,2 → squares [0,1,4]. range excludes the stop value.`},
+{id:'y7',t:'python',q:`<code>x = (5); y = (5,); print(type(x).__name__, type(y).__name__)</code>`,o:['tuple tuple','int tuple','tuple int','int int'],a:1,e:`(5) is just parenthesized 5 → int. The comma makes the tuple: (5,). Ties to the list-vs-tuple question they love.`},
+{id:'y8',t:'python',q:`<code>print("3" + 3)</code>`,o:['6','33','"33"','TypeError'],a:3,e:`Python never auto-converts between str and int (unlike Java's concatenation) → TypeError. Cross-language trap after Java MCQs!`},
+// APTI
+{id:'a1',t:'apti',q:`Successive discounts of 10% and 20% = single discount of?`,o:['30%','28%','25%','32%'],a:1,e:`a+b+ab/100 with both negative: −10−20+2 = −28%. Never just add.`},
+{id:'a2',t:'apti',q:`To a city at 40 km/h, back at 60 km/h. Average speed?`,o:['50','48','45','52'],a:1,e:`Equal distances → 2xy/(x+y) = 4800/100 = 48. The arithmetic mean (50) is always the trap option.`},
+{id:'a3',t:'apti',q:`3, 6, 11, 18, 27, __ ?`,o:['36','38','40','34'],a:1,e:`Differences: +3, +5, +7, +9 → next +11 → 38. Differences first, always.`},
+{id:'a4',t:'apti',q:`A does work in 12 days, B in 18. Together?`,o:['7.2 days','7.5 days','8 days','6 days'],a:0,e:`LCM 36 units: A=3/day, B=2/day → 5/day → 36/5 = 7.2. LCM method beats fractions.`},
+{id:'a5',t:'apti',q:`Two numbers in ratio 2:3 sum to 60. The larger is?`,o:['24','36','40','30'],a:1,e:`5 parts = 60 → part = 12 → larger = 3×12 = 36.`},
+{id:'a6',t:'apti',q:`Angle between clock hands at 3:30?`,o:['90°','75°','60°','105°'],a:1,e:`Hour hand at 3:30 = 105° (3.5 × 30°); minute hand at 180°. Difference = 75°.`}
+];
+
+/* ============ STATE ============ */
+const KEY = 'tredence-v2';
+let S = { stats: {}, best: 0, mocks: [] };
+try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const now = () => Date.now();
+const DAY = 86400000;
+const stat = id => S.stats[id] || (S.stats[id] = { c: 0, w: 0, box: 0, due: 0 });
+
+function record(id, ok) {
+  const st = stat(id);
+  if (ok) {
+    st.c++;
+    if (st.w > 0) { st.box++; st.due = now() + (st.box >= 2 ? 3 : 1) * DAY; }
+  } else {
+    st.w++; st.box = 0; st.due = now(); // due immediately
+  }
+  save(); refreshHome();
+}
+const dueList = () => BANK.filter(q => { const st = S.stats[q.id]; return st && st.w > 0 && st.box < 3 && st.due <= now(); });
+
+/* ============ RENDER QUESTION ============ */
+let curTimer = null;
+function renderQ(q, mount, opts = {}) {
+  clearInterval(curTimer);
+  const d = document.createElement('div');
+  d.className = 'qbox';
+  const tn = { sql: 'SQL', oop: 'OOP', pseudo: 'Pseudocode', python: 'Python', apti: 'Aptitude' }[q.t];
+  d.innerHTML = `<div class="topic">${tn}${opts.timed ? ' · <span class="qtimer" id="qt">1:30</span>' : ''}</div>
+    <div class="qt">${q.q}</div><div class="opts"></div>
+    <div class="expl"></div>
+    <div class="qmeta"><span class="small" id="qfb"></span><button class="nextbtn">next →</button></div>`;
+  const optsEl = d.querySelector('.opts');
+  const finish = (chosen) => {
+    clearInterval(curTimer);
+    const ok = chosen === q.a;
+    [...optsEl.children].forEach((b, i) => {
+      b.disabled = true;
+      if (i === q.a) b.classList.add('right');
+      else if (i === chosen) b.classList.add('wrong');
+    });
+    const ex = d.querySelector('.expl');
+    ex.innerHTML = (ok ? '✅ ' : (chosen === -1 ? '⏰ Time! ' : '❌ ')) + q.e;
+    ex.classList.add('show');
+    d.querySelector('.nextbtn').classList.add('show');
+    if (!opts.noRecord) record(q.id, ok);
+    if (opts.onDone) opts.onDone(ok);
+  };
+  q.o.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = String.fromCharCode(97 + i) + ') ' + t;
+    b.onclick = () => finish(i);
+    optsEl.appendChild(b);
+  });
+  d.querySelector('.nextbtn').onclick = () => opts.onNext && opts.onNext();
+  mount.innerHTML = '';
+  mount.appendChild(d);
+  if (opts.timed) {
+    let s = 90;
+    const tEl = d.querySelector('#qt');
+    curTimer = setInterval(() => {
+      s--;
+      tEl.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+      tEl.classList.toggle('low', s <= 20);
+      if (s <= 0) finish(-1);
+    }, 1000);
+  }
+}
+
+/* ============ DRILL ============ */
+let dMode = 'mix', dStreak = 0;
+document.querySelectorAll('#drillmodes button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#drillmodes button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); dMode = b.dataset.m; startDrill();
+});
+function pickDrill() {
+  const pool = dMode === 'mix' ? BANK : BANK.filter(q => q.t === dMode);
+  const scored = pool.map(q => { const st = S.stats[q.id]; return { q, seen: st ? st.c + st.w : 0, wrong: st ? st.w : 0 }; });
+  scored.sort((a, b) => (a.seen - b.seen) || (b.wrong - a.wrong) || (Math.random() - .5));
+  return scored[Math.floor(Math.random() * Math.min(5, scored.length))].q;
+}
+function startDrill() {
+  const q = pickDrill();
+  renderQ(q, document.getElementById('drillbox'), {
+    timed: dMode === 'mix',
+    onDone: ok => {
+      dStreak = ok ? dStreak + 1 : 0;
+      if (dStreak > (S.best || 0)) { S.best = dStreak; save(); }
+      document.getElementById('drillscore').textContent = `streak ${dStreak} · best ${S.best || 0}`;
+      refreshHome();
+    },
+    onNext: startDrill
+  });
+}
+
+/* ============ WEAK SPOTS ============ */
+function startWeak() {
+  const list = dueList();
+  const box = document.getElementById('weakbox');
+  if (!list.length) {
+    box.innerHTML = `<div class="card mint"><b>🎉 Queue clear.</b> Nothing due for review — misses land here automatically, then return after 1 and 3 days. Go drill.</div>`;
+    return;
+  }
+  renderQ(list[0], box, { onNext: startWeak });
+}
+
+/* ============ MOCK ============ */
+let mockQs = [], mockI = 0, mockScore = 0, mockAnswers = [], mockTimer = null;
+function startMock() {
+  mockQs = BANK.filter(q => q.mock);
+  mockI = 0; mockScore = 0; mockAnswers = [];
+  let s = 2400;
+  clearInterval(mockTimer);
+  mockTimer = setInterval(() => { s--; if (s <= 0) endMock(); const el = document.getElementById('mt'); if (el) { el.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); el.classList.toggle('low', s <= 300); } }, 1000);
+  mockNext();
+}
+function mockNext() {
+  if (mockI >= mockQs.length) return endMock();
+  const q = mockQs[mockI];
+  const box = document.getElementById('mockbox');
+  const d = document.createElement('div');
+  d.className = 'qbox';
+  d.innerHTML = `<div class="topic">Q${mockI + 1}/20 · <span class="qtimer" id="mt">–</span></div>
+    <div class="qt">${q.q}</div><div class="opts"></div>`;
+  const optsEl = d.querySelector('.opts');
+  q.o.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = String.fromCharCode(97 + i) + ') ' + t;
+    b.onclick = () => {
+      const ok = i === q.a;
+      if (ok) mockScore++;
+      mockAnswers.push({ q, chosen: i, ok });
+      record(q.id, ok);
+      mockI++; mockNext();
+    };
+    optsEl.appendChild(b);
+  });
+  box.innerHTML = ''; box.appendChild(d);
+}
+function endMock() {
+  clearInterval(mockTimer);
+  const box = document.getElementById('mockbox');
+  S.mocks.push({ d: new Date().toISOString().slice(0, 10), s: mockScore }); save();
+  const verdict = mockScore >= 16 ? '💪 Strong — you clear typical cutoffs.' : mockScore >= 12 ? '🙂 Solid — your misses are tonight\'s syllabus (they\'re already in 🔁).' : '📚 Fundamentals focus — every miss is queued in 🔁; clear that queue before anything else.';
+  let rows = mockAnswers.filter(a => !a.ok).map(a => `<div class="qbox"><div class="qt">${a.q.q}</div><div class="expl show">❌ you: ${a.chosen === undefined ? '—' : a.q.o[a.chosen]}<br>✅ ${a.q.o[a.q.a]}<br>${a.q.e}</div></div>`).join('');
+  box.innerHTML = `<div class="card mint"><div class="stat" style="border:none"><div class="n">${mockScore}/20</div><div class="l">${verdict}</div></div></div>
+    ${rows ? '<h3>Your misses, explained:</h3>' + rows : '<div class="card mint">Perfect score. Go touch grass, champion. 🌱</div>'}
+    <button class="go ghost" onclick="startMock()">↻ retake</button>`;
+  refreshHome();
+}
+
+/* ============ HOME ============ */
+function refreshHome() {
+  const days = Math.max(0, Math.ceil((new Date('2026-07-21T09:00:00+05:30') - new Date()) / DAY));
+  document.getElementById('s-days').textContent = days;
+  document.getElementById('s-streak').textContent = S.best || 0;
+  let c = 0, w = 0;
+  const per = {};
+  BANK.forEach(q => {
+    const st = S.stats[q.id]; if (!st) return;
+    c += st.c; w += st.w;
+    per[q.t] = per[q.t] || { c: 0, w: 0 };
+    per[q.t].c += st.c; per[q.t].w += st.w;
+  });
+  document.getElementById('s-acc').textContent = (c + w) ? Math.round(c / (c + w) * 100) + '%' : '–';
+  const due = dueList().length;
+  document.getElementById('s-due').textContent = due;
+  document.getElementById('weaktab').innerHTML = '🔁 Weak spots' + (due ? `<span class="badge">${due}</span>` : '');
+  const names = { sql: 'SQL', python: 'Python', oop: 'OOP', pseudo: 'Pseudo', apti: 'Aptitude' };
+  document.getElementById('topicbars').innerHTML = Object.keys(names).map(t => {
+    const p = per[t]; const pct = p && (p.c + p.w) ? Math.round(p.c / (p.c + p.w) * 100) : 0;
+    const attempted = p && (p.c + p.w) > 0;
+    return `<div class="topicrow"><span class="tn">${names[t]}</span><div class="bar"><div style="width:${pct}%"></div></div><span class="pct">${attempted ? pct + '%' : '—'}</span></div>`;
+  }).join('');
+  const today = new Date().toISOString().slice(5, 10);
+  const plans = {
+    '07-17': '<b>Today (SQL day):</b> ⚡ Drill SQL to 80%+ accuracy · window functions in 📖 Learn · rep session with Claude.',
+    '07-18': '<b>Today (Trees + Python):</b> 💻 attempt Level Sum properly · ⚡ Drill Python + Pseudo · 4 tree problems with Claude.',
+    '07-19': '<b>Today (Mock day):</b> 📝 full mock fresh in the morning · clear 🔁 queue · one guesstimate out loud (🎤 tab).',
+    '07-20': '<b>Today (Polish):</b> clear 🔁 completely · re-attempt mock misses · logistics · sleep by 22:00. No new topics after 8pm.',
+    '07-21': '<b>OA DAY:</b> skim 🔁 once, nothing new. Star → skip → return. Brute force first, submit, optimize. Go get it. 🍀'
+  };
+  document.getElementById('todayplan').innerHTML = plans[today] || `<b>Plan:</b> drill daily, clear the 🔁 queue, mock on Saturday. ${due ? `<b>${due} review${due > 1 ? 's' : ''} due now — start there.</b>` : ''}`;
+}
+
+/* ============ LEARN ============ */
+const CARDS = [
+  { title: 'The NULL trilogy (their favorite)', body: `<code>COUNT(*)</code> counts rows — NULLs included. <code>COUNT(col)</code> skips NULLs in that column. <code>COUNT(DISTINCT col)</code> skips NULLs <i>and</i> duplicates. And nothing ever <code>=</code> NULL — comparisons give unknown, so use <code>IS NULL</code>. Arithmetic with NULL returns NULL, which is why <code>COALESCE</code> (first non-NULL wins) exists.`, check: 's10' },
+  { title: 'Window functions in 60 seconds', body: `A window function computes across rows <i>without collapsing them</i> (unlike GROUP BY). <code>ROW_NUMBER() OVER(PARTITION BY dept ORDER BY salary DESC)</code> = "restart a rank counter inside each department, ordered by salary." RANK skips after ties (1,1,3), DENSE_RANK doesn't (1,1,2), LAG/LEAD peek at neighboring rows. Top-N per group = wrap in a subquery, filter rn ≤ N.`, check: 's7' },
+  { title: 'WHERE vs HAVING', body: `WHERE filters <b>rows before grouping</b>; HAVING filters <b>groups after aggregation</b>. That's the whole rule. "Customers with more than 3 orders" → the condition uses COUNT → it must be HAVING. Logical order: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.`, check: 's9' },
+  { title: 'Python\'s three classic traps', body: `① Mutable default argument: <code>def f(x, lst=[])</code> — the [] is created once, shared across calls. ② <code>is</code> vs <code>==</code>: identity vs value. ③ Tuples are immutable and need the comma: <code>(5,)</code> is a tuple, <code>(5)</code> is just 5. All three are reported interview questions at analytics firms.`, check: 'y7' },
+  { title: 'Trees: the level-batch BFS skeleton', body: `Put the root in a queue. Loop: process the <b>entire queue</b> as one level (sum it, max it, print it), then rebuild the queue from every node's children. This one skeleton answers level-order, level sums, max per level, zigzag, and "count levels" (height). Trees stop being scary when every question is the same loop.`, check: 'p2' },
+  { title: 'Guesstimates: Base → Segment → Filter → Sanity', body: `"iPhones in your village": population (5,000) → smartphone users (~60% = 3,000) → iPhone share rural (~4% ≈ 120) → sanity-check aloud ("one per 40 people — reasonable?"). They grade the structure and your comfort with assumptions, not the number. Round aggressively — your mental-math multipliers do the lifting.`, check: 'a2' }
+];
+const lc = document.getElementById('learncards');
+CARDS.forEach((c2, i) => {
+  const d = document.createElement('div');
+  d.className = 'card mint';
+  d.innerHTML = `<h3 style="margin-top:0">${c2.title}</h3><p>${c2.body}</p><div class="mount"></div><button class="go ghost">✍️ prove it</button>`;
+  d.querySelector('button').onclick = function () {
+    const q = BANK.find(x => x.id === c2.check);
+    renderQ(q, d.querySelector('.mount'), { onNext: () => { d.querySelector('.mount').innerHTML = '<span class="small">✔ checked — it\'s in your stats now.</span>'; } });
+    this.style.display = 'none';
+  };
+  lc.appendChild(d);
+});
+
+/* ============ NAV ============ */
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  if (b.dataset.p === 'weak') startWeak();
+  window.scrollTo({ top: 0 });
+});
+refreshHome();
+</script>
+</body>
+</html>

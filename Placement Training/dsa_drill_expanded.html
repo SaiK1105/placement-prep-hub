@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Drill — Expanded Edition (144 problems)</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 90px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 25px; font-weight: 500; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; margin: 18px 0 10px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 14px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 5px 0 15px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 16px; }
+  nav button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 13px; border-radius: 10px; border: none; background: transparent; color: #b8b5ad; cursor: pointer; position: relative; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  nav button .badge { position: absolute; top: -5px; right: -4px; background: #d97757; color: #fff; font-size: 10px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .grid4 { grid-template-columns: 1fr 1fr; } }
+  .stat { background: #30302e; border-radius: 12px; padding: 12px 14px; text-align: center; }
+  .stat .n { font-family: ui-serif, Georgia, serif; font-size: 26px; font-weight: 500; }
+  .stat .l { font-size: 11px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; }
+  code { background: #1f1e1c; border-radius: 5px; font-family: Consolas, monospace; font-size: 13px; color: #cbc3f0; padding: 1px 6px; }
+  .small { font-size: 12.5px; color: #8e8b83; }
+  .diff { font-size: 11px; font-weight: 700; border-radius: 12px; padding: 2px 10px; text-transform: uppercase; letter-spacing: .5px; }
+  .diff.E { background: #333a2e; color: #b5cda5; }
+  .diff.M { background: #3d382b; color: #dcbf83; }
+  .diff.H { background: #40302d; color: #e0a49c; }
+  .ptag { font-size: 11.5px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; }
+  .timer { font-family: Consolas, monospace; font-size: 34px; font-weight: 700; color: #90a883; }
+  .timer.low { color: #c4635a; }
+  .btnrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .btn { font: inherit; font-size: 13.5px; font-weight: 600; padding: 9px 16px; border-radius: 10px; border: 1px solid #45443f; background: #383836; color: #e6e4dd; cursor: pointer; }
+  .btn:hover { border-color: #6b6961; }
+  .btn.solid { background: #d97757; border-color: #d97757; color: #fff; }
+  .btn.solid:hover { background: #c96442; }
+  .btn.good { background: #333a2e; border-color: #90a883; color: #cfe0c2; }
+  .btn.bad { background: #40302d; border-color: #c4635a; color: #eab8b1; }
+  .reveal { display: none; margin-top: 12px; padding: 12px 15px; border-radius: 0 10px 10px 0; background: #383430; border-left: 3px solid #d97757; font-size: 13.5px; color: #d8d5cc; }
+  .reveal.show { display: block; animation: fade .3s; }
+  .topicrow { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid #3f3e3a; border-radius: 12px; margin: 8px 0; background: #30302e; cursor: pointer; }
+  .topicrow:hover { border-color: #6b6961; }
+  .topicrow.cur { border-color: #d97757; }
+  .topicrow .tn { flex: 1; font-weight: 600; font-size: 14px; }
+  .topicrow .prog { font-size: 12.5px; color: #8e8b83; }
+  .bar { height: 7px; border-radius: 5px; background: #3f3e3a; overflow: hidden; width: 110px; }
+  .bar div { height: 100%; background: #d97757; }
+  .plist { border-top: 1px solid #3f3e3a; margin-top: 8px; padding-top: 8px; display: none; }
+  .plist.show { display: block; }
+  .pitem { display: flex; gap: 8px; align-items: center; font-size: 13px; padding: 5px 2px; color: #b8b5ad; }
+  .pitem .st { min-width: 20px; }
+  .patline { padding: 10px 14px; border-left: 3px solid #90a883; background: #30302e; border-radius: 0 10px 10px 0; margin: 8px 0; font-size: 13.5px; }
+  .patline .t { font-weight: 600; color: #f0efea; }
+  ul li { margin-bottom: 7px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>DSA Drill <span style="color:#d97757">· expanded edition</span></h1>
+<div class="sub">144 problems · 15 topics · full campus-placement coverage including heaps, greedy, intervals, and bit manipulation. Same protocol: 25-min timer, honest outcomes, misses return in 2–3 days. Progress here is separate from the starter drill.</div>
+
+<nav id="nav">
+  <button data-p="today" class="on">Today</button>
+  <button data-p="map">Roadmap</button>
+  <button data-p="due" id="duetab">Re-solve</button>
+  <button data-p="pat">Pattern book</button>
+  <button data-p="proto">Protocol</button>
+</nav>
+
+<div class="page on" id="today">
+  <div class="grid4">
+    <div class="stat"><div class="n" id="s-today">0/3</div><div class="l">today</div></div>
+    <div class="stat"><div class="n" id="s-streak">0</div><div class="l">day streak</div></div>
+    <div class="stat"><div class="n" id="s-solved">0</div><div class="l">solved</div></div>
+    <div class="stat"><div class="n" id="s-due">0</div><div class="l">due</div></div>
+  </div>
+  <div id="arena"></div>
+</div>
+
+<div class="page" id="map">
+  <h2>Roadmap</h2>
+  <p class="small">Placement-optimal order. Click a topic to make it current; click the current topic to list its problems. Trees pre-selected for Tredence.</p>
+  <div id="topics"></div>
+</div>
+
+<div class="page" id="due">
+  <h2>Re-solve queue</h2>
+  <p class="small">From-scratch reattempts of what beat you. This queue outranks new problems, always.</p>
+  <div id="duebox"></div>
+</div>
+
+<div class="page" id="pat">
+  <h2>Pattern book</h2>
+  <p class="small">One line per genuine solve. Skim before every OA.</p>
+  <div id="patbox"></div>
+</div>
+
+<div class="page" id="proto">
+  <h2>The protocol</h2>
+  <div class="card">
+    <ul>
+      <li><b>25 minutes, timer on.</b> Stuck at ~10? Read the approach, close it, implement from memory.</li>
+      <li><b>Honest buttons.</b> "Solved myself" means zero peeks. Assisted → back in 2 days; failed → back tomorrow.</li>
+      <li><b>3 problems a day</b> — one easy, two medium. ~7 weeks covers all 144.</li>
+      <li><b>Pattern book weekly review.</b> The index in your head is the product; problems are just the reps.</li>
+      <li><b>Failed twice?</b> Bring your attempt to Claude for an interviewer-style teardown.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script>
+const TOPICS = [
+['trees','Trees'],['arrays','Arrays'],['hashing','Hashing'],['twoptr','Two Pointers / Sliding Window'],['strings','Strings'],['binsearch','Binary Search'],['linkedlist','Linked List'],['stacks','Stacks & Queues'],['heaps','Heaps / Priority Queue'],['greedy','Greedy'],['intervals','Intervals'],['bitman','Bit Manipulation'],['recursion','Recursion & Backtracking'],['graphs','Graphs'],['dp','DP Basics']
+];
+const P = [
+['t1','trees','E','Height of binary tree','Return max depth. 3(9,20(15,7)) → 3.','Height in terms of children?','height = 1 + max(height(L), height(R)); null → 0.','tree height → 1 + max of children'],
+['t2','trees','E','Inorder traversal','Left, node, right values of a binary tree.','Recurse in that order.','inorder(L) + [val] + inorder(R); iterative = stack of lefts.','inorder → L,N,R; BST inorder = sorted'],
+['t3','trees','E','Symmetric tree','Is the tree a mirror of itself?','Compare two trees simultaneously.','mirror(a,b): a.val==b.val and mirror(a.L,b.R) and mirror(a.R,b.L).','symmetry → twin recursion L↔R'],
+['t4','trees','E','Path sum','Is there a root-to-leaf path summing to target?','Subtract as you descend.','Recurse with target−val; at leaf check remainder == val.','root-to-leaf sum → subtract downward'],
+['t5','trees','M','Level order traversal','Values level by level → [[3],[9,20],[15,7]].','Arrival-order processing.','BFS queue: process whole queue = one level, append children.','level order → queue, one level per loop'],
+['t6','trees','M','Zigzag level order','Level order but alternate left→right / right→left.','Level order + a flip.','Standard BFS levels; reverse alternate levels (or use deque).','zigzag → BFS + reverse odd levels'],
+['t7','trees','M','Diameter of binary tree','Longest path between any two nodes.','What passes through each node?','Candidate at node = Lheight + Rheight; track max during height recursion.','diameter → max of Lh+Rh over nodes'],
+['t8','trees','M','Lowest common ancestor','LCA of p and q in a binary tree.','Where do their paths split?','If node is p/q/null return it; both sides non-null ⇒ node is LCA.','LCA → both sides answer ⇒ this node'],
+['t9','trees','M','Validate BST','Every node within its allowed range?','Immediate children aren\'t enough.','Pass (min,max) bounds down; left gets (min,node), right (node,max).','validate BST → min/max bounds down'],
+['t10','trees','M','Kth smallest in BST','k-th smallest value in a BST.','What order does inorder give?','Inorder traversal, stop at the k-th visit.','kth in BST → inorder countdown'],
+['a1','arrays','E','Two sum','Indices of two numbers summing to target. [2,7,11,15],9 → [0,1].','What would you look up instantly?','Hash map value→index; check target−x among seen.','pair sum → hash map of seen'],
+['a2','arrays','E','Best time to buy/sell stock','One buy, one sell, max profit. [7,1,5,3,6,4] → 5.','Track something on a single sweep.','Track min-so-far; profit = price − min; keep max.','one-pass profit → min-so-far'],
+['a3','arrays','E','Missing number','0..n with one missing. [3,0,1] → 2.','Totals or XOR.','Sum 0..n minus actual sum; or XOR of all indices and values.','missing → sum/XOR difference'],
+['a4','arrays','E','Move zeros','Zeros to the end, order preserved, in place.','Where does the next non-zero go?','Writer pointer: swap non-zeros forward, w++.','stable partition → writer pointer'],
+['a5','arrays','M','Maximum subarray (Kadane)','Max contiguous sum. [-2,1,-3,4,-1,2,1,-5,4] → 6.','Helping or hurting?','cur = max(x, cur+x); best = max(best, cur); start at a[0].','max subarray → extend or restart'],
+['a6','arrays','M','Product except self','No division. [1,2,3,4] → [24,12,8,6].','What\'s to my left? To my right?','Prefix products pass, then multiply suffix products backward.','except-self → prefix × suffix'],
+['a7','arrays','M','Rotate array by k','Rotate right k steps in place. [1..7],k=3 → [5,6,7,1,2,3,4].','Reversal is your friend.','Reverse all, reverse first k, reverse rest.','rotation → triple reverse'],
+['a8','arrays','M','Sort colors (Dutch flag)','Sort 0s,1s,2s in one pass.','Three regions, three pointers.','low/mid/high: 0→swap low, 2→swap high (don\'t advance mid), 1→advance.','3-way partition → Dutch national flag'],
+['a9','arrays','M','Majority element','Appears > n/2. [2,2,1,1,1,2,2] → 2.','Different elements cancel.','Boyer–Moore: candidate + counter.','majority → Boyer–Moore voting'],
+['a10','arrays','H','Next permutation','Next lexicographic arrangement in place.','Find the descending tail.','First a[i]<a[i+1] from right; swap with smallest-larger in tail; reverse tail.','next perm → breakpoint, swap, reverse'],
+['h1','hashing','E','Contains duplicate','Any repeated value?','O(1) membership.','Set while scanning; hit ⇒ true.','seen before → set'],
+['h2','hashing','E','First non-repeating char','First char with count 1, else \'_\'. "swiss" → w.','Count, then rescan.','Counter pass + ordered rescan.','first unique → count + rescan'],
+['h3','hashing','E','Intersection of two arrays','Unique common elements.','Sets exist.','set(a) & set(b).','intersection → set operations'],
+['h4','hashing','E','Isomorphic strings','"egg","add" → true; "foo","bar" → false.','Mappings must be consistent BOTH ways.','Two maps (s→t, t→s); conflict ⇒ false.','char mapping → bidirectional maps'],
+['h5','hashing','M','Subarray sum equals K','Count subarrays summing to k. [1,1,1],2 → 2.','sum(i..j) = pre(j) − pre(i−1).','Prefix sum + map of counts; add count of (prefix−k).','subarray sum k → prefix map'],
+['h6','hashing','M','Longest consecutive sequence','[100,4,200,1,3,2] → 4.','Who starts a run?','Set; only expand from x where x−1 absent.','consecutive runs → start-only walks'],
+['h7','hashing','M','Group anagrams','Group words sharing letters.','Canonical form as key.','Map sorted(word) → list (or 26-count key).','grouping → canonical key'],
+['h8','hashing','M','Top K frequent elements','[1,1,1,2,2,3],k=2 → [1,2].','Count, then select.','Counter + heap of size k (or bucket by frequency).','top-k frequent → count + heap/bucket'],
+['h9','hashing','M','Longest subarray with 0 sum','Longest zero-sum span.','Equal prefixes bracket zero.','Map prefix→first index; repeat ⇒ span; max length.','zero-sum span → repeated prefix'],
+['h10','hashing','M','Distinct elements in every window','Count distinct in each window of size k.','Maintain counts as the window slides.','Freq map: add entering, decrement/delete leaving; record map size.','windowed distinct → sliding freq map'],
+['w1','twoptr','E','Valid palindrome','Alphanumerics only, case-insensitive.','Two ends inward.','Skip non-alnum, compare lowered chars.','palindrome → two ends inward'],
+['w2','twoptr','E','Remove duplicates from sorted array','In place, return new length.','Sorted means dups are adjacent.','Writer pointer: copy when different from previous kept.','sorted dedup → writer pointer'],
+['w3','twoptr','E','Squares of sorted array','[-4,-1,0,3,10] → sorted squares.','Biggest squares live at the ends.','Two ends, fill result from the back with the larger square.','sorted squares → fill backward from ends'],
+['w4','twoptr','M','Container with most water','Max area between two lines. → 49.','Which pointer is hopeless?','Move the shorter side inward; area = width × min height.','max container → move shorter side'],
+['w5','twoptr','M','3Sum','All unique triplets summing to 0.','Fix one, hunt the pair.','Sort; fix i; two-pointer for −a[i]; skip duplicates.','3sum → sort + fix + two-pointer'],
+['w6','twoptr','M','Longest substring without repeats','"abcabcbb" → 3.','What forces the left edge forward?','Window + map; shrink past the duplicate; track max.','no-repeat window → shrink past dup'],
+['w7','twoptr','M','Max ones with k flips','Longest 1-run flipping ≤ k zeros.','Valid while zeros ≤ k.','Expand right; if zeros > k advance left; max window.','≤k violations → sliding window counter'],
+['w8','twoptr','M','Fruit into baskets','Longest window with at most 2 distinct values.','Same skeleton, different violation.','Window + freq map; shrink while distinct > 2.','≤2 distinct → window + freq map'],
+['w9','twoptr','H','Trapping rain water','Water between bars → 6.','Water depends on both side maxes.','Two pointers, leftMax/rightMax; advance smaller side, add max−h.','rain water → two-pointer running maxes'],
+['w10','twoptr','H','Minimum window substring','Smallest window of s containing all of t.','Expand to cover, shrink to optimize.','Need-map + have-count; expand right until valid, shrink left while valid.','min covering window → expand/shrink'],
+['s1','strings','E','Valid anagram','"listen"/"silent" → true.','Counting beats sorting.','Counter equality or 26-array ±.','anagram → frequency compare'],
+['s2','strings','E','Longest common prefix','["flower","flow","flight"] → "fl".','Column by column.','Vertical scan until mismatch.','common prefix → vertical scan'],
+['s3','strings','E','Roman to integer','"MCMXCIV" → 1994.','When is a numeral negative?','Subtract value when smaller than the next; else add.','roman → subtract if smaller than next'],
+['s4','strings','E','Excel column title','1→A, 28→AB.','Base 26… almost.','Repeated divmod by 26 with the (n−1) offset trick.','bijective base-26 → (n−1) mod trick'],
+['s5','strings','M','Find first occurrence (strStr)','Index of needle in haystack.','Slide and compare is accepted.','O(n·m) window compare; name-drop KMP for follow-up.','substring → slide-compare; KMP if pushed'],
+['s6','strings','M','Longest palindromic substring','"babad" → "bab".','Palindromes have centers.','Expand around 2n−1 centers; track best.','longest palindrome → expand centers'],
+['s7','strings','M','Count palindromic substrings','"aaa" → 6.','Same centers, count instead of track.','Expand every center, count each success.','count palindromes → expand and count'],
+['s8','strings','M','String compression','"aaabbc" → a3b2c1.','Count runs.','Two-pointer run-length encoding.','compression → run-length'],
+['s9','strings','M','Repeated substring pattern','"abab" → true (ab×2).','Divisors of the length.','Try each divisor d: does s[0:d] × (n/d) == s? (Or the s+s trick.)','repetition → divisor check / s in (s+s)[1:-1]'],
+['s10','strings','M','Reverse words in a string','"  hello   world " → "world hello".','Split handles the mess.','split() then reverse-join; or in-place two-step reverse for the follow-up.','word reverse → split/join or double reverse'],
+['b1','binsearch','E','Classic binary search','Target index in sorted array, else −1.','Halve every step.','lo≤hi, mid compare, move lo/hi by mid±1.','sorted find → binary search'],
+['b2','binsearch','E','Search insert position','Where target should be inserted in sorted array.','It\'s BS\'s exit value.','Standard BS; return lo at the end.','insert position → BS lower bound'],
+['b3','binsearch','E','Floor of square root','isqrt(28) → 5.','Search the answers.','BS largest x with x² ≤ n.','numeric floor → BS on answer'],
+['b4','binsearch','M','First and last occurrence','Range of target in sorted array with dups.','Two biased searches.','BS twice: on hit keep going left / keep going right.','bounds with dups → biased BS ×2'],
+['b5','binsearch','M','Search rotated sorted array','[4,5,6,7,0,1,2],0 → 4.','One half is always sorted.','Identify sorted half; is target inside it? Recurse accordingly.','rotated → pick the sorted half'],
+['b6','binsearch','M','Min in rotated sorted array','[3,4,5,1,2] → 1.','Compare mid to the right end.','If a[mid] > a[hi] min is right; else hi = mid.','rotated min → mid vs hi'],
+['b7','binsearch','M','Peak element','Any index greater than both neighbors.','Walk uphill.','If a[mid] < a[mid+1] go right else left-including-mid.','peak → BS uphill'],
+['b8','binsearch','M','Kth missing positive','[2,3,4,7,11],k=5 → 9.','How many are missing before index i?','missing(i) = a[i]−(i+1); BS smallest i with missing ≥ k.','kth missing → BS on missing-count'],
+['b9','binsearch','H','Koko eating bananas','Min speed to finish piles within h hours.','Can you test a speed fast?','BS the answer; feasible(k) = Σceil(pile/k) ≤ h.','min feasible value → BS on answer'],
+['b10','binsearch','H','Median of two sorted arrays','O(log) median of two sorted arrays.','Partition both so left halves balance.','BS the cut in the smaller array; check cross conditions maxL ≤ minR.','two-array median → partition BS'],
+['l1','linkedlist','E','Reverse a linked list','1→2→3 ⇒ 3→2→1.','Three walkers.','prev/cur/next rewiring walk; return prev.','reverse LL → prev/cur/next'],
+['l2','linkedlist','E','Middle of linked list','Second-middle if even.','Two speeds.','Slow×1, fast×2; slow lands mid.','middle → slow/fast'],
+['l3','linkedlist','E','Delete node (given node only)','No head given; delete this non-tail node.','You can\'t reach behind you — so cheat.','Copy next\'s value in, bypass next.','delete w/o head → become your next'],
+['l4','linkedlist','M','Detect cycle','Does the list loop?','Racers on a track.','Floyd slow/fast; meeting ⇒ cycle.','cycle → tortoise & hare'],
+['l5','linkedlist','M','Merge two sorted lists','1→2→4 + 1→3→4 merged.','Merge-sort\'s merge step.','Dummy head; attach smaller front repeatedly.','merge lists → dummy + smaller-first'],
+['l6','linkedlist','M','Remove Nth from end','One pass.','Head start of n.','Lead n ahead; move both; trail lands before target.','nth from end → offset pointers'],
+['l7','linkedlist','M','Intersection of two lists','First shared node of two lists.','Equalize path lengths.','Two pointers; on end, switch to other list\'s head — they meet at intersection.','intersection → pointer switcheroo'],
+['l8','linkedlist','M','Add two numbers','Digits in reverse order lists: 342+465 → 807.','School addition.','Walk both with carry; dummy head for result.','list addition → digit walk + carry'],
+['l9','linkedlist','M','Palindrome linked list','O(1) space check.','Three earlier tricks combined.','Middle → reverse second half → compare.','LL palindrome → mid + reverse + compare'],
+['l10','linkedlist','M','Rotate list by k','Rotate right k places.','It\'s a ring until you cut it.','Find length, connect tail to head, cut at len − k%len.','rotate list → ring + cut'],
+['k1','stacks','E','Valid parentheses','"({[]})" → true.','Most recent opener matters.','Stack push/pop matching pairs; empty at end.','brackets → stack'],
+['k2','stacks','E','Queue via two stacks','FIFO from two LIFOs.','Two reversals = forward.','in-stack / out-stack lazy pour.','queue via stacks → lazy pour'],
+['k3','stacks','E','Remove adjacent duplicates','"abbaca" → "ca".','Compare with the top.','Stack: pop if equal to top else push.','adjacent removal → stack top compare'],
+['k4','stacks','E','Evaluate postfix','"2 3 4 * +" → 14.','Operands wait, operators act.','Stack numbers; operator pops 2, pushes result.','postfix → operand stack'],
+['k5','stacks','M','Min stack','All ops O(1) including getMin.','Carry the min with you.','Store (val, minSoFar) pairs.','O(1) min → min rides along'],
+['k6','stacks','M','Next greater element','[2,1,5] → [5,5,−1].','Who\'s still waiting?','Monotonic decreasing stack; current answers all smaller pops.','next greater → monotonic stack'],
+['k7','stacks','M','Daily temperatures','Days until a warmer day, per day.','Same waiting game.','Monotonic stack of indices; answer = j − i on pop.','days-until → monotonic stack of indices'],
+['k8','stacks','M','Celebrity problem','Person known by all, knows none. Matrix knows(i,j).','Eliminate one per question.','Stack/two-pointer elimination: one candidate survives, verify.','celebrity → pairwise elimination'],
+['k9','stacks','H','Sliding window maximum','Max of every k-window. → [3,3,5,5,6,7].','Old smalls are useless.','Monotonic deque of indices; front = max; evict expired & dominated.','window max → monotonic deque'],
+['k10','stacks','H','Largest rectangle in histogram','[2,1,5,6,2,3] → 10.','How far can each bar stretch?','Monotonic stack; on pop area = h × span between boundaries.','histogram → monotonic stack spans'],
+['e1','heaps','E','Kth largest element','[3,2,1,5,6,4],k=2 → 5.','You only need to keep k things.','Min-heap of size k; top = answer. (Or quickselect.)','kth largest → size-k min-heap'],
+['e2','heaps','E','Last stone weight','Smash two heaviest; repeat. [2,7,4,1,8,1] → 1.','Repeatedly need the max.','Max-heap; pop two, push difference.','repeated max → heap'],
+['e3','heaps','M','K closest points to origin','k nearest points by distance.','Keep only k candidates.','Max-heap of size k on distance (or heapify + pop k).','k closest → bounded max-heap'],
+['e4','heaps','M','Kth smallest in sorted matrix','Rows and cols sorted; find kth.','Frontier of candidates.','Min-heap seeded with row heads; pop k times pushing right-neighbors. (Or BS on value.)','sorted matrix kth → heap frontier'],
+['e5','heaps','M','Sort a nearly-sorted array','Each element ≤ k away from its place.','You never need more than k+1 in hand.','Min-heap of k+1; pop-push through the array. O(n log k).','k-sorted → rolling heap of k+1'],
+['e6','heaps','M','Top K frequent words','Most frequent words, ties alphabetical.','Count then heap with custom order.','Counter + heap keyed (−freq, word); pop k.','top-k with ties → heap on tuple key'],
+['e7','heaps','M','Task scheduler','Same tasks need gap n; min time.','The most frequent task dictates the frame.','Frames = (maxFreq−1)×(n+1) + tasksWithMaxFreq; answer = max(that, total).','cooldown schedule → frame formula / greedy heap'],
+['e8','heaps','H','Merge k sorted lists','Merge k sorted linked lists.','Always want the smallest of k heads.','Min-heap of heads; pop, attach, push its next. O(N log k).','k-way merge → heap of heads'],
+['e9','heaps','H','Median from data stream','addNum / findMedian efficiently.','Balance two halves.','Max-heap (low half) + min-heap (high half), rebalance to ±1.','streaming median → two balanced heaps'],
+['e10','heaps','M','Reorganize string','Rearrange so no two adjacent chars equal, or "".','Always place the most plentiful first.','Max-heap by count; pop two different, append, re-push decremented.','no-adjacent rearrange → greedy heap pairs'],
+['y1','greedy','E','Assign cookies','Greed factors vs cookie sizes; max satisfied kids.','Smallest sufficient cookie.','Sort both; two pointers matching smallest workable.','matching → sort + two pointers'],
+['y2','greedy','E','Lemonade change','Bills 5/10/20; can you give change?','Big bills need specific change.','Track 5s and 10s; for 20 prefer 10+5 over 5+5+5.','change making → keep counts, spend big first'],
+['y3','greedy','M','N meetings in one room','Max non-overlapping meetings.','Which meeting frees you earliest?','Sort by END time; take if start ≥ last end.','activity selection → sort by end'],
+['y4','greedy','M','Minimum platforms','Min platforms for train arrivals/departures.','Peak simultaneous trains.','Sort both arrays; sweep two pointers counting overlap; track max.','max overlap → sorted sweep'],
+['y5','greedy','M','Fractional knapsack','Fractions allowed; maximize value under weight.','Best bang per kg.','Sort by value/weight; take greedily, last one fractional.','fractional → sort by ratio'],
+['y6','greedy','M','Jump game','Can you reach the last index? [2,3,1,1,4] → true.','How far can you possibly reach?','Track maxReach; if i > maxReach ⇒ false.','reachability → running max reach'],
+['y7','greedy','M','Gas station','Start index to complete the circuit, else −1.','A failed stretch can\'t hide a good start.','If total ≥ 0 answer exists; reset start after any negative running tank.','circuit start → reset-on-deficit'],
+['y8','greedy','M','Job sequencing with deadlines','Each job: deadline + profit; one job per slot.','Do valuable jobs as LATE as allowed.','Sort by profit; place each in latest free slot ≤ deadline.','deadline scheduling → profit-first, latest slot'],
+['v1','intervals','E','Meeting rooms (can attend all?)','Any overlap in [[0,30],[5,10]]? → no.','Sort makes overlaps adjacent.','Sort by start; overlap if start[i] < end[i−1].','overlap check → sort + adjacent compare'],
+['v2','intervals','E','Remove covered intervals','Count intervals not covered by another.','Sort cleverly.','Sort start asc, end desc; count when end extends the running max.','covered → sort + running max end'],
+['v3','intervals','M','Merge intervals','[[1,3],[2,6],[8,10]] → [[1,6],[8,10]].','After sorting, merging is local.','Sort by start; extend current if overlap, else push new.','merge → sort + extend-or-push'],
+['v4','intervals','M','Insert interval','Insert + merge into sorted disjoint intervals.','Three phases.','Add all before; merge all overlapping into one; add all after.','insert → before / merge / after'],
+['v5','intervals','M','Non-overlapping intervals','Min removals to make disjoint.','Keep the ones ending earliest.','Sort by end; greedily keep compatible; removals = n − kept.','min removals → keep earliest-ending'],
+['v6','intervals','M','Interval list intersections','Intersections of two sorted interval lists.','Compare current pair; drop the one that ends first.','Two pointers: lo=max(starts), hi=min(ends); if lo≤hi record; advance smaller end.','intersections → two-pointer pairwise'],
+['v7','intervals','M','Meeting rooms II','Min rooms for all meetings.','Same as platforms.','Sort starts & ends separately; sweep counting concurrency.','min rooms → start/end sweep'],
+['v8','intervals','M','Min arrows to burst balloons','Overlapping ranges popped by one arrow.','One arrow per "group ending earliest".','Sort by end; shoot at end; skip all starting ≤ that point.','min arrows → greedy by earliest end'],
+['x1','bitman','E','Power of two','Is n a power of 2, without loops?','Powers of two have one bit.','n > 0 and n & (n−1) == 0.','single-bit test → n&(n−1)'],
+['x2','bitman','E','Count set bits','Number of 1s in binary of n.','Kill the lowest 1 repeatedly.','Kernighan: n &= n−1 counts in O(bits set).','popcount → n&=n−1 loop'],
+['x3','bitman','E','Single number','Every element twice except one. [4,1,2,1,2] → 4.','What cancels pairs?','XOR everything; pairs vanish.','pairs cancel → XOR all'],
+['x4','bitman','E','Check kth bit','Is bit k set in n?','Make a mask.','n & (1 << k) != 0.','bit test → shift mask'],
+['x5','bitman','E','Swap two numbers without temp','Swap a, b using no extra variable.','XOR is reversible.','a^=b; b^=a; a^=b. (Say why: x^x=0, x^0=x.)','xor swap → triple xor'],
+['x6','bitman','M','Single number III','Two elements appear once, rest twice. Find both.','Split the pack into two XOR groups.','XOR all → x^y; pick a set bit; XOR within the two groups it defines.','two uniques → partition by a differing bit'],
+['x7','bitman','M','Reverse bits','Reverse the 32 bits of an integer.','Build result bit by bit.','Loop 32×: result = (result<<1) | (n&1); n >>= 1.','bit reverse → shift-in loop'],
+['x8','bitman','M','Subsets via bitmask','Generate all subsets using numbers 0..2ⁿ−1.','Each mask IS a subset.','For mask in range(2ⁿ): include a[i] where bit i set.','subsets → masks 0..2ⁿ−1'],
+['r1','recursion','E','Fibonacci with memo','Make naive fib not exponential.','Cache repeated calls.','Memo dict / lru_cache → O(n). The doorway to DP.','repeated calls → memoize'],
+['r2','recursion','E','Tower of Hanoi','Move n disks, print moves.','Trust the smaller problem.','Move n−1 to aux, 1 to target, n−1 aux→target. 2ⁿ−1 moves.','hanoi → n−1, 1, n−1'],
+['r3','recursion','M','Subsets (power set)','All subsets of [1,2,3].','In or out per element.','Include/exclude recursion per index.','subsets → include/exclude'],
+['r4','recursion','M','Permutations','All orderings of distinct nums.','Choose, recurse, un-choose.','Backtrack with used[] or swapping.','permutations → choose/undo'],
+['r5','recursion','M','Generate parentheses','All valid strings of n pairs.','When may you open? Close?','Recurse with (open, close) counts; open<n, close<open.','valid parens → counters gate recursion'],
+['r6','recursion','M','Combination sum','Reuse allowed; combos hitting target.','Stay on i to allow reuse.','Backtrack with start index; prune negatives.','combination sum → start-index backtrack'],
+['r7','recursion','M','Word search in grid','Is word traceable through adjacent cells?','Mark, try 4 ways, unmark.','DFS per starting cell; visited marking; backtrack.','grid word → DFS + unmark'],
+['r8','recursion','M','Palindrome partitioning','All ways to split into palindromes.','Cut after every palindromic prefix.','Backtrack: for each palindromic prefix, recurse on the rest.','partitioning → prefix check + recurse rest'],
+['r9','recursion','M','Rat in a maze','Paths (0,0)→(n−1,n−1) via open cells.','Classic grid backtracking.','DFS D/L/R/U with visited, backtrack.','maze paths → DFS mark/unmark'],
+['r10','recursion','H','N-Queens','Place n non-attacking queens.','What does a column choice poison?','Row-wise; sets for cols and both diagonals (r±c); backtrack.','n-queens → col/diag sets'],
+['g1','graphs','E','BFS traversal','Breadth-first from a source.','Queue + visited.','Queue; pop, push unvisited neighbors.','BFS → queue + visited'],
+['g2','graphs','E','DFS traversal','Depth-first from a source.','Deep then back.','Recursion/stack + visited.','DFS → recurse + visited'],
+['g3','graphs','E','Flood fill','Repaint a connected region from (r,c).','Paint bucket = component.','DFS/BFS from start over same-color neighbors.','region fill → component walk'],
+['g4','graphs','M','Number of islands','Connected groups of 1s in grid.','Every unseen 1 starts one.','Scan; each unvisited land → count+1 and flood its component.','components → flood fill per unseen'],
+['g5','graphs','M','Rotten oranges','Minutes to rot all; −1 if some never.','Rot spreads from ALL sources at once.','Multi-source BFS; level = minute; check fresh leftovers.','simultaneous spread → multi-source BFS'],
+['g6','graphs','M','Cycle detection (undirected)','Any cycle?','Visited neighbor ≠ parent.','DFS carrying parent; non-parent visited ⇒ cycle.','undirected cycle → parent check'],
+['g7','graphs','M','Course schedule (directed cycle)','Can all courses finish given prereqs?','Cycle in a DIRECTED graph.','DFS 3-color (white/gray/black); gray hit ⇒ cycle. Or Kahn\'s leftover.','directed cycle → 3-color DFS / Kahn'],
+['g8','graphs','M','Topological sort','Valid order of dependent tasks.','Zero prerequisites go first.','Kahn: in-degrees, queue of 0s, pop & decrement.','topo order → Kahn in-degree'],
+['g9','graphs','M','Bipartite check','2-color the graph without conflicts?','Alternate colors by level.','BFS coloring; same-color edge ⇒ not bipartite.','bipartite → BFS 2-coloring'],
+['g10','graphs','M','Shortest path in unweighted graph','Fewest edges source→target.','Unweighted shortest = ?','BFS levels; first arrival is shortest. (Weighted → Dijkstra, name it.)','unweighted shortest → BFS levels'],
+['d1','dp','E','Climbing stairs','1 or 2 steps; count ways to n.','Where did the last step start?','ways(n)=ways(n−1)+ways(n−2); two rolling vars.','step counting → fib recurrence'],
+['d2','dp','E','Unique paths in grid','Right/down only, m×n grid; count paths.','Where can a cell be entered from?','dp[r][c] = dp[r−1][c] + dp[r][c−1]; 1D row rolling works.','grid paths → sum of top+left'],
+['d3','dp','M','House robber','No two adjacent. [2,7,9,3,1] → 12.','Take or skip.','dp[i]=max(dp[i−1], dp[i−2]+a[i]).','no-adjacent → take/skip'],
+['d4','dp','M','Coin change (min coins)','Fewest coins for amount, else −1.','Best for 11 uses best for 11−coin.','dp[x]=1+min(dp[x−c]); dp[0]=0.','min coins → bottom-up amounts'],
+['d5','dp','M','Min path sum in grid','Cheapest top-left → bottom-right path.','Same shape as unique paths.','dp[r][c] = cost + min(top, left).','grid min cost → min(top,left)+cell'],
+['d6','dp','M','Longest increasing subsequence','[10,9,2,5,3,7,101,18] → 4.','Best chain ending here.','dp[i]=1+max(dp[j], a[j]<a[i]); O(n²); patience+BS for n log n.','LIS → best-ending-here'],
+['d7','dp','M','Longest common subsequence','LCS("abcde","ace") → 3.','Compare the last characters.','2D: match ⇒ 1+diag else max(up,left).','LCS → 2D table diagonal'],
+['d8','dp','M','Partition equal subset sum','Split array into two equal-sum halves?','It\'s knapsack in a costume.','Target = total/2; subset-sum boolean dp, reverse loop.','equal split → subset-sum knapsack'],
+['d9','dp','M','0/1 Knapsack','Max value under capacity, items once.','Take or leave each item.','1D dp over weights DESC: dp[w]=max(dp[w], dp[w−wt]+val).','knapsack → reverse weight loop'],
+['d10','dp','H','Edit distance','Min ops (ins/del/replace) "horse"→"ros" → 3.','Align the endings.','2D: equal ⇒ diag; else 1+min(ins,del,rep).','edit distance → 3-way min table']
+];
+
+const KEY = 'dsa-drill-expanded';
+let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '' };
+try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const DAY = 86400000;
+const todayStr = () => new Date().toISOString().slice(0, 10);
+if (S.todayDate !== todayStr()) { S.todayDate = todayStr(); S.doneToday = 0; save(); }
+const rec = id => S.st[id] || {};
+const dueList = () => P.filter(p => { const r = rec(p[0]); return (r.s === 'assisted' || r.s === 'failed') && r.due <= Date.now(); });
+function bumpStreak() {
+  const t = todayStr();
+  if (S.last === t) return;
+  const y = new Date(Date.now() - DAY).toISOString().slice(0, 10);
+  S.streak = (S.last === y) ? S.streak + 1 : 1;
+  S.last = t;
+}
+function outcome(id, kind, isResolve) {
+  const r = rec(id);
+  if (kind === 'solved') { r.s = 'solved'; r.due = 0; }
+  else if (kind === 'assisted') { r.s = 'assisted'; r.due = Date.now() + 2 * DAY; }
+  else { r.s = 'failed'; r.due = Date.now() + 1 * DAY; }
+  r.n = (r.n || 0) + 1;
+  S.st[id] = r;
+  S.doneToday++; bumpStreak(); save(); refresh();
+  if (isResolve) startDueUI(); else nextProblemUI();
+}
+let tick = null;
+function problemCard(p, isResolve) {
+  clearInterval(tick);
+  const [id, topic, diff, name, stmt, hint, appr, pat] = p;
+  const tName = TOPICS.find(t => t[0] === topic)[1];
+  const d = document.createElement('div');
+  d.className = 'card';
+  let revealed = false;
+  d.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div><span class="ptag">${tName}${isResolve ? ' · re-solve' : ''}</span><h3 style="margin:2px 0 0">${name} <span class="diff ${diff}">${diff === 'E' ? 'easy' : diff === 'M' ? 'medium' : 'hard'}</span></h3></div>
+      <div class="timer" id="tm">25:00</div>
+    </div>
+    <p style="margin:10px 0 4px">${stmt}</p>
+    <div class="reveal" id="rv-h">💡 ${hint}</div>
+    <div class="reveal" id="rv-a">🧭 ${appr}<br><span class="small">Close this mentally and implement from memory.</span></div>
+    <div class="btnrow">
+      <button class="btn" id="bh">show hint</button>
+      <button class="btn" id="ba">show approach</button>
+      <button class="btn good" id="b1">✓ solved myself</button>
+      <button class="btn" id="b2">needed the approach</button>
+      <button class="btn bad" id="b3">couldn't solve</button>
+    </div>
+    <p class="small" style="margin-top:10px">Solve in your own editor or on paper. Honesty trains the schedule.</p>`;
+  d.querySelector('#bh').onclick = () => d.querySelector('#rv-h').classList.add('show');
+  d.querySelector('#ba').onclick = () => { d.querySelector('#rv-a').classList.add('show'); revealed = true; };
+  d.querySelector('#b1').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve);
+  d.querySelector('#b2').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'assisted', isResolve); };
+  d.querySelector('#b3').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'failed', isResolve); };
+  let s = 1500;
+  const tm = d.querySelector('#tm');
+  tick = setInterval(() => {
+    s--;
+    tm.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    tm.classList.toggle('low', s <= 300);
+    if (s <= 0) { clearInterval(tick); tm.textContent = '⏰ call it'; }
+  }, 1000);
+  return d;
+}
+function nextProblemUI() {
+  const arena = document.getElementById('arena');
+  const due = dueList();
+  if (due.length) {
+    arena.innerHTML = `<div class="card" style="border-left:3px solid #d97757;border-radius:0 14px 14px 0"><b>${due.length} re-solve${due.length > 1 ? 's' : ''} due.</b> These outrank new problems — they're your highest-value reps. <div class="btnrow"><button class="btn solid" onclick="goDue()">start re-solves</button><button class="btn" onclick="newProblem()">skip to new (not recommended)</button></div></div>`;
+    return;
+  }
+  newProblem();
+}
+function newProblem() {
+  const arena = document.getElementById('arena');
+  const pool = P.filter(p => p[1] === S.cur && !rec(p[0]).s);
+  if (!pool.length) {
+    const idx = TOPICS.findIndex(t => t[0] === S.cur);
+    const nxt = TOPICS[idx + 1];
+    arena.innerHTML = `<div class="card"><b>🎉 ${TOPICS[idx][1]} complete.</b> ${nxt ? `Next: <b>${nxt[1]}</b>.` : 'All 144 done. Placements should be scared of you.'} <div class="btnrow">${nxt ? `<button class="btn solid" onclick="setTopic('${nxt[0]}')">start ${nxt[1]}</button>` : ''}</div></div>`;
+    return;
+  }
+  arena.innerHTML = '';
+  arena.appendChild(problemCard(pool[0], false));
+}
+function goDue() { document.querySelector('[data-p="due"]').click(); }
+function startDueUI() {
+  const box = document.getElementById('duebox');
+  const due = dueList();
+  if (!due.length) { box.innerHTML = '<div class="card">Queue clear. 🌱 Back to Today for new problems.</div>'; return; }
+  box.innerHTML = '';
+  box.appendChild(problemCard(due[0], true));
+}
+function setTopic(t) { S.cur = t; save(); refresh(); document.querySelector('[data-p="today"]').click(); nextProblemUI(); }
+function refresh() {
+  document.getElementById('s-today').textContent = S.doneToday + '/3';
+  document.getElementById('s-streak').textContent = S.streak;
+  document.getElementById('s-solved').textContent = P.filter(p => rec(p[0]).s === 'solved').length;
+  const due = dueList().length;
+  document.getElementById('s-due').textContent = due;
+  document.getElementById('duetab').innerHTML = 'Re-solve' + (due ? `<span class="badge">${due}</span>` : '');
+  const tb = document.getElementById('topics');
+  tb.innerHTML = '';
+  TOPICS.forEach(([tid, tname]) => {
+    const probs = P.filter(p => p[1] === tid);
+    const done = probs.filter(p => rec(p[0]).s === 'solved').length;
+    const row = document.createElement('div');
+    row.className = 'topicrow' + (tid === S.cur ? ' cur' : '');
+    row.innerHTML = `<span class="tn">${tname}${tid === S.cur ? ' <span style="color:#e0987d">· current</span>' : ''}</span><div class="bar"><div style="width:${Math.round(done / probs.length * 100)}%"></div></div><span class="prog">${done}/${probs.length}</span>`;
+    const pl = document.createElement('div');
+    pl.className = 'plist';
+    pl.innerHTML = probs.map(p => { const r = rec(p[0]); const ic = r.s === 'solved' ? '✅' : r.s === 'assisted' ? '🟡' : r.s === 'failed' ? '🔴' : '⚪'; return `<div class="pitem"><span class="st">${ic}</span>${p[3]} <span class="diff ${p[2]}" style="margin-left:auto">${p[2]}</span></div>`; }).join('');
+    row.onclick = () => { if (S.cur !== tid) setTopic(tid); else pl.classList.toggle('show'); };
+    tb.appendChild(row); tb.appendChild(pl);
+  });
+  const pb = document.getElementById('patbox');
+  const learned = P.filter(p => rec(p[0]).s === 'solved');
+  pb.innerHTML = learned.length ? learned.map(p => `<div class="patline"><span class="t">${p[3]}:</span> ${p[7]}</div>`).join('') : '<div class="card small">Every problem you solve yourself adds its one-line pattern here.</div>';
+}
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  if (b.dataset.p === 'due') startDueUI();
+  if (b.dataset.p === 'today') nextProblemUI();
+  window.scrollTo({ top: 0 });
+});
+refresh();
+nextProblemUI();
+</script>
+</body>
+</html>
