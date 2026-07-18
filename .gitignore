@@ -6,6 +6,11 @@
 !/Companies/
 !/Placement Training/
 
+# Claude Code teaching skills are public; the rest of .claude/ stays private
+!/.claude/
+/.claude/*
+!/.claude/skills/
+
 # Resumes, JDs, third-party/personal docs stay private
 Companies/**/*.pdf
 Companies/**/*.docx
