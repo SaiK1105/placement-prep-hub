@@ -268,6 +268,26 @@ const P = [
 ['d10','dp','H','Edit distance','Min ops (ins/del/replace) "horse"→"ros" → 3.','Align the endings.','2D: equal ⇒ diag; else 1+min(ins,del,rep).','edit distance → 3-way min table']
 ];
 
+// Judge links: learn the pattern here, then solve for real. LC = LeetCode, G = GfG Practice (for classics LeetCode doesn't have, or locks behind premium).
+const LC = s => 'https://leetcode.com/problems/' + s + '/';
+const GG = s => 'https://www.geeksforgeeks.org/problems/' + s + '/1';
+const LINK = {
+t1:LC('maximum-depth-of-binary-tree'),t2:LC('binary-tree-inorder-traversal'),t3:LC('symmetric-tree'),t4:LC('path-sum'),t5:LC('binary-tree-level-order-traversal'),t6:LC('binary-tree-zigzag-level-order-traversal'),t7:LC('diameter-of-binary-tree'),t8:LC('lowest-common-ancestor-of-a-binary-tree'),t9:LC('validate-binary-search-tree'),t10:LC('kth-smallest-element-in-a-bst'),
+a1:LC('two-sum'),a2:LC('best-time-to-buy-and-sell-stock'),a3:LC('missing-number'),a4:LC('move-zeroes'),a5:LC('maximum-subarray'),a6:LC('product-of-array-except-self'),a7:LC('rotate-array'),a8:LC('sort-colors'),a9:LC('majority-element'),a10:LC('next-permutation'),
+h1:LC('contains-duplicate'),h2:LC('first-unique-character-in-a-string'),h3:LC('intersection-of-two-arrays'),h4:LC('isomorphic-strings'),h5:LC('subarray-sum-equals-k'),h6:LC('longest-consecutive-sequence'),h7:LC('group-anagrams'),h8:LC('top-k-frequent-elements'),h9:GG('largest-subarray-with-0-sum'),h10:GG('count-distinct-elements-in-every-window'),
+w1:LC('valid-palindrome'),w2:LC('remove-duplicates-from-sorted-array'),w3:LC('squares-of-a-sorted-array'),w4:LC('container-with-most-water'),w5:LC('3sum'),w6:LC('longest-substring-without-repeating-characters'),w7:LC('max-consecutive-ones-iii'),w8:LC('fruit-into-baskets'),w9:LC('trapping-rain-water'),w10:LC('minimum-window-substring'),
+s1:LC('valid-anagram'),s2:LC('longest-common-prefix'),s3:LC('roman-to-integer'),s4:LC('excel-sheet-column-title'),s5:LC('find-the-index-of-the-first-occurrence-in-a-string'),s6:LC('longest-palindromic-substring'),s7:LC('palindromic-substrings'),s8:LC('string-compression'),s9:LC('repeated-substring-pattern'),s10:LC('reverse-words-in-a-string'),
+b1:LC('binary-search'),b2:LC('search-insert-position'),b3:LC('sqrtx'),b4:LC('find-first-and-last-position-of-element-in-sorted-array'),b5:LC('search-in-rotated-sorted-array'),b6:LC('find-minimum-in-rotated-sorted-array'),b7:LC('find-peak-element'),b8:LC('kth-missing-positive-number'),b9:LC('koko-eating-bananas'),b10:LC('median-of-two-sorted-arrays'),
+l1:LC('reverse-linked-list'),l2:LC('middle-of-the-linked-list'),l3:LC('delete-node-in-a-linked-list'),l4:LC('linked-list-cycle'),l5:LC('merge-two-sorted-lists'),l6:LC('remove-nth-node-from-end-of-list'),l7:LC('intersection-of-two-linked-lists'),l8:LC('add-two-numbers'),l9:LC('palindrome-linked-list'),l10:LC('rotate-list'),
+k1:LC('valid-parentheses'),k2:LC('implement-queue-using-stacks'),k3:LC('remove-all-adjacent-duplicates-in-string'),k4:LC('evaluate-reverse-polish-notation'),k5:LC('min-stack'),k6:LC('next-greater-element-i'),k7:LC('daily-temperatures'),k8:GG('the-celebrity-problem'),k9:LC('sliding-window-maximum'),k10:LC('largest-rectangle-in-histogram'),
+e1:LC('kth-largest-element-in-an-array'),e2:LC('last-stone-weight'),e3:LC('k-closest-points-to-origin'),e4:LC('kth-smallest-element-in-a-sorted-matrix'),e5:GG('nearly-sorted-1587115620'),e6:LC('top-k-frequent-words'),e7:LC('task-scheduler'),e8:LC('merge-k-sorted-lists'),e9:LC('find-median-from-data-stream'),e10:LC('reorganize-string'),
+y1:LC('assign-cookies'),y2:LC('lemonade-change'),y3:GG('activity-selection-1587115620'),y4:GG('minimum-platforms-1587115620'),y5:GG('fractional-knapsack-1587115620'),y6:LC('jump-game'),y7:LC('gas-station'),y8:GG('job-sequencing-problem-1587115620'),
+v1:GG('attend-all-meetings-ii'),v2:LC('remove-covered-intervals'),v3:LC('merge-intervals'),v4:LC('insert-interval'),v5:LC('non-overlapping-intervals'),v6:LC('interval-list-intersections'),v7:GG('minimum-platforms-1587115620'),v8:LC('minimum-number-of-arrows-to-burst-balloons'),
+x1:LC('power-of-two'),x2:LC('number-of-1-bits'),x3:LC('single-number'),x4:GG('check-whether-k-th-bit-is-set-or-not-1587115620'),x5:'https://www.geeksforgeeks.org/swap-two-numbers-without-using-temporary-variable/',x6:LC('single-number-iii'),x7:LC('reverse-bits'),x8:LC('subsets'),
+r1:LC('fibonacci-number'),r2:GG('tower-of-hanoi-1587115621'),r3:LC('subsets'),r4:LC('permutations'),r5:LC('generate-parentheses'),r6:LC('combination-sum'),r7:LC('word-search'),r8:LC('palindrome-partitioning'),r9:GG('rat-in-a-maze-problem'),r10:LC('n-queens'),
+g1:GG('bfs-traversal-of-graph'),g2:GG('depth-first-traversal-for-a-graph'),g3:LC('flood-fill'),g4:LC('number-of-islands'),g5:LC('rotting-oranges'),g6:GG('detect-cycle-in-an-undirected-graph'),g7:LC('course-schedule'),g8:GG('topological-sort'),g9:LC('is-graph-bipartite'),g10:GG('shortest-path-in-undirected-graph-having-unit-distance'),
+d1:LC('climbing-stairs'),d2:LC('unique-paths'),d3:LC('house-robber'),d4:LC('coin-change'),d5:LC('minimum-path-sum'),d6:LC('longest-increasing-subsequence'),d7:LC('longest-common-subsequence'),d8:LC('partition-equal-subset-sum'),d9:GG('0-1-knapsack-problem0945'),d10:LC('edit-distance')
+};
 const KEY = 'dsa-drill-expanded';
 let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '' };
 try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
@@ -311,13 +331,14 @@ function problemCard(p, isResolve) {
     <div class="reveal" id="rv-h">💡 ${hint}</div>
     <div class="reveal" id="rv-a">🧭 ${appr}<br><span class="small">Close this mentally and implement from memory.</span></div>
     <div class="btnrow">
+      ${LINK[id] ? `<a class="btn solid" style="text-decoration:none" href="${LINK[id]}" target="_blank" rel="noopener">🚀 solve on ${LINK[id].includes('geeksforgeeks') ? 'GfG' : 'LeetCode'} ↗</a>` : ''}
       <button class="btn" id="bh">show hint</button>
       <button class="btn" id="ba">show approach</button>
       <button class="btn good" id="b1">✓ solved myself</button>
       <button class="btn" id="b2">needed the approach</button>
       <button class="btn bad" id="b3">couldn't solve</button>
     </div>
-    <p class="small" style="margin-top:10px">Solve in your own editor or on paper. Honesty trains the schedule.</p>`;
+    <p class="small" style="margin-top:10px">Click through, solve it on the real judge, then come back and record the honest outcome. Honesty trains the schedule.</p>`;
   d.querySelector('#bh').onclick = () => d.querySelector('#rv-h').classList.add('show');
   d.querySelector('#ba').onclick = () => { d.querySelector('#rv-a').classList.add('show'); revealed = true; };
   d.querySelector('#b1').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve);

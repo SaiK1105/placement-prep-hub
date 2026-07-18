@@ -191,6 +191,22 @@ const P = [
 ['d6','dp','M','0/1 Knapsack','Max value under weight cap, each item once.','Take or leave each item.','dp[w] loop items then weights DESCENDING (1D), dp[w] = max(dp[w], dp[w−wt]+val).','knapsack 0/1 → take/leave, reverse weight loop']
 ];
 
+// Judge links: learn the pattern here, then click through and solve for real. LC = LeetCode, GG = GfG Practice.
+const LC = s => 'https://leetcode.com/problems/' + s + '/';
+const GG = s => 'https://www.geeksforgeeks.org/problems/' + s + '/1';
+const LINK = {
+t1:LC('maximum-depth-of-binary-tree'),t2:LC('binary-tree-inorder-traversal'),t3:LC('binary-tree-level-order-traversal'),t4:LC('diameter-of-binary-tree'),t5:LC('lowest-common-ancestor-of-a-binary-tree'),t6:LC('validate-binary-search-tree'),
+a1:LC('two-sum'),a2:LC('best-time-to-buy-and-sell-stock'),a3:LC('maximum-subarray'),a4:LC('product-of-array-except-self'),a5:LC('majority-element'),a6:LC('next-permutation'),
+h1:LC('contains-duplicate'),h2:LC('first-unique-character-in-a-string'),h3:LC('subarray-sum-equals-k'),h4:LC('longest-consecutive-sequence'),h5:LC('group-anagrams'),h6:GG('largest-subarray-with-0-sum'),
+w1:LC('valid-palindrome'),w2:LC('container-with-most-water'),w3:LC('3sum'),w4:LC('longest-substring-without-repeating-characters'),w5:LC('max-consecutive-ones-iii'),w6:LC('trapping-rain-water'),
+s1:LC('valid-anagram'),s2:LC('longest-common-prefix'),s3:LC('roman-to-integer'),s4:LC('find-the-index-of-the-first-occurrence-in-a-string'),s5:LC('longest-palindromic-substring'),s6:LC('string-compression'),
+b1:LC('binary-search'),b2:LC('sqrtx'),b3:LC('find-first-and-last-position-of-element-in-sorted-array'),b4:LC('search-in-rotated-sorted-array'),b5:LC('find-peak-element'),b6:LC('koko-eating-bananas'),
+l1:LC('reverse-linked-list'),l2:LC('middle-of-the-linked-list'),l3:LC('linked-list-cycle'),l4:LC('merge-two-sorted-lists'),l5:LC('remove-nth-node-from-end-of-list'),l6:LC('palindrome-linked-list'),
+k1:LC('valid-parentheses'),k2:LC('implement-queue-using-stacks'),k3:LC('min-stack'),k4:LC('next-greater-element-i'),k5:LC('evaluate-reverse-polish-notation'),k6:LC('largest-rectangle-in-histogram'),
+r1:LC('fibonacci-number'),r2:LC('subsets'),r3:LC('permutations'),r4:LC('combination-sum'),r5:GG('rat-in-a-maze-problem'),r6:LC('n-queens'),
+g1:GG('bfs-traversal-of-graph'),g2:GG('depth-first-traversal-for-a-graph'),g3:LC('number-of-islands'),g4:LC('rotting-oranges'),g5:GG('detect-cycle-in-an-undirected-graph'),g6:GG('topological-sort'),
+d1:LC('climbing-stairs'),d2:LC('house-robber'),d3:LC('coin-change'),d4:LC('longest-increasing-subsequence'),d5:LC('longest-common-subsequence'),d6:GG('0-1-knapsack-problem0945')
+};
 const KEY = 'dsa-a2z-drill';
 let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '' };
 try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
@@ -245,6 +261,7 @@ function problemCard(p, isResolve) {
     <div class="reveal" id="rv-h">💡 ${hint}</div>
     <div class="reveal" id="rv-a">🧭 ${appr}<br><span class="small">Now close this mentally and implement from memory.</span></div>
     <div class="btnrow">
+      ${LINK[id] ? `<a class="btn solid" style="text-decoration:none" href="${LINK[id]}" target="_blank" rel="noopener">🚀 solve on ${LINK[id].includes('geeksforgeeks') ? 'GfG' : 'LeetCode'} ↗</a>` : ''}
       <button class="btn" id="bh">show hint</button>
       <button class="btn" id="ba">show approach</button>
       <button class="btn good" id="b1">✓ solved myself</button>
