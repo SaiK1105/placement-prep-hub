@@ -73,6 +73,17 @@ without Plan A after it is a crash diet; Plan A is the actual transformation.
 Either way, Day 1 opens with the **45-minute baseline** (2 problems, cold)
 so the ladder starts at the right rung.
 
+## Language policy (decided 22 Jul — do not re-litigate)
+- **Python is the primary language.** All Hell Week + Contract weeks 1–4 reps
+  in Python only. One language, maximum fluency — that's the rebuild.
+- **Weeks 5–8: +15 min/day Java revival** — re-type ONE already-solved
+  problem in Java (logic known, syntax revival only: HashMap, PriorityQueue,
+  arrays vs ArrayList). Covers "do it in Java" interview moments.
+- **Per-company recon checks allowed languages** 2 days out. Python 3 is
+  allowed on virtually every campus platform (HackerEarth/HackerRank/
+  HirePro/Codility); if a drive ever locks Java, that company's
+  format-matched mock is done in Java.
+
 ## Non-negotiables (both plans)
 1. Every problem TYPED and SUBMITTED — reading ≠ reps
 2. Timer on everything
