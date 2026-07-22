@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honeywell Prep HQ — OA 21 July · 6 PM</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.65; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 26px 18px 90px; }
+  h1 { font-family: ui-serif, Georgia, 'Times New Roman', serif; font-size: 27px; font-weight: 500; color: #f0efea; letter-spacing: -.01em; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 21px; font-weight: 500; color: #f0efea; margin: 22px 0 10px; }
+  h3 { font-size: 15px; font-weight: 600; color: #f0efea; margin: 16px 0 6px; }
+  .sub { color: #b8b5ad; font-size: 13.5px; margin: 6px 0 16px; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(38,38,36,.95); backdrop-filter: blur(8px); padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; margin-bottom: 18px; }
+  nav button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 13px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: #b8b5ad; cursor: pointer; position: relative; }
+  nav button:hover { background: #30302e; }
+  nav button.on { background: #f0efea; color: #262624; }
+  nav button .badge { position: absolute; top: -5px; right: -4px; background: #d97757; color: #fff; font-size: 10px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+  .page { display: none; animation: fade .25s; }
+  .page.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 16px 18px; margin: 12px 0; }
+  .card.mint { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.pink { border-left: 3px solid #c4635a; border-radius: 0 14px 14px 0; }
+  .card.blue { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .grid2, .grid4 { grid-template-columns: 1fr 1fr; } }
+  .stat { background: #30302e; border-radius: 12px; padding: 13px 14px; text-align: center; }
+  .stat .n { font-family: ui-serif, Georgia, serif; font-size: 27px; font-weight: 500; color: #f0efea; }
+  .stat .l { font-size: 11px; color: #8e8b83; text-transform: uppercase; letter-spacing: .6px; }
+  code, pre { background: #1f1e1c; border-radius: 6px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 13px; color: #cbc3f0; }
+  code { padding: 1px 6px; }
+  pre { padding: 12px; overflow-x: auto; border: 1px solid #3f3e3a; margin: 8px 0; color: #d8d5cc; }
+  .small { font-size: 12.5px; color: #8e8b83; }
+  ul li, ol li { margin-bottom: 6px; }
+  ul, ol { padding-left: 22px; }
+  .qbox { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 17px 19px; margin: 12px 0; }
+  .qbox .topic { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: #8e8b83; margin-bottom: 7px; }
+  .qbox .qt { font-size: 15px; margin-bottom: 12px; color: #f0efea; white-space: pre-wrap; }
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+  .opts button { font: inherit; font-size: 14px; text-align: left; padding: 10px 14px; border-radius: 10px; border: 1px solid #45443f; background: #383836; color: #e6e4dd; cursor: pointer; transition: border-color .12s, background .12s; }
+  .opts button:hover:not(:disabled) { border-color: #d97757; background: #3d3733; }
+  .opts button.right { background: #333a2e; border-color: #90a883; color: #cfe0c2; }
+  .opts button.wrong { background: #40302d; border-color: #c4635a; color: #eab8b1; }
+  .opts button:disabled { cursor: default; }
+  .expl { display: none; margin-top: 12px; padding: 12px 15px; border-radius: 0 10px 10px 0; background: #383430; border-left: 3px solid #d97757; font-size: 13.5px; color: #d8d5cc; }
+  .expl.show { display: block; animation: fade .3s; }
+  .qmeta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .nextbtn { font: inherit; font-size: 13.5px; font-weight: 600; padding: 8px 20px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; display: none; }
+  .nextbtn:hover { background: #c96442; }
+  .nextbtn.show { display: inline-block; }
+  .qtimer { font-family: Consolas, monospace; font-weight: 700; font-size: 17px; color: #90a883; }
+  .qtimer.low { color: #c4635a; }
+  .modes { display: flex; gap: 7px; flex-wrap: wrap; margin: 10px 0; }
+  .modes button { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 10px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .modes button:hover { border-color: #6b6961; }
+  .modes button.on { background: #d97757; color: #fff; border-color: #d97757; }
+  .bar { height: 8px; border-radius: 6px; background: #3f3e3a; overflow: hidden; margin-top: 6px; }
+  .bar div { height: 100%; background: #d97757; border-radius: 6px; }
+  .topicrow { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 13px; }
+  .topicrow .tn { width: 100px; color: #b8b5ad; font-weight: 600; }
+  .topicrow .pct { width: 46px; text-align: right; color: #8e8b83; }
+  .topicrow .bar { flex: 1; margin-top: 0; }
+  .go { font: inherit; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 10px; border: none; background: #d97757; color: #fff; cursor: pointer; margin: 8px 6px 0 0; }
+  .go:hover { background: #c96442; }
+  .go.ghost { background: transparent; border: 1px solid #45443f; color: #b8b5ad; }
+  .go.ghost:hover { background: #30302e; }
+  details { margin: 12px 0; border: 1px solid #3f3e3a; border-radius: 12px; padding: 12px 16px; background: #30302e; }
+  summary { cursor: pointer; font-weight: 600; color: #e0987d; font-size: 14px; }
+  .talk { background: #383430; border-left: 3px solid #d97757; padding: 13px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; color: #d8d5cc; }
+  .arrowflow { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 10px 0; font-size: 12.5px; font-weight: 500; color: #b8b5ad; }
+  .arrowflow span { background: #30302e; border: 1px solid #3f3e3a; padding: 6px 12px; border-radius: 10px; }
+  .arrowflow em { color: #e0987d; font-style: normal; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { border: 1px solid #3f3e3a; padding: 8px 11px; text-align: left; font-size: 13.5px; }
+  th { background: #30302e; color: #b8b5ad; }
+  .conf { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; border-radius: 8px; padding: 2px 8px; white-space: nowrap; }
+  .conf.hi { background: #333a2e; color: #a9c99a; }
+  .conf.med { background: #3d3830; color: #d3a13f; }
+  .conf.lo { background: #40302d; color: #d99287; }
+  .checkrow { display: flex; gap: 10px; align-items: flex-start; margin: 7px 0; font-size: 14px; }
+  .checkrow input { margin-top: 5px; accent-color: #d97757; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Honeywell Prep HQ 🐝</h1>
+<div class="sub">Campus Connect Hackathon · Round 1 OA: <b style="color:#e0987d">Tue 21 July · 6 PM · HirePro</b> · Prize: paid 6-month winter internship (Jan 2027) + FTE shot</div>
+
+<nav id="nav">
+  <button data-p="home" class="on">🏠 Home</button>
+  <button data-p="format">🔍 Format</button>
+  <button data-p="learn">📖 Learn</button>
+  <button data-p="drill">⚡ Drill</button>
+  <button data-p="weak" id="weaktab">🔁 Weak spots</button>
+  <button data-p="mock">📝 Mock</button>
+  <button data-p="code">💻 Coding</button>
+  <button data-p="round2">🏗️ Round 2</button>
+  <button data-p="talk">🎤 Interview</button>
+  <button data-p="src">📚 Sources</button>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div class="page on" id="home">
+  <div class="grid4">
+    <div class="stat"><div class="n" id="s-hours">–</div><div class="l">hours to OA</div></div>
+    <div class="stat"><div class="n" id="s-streak">0</div><div class="l">best streak</div></div>
+    <div class="stat"><div class="n" id="s-acc">–</div><div class="l">accuracy</div></div>
+    <div class="stat"><div class="n" id="s-due">0</div><div class="l">due for review</div></div>
+  </div>
+
+  <div class="card pink">
+    <h3 style="margin-top:0">⚠️ Reality check — read this first</h3>
+    Tomorrow's "hackathon" is <b>NOT a build-a-project event</b>. It's a proctored HirePro <b>online assessment: aptitude + technical MCQs + 2–3 coding problems</b> (individual). The actual build-and-pitch hackathon is <b>Round 2, in person, 25–26 July</b> — only if you clear tomorrow. Full evidence on the Format tab.
+  </div>
+
+  <div class="arrowflow"><span>🧪 OA on HirePro<br><em>21–22 Jul · MCQ + coding</em></span> → <span>🏗️ In-person hackathon<br><em>25–26 Jul · pick 1 of 5 problems</em></span> → <span>🎤 Tech + HR interview</span> → <span>🎉 Paid 6-mo internship<br><em>Jan 2027 · FTE shot</em></span></div>
+
+  <div class="card amber">
+    <h3 style="margin-top:0">🗓️ Tomorrow's plan (daytime only — OA at 6 PM)</h3>
+    <ul style="margin-top:6px">
+      <li><b>Block 1 · 60 min (morning):</b> Learn tab once through, then Drill → All (30 Qs). Don't linger — the drill remembers your misses.</li>
+      <li><b>Block 2 · 75 min:</b> Coding tab — solve all 3 problems <b>in a plain editor, reading input from stdin</b>, 25-min cap each. This is the highest-yield block.</li>
+      <li><b>Block 3 · 30 min:</b> Weak spots tab until the due-count hits 0.</li>
+      <li><b>Block 4 · 15 min:</b> Mock tab — 12 MCQs / 12 min, exam conditions. Then only review misses.</li>
+      <li><b>4:45 PM — STOP studying.</b> Run the setup checklist below. Cramming past this point costs more than it adds.</li>
+      <li><b>5:15–5:30 PM:</b> Log in to HirePro early — the camera/mic hardware-check flow takes time.</li>
+    </ul>
+    <div class="small">Tredence OA is the same day — if its slot conflicts, do Blocks 1–2 in whatever morning window you have; they carry 80% of the value.</div>
+  </div>
+
+  <div class="card mint">
+    <h3 style="margin-top:0">✅ Setup checklist (4:45 PM) — HirePro is strict; logistics fail people before questions do</h3>
+    <div class="checkrow"><input type="checkbox"><span>Check <b>both</b> sastra.ac.in and personal mail <b>+ spam folders</b> for the HirePro link (it may arrive late)</span></div>
+    <div class="checkrow"><input type="checkbox"><span><b>Google Chrome only</b> (v81+, updated, no Firefox/Edge) · allow pop-ups & cookies · disable extensions</span></div>
+    <div class="checkrow"><input type="checkbox"><span>Laptop/desktop only — phones get "Device not Compatible"</span></div>
+    <div class="checkrow"><input type="checkbox"><span>Webcam + mic working (they're recorded throughout); face well-lit, quiet closed room, alone</span></div>
+    <div class="checkrow"><input type="checkbox"><span>Charger plugged in · phone on silent and out of reach · close every other app</span></div>
+    <div class="checkrow"><input type="checkbox"><span>Disable VPN/proxy · stable internet + <b>mobile hotspot as backup</b></span></div>
+    <div class="checkrow"><input type="checkbox"><span>Know the rule: <b>never switch tabs or exit fullscreen</b> — auto-warnings, can auto-logout. Copy-paste into the editor is flagged.</span></div>
+    <div class="checkrow"><input type="checkbox"><span>If you disconnect: don't panic — re-login with the same credentials within the window (officially supported)</span></div>
+  </div>
+
+  <div class="card blue">
+    <h3 style="margin-top:0">📈 Accuracy by topic</h3>
+    <div id="topicbars"></div>
+    <div class="small" style="margin-top:6px">Bars fill as you drill. Weakest topic = first thing tomorrow morning.</div>
+  </div>
+
+  <div class="talk"><b>Why you fit this pipeline:</b> Round 2's five problem statements are ALL AI/LLM-flavored, and your resume is built on exactly that — RAG, LangGraph, multimodal pipelines. Tomorrow's OA is the toll gate: easy-medium arrays/strings + core-CS MCQs. Clear it, and you're playing on home turf.</div>
+</div>
+
+<!-- ══════════ FORMAT ══════════ -->
+<div class="page" id="format">
+  <h2>🔍 What tomorrow actually looks like</h2>
+  <div class="sub">Every claim labeled by confidence. Official = the Campus Connect event site (the hirepro.in link's redirect target).</div>
+  <table>
+    <tr><th>Claim</th><th>Confidence</th></tr>
+    <tr><td>Round 1 = online assessment: aptitude + technical MCQs + coding challenges, window 21–22 July</td><td><span class="conf hi">official</span></td></tr>
+    <tr><td>Individual, not team-based</td><td><span class="conf hi">official</span></td></tr>
+    <tr><td>Round 2 = in-person hackathon 25–26 July, pick 1 of 5 published AI/ML problem statements, build + pitch</td><td><span class="conf hi">official</span></td></tr>
+    <tr><td>Top performers → paid 6-month winter internship from Jan 2027, FTE conversion possible</td><td><span class="conf hi">official</span></td></tr>
+    <tr><td>~60–90 min total; ~10–15 tech MCQs (OS, DBMS, OOPS, pseudocode, C/C++ output) + aptitude</td><td><span class="conf med">triangulated</span></td></tr>
+    <tr><td>2–3 coding problems, easy→medium, arrays &amp; strings heavy</td><td><span class="conf med">multiple reports</span></td></tr>
+    <tr><td>Per-test-case partial credit in the coding section</td><td><span class="conf lo">likely, unconfirmed</span></td></tr>
+    <tr><td>Worst case: one harder problem (DP / trees / graphs) like the 2024-25 HackerEarth drive</td><td><span class="conf lo">outlier report</span></td></tr>
+  </table>
+  <div class="card amber"><b>Calibration:</b> the most recent directly-relevant report (2026-batch intern OA) said: aptitude + OS/DBMS/OOPS MCQs + <b>2 coding problems on arrays and strings, easy-to-medium</b>, and that <i>"time management was important, especially for the second coding problem."</i> Funnel that year: 150 sat → 40 cleared the OA → 8 final offers.</div>
+  <div class="card blue"><b>HirePro platform facts (from HirePro's own help center):</b> Chrome-only · webcam+mic recorded with AI + manual proctor review · tab-switch/fullscreen-exit = warnings then possible auto-logout · paste into the code editor is flagged with built-in plagiarism scoring · Python 3 fully supported · evaluation is test-case based with runtime/memory metrics · disconnect + re-login is officially recoverable.</div>
+</div>
+
+<!-- ══════════ LEARN ══════════ -->
+<div class="page" id="learn">
+  <h2>📖 The 7 things tomorrow tests</h2>
+  <div class="sub">Each ends with a "prove it" — if you can't answer it cold, that's your gap.</div>
+
+  <div class="card">
+    <h3>1 · Arrays &amp; strings patterns (the coding section's bread and butter)</h3>
+    <ul>
+      <li><b>Single-pass counter:</b> max consecutive 1s, streaks, run-length. Reset on break, track best. O(n).</li>
+      <li><b>Two pointers:</b> pair-sum in sorted array, reverse, palindrome check. Move the pointer that helps.</li>
+      <li><b>Sliding window:</b> longest substring/subarray under a constraint — grow right, shrink left while invalid.</li>
+      <li><b>Hashing:</b> frequency maps for anagrams, first-non-repeating, duplicates. <code>collections.Counter</code> is your friend.</li>
+      <li><b>Prefix sums:</b> range sums, equilibrium index.</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> longest streak of 1s in <code>[1,1,0,1,1,1,0,1]</code> — what do you track per step, and what's the answer? <i>(best=3; track current run + best, reset current on 0)</i></div>
+  </div>
+
+  <div class="card">
+    <h3>2 · Raw stdin I/O in Python (HirePro is NOT LeetCode)</h3>
+    No function signatures — you read stdin, print stdout. Memorize this skeleton:
+<pre>import sys
+input = sys.stdin.readline
+
+n = int(input())
+arr = list(map(int, input().split()))
+# ... solve ...
+print(answer)</pre>
+    Multiple test cases usually come as <code>t = int(input())</code> then a loop. Print <b>exactly</b> what's asked — no labels like "Answer:", no extra spaces.
+    <div class="talk"><b>Prove it:</b> input is "3&#10;1 2 3" (n, then n ints). Write the two read lines from memory.</div>
+  </div>
+
+  <div class="card">
+    <h3>3 · OOPS rapid theory</h3>
+    <ul>
+      <li>4 pillars: <b>encapsulation</b> (bundle data+methods, restrict access), <b>abstraction</b> (hide implementation, expose interface), <b>inheritance</b>, <b>polymorphism</b>.</li>
+      <li><b>Overloading</b> = same name, different params, resolved at <b>compile time</b>. <b>Overriding</b> = subclass redefines, resolved at <b>runtime</b> (virtual dispatch).</li>
+      <li>Abstract class: can hold constructors + instance state; interface (Java): contract only. Python does multiple inheritance (MRO); Java classes don't.</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> which pillar does <code>private</code> + getters/setters implement, and which one is "runtime polymorphism"?</div>
+  </div>
+
+  <div class="card">
+    <h3>4 · OS essentials</h3>
+    <ul>
+      <li>Process = own address space; <b>threads share</b> code/heap/globals but have <b>own stack + registers</b>.</li>
+      <li>Scheduling: FCFS, SJF (starvation risk!), Round Robin (time quantum), Priority (starvation → fix with aging).</li>
+      <li>Deadlock's 4 conditions: mutual exclusion, hold &amp; wait, <b>no preemption</b>, circular wait.</li>
+      <li>Virtual memory: page fault = page not in RAM; too many = <b>thrashing</b>.</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> name the 4 deadlock conditions in under 10 seconds.</div>
+  </div>
+
+  <div class="card">
+    <h3>5 · DBMS essentials</h3>
+    <ul>
+      <li>Normalization: 1NF atomic values → 2NF no <b>partial</b> dependency → 3NF no <b>transitive</b> dependency.</li>
+      <li>ACID: Atomicity, Consistency, <b>Isolation</b> (concurrent txns don't see each other's intermediate state), Durability.</li>
+      <li>Index: faster SELECT, <b>slower</b> INSERT/UPDATE/DELETE. Primary key = UNIQUE + NOT NULL.</li>
+      <li>Joins: INNER = matches only; LEFT = all left rows, NULLs where unmatched. GROUP BY + HAVING filters groups.</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> what exactly does 2NF eliminate, and on what kind of key does that situation arise? <i>(partial dependency — composite primary key)</i></div>
+  </div>
+
+  <div class="card">
+    <h3>6 · Pseudocode / output prediction technique</h3>
+    <ul>
+      <li><b>Trace on paper, always.</b> Make a variable table; update per iteration. Mental tracing is where marks die.</li>
+      <li>C increments: <code>b = a++</code> → b gets old value; <code>b = ++a</code> → b gets new value.</li>
+      <li>Loop off-by-ones: <code>range(5)</code> = 0..4; <code>while i &lt; 10: i *= 2</code> from 1 hits 1,2,4,8.</li>
+      <li>Recursion: unwind to base case, then roll back up.</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> f(n) = f(n−1) + 2, f(0) = 0. What's f(4)? <i>(8)</i></div>
+  </div>
+
+  <div class="card">
+    <h3>7 · Aptitude speed math</h3>
+    <ul>
+      <li>Successive % change: +a% then −a% → net <b>−a²/100 %</b> (e.g. +20 then −20 = −4%).</li>
+      <li>Time &amp; work: rates add. A in 12d + B in 18d → 1/12 + 1/18 = 5/36 → 7.2 days.</li>
+      <li>Trains: km/h × 5/18 = m/s. Passing a pole: time = length ÷ speed.</li>
+      <li>Average speed over equal distances = harmonic mean: 2xy/(x+y).</li>
+      <li>Dice/coins: count favorable ÷ total (36 for two dice, 2ⁿ for n coins).</li>
+    </ul>
+    <div class="talk"><b>Prove it:</b> 60 km at 30 km/h then 60 km at 60 km/h — average speed? <i>(40, not 45)</i></div>
+  </div>
+</div>
+
+<!-- ══════════ DRILL ══════════ -->
+<div class="page" id="drill">
+  <h2>⚡ Drill</h2>
+  <div class="sub">30 questions in Honeywell's reported MCQ mix. Answer → instant feedback → misses go to Weak spots.</div>
+  <div class="modes" id="drillmodes"></div>
+  <div id="drillarea"></div>
+</div>
+
+<!-- ══════════ WEAK ══════════ -->
+<div class="page" id="weak">
+  <h2>🔁 Weak spots</h2>
+  <div class="sub">Everything you've missed and not yet re-answered correctly. Get this to zero before the mock.</div>
+  <div id="weakarea"></div>
+</div>
+
+<!-- ══════════ MOCK ══════════ -->
+<div class="page" id="mock">
+  <h2>📝 Timed mock — 12 MCQs · 12 minutes</h2>
+  <div class="sub">Fresh questions (not from the drill bank), paced at HirePro's reported ~1 min/MCQ. No feedback until the end. Exam conditions: fullscreen, phone away.</div>
+  <div id="mockarea"><button class="go" onclick="startMock()">▶ Start mock</button></div>
+</div>
+
+<!-- ══════════ CODING ══════════ -->
+<div class="page" id="code">
+  <h2>💻 Predicted coding section</h2>
+  <div class="sub">3 originals in the exact style of reported Honeywell problems (arrays/strings easy-medium + one DP stretch). Solve in a plain editor with stdin input — 25 min cap each. Python 3.</div>
+
+  <div class="card mint">
+    <h3 style="margin-top:0">Q1 · Sensor Uptime Streak <span class="small">(easy — pattern of the reported "max consecutive 1s")</span></h3>
+    <p>A machine reports its status every minute: <code>1</code> = online, <code>0</code> = offline. Given the day's log, print the length of the longest continuous online streak.</p>
+    <pre>Input:  line 1: n (1 ≤ n ≤ 10⁵)
+        line 2: n space-separated integers (each 0 or 1)
+Output: one integer — longest run of 1s
+
+Sample in:   8
+             1 1 0 1 1 1 0 1
+Sample out:  3</pre>
+    <details><summary>Hint</summary>Track <code>cur</code> and <code>best</code>. On 1: cur += 1, best = max(best, cur). On 0: cur = 0. One pass, O(n), O(1) space.</details>
+    <details><summary>Solution + the twist to expect</summary>
+<pre>import sys
+input = sys.stdin.readline
+n = int(input())
+a = list(map(int, input().split()))
+cur = best = 0
+for x in a:
+    cur = cur + 1 if x == 1 else 0
+    best = max(best, cur)
+print(best)</pre>
+    <b>Likely twist:</b> "you may flip at most k zeros" → sliding window: grow right, count zeros in window, shrink left while zeros &gt; k; answer = max window size.</details>
+  </div>
+
+  <div class="card amber">
+    <h3 style="margin-top:0">Q2 · Third Largest Alert Code <span class="small">(easy-medium — the reported "third largest string" verbatim pattern)</span></h3>
+    <p>Alerts arrive as strings. Print the <b>third largest distinct</b> string in lexicographic (dictionary) order. If fewer than 3 distinct strings exist, print <code>NONE</code>.</p>
+    <pre>Input:  line 1: n (1 ≤ n ≤ 10⁴)
+        next n lines: one lowercase string each
+Output: the third largest distinct string, or NONE
+
+Sample in:   5
+             fire
+             smoke
+             gas
+             fire
+             heat
+Sample out:  gas   (distinct sorted desc: smoke, heat, gas, fire)</pre>
+    <details><summary>Hint</summary><code>set()</code> to dedupe → <code>sorted(..., reverse=True)</code> → index 2 if length ≥ 3. Watch the trap: duplicates must not count twice.</details>
+    <details><summary>Solution</summary>
+<pre>import sys
+data = sys.stdin.read().split()
+n = int(data[0])
+s = sorted(set(data[1:n+1]), reverse=True)
+print(s[2] if len(s) >= 3 else "NONE")</pre></details>
+  </div>
+
+  <div class="card pink">
+    <h3 style="margin-top:0">Q3 · Non-Adjacent Sensor Load <span class="small">(medium — easy-DP stretch, house-robber pattern)</span></h3>
+    <p>n sensors sit in a row; sensor i draws <code>p[i]</code> watts when enabled. Adjacent sensors interfere, so no two neighbours may both be enabled. Print the maximum total wattage achievable.</p>
+    <pre>Input:  line 1: n (1 ≤ n ≤ 10⁵)
+        line 2: n non-negative integers p[i] ≤ 10⁴
+Output: one integer — max sum of non-adjacent elements
+
+Sample in:   5
+             3 2 7 10 1
+Sample out:  13   (3 + 10, or 3+7+1=11 &lt; 13)</pre>
+    <details><summary>Hint</summary>For each i: either skip it (best so far) or take it (p[i] + best up to i−2). Two rolling variables, no array needed.</details>
+    <details><summary>Solution</summary>
+<pre>import sys
+input = sys.stdin.readline
+n = int(input())
+p = list(map(int, input().split()))
+take = skip = 0          # best ending with/without current
+for x in p:
+    take, skip = skip + x, max(skip, take)
+print(max(take, skip))</pre></details>
+  </div>
+
+  <details><summary>⚡ Rapid patterns for the outlier topics (linked list · trees) — 5-min read, don't over-invest</summary>
+    <ul style="margin-top:8px">
+      <li><b>Cycle in linked list</b> (reported): Floyd's — slow ×1, fast ×2; they meet ⇒ cycle. Loop start: reset one pointer to head, advance both ×1 until they meet.</li>
+      <li><b>Two nodes are siblings</b> (reported): BFS/DFS — find a node whose two children are exactly the pair (order-agnostic).</li>
+      <li><b>FizzBuzz</b> (reported): check <code>% 15</code> first.</li>
+      <li><b>Missing digits in expression:</b> brute force 0–9 into the blank and test the equation.</li>
+    </ul>
+  </details>
+
+  <div class="talk"><b>Exam tactics:</b> read <b>both/all</b> problems first, solve the easier one completely before touching the harder one (that 2026 report: "time management was important, especially for the second problem"). Partial credit is likely per test case — a brute-force that passes 60% beats an unfinished optimal. And print exactly the asked format.</div>
+</div>
+
+<!-- ══════════ ROUND 2 ══════════ -->
+<div class="page" id="round2">
+  <h2>🏗️ Round 2 — the real hackathon (25–26 July, in person)</h2>
+  <div class="sub">Only if you clear tomorrow — but 30 minutes of thinking now = a weekend head start. Individual. Pick 1 of 5 published statements, build, pitch.</div>
+  <div class="card">
+    <h3 style="margin-top:0">The 5 published problem statements</h3>
+    <ol>
+      <li><b>LLM-powered building energy optimization</b> ← 🎯 <b>your pick</b></li>
+      <li>Fire evacuation routing with real-time hazard detection</li>
+      <li>Behavioral anomaly detection for cybersecurity</li>
+      <li>Autonomous oil well production control</li>
+      <li>AI-driven paper manufacturing quality prediction</li>
+    </ol>
+  </div>
+  <div class="card mint">
+    <h3 style="margin-top:0">Why #1 is your home turf</h3>
+    It's literally your resume: an LLM/RAG pipeline over streams of unstructured data. A.R.G.U.S-V (LangGraph orchestration + semantic retrieval) and the FOMC pipeline (multimodal → structured insights) are the same architecture pointed at building-sensor data + energy bills instead of videos and transcripts. Sketch: ingest sensor/weather/tariff data → RAG over building docs &amp; HVAC manuals → LLM agent recommends setpoint schedules → natural-language interface for the facilities manager ("why is Block C expensive on Mondays?").
+  </div>
+  <div class="card amber">
+    <h3 style="margin-top:0">What judges rewarded last year</h3>
+    <i>"Clarity and structure — showing how you'd improve your solution, even if it's not perfect."</i> Pitch skeleton: problem → architecture diagram → small live demo → honest limitations → improvement roadmap. A working thin slice + crisp story beats a broken ambitious build. Last year's winning example was Flight Schedule Optimization with an AI model + NLP interface — same shape as the sketch above.
+  </div>
+</div>
+
+<!-- ══════════ INTERVIEW ══════════ -->
+<div class="page" id="talk">
+  <h2>🎤 Round 3 — tech + HR combined (~20–25 min, resume-heavy)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Actually-asked technical questions</h3>
+    <ul>
+      <li>Reverse a linked list — <b>iterative AND recursive, with complexity</b> (asked verbatim)</li>
+      <li>Knapsack; "what's your favorite algorithm?" (one candidate answered Dijkstra — have yours ready + why)</li>
+      <li>OS: processes vs threads, scheduling · DBMS: normalization, indexing, transactions · OOPS pillars</li>
+      <li>Scenario: design a database for a bank · how would you handle many concurrent user requests?</li>
+    </ul>
+  </div>
+  <div class="card mint">
+    <h3 style="margin-top:0">Projects dominate — prep these stories</h3>
+    <ul>
+      <li><b>A.R.G.U.S-V:</b> 90-second version: problem → LangGraph architecture → hardest bug you fixed → what you'd improve. Expect "why LangGraph?", "what is RAG actually doing?", "how do you evaluate output quality?"</li>
+      <li><b>FOMC pipeline:</b> lead with the industrial-data angle — unstructured multimodal → structured queryable. That's Honeywell's business in miniature.</li>
+      <li><b>SIH team lead:</b> conflict handled, deadline trade-off made, how you split work — one concrete story each.</li>
+    </ul>
+  </div>
+  <div class="card amber">
+    <h3 style="margin-top:0">HR layer</h3>
+    <ul>
+      <li><b>Why Honeywell:</b> name real businesses — building automation, industrial/process automation, aerospace. Tie to your interest in software that touches physical systems.</li>
+      <li>Relocation: yes. Winter internship Jan 2027 timing: confirm your university allows it <b>before</b> the interview.</li>
+      <li>Teamwork answer = SIH story. Career goal: engineer who ships AI systems into real industrial products.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ SOURCES ══════════ -->
+<div class="page" id="src">
+  <h2>📚 Sources</h2>
+  <div class="sub">Full annotated notes in <code>research.txt</code> (same folder).</div>
+  <ol class="small" style="line-height:2">
+    <li>Official event site — honeywelltechnologiescampusconnect.mycareernet.co (redirect of honeywellcampusconnect.hirepro.in) — format, dates, rounds, prize, problem statements</li>
+    <li>GfG — Honeywell Interview Experience for Software Intern (2026 batch) — OA content, funnel, interview Qs</li>
+    <li>GfG — Honeywell on-campus experiences (2020–22) — legacy question pool</li>
+    <li>Interview Query — Honeywell SE guide</li>
+    <li>PrepInsta — HirePro technical section pattern</li>
+    <li>GfG — Honeywell Internship 2024-25 (HackerEarth outlier drive)</li>
+    <li>Medium (Rishi Guptha, Oct 2025) — prior Campus Connect edition walkthrough, Round 2 &amp; 3 detail</li>
+    <li>HirePro assessment help center — browser/proctoring/disconnection rules</li>
+    <li>HirePro proctoring product page</li>
+    <li>FacePrep — HirePro test pattern</li>
+    <li>HirePro coding assessments product — languages, evaluation metrics</li>
+    <li>GfG — Honeywell Connected Enterprise internship experience</li>
+    <li>GfG — Honeywell Software 2022 experience</li>
+  </ol>
+</div>
+
+</div>
+<script>
+/* ───────── question bank ───────── */
+const QBANK = [
+ {id:'ap1',t:'Aptitude',q:'A price is increased by 20% and then decreased by 20%. Net change?',o:['No change','−4%','+4%','−2%'],a:1,e:'Successive change: +a then −a → −a²/100 = −4%. (1.2 × 0.8 = 0.96)'},
+ {id:'ap2',t:'Aptitude',q:'A finishes a job in 12 days, B in 18 days. Working together, they take:',o:['7.2 days','7.5 days','6 days','15 days'],a:0,e:'Rates add: 1/12 + 1/18 = 5/36 → 36/5 = 7.2 days.'},
+ {id:'ap3',t:'Aptitude',q:'A 150 m train at 54 km/h passes a pole in:',o:['8 s','10 s','12 s','15 s'],a:1,e:'54 km/h × 5/18 = 15 m/s → 150/15 = 10 s.'},
+ {id:'ap4',t:'Aptitude',q:'₹720 is divided in ratio 2:3:4. The largest share is:',o:['₹240','₹160','₹320','₹360'],a:2,e:'Unit = 720/9 = 80 → shares 160/240/320.'},
+ {id:'ap5',t:'Aptitude',q:'Two dice are rolled. P(sum = 9)?',o:['1/6','1/9','1/12','5/36'],a:1,e:'Favorable: (3,6)(4,5)(5,4)(6,3) = 4 of 36 = 1/9.'},
+ {id:'ap6',t:'Aptitude',q:'Next in series: 2, 6, 12, 20, 30, ?',o:['36','40','42','44'],a:2,e:'n² + n: 1·2, 2·3, 3·4, 4·5, 5·6 → 6·7 = 42.'},
+ {id:'os1',t:'OS',q:'Threads of the same process do NOT share:',o:['Heap memory','Global variables','Code section','Stack'],a:3,e:'Each thread has its own stack and registers; heap/globals/code are shared.'},
+ {id:'os2',t:'OS',q:'Which scheduling algorithm risks starvation of long jobs?',o:['Round Robin','FCFS','Shortest Job First','None of these'],a:2,e:'SJF (and plain priority) can starve long/low-priority jobs; aging fixes it.'},
+ {id:'os3',t:'OS',q:'Which is NOT one of the four necessary deadlock conditions?',o:['Mutual exclusion','Preemption','Hold and wait','Circular wait'],a:1,e:'The condition is NO preemption. Preemption existing actually helps break deadlocks.'},
+ {id:'os4',t:'OS',q:'A page fault occurs when:',o:['A page has a checksum error','The referenced page is not in main memory','TLB is full','A page is written to disk'],a:1,e:'Page fault = referenced page absent from RAM; OS loads it from disk. Excessive faults = thrashing.'},
+ {id:'db1',t:'DBMS',q:'2NF specifically eliminates:',o:['Transitive dependency','Partial dependency','Multivalued dependency','Join dependency'],a:1,e:'2NF: no non-key attribute depends on part of a composite key. 3NF kills transitive deps.'},
+ {id:'db2',t:'DBMS',q:'"Isolation" in ACID means:',o:['Data survives crashes','Transactions are all-or-nothing','Concurrent transactions don\'t see each other\'s intermediate state','Constraints always hold'],a:2,e:'Durability = survives crashes; Atomicity = all-or-nothing; Consistency = constraints hold.'},
+ {id:'db3',t:'DBMS',q:'Adding an index on a column typically:',o:['Speeds up SELECT and INSERT','Speeds up SELECT, slows INSERT/UPDATE','Slows everything','Only affects storage'],a:1,e:'Reads get faster lookups; every write must also maintain the index structure.'},
+ {id:'db4',t:'DBMS',q:'A LEFT JOIN returns:',o:['Only matching rows','All left-table rows, NULLs for unmatched right columns','All right-table rows','The cartesian product'],a:1,e:'Matching rows = INNER JOIN. Cartesian product = CROSS JOIN.'},
+ {id:'db5',t:'DBMS',q:'Table depts: A,A,B,B,C. Query: SELECT dept, COUNT(*) ... GROUP BY dept HAVING COUNT(*) > 1. Rows returned?',o:['1','2','3','5'],a:1,e:'Groups: A=2, B=2, C=1. HAVING filters groups → A and B → 2 rows.'},
+ {id:'op1',t:'OOPS',q:'Method overriding is resolved at:',o:['Compile time','Runtime','Link time','Load time'],a:1,e:'Overriding = runtime (dynamic dispatch). Overloading = compile time.'},
+ {id:'op2',t:'OOPS',q:'Bundling data with the methods that operate on it, restricting direct access, is:',o:['Abstraction','Encapsulation','Inheritance','Polymorphism'],a:1,e:'Encapsulation = the private-fields-plus-getters pattern. Abstraction hides implementation behind an interface.'},
+ {id:'op3',t:'OOPS',q:'An abstract class differs from a (Java) interface because it can:',o:['Be instantiated','Have constructors and instance state','Not be extended','Have no methods'],a:1,e:'Abstract classes carry constructors + fields; neither can be instantiated directly.'},
+ {id:'op4',t:'OOPS',q:'Multiple inheritance of classes is supported in:',o:['Java','Python','Neither','Both'],a:1,e:'Python resolves it via MRO (C3 linearization). Java allows it only for interfaces.'},
+ {id:'pc1',t:'Pseudocode',q:'x = 0; for i = 1 to 5: x = x + i. Final x?',o:['10','15','5','20'],a:1,e:'1+2+3+4+5 = 15.'},
+ {id:'pc2',t:'Pseudocode',q:'C: int a = 5; int b = a++; Now a and b are:',o:['a=6, b=6','a=5, b=6','a=6, b=5','a=5, b=5'],a:2,e:'Post-increment: b takes the OLD value (5), then a becomes 6. ++a would give b=6.'},
+ {id:'pc3',t:'Pseudocode',q:'Python: "honeywell"[::-1] evaluates to:',o:['"honeywell"','"llewyenoh"','error','"lleweynoh"'],a:1,e:'[::-1] reverses the string.'},
+ {id:'pc4',t:'Pseudocode',q:'f(n) = f(n−1) + 2 with f(0) = 0. f(4) = ?',o:['6','8','10','16'],a:1,e:'Each step adds 2: f(4) = 4 × 2 = 8.'},
+ {id:'pc5',t:'Pseudocode',q:'i = 1; s = 0; while i < 10: s += i; i *= 2. Final s?',o:['15','10','31','7'],a:0,e:'i takes 1, 2, 4, 8 → s = 1+2+4+8 = 15.'},
+ {id:'ds1',t:'DSA',q:'Which structure gives Last-In-First-Out?',o:['Queue','Stack','Heap','Deque'],a:1,e:'Stack = LIFO. Queue = FIFO.'},
+ {id:'ds2',t:'DSA',q:'Binary search requires ___ and runs in ___:',o:['Sorted data, O(log n)','Any data, O(log n)','Sorted data, O(n)','Hashed data, O(1)'],a:0,e:'Halving only works when order tells you which half to keep.'},
+ {id:'ds3',t:'DSA',q:'Average-case lookup in a hash table:',o:['O(n)','O(log n)','O(1)','O(n log n)'],a:2,e:'O(1) average; O(n) worst case when everything collides.'},
+ {id:'ds4',t:'DSA',q:'Standard way to detect a cycle in a linked list:',o:['Sort the nodes','Floyd\'s slow/fast pointers','BFS','Binary search'],a:1,e:'Slow ×1 and fast ×2 meet iff a cycle exists — O(n) time, O(1) space. (Reported Honeywell question!)'},
+ {id:'ds5',t:'DSA',q:'Best approach for "max consecutive 1s in a binary array":',o:['Sort first','Nested loops O(n²)','Single pass with a run counter','Prefix sums'],a:2,e:'Track current run + best, reset on 0. This exact problem appeared in past Honeywell drives.'},
+ {id:'ds6',t:'DSA',q:'Optimal for pair-with-target-sum in a SORTED array:',o:['Two pointers O(n)','Hash map O(n) + O(n) space','Both work; two pointers uses O(1) space','Binary search each element O(n log n)'],a:2,e:'All three work — but sorted input makes two pointers the O(1)-space winner.'}
+];
+const MOCK = [
+ {t:'Aptitude',q:'60 km at 30 km/h, then 60 km at 60 km/h. Average speed?',o:['45 km/h','40 km/h','42 km/h','48 km/h'],a:1,e:'Equal distances → harmonic mean 2·30·60/90 = 40.'},
+ {t:'Aptitude',q:'Simple interest on ₹8000 at 5% p.a. for 3 years:',o:['₹1200','₹1250','₹1500','₹400'],a:0,e:'8000 × 0.05 × 3 = 1200.'},
+ {t:'Aptitude',q:'Angle between clock hands at 3:30:',o:['90°','75°','60°','105°'],a:1,e:'|30H − 5.5M| = |90 − 165| = 75°.'},
+ {t:'Aptitude',q:'Three fair coins: P(all heads)?',o:['1/3','1/4','1/8','3/8'],a:2,e:'(1/2)³ = 1/8.'},
+ {t:'OS',q:'Saving one process\'s state and loading another\'s is called:',o:['Swapping','Context switch','Paging','Interrupt'],a:1,e:'Context switch — pure overhead, no useful work during it.'},
+ {t:'OS',q:'Thrashing means:',o:['CPU at 100%','Excessive paging, little real work','Deadlock','Disk failure'],a:1,e:'Too little RAM per process → constant page faults dominate execution.'},
+ {t:'DBMS',q:'A primary key is:',o:['Unique only','Not null only','Unique AND not null','A foreign reference'],a:2,e:'Both constraints together; one per table.'},
+ {t:'DBMS',q:'TRUNCATE differs from DELETE because TRUNCATE:',o:['Can use WHERE','Removes all rows fast, no row-level WHERE','Drops the table structure','Is slower'],a:1,e:'TRUNCATE = DDL-style bulk wipe, no WHERE. DROP removes the structure.'},
+ {t:'OOPS',q:'Exposing only essential features while hiding implementation is:',o:['Encapsulation','Abstraction','Overloading','Aggregation'],a:1,e:'Abstraction = the interface; encapsulation = the access-restriction mechanism.'},
+ {t:'Pseudocode',q:'for i in range(5): if i == 3: break; print(i) — how many numbers print?',o:['5','4','3','2'],a:2,e:'Prints 0, 1, 2 then breaks at i=3 → 3 numbers.'},
+ {t:'DSA',q:'A queue\'s enqueue and dequeue happen at:',o:['Same end','Opposite ends','Middle','Random'],a:1,e:'FIFO: insert at rear, remove at front.'},
+ {t:'DSA',q:'Inserting at the HEAD of a singly linked list is:',o:['O(1)','O(n)','O(log n)','O(n²)'],a:0,e:'New node → point to old head → done. Tail insert without a tail pointer is O(n).'}
+];
+const TOPICS = ['Aptitude','OS','DBMS','OOPS','Pseudocode','DSA'];
+
+/* ───────── state ───────── */
+const KEY = 'hw_prep_v1';
+let S = JSON.parse(localStorage.getItem(KEY) || 'null') || { hist:{}, right:0, wrong:0, cur:0, best:0, tstats:{} };
+function save(){ localStorage.setItem(KEY, JSON.stringify(S)); refreshStats(); }
+function weakIds(){ return QBANK.filter(q => S.hist[q.id] === 'W').map(q => q.id); }
+
+function refreshStats(){
+  const tot = S.right + S.wrong;
+  document.getElementById('s-acc').textContent = tot ? Math.round(100*S.right/tot) + '%' : '–';
+  document.getElementById('s-streak').textContent = S.best;
+  const due = weakIds().length;
+  document.getElementById('s-due').textContent = due;
+  const wt = document.getElementById('weaktab');
+  wt.querySelector('.badge')?.remove();
+  if (due) { const b = document.createElement('span'); b.className = 'badge'; b.textContent = due; wt.appendChild(b); }
+  const tb = document.getElementById('topicbars'); tb.innerHTML = '';
+  TOPICS.forEach(t => {
+    const st = S.tstats[t] || {r:0,w:0}; const n = st.r + st.w;
+    const pct = n ? Math.round(100*st.r/n) : 0;
+    tb.insertAdjacentHTML('beforeend',
+      `<div class="topicrow"><div class="tn">${t}</div><div class="bar"><div style="width:${pct}%"></div></div><div class="pct">${n? pct+'%':'—'}</div></div>`);
+  });
+}
+
+/* countdown to 21 July 2026, 6 PM IST */
+function tick(){
+  const ms = new Date('2026-07-21T18:00:00+05:30') - new Date();
+  document.getElementById('s-hours').textContent = ms > 0 ? Math.floor(ms/3.6e6) + 'h' : 'GO';
+}
+tick(); setInterval(tick, 60000);
+
+/* ───────── nav ───────── */
+document.getElementById('nav').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('nav button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.getElementById(b.dataset.p).classList.add('on');
+  if (b.dataset.p === 'weak') renderWeak();
+});
+
+/* ───────── drill engine ───────── */
+function shuffle(a){ a = a.slice(); for (let i = a.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+let queue = [], qi = 0, area = null;
+
+function renderQ(q, container, onDone, review){
+  const div = document.createElement('div');
+  div.className = 'qbox';
+  div.innerHTML = `<div class="topic">${q.t}</div><div class="qt">${q.q}</div><div class="opts"></div>
+    <div class="expl">${q.e}</div><div class="qmeta"><span class="small">${qi+1} / ${queue.length}</span><button class="nextbtn">Next →</button></div>`;
+  const opts = div.querySelector('.opts');
+  q.o.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.textContent = String.fromCharCode(65+i) + '. ' + o;
+    b.onclick = () => {
+      opts.querySelectorAll('button').forEach(x => x.disabled = true);
+      const ok = i === q.a;
+      b.classList.add(ok ? 'right' : 'wrong');
+      if (!ok) opts.children[q.a].classList.add('right');
+      div.querySelector('.expl').classList.add('show');
+      div.querySelector('.nextbtn').classList.add('show');
+      if (!review){
+        S.hist[q.id] = ok ? 'R' : 'W';
+        S[ok ? 'right' : 'wrong']++;
+        S.cur = ok ? S.cur + 1 : 0; S.best = Math.max(S.best, S.cur);
+        S.tstats[q.t] = S.tstats[q.t] || {r:0,w:0}; S.tstats[q.t][ok ? 'r' : 'w']++;
+        save();
+      }
+    };
+    opts.appendChild(b);
+  });
+  div.querySelector('.nextbtn').onclick = onDone;
+  container.innerHTML = ''; container.appendChild(div);
+}
+
+function stepDrill(container, review){
+  if (qi >= queue.length){
+    container.innerHTML = `<div class="card mint"><b>Set complete.</b> ${weakIds().length ? 'Misses are waiting in 🔁 Weak spots.' : 'No weak spots outstanding — nice.'}<br><button class="go" onclick="location.hash='';document.querySelector('nav button[data-p=drill]').click()">Drill again</button></div>`;
+    return;
+  }
+  renderQ(queue[qi], container, () => { qi++; stepDrill(container, review); }, review);
+}
+
+const dm = document.getElementById('drillmodes');
+['All', ...TOPICS].forEach(m => {
+  const b = document.createElement('button');
+  b.textContent = m;
+  b.onclick = () => {
+    dm.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    queue = shuffle(m === 'All' ? QBANK : QBANK.filter(q => q.t === m));
+    qi = 0;
+    stepDrill(document.getElementById('drillarea'), false);
+  };
+  dm.appendChild(b);
+});
+
+function renderWeak(){
+  const w = document.getElementById('weakarea');
+  const ids = weakIds();
+  if (!ids.length){ w.innerHTML = '<div class="card mint">Nothing due. Misses land here automatically.</div>'; return; }
+  queue = shuffle(QBANK.filter(q => ids.includes(q.id)));
+  qi = 0;
+  stepDrill(w, false);
+}
+
+/* ───────── mock ───────── */
+let mockAns = [], mockT = null, mockLeft = 0;
+function startMock(){
+  mockAns = new Array(MOCK.length).fill(-1);
+  mockLeft = 12 * 60;
+  renderMock(0);
+  clearInterval(mockT);
+  mockT = setInterval(() => {
+    mockLeft--;
+    const el = document.getElementById('mtimer');
+    if (el){ el.textContent = fmt(mockLeft); el.classList.toggle('low', mockLeft < 120); }
+    if (mockLeft <= 0) finishMock();
+  }, 1000);
+}
+function fmt(s){ return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+function renderMock(i){
+  const q = MOCK[i];
+  const a = document.getElementById('mockarea');
+  a.innerHTML = `<div class="qmeta" style="margin-bottom:8px"><span class="small">Q${i+1} / ${MOCK.length} · ${q.t}</span><span class="qtimer" id="mtimer">${fmt(mockLeft)}</span></div>
+    <div class="qbox"><div class="qt">${q.q}</div><div class="opts" id="mopts"></div>
+    <div class="qmeta"><button class="go ghost" id="mprev" ${i===0?'disabled':''}>← Back</button>
+    <button class="go" id="mnext">${i === MOCK.length-1 ? 'Finish ✓' : 'Next →'}</button></div></div>`;
+  const opts = document.getElementById('mopts');
+  q.o.forEach((o, j) => {
+    const b = document.createElement('button');
+    b.textContent = String.fromCharCode(65+j) + '. ' + o;
+    if (mockAns[i] === j) b.style.borderColor = '#d97757';
+    b.onclick = () => { mockAns[i] = j; renderMock(i); };
+    opts.appendChild(b);
+  });
+  document.getElementById('mprev').onclick = () => i > 0 && renderMock(i-1);
+  document.getElementById('mnext').onclick = () => i === MOCK.length-1 ? finishMock() : renderMock(i+1);
+}
+function finishMock(){
+  clearInterval(mockT);
+  const right = MOCK.reduce((n, q, i) => n + (mockAns[i] === q.a ? 1 : 0), 0);
+  let html = `<div class="card ${right >= 9 ? 'mint' : right >= 6 ? 'amber' : 'pink'}"><h3 style="margin-top:0">Score: ${right} / ${MOCK.length}</h3>
+    <div class="small">${right >= 9 ? 'OA-ready on MCQs — spend remaining time on coding.' : right >= 6 ? 'Solid but review the misses below, then hit Weak spots.' : 'Review every miss below, then redo Learn for those topics.'}</div></div>`;
+  MOCK.forEach((q, i) => {
+    const ok = mockAns[i] === q.a;
+    if (!ok) html += `<div class="qbox"><div class="topic">${q.t} · missed</div><div class="qt">${q.q}</div>
+      <div class="small">Your answer: <b style="color:#c4635a">${mockAns[i] >= 0 ? q.o[mockAns[i]] : '(blank)'}</b> · Correct: <b style="color:#90a883">${q.o[q.a]}</b></div>
+      <div class="expl show">${q.e}</div></div>`;
+  });
+  html += `<button class="go" onclick="startMock()">↻ Retake</button>`;
+  document.getElementById('mockarea').innerHTML = html;
+}
+
+refreshStats();
+</script>
+</body>
+</html>

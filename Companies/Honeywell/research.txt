@@ -1,0 +1,87 @@
+HONEYWELL CAMPUS CONNECT HACKATHON — RESEARCH NOTES
+Compiled 20 July 2026 (evening before Round 1). Candidate: S Sai Kumar, SASTRA, 2027 batch.
+Confidence labels: [CONFIRMED] official source · [MULTI] multiple reports · [SINGLE] one report · [SPEC] speculation/triangulation
+
+=== WHAT THE 21 JULY EVENT ACTUALLY IS ===
+[CONFIRMED] "Hackathon" is the umbrella name for the whole Campus Connect program. Round 1 on
+21-22 July is a timed, proctored ONLINE ASSESSMENT (aptitude + technical MCQs + coding
+challenges), taken INDIVIDUALLY. It is NOT a project-building event.
+Source: official event site https://honeywelltechnologiescampusconnect.mycareernet.co/
+(redirect target of honeywellcampusconnect.hirepro.in; mycareernet = HirePro's candidate brand)
+
+[CONFIRMED] Pipeline: Round 1 OA (21-22 Jul) -> Round 2 in-person hackathon (25-26 Jul,
+individual, pick 1 of 5 published problem statements, build + pitch) -> Round 3 interview
+(tech + HR combined).
+[CONFIRMED] Prize: top performers get a PAID 6-MONTH WINTER INTERNSHIP starting Jan 2027 at
+Honeywell India offices, performance-based FTE conversion.
+[CONFIRMED] Eligibility: 2027 batch, CS/IT/AI-ML/allied, 6.0+ CGPA, no backlogs, partner colleges.
+
+=== ROUND 1 FORMAT (duration/counts NOT officially published) ===
+[SPEC, triangulated] ~60-90 min total. Aptitude MCQs + ~10-15 technical MCQs
+(OS, DBMS, OOPS, CN, C/C++ output, pseudocode) + 2-3 coding problems, easy->medium,
+arrays/strings-heavy.
+[SINGLE, most recent+relevant] GfG Software Intern experience (2026 batch): OA = aptitude +
+OS/DBMS/OOPS MCQs + 2 coding problems on arrays and strings, easy-medium. 150 sat -> 40
+shortlisted. "Time management was important, especially for the second coding problem."
+[MULTI, mixed years] Other Honeywell OA reports: 3 coding easy-medium + ~15 MCQs, ~1 hr.
+[MULTI, platform-generic] PrepInsta HirePro pattern: 15 tech MCQs / 15 min, adaptive, no
+negative marking (Honeywell's config may differ).
+[SINGLE, outlier] 2024-25 internship drive on HackerEarth (different pipeline): 3 problems
+medium-hard (segment tree, graph, DP), 90 min. Worst-case ceiling, not the Campus Connect norm.
+[SINGLE, prior edition] Medium post by 2026-batch selected candidate (Oct 2025): identical
+3-round pipeline; Round 2 described as 48-hour hackathon; winner credited Striver A2Z sheet.
+
+=== HIREPRO PLATFORM RULES (from HirePro's own help center) ===
+[CONFIRMED for platform] Chrome 81+ ONLY. Laptop/desktop only (phones = "Device not
+Compatible"). Pop-ups/cookies enabled, no extensions, disable VPN/proxy, close other apps.
+[CONFIRMED] Webcam + mic mandatory (min 640x480), recorded throughout, AI + manual review.
+Face visible and well-lit at all times.
+[MULTI] Tab switching / leaving fullscreen = automatic warnings, can auto-logout.
+[MULTI] Copy-paste into coding editor blocked/flagged; plagiarism scoring built in.
+[CONFIRMED] Disconnection is recoverable: re-login with same credentials within the window.
+[CONFIRMED] Languages include Python 3, C++, Java, etc. Test-case-based evaluation with
+execution time/memory + code-quality metrics -> per-test-case partial credit likely [SPEC].
+
+=== QUESTION INTEL (reported Honeywell problems, by vintage) ===
+- 2 problems, arrays + strings, easy-medium (2026-batch intern OA) [SINGLE]
+- Easy DSA + DP problem + tree problem (Honeywell Connected Enterprise intern, HackerRank) [SINGLE]
+- Segment tree, graph, DP medium-hard (2024-25, HackerEarth outlier) [SINGLE]
+- Older full-time drives (2020-2022, directional): max consecutive 1s/0s; detect loop in
+  linked list + print loop start; check if two tree nodes are siblings; third largest string;
+  missing digits in expression; FizzBuzz [MULTI]
+- MCQ topics: quant/logical/verbal aptitude, OS, DBMS, OOPS, CN, C/C++ output, pseudocode [MULTI]
+
+=== ROUND 2 (25-26 JULY) PROBLEM STATEMENTS, THIS EDITION ===
+[CONFIRMED] Pick 1 of 5 (all AI/ML-flavored):
+1. LLM-powered building energy optimization
+2. Fire evacuation routing with real-time hazard detection
+3. Behavioral anomaly detection for cybersecurity
+4. Autonomous oil well production control
+5. AI-driven paper manufacturing quality prediction
+Judges reward "clarity and structure - showing how you'd improve your solution, even if it's
+not perfect." Last year's example: Flight Schedule Optimization with AI model + NLP interface.
+
+=== ROUND 3 INTERVIEW (tech + HR combined) ===
+- DSA: reverse linked list (iterative + recursive, with complexity), knapsack, "favorite
+  algorithm" (one candidate answered Dijkstra), complexity analysis
+- Core CS: OS (process/thread/scheduling), DBMS (normalization/indexing/transactions), OOPS;
+  scenario Qs (design a DB for a bank; handle many concurrent requests)
+- Projects dominate; some candidates report the round was almost entirely HR/project-focused
+- HR: why Honeywell (know products: aerospace, building automation, industrial), relocation,
+  teamwork, goals. ~20-25 min.
+- Funnel (2026-batch intern drive): 150 -> 40 (OA) -> 18 -> 8 selected.
+
+=== SOURCES ===
+1.  https://honeywelltechnologiescampusconnect.mycareernet.co/  (official; via honeywellcampusconnect.hirepro.in)
+2.  https://www.geeksforgeeks.org/interview-experiences/honeywell-interview-experience-for-software-intern/
+3.  https://www.geeksforgeeks.org/interview-experiences/honeywell-interview-experience-on-campus/
+4.  https://www.interviewquery.com/interview-guides/honeywell-software-engineer
+5.  https://prepinsta.com/hirepro-technical-dashboard/
+6.  https://www.geeksforgeeks.org/interview-experiences/honeywell-internship-interview-experience-2024-25/
+7.  https://rishiguptha45.medium.com/how-i-got-placed-at-honeywell-my-journey-tips-and-lessons-5a5e087f638f
+8.  https://assessmenthelp.hirepro.in/nism/
+9.  https://hirepro.in/products/hirepro-proctoring/
+10. https://faceprep.in/article/hirepro-placement-papers-with-hirepro-test-questions-hirepro-previous-year-questions/
+11. https://hirepro.in/products/hirepro-coding-assessments/
+12. https://www.geeksforgeeks.org/interview-experiences/honeywell-connected-enterprise-interview-experience-for-internship-on-campus/
+13. https://www.geeksforgeeks.org/honeywell-software-interview-experience-2022/

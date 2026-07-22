@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Plans — The Contract & Hell Week</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; min-height: 100vh; line-height: 1.6; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 16px 90px; }
+  header { text-align: center; padding: 40px 0 20px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 30px; font-weight: 500; }
+  h1 span { color: #d97757; }
+  .tagline { color: #b8b5ad; font-size: 14px; max-width: 640px; margin: 10px auto 0; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 22px; font-weight: 500; margin: 36px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 2px 0 14px; }
+  .bar-outer { background: #30302e; border: 1px solid #3f3e3a; border-radius: 10px; height: 14px; overflow: hidden; margin: 6px 0 2px; }
+  .bar-inner { height: 100%; background: #d97757; width: 0%; transition: width .3s; }
+  .bar-label { font-size: 12px; color: #b8b5ad; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.mint  { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.blue  { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .card.red   { border-left: 3px solid #c96f6f; border-radius: 0 14px 14px 0; }
+  .day-head { display: flex; justify-content: space-between; align-items: baseline; cursor: pointer; user-select: none; }
+  .day-head .when { font-size: 12px; color: #d3a13f; font-weight: 600; }
+  .day-head .count { font-size: 12px; color: #8e8b83; }
+  .blockname { font-size: 12.5px; font-weight: 700; color: #90a883; text-transform: uppercase; letter-spacing: .4px; margin: 10px 0 4px; }
+  label.task { display: flex; gap: 9px; align-items: flex-start; padding: 5px 6px; border-radius: 8px; font-size: 13.5px; color: #dedbd3; cursor: pointer; }
+  label.task:hover { background: #383733; }
+  label.task input { margin-top: 3px; accent-color: #d97757; }
+  label.task a { color: #7f9cc0; text-decoration: none; }
+  label.task a:hover { color: #a9c2e0; text-decoration: underline; }
+  label.task.done { color: #8e8b83; text-decoration: line-through; }
+  label.task.done a { color: #6b7f99; }
+  .rules { font-size: 13px; color: #b8b5ad; }
+  .rules li { margin: 5px 0 5px 18px; }
+  .note { font-size: 12.5px; color: #d3a13f; margin-top: 8px; }
+  .pill { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 10px; border-radius: 10px; border: 1px solid #45443f; color: #90a883; margin-left: 8px; }
+  .pill.hard { color: #c96f6f; }
+  .switch { display: flex; gap: 8px; justify-content: center; margin: 18px 0 6px; flex-wrap: wrap; }
+  .switch button { font-size: 13.5px; font-weight: 600; padding: 9px 18px; border-radius: 12px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .switch button.active { border-color: #d97757; color: #f0efea; background: #3a332f; }
+  .plan { display: none; }
+  .plan.visible { display: block; }
+  .collapsible .body { display: none; margin-top: 4px; }
+  .collapsible.open .body { display: block; }
+  .weekgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 6px; margin-top: 8px; }
+  .weekgrid label.task { font-size: 12.5px; padding: 6px; border: 1px solid #3f3e3a; border-radius: 8px; }
+  footer { border-top: 1px solid #3f3e3a; margin-top: 46px; padding-top: 20px; text-align: center; font-size: 12px; color: #8e8b83; }
+  footer a { color: #e0987d; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🗺️ Training <span>Plans</span></h1>
+  <p class="tagline">Written 22 July 2026, after going 0-for-5 on OAs with prediction-based cramming. The fix: volume + exam-tier practice. Two paths — the sustainable contract, and the one-week push. Check boxes as you go; progress saves in this browser.</p>
+</header>
+
+<div class="card amber">
+  <h3>⚖️ Non-negotiables (both plans)</h3>
+  <ul class="rules">
+    <li><b>Typed & submitted</b> — every problem written in full in a real editor and submitted. Reading solutions ≠ reps.</li>
+    <li><b>Timer on everything.</b> 25-min cap per DSA problem: cap hit → read the <i>approach only</i> → close it → type the full solution from blank.</li>
+    <li><b>Misses get root causes</b>, logged in the mistake log — never shrugs.</li>
+    <li><b>Cold mocks are the only readiness signal we trust.</b> No more "feels ready".</li>
+    <li><b>Company prep = format & logistics recon only</b> (platform, sections, allowed languages) + one format-matched mock 2 days out. No content-prediction cramming, ever again.</li>
+  </ul>
+  <p class="note">Honest math: expertise ≈ 300 reps. Hell Week buys ~40, the Contract buys ~170 more. That's the whole strategy — there is no shortcut, only the ladder.</p>
+</div>
+
+<div class="switch">
+  <button id="btnB" class="active" onclick="showPlan('B')">🔥 Plan B — Hell Week (23–29 Jul)</button>
+  <button id="btnA" onclick="showPlan('A')">📜 Plan A — The Contract (30 Jul–21 Sep)</button>
+</div>
+
+<!-- ============ PLAN B — HELL WEEK ============ -->
+<div class="plan visible" id="planB">
+  <h2>🔥 Hell Week <span class="pill hard">~6–7 h/day · 7 days</span></h2>
+  <p class="sub">Daily shape: <b>Morning</b> 5 DSA (25-min caps) · <b>Midday</b> 7 SQL (executed, not eyeballed) · <b>Afternoon</b> re-solve yesterday's misses from a BLANK editor + 30 min timed aptitude · <b>Evening</b> odd days = cold mini-mock, even days = 2 hard problems with tutor. Sleep 7+ hrs — it's part of the plan. Miss a day → drop into Plan A. No making up.</p>
+  <div class="bar-outer"><div class="bar-inner" id="barB"></div></div>
+  <div class="bar-label" id="barBlabel"></div>
+  <p class="note">⚠️ If Honeywell Round 2 happens (in-person hackathon, 25–26 Jul), those days ARE the hackathon — Hell Week pauses and resumes after. That's a win, not a miss.</p>
+  <div id="hellweek"></div>
+</div>
+
+<!-- ============ PLAN A — THE CONTRACT ============ -->
+<div class="plan" id="planA">
+  <h2>📜 The Contract <span class="pill">~2–2.5 h/day · 8 weeks</span></h2>
+  <p class="sub">The daily loop, every single day: <b>3 DSA problems</b> from <a href="dsa_drill_expanded.html" style="color:#7f9cc0">the 210-tracker</a> in ladder order (~90 min) + <b>20 min timed aptitude</b>. <b>Mon/Wed/Fri:</b> +30 min SQL (LeetCode <a href="https://leetcode.com/studyplan/top-sql-50/" style="color:#7f9cc0">SQL 50</a>, in order — continue past Hell Week's progress). <b>Sunday:</b> cold 2-hour mock (MCQ block + 2–3 DSA + 1 SQL), honestly scored; misses become next week's drills. A short day is 1 problem — never 0.</p>
+  <div class="bar-outer"><div class="bar-inner" id="barA"></div></div>
+  <div class="bar-label" id="barAlabel"></div>
+  <div id="contract"></div>
+  <div class="card mint">
+    <h3>🎯 Milestones — how we know it's working</h3>
+    <ul class="rules">
+      <li><b>End of Week 2:</b> arrays/strings/hashing clean at medium tier</li>
+      <li><b>End of Week 4:</b> 2-of-3 mediums cleared in Sunday mocks, consistently</li>
+      <li><b>End of Week 6:</b> medium-hards entering the mix without panic</li>
+      <li><b>End of Week 8:</b> full OA sims at real difficulty, above cut-line pace — ready for the September wave</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Progress stored locally in your browser · Part of <a href="../index.html">Placement Prep Hub</a>
+</footer>
+
+</div>
+<script>
+const LC = s => `https://leetcode.com/problems/${s}/`;
+const link = (name, slug) => `<a href="${LC(slug)}" target="_blank" rel="noopener">${name}</a>`;
+
+// ---------- HELL WEEK DATA (23–29 July 2026) ----------
+const HW = [
+  { d:'Day 1 · Wed 23 Jul', theme:'Arrays', blocks: [
+    ['🌅 Morning — 5 DSA (25-min cap each)', [
+      link('Two Sum','two-sum'), link('Best Time to Buy & Sell Stock','best-time-to-buy-and-sell-stock'),
+      link('Contains Duplicate','contains-duplicate'), link('Product of Array Except Self','product-of-array-except-self'),
+      link('Rotate Array','rotate-array') ]],
+    ['🕛 Midday — 7 SQL (SQL 50 · Select)', [
+      link('Recyclable & Low Fat Products','recyclable-and-low-fat-products'), link('Find Customer Referee','find-customer-referee'),
+      link('Big Countries','big-countries'), link('Article Views I','article-views-i'), link('Invalid Tweets','invalid-tweets'),
+      link('Replace Employee ID','replace-employee-id-with-the-unique-identifier'), link('Product Sales Analysis I','product-sales-analysis-i') ]],
+    ['🌇 Afternoon — consolidation', ['Re-solve baseline misses from a BLANK editor', '30 min timed aptitude (mental-math trainer or HQ drill)']],
+    ['🌙 Evening (odd day) — 60-min cold mini-mock', ['2 unseen mediums, real editor, tutor silent; review after']],
+  ]},
+  { d:'Day 2 · Thu 24 Jul', theme:'Strings', blocks: [
+    ['🌅 Morning — 5 DSA', [
+      link('Valid Anagram','valid-anagram'), link('Valid Palindrome','valid-palindrome'),
+      link('Longest Common Prefix','longest-common-prefix'), link('Group Anagrams','group-anagrams'),
+      link('Longest Substring Without Repeating Characters','longest-substring-without-repeating-characters') ]],
+    ['🕛 Midday — 7 SQL (Joins)', [
+      link('Customer Who Visited but Did Not Transact','customer-who-visited-but-did-not-make-any-transactions'),
+      link('Rising Temperature','rising-temperature'), link('Average Time of Process per Machine','average-time-of-process-per-machine'),
+      link('Employee Bonus','employee-bonus'), link('Students and Examinations','students-and-examinations'),
+      link('Managers with ≥5 Direct Reports','managers-with-at-least-5-direct-reports'), link('Confirmation Rate','confirmation-rate') ]],
+    ['🌇 Afternoon — consolidation', ["Re-solve Day 1 misses from BLANK editor", '30 min timed aptitude']],
+    ['🌙 Evening (even day) — 2 hard problems with tutor', ['Socratic session: invariant stated out loud BEFORE any code']],
+  ]},
+  { d:'Day 3 · Fri 25 Jul', theme:'Hashing & prefix sums · (Honeywell R2 if shortlisted)', blocks: [
+    ['🌅 Morning — 5 DSA', [
+      link('Majority Element','majority-element'), link('Intersection of Two Arrays','intersection-of-two-arrays'),
+      link('Subarray Sum Equals K','subarray-sum-equals-k'), link('Longest Consecutive Sequence','longest-consecutive-sequence'),
+      link('First Unique Character','first-unique-character-in-a-string') ]],
+    ['🕛 Midday — 7 SQL (Aggregation)', [
+      link('Not Boring Movies','not-boring-movies'), link('Average Selling Price','average-selling-price'),
+      link('Project Employees I','project-employees-i'), link('Percentage of Users Attended Contest','percentage-of-users-attended-a-contest'),
+      link('Queries Quality and Percentage','queries-quality-and-percentage'), link('Monthly Transactions I','monthly-transactions-i'),
+      link('Immediate Food Delivery II','immediate-food-delivery-ii') ]],
+    ['🌇 Afternoon — consolidation', ['Re-solve Day 2 misses from BLANK editor', '30 min timed aptitude']],
+    ['🌙 Evening (odd day) — 60-min cold mini-mock', ['2 unseen mediums, tutor silent']],
+  ]},
+  { d:'Day 4 · Sat 26 Jul', theme:'Two pointers & sliding window · (Honeywell R2 if shortlisted)', blocks: [
+    ['🌅 Morning — 5 DSA', [
+      link('Squares of a Sorted Array','squares-of-a-sorted-array'), link('3Sum','3sum'), link('Sort Colors','sort-colors'),
+      link('Max Consecutive Ones III','max-consecutive-ones-iii'), link('Minimum Size Subarray Sum','minimum-size-subarray-sum') ]],
+    ['🕛 Midday — 7 SQL (Sorting & grouping)', [
+      link('Unique Subjects per Teacher','number-of-unique-subjects-taught-by-each-teacher'),
+      link('User Activity Past 30 Days I','user-activity-for-the-past-30-days-i'), link('Product Sales Analysis III','product-sales-analysis-iii'),
+      link('Classes With ≥5 Students','classes-more-than-5-students'), link('Find Followers Count','find-followers-count'),
+      link('Biggest Single Number','biggest-single-number'), link('Customers Who Bought All Products','customers-who-bought-all-products') ]],
+    ['🌇 Afternoon — consolidation', ['Re-solve Day 3 misses from BLANK editor', '30 min timed aptitude']],
+    ['🌙 Evening (even day) — 2 hard problems with tutor', ['Sliding-window hards; invariant first, code second']],
+  ]},
+  { d:'Day 5 · Sun 27 Jul', theme:'Binary search & stack', blocks: [
+    ['🌅 Morning — 5 DSA', [
+      link('Binary Search','binary-search'), link('Search in Rotated Sorted Array','search-in-rotated-sorted-array'),
+      link('First & Last Position in Sorted Array','find-first-and-last-position-of-element-in-sorted-array'),
+      link('Valid Parentheses','valid-parentheses'), link('Daily Temperatures','daily-temperatures') ]],
+    ['🕛 Midday — 7 SQL (Advanced select & joins)', [
+      link('Employees Reporting to Each Employee','the-number-of-employees-which-report-to-each-employee'),
+      link('Primary Department for Each Employee','primary-department-for-each-employee'), link('Triangle Judgement','triangle-judgement'),
+      link('Consecutive Numbers','consecutive-numbers'), link('Product Price at a Given Date','product-price-at-a-given-date'),
+      link('Last Person to Fit in the Bus','last-person-to-fit-in-the-bus'), link('Count Salary Categories','count-salary-categories') ]],
+    ['🌇 Afternoon — consolidation', ['Re-solve Day 4 misses from BLANK editor', '30 min timed aptitude']],
+    ['🌙 Evening (odd day) — 60-min cold mini-mock', ['2 unseen mediums, tutor silent']],
+  ]},
+  { d:'Day 6 · Mon 28 Jul', theme:'Linked list, trees & heap', blocks: [
+    ['🌅 Morning — 5 DSA', [
+      link('Reverse Linked List','reverse-linked-list'), link('Linked List Cycle','linked-list-cycle'),
+      link('Merge Two Sorted Lists','merge-two-sorted-lists'), link('Maximum Depth of Binary Tree','maximum-depth-of-binary-tree'),
+      link('Kth Largest Element in an Array','kth-largest-element-in-an-array') ]],
+    ['🕛 Midday — 7 SQL (Subqueries & windows)', [
+      link('Employees Whose Manager Left','employees-whose-manager-left-the-company'), link('Exchange Seats','exchange-seats'),
+      link('Movie Rating','movie-rating'), link('Restaurant Growth','restaurant-growth'),
+      link('Friend Requests II','friend-requests-ii-who-has-the-most-friends'), link('Investments in 2016','investments-in-2016'),
+      link('Department Top Three Salaries','department-top-three-salaries') ]],
+    ['🌇 Afternoon — consolidation', ['Re-solve Day 5 misses from BLANK editor', '30 min timed aptitude']],
+    ['🌙 Evening (even day) — 2 hard problems with tutor', ['Tree/heap hards; dry-run before submit']],
+  ]},
+  { d:'Day 7 · Tue 29 Jul', theme:'FULL OA SIMULATION', blocks: [
+    ['🧪 The sim — 2 hours, cold', ['MCQ block (aptitude + CS fundamentals)', '3 DSA: medium / medium / medium-hard', '1 SQL (window functions)', 'Real editor · timer · zero help · submit everything']],
+    ['🔍 Full review with tutor', ['Root-cause EVERY miss', "Write the week's mistake-log entries", 'Score honestly; decide Plan A entry rung']],
+  ]},
+];
+
+// ---------- CONTRACT DATA (30 Jul – 21 Sep 2026) ----------
+const WEEKS = [
+  ['Week 1 · Wed 30 Jul – Sun 3 Aug', 'Arrays & strings (ladder start)', 5],
+  ['Week 2 · Mon 4 – Sun 10 Aug', 'Hashing & prefix sums', 7],
+  ['Week 3 · Mon 11 – Sun 17 Aug', 'Two pointers & sliding window', 7],
+  ['Week 4 · Mon 18 – Sun 24 Aug', 'Binary search + stack & queue', 7],
+  ['Week 5 · Mon 25 – Sun 31 Aug', 'Linked list + trees & BFS/DFS', 7],
+  ['Week 6 · Mon 1 – Sun 7 Sep', 'Heap & greedy', 7],
+  ['Week 7 · Mon 8 – Sun 14 Sep', 'DP basics (1-D, knapsack, grid)', 7],
+  ['Week 8 · Mon 15 – Sun 21 Sep', 'Graphs + mixed hard sims', 7],
+];
+const DAYNAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+// ---------- RENDER ----------
+const KEY = 'training_plans_v1';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { state = {}; }
+const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+
+function taskHTML(id, html) {
+  const done = state[id] ? 'done' : '';
+  const chk = state[id] ? 'checked' : '';
+  return `<label class="task ${done}"><input type="checkbox" data-id="${id}" ${chk}> <span>${html}</span></label>`;
+}
+
+function renderHW() {
+  const root = document.getElementById('hellweek');
+  root.innerHTML = HW.map((day, di) => {
+    const ids = [];
+    const body = day.blocks.map((b, bi) =>
+      `<div class="blockname">${b[0]}</div>` +
+      b[1].map((t, ti) => { const id = `hw-${di}-${bi}-${ti}`; ids.push(id); return taskHTML(id, t); }).join('')
+    ).join('');
+    const doneCount = ids.filter(id => state[id]).length;
+    const open = di === 0 || (doneCount > 0 && doneCount < ids.length) ? 'open' : '';
+    return `<div class="card red collapsible ${open}" data-day="${di}">
+      <div class="day-head" onclick="this.parentElement.classList.toggle('open')">
+        <h3>${day.d} — ${day.theme}</h3>
+        <span class="count">${doneCount}/${ids.length}</span>
+      </div>
+      <div class="body">${body}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderContract() {
+  const root = document.getElementById('contract');
+  root.innerHTML = WEEKS.map((w, wi) => {
+    const nDays = w[2];
+    const names = nDays === 5 ? ['Wed','Thu','Fri','Sat','Sun'] : DAYNAMES;
+    const dayBoxes = names.map((nm, di) =>
+      taskHTML(`ct-${wi}-${di}`, `${nm}: 3 DSA + apt${['Mon','Wed','Fri'].includes(nm) ? ' + SQL' : ''}`)
+    ).join('');
+    const mock = taskHTML(`ct-${wi}-mock`, `<b>Sunday cold mock done & reviewed</b> (MCQ + 2–3 DSA + 1 SQL)`);
+    const ids = names.map((_, di) => `ct-${wi}-${di}`).concat([`ct-${wi}-mock`]);
+    const doneCount = ids.filter(id => state[id]).length;
+    return `<div class="card blue">
+      <div class="day-head"><h3>${w[0]}</h3><span class="count">${doneCount}/${ids.length}</span></div>
+      <p class="sub" style="margin:2px 0 4px">Focus: <b>${w[1]}</b> — problems from the 210-tracker, in order, ~21 DSA this week.</p>
+      <div class="weekgrid">${dayBoxes}</div>
+      <div style="margin-top:6px">${mock}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderBars() {
+  const hwIds = [], ctIds = [];
+  HW.forEach((day, di) => day.blocks.forEach((b, bi) => b[1].forEach((_, ti) => hwIds.push(`hw-${di}-${bi}-${ti}`))));
+  WEEKS.forEach((w, wi) => { for (let di = 0; di < w[2]; di++) ctIds.push(`ct-${wi}-${di}`); ctIds.push(`ct-${wi}-mock`); });
+  const pct = ids => ids.length ? Math.round(100 * ids.filter(id => state[id]).length / ids.length) : 0;
+  const hp = pct(hwIds), cp = pct(ctIds);
+  document.getElementById('barB').style.width = hp + '%';
+  document.getElementById('barBlabel').textContent = `Hell Week: ${hp}% · ${hwIds.filter(id=>state[id]).length}/${hwIds.length} tasks`;
+  document.getElementById('barA').style.width = cp + '%';
+  document.getElementById('barAlabel').textContent = `The Contract: ${cp}% · ${ctIds.filter(id=>state[id]).length}/${ctIds.length} day-blocks`;
+}
+
+function renderAll() { renderHW(); renderContract(); renderBars(); }
+
+document.addEventListener('change', e => {
+  if (e.target.matches('input[data-id]')) {
+    state[e.target.dataset.id] = e.target.checked;
+    save();
+    const openDays = [...document.querySelectorAll('#hellweek .collapsible.open')].map(el => el.dataset.day);
+    renderAll();
+    openDays.forEach(d => { const el = document.querySelector(`#hellweek .collapsible[data-day="${d}"]`); if (el) el.classList.add('open'); });
+  }
+});
+
+function showPlan(which) {
+  document.getElementById('planA').classList.toggle('visible', which === 'A');
+  document.getElementById('planB').classList.toggle('visible', which === 'B');
+  document.getElementById('btnA').classList.toggle('active', which === 'A');
+  document.getElementById('btnB').classList.toggle('active', which === 'B');
+}
+
+renderAll();
+</script>
+</body>
+</html>
