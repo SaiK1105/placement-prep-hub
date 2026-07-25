@@ -23,6 +23,20 @@ For each company I interviewed with, I built a targeted prep plan: predicted onl
 | Tredence | Prep HQ with OA countdown plan |
 | Swym | 1-night OA prep plan + mock paper |
 
+## 📋 Drives Tracked
+
+Companies I've applied to where the JD is on file and my resume was tailored to it.
+
+| Company | Role | Materials | Status |
+|---------|------|-----------|--------|
+| Qualcomm | IT Intern — OneIT India | JD, tailored resume | TBD |
+| Trimble | Graduate Technical Intern 2026–27 | JD, Codility prerequisites, tailored resume | TBD |
+| IDFC First Bank | Application Engineer (2027) | JD, tailored resume | TBD |
+| Bluepond.AI | Engineer Trainee | JD, tailored resume | TBD |
+| MathCo | AI Analyst (2027) | JD | TBD |
+| Azentio | Product Engineering Intern | JD, tailored resume | TBD |
+| Infosys | Specialist Programmer L1/L2/L3 | JD, HackWithInfy practice sets, guidelines | TBD |
+
 ## 📚 DSA Practice
 
 `Placement Training/DSA/` — topic-wise solutions written while drilling, organized by pattern.

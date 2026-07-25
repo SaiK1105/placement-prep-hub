@@ -1,0 +1,78 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.45in,top=0.35in,bottom=0.3in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{charter}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\pagestyle{empty}
+\setlist[itemize]{leftmargin=3.2mm,itemsep=0.6pt,parsep=0pt,topsep=1.2pt,label=\tiny$\bullet$}
+\titleformat{\section}{\bfseries\small}{}{0em}{\uppercase}[\vspace{-1.6mm}\rule{\linewidth}{0.5pt}]
+\titlespacing{\section}{0pt}{3.2mm}{1.2mm}
+\newcommand{\proj}[2]{\vspace{0.6mm}\noindent\textbf{#1}\hfill{\footnotesize\itshape #2}\par\vspace{-0.4mm}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries S SAI KUMAR}\\[1.2mm]
+{\footnotesize \href{mailto:s.sai08019@gmail.com}{s.sai08019@gmail.com} $\mid$ \href{tel:+917337354430}{+91 7337354430} $\mid$ \href{https://saik.co.in}{saik.co.in} $\mid$ \href{https://linkedin.com/in/saik7337}{linkedin.com/in/saik7337} $\mid$ \href{https://github.com/SaiK1105}{github.com/SaiK1105}}
+\end{center}
+\vspace{-2mm}
+
+\section{Profile}
+{\small CS (AI \& Data Science) undergraduate who builds, deploys, and maintains complete systems --- Python/Java backends and REST APIs, containerized Linux deployments with CI/CD, and pipelines that turn unstructured content into structured, queryable data. Works across the full IT stack: development and testing, integration and infrastructure, databases, and data analysis --- and documents what he builds (system manuals, benchmark reports, changelogs). Systematic troubleshooter across application, data, and deployment layers. Proven team leader (Smart India Hackathon); CGPA 8.48/10.}
+
+\section{Technical Skills}
+{\small
+\begin{itemize}
+\item \textbf{Programming Languages:} Python (primary), Java, C++, C, JavaScript, SQL, Bash
+\item \textbf{Development \& Integration:} REST API design \& integration, Node.js, MERN stack (React, Node.js), HTML/CSS, backend data pipelines, system-level integration of multi-component services, feature design \& delivery
+\item \textbf{Databases:} DBMS \& SQL (schema design, joins, query optimisation), Redis (caching \& storage), vector databases (LanceDB), NoSQL/document-store concepts
+\item \textbf{Infrastructure \& DevOps:} Unix/Linux shell \& server-side operations, Docker \& docker-compose (incl. GPU deployment), CI/CD pipelines for automated build \& deploy, Git/GitHub version control \& code reviews, cloud \& virtualization fundamentals (AWS/Azure concepts)
+\item \textbf{Testing, Support \& Documentation:} pytest (unit/integration/e2e), cross-layer debugging \& root-cause analysis, application maintenance \& support, technical documentation (system manuals, benchmark reports, changelogs)
+\item \textbf{Data \& Analytics:} data cleaning \& exploratory analysis, ETL-style ingestion \& transformation pipelines, semantic search \& embeddings, NLP, Machine Learning, Deep Learning, multimodal data processing
+\item \textbf{AI \& Automation:} LLM pipelines, Retrieval-Augmented Generation (RAG), agent orchestration (LangGraph), multi-agent systems, prompt engineering; AI-assisted development (Claude Code, GitHub Copilot) with rigorous review of generated output
+\item \textbf{Core CS Fundamentals:} Data Structures \& Algorithms, Operating Systems, DBMS, Computer Networks, Object-Oriented Analysis \& Design (OOAD), software architecture \& system design
+\end{itemize}}
+
+\section{Projects}
+{\small
+\proj{Recursive Language Model (RLM) --- Document \& Video Intelligence Platform}{Python $\cdot$ LanceDB $\cdot$ Docker $\cdot$ pytest}
+\begin{itemize}
+\item Implemented the Recursive Language Model paradigm (arXiv:2512.24601) in Python --- a root model treats the prompt as an external environment explored via a REPL with recursive sub-model calls, scaling document analysis far beyond fixed context windows.
+\item Designed the multi-agent backend: an orchestrator decomposes queries into subtasks dispatched via an event-driven task queue to executor agents searching a LanceDB vector store of Whisper transcripts and CLIP-embedded video frames.
+\item Owned the full delivery lifecycle --- \textbf{docker-compose} GPU deployment, a \textbf{pytest} unit/integration/e2e suite, and complete system + benchmark documentation; benchmarked against a single-shot RAG baseline, answering all three stress-test queries correctly where the baseline failed.
+\end{itemize}
+\proj{A.R.G.U.S-V --- Agentic RAG Framework for Video Intelligence}{Python $\cdot$ LangGraph $\cdot$ Redis $\cdot$ CI/CD}
+\begin{itemize}
+\item Architected and maintain an end-to-end Python application --- ingestion service, processing backend, semantic-search retrieval, and Redis-backed caching --- that converts long-form video into structured, query-ready data and answers natural-language questions over it.
+\item Configured a \textbf{CI/CD pipeline} for automated build and deployment, enforced modular clean-code structure across layers, and reviewed and validated all AI-assisted code before merge; used prompt engineering to control agent scope and output structure.
+\end{itemize}
+\proj{FOMC Insight Pipeline --- Data Analysis on Federal Reserve Communications}{Python $\cdot$ NLP $\cdot$ Multimodal ML}
+\begin{itemize}
+\item Built a multimodal ingestion-and-analysis pipeline over US Federal Reserve transcripts, audio, and visual signals --- extracting, cleaning, and transforming dense, jargon-heavy source material into structured datasets for downstream querying and reporting.
+\end{itemize}}
+
+\section{Achievements \& Leadership}
+{\small
+\proj{Smart India Hackathon --- Team Leader}{Cleared inter-college rounds $\cdot$ Sep 2025}
+\begin{itemize}
+\item Led a team end-to-end --- problem analysis, solution architecture, development, and final pitch --- clearing competitive inter-college rounds with a mental-health support app connecting users with counsellors under full mutual anonymity.
+\item Ran task delegation, code integration, and delivery scheduling under tight deadlines in an agile, cross-functional team --- small-scale project management in practice.
+\end{itemize}}
+
+\section{Education}
+{\small
+\noindent B.Tech, Computer Science (AI \& Data Science) --- SASTRA Deemed University, Thanjavur \hfill CGPA 8.48/10 $\cdot$ Expected 2027\\
+Higher Secondary (Class XII) --- Kendriya Vidyalaya No. 1, Akhnoor, J\&K \hfill 88.4\% $\cdot$ 2022\\
+Secondary (Class X) --- Kendriya Vidyalaya Hirapatti, Azamgarh, UP \hfill 88.4\% $\cdot$ 2020}
+
+\section{Certifications \& Key Strengths}
+{\small
+\begin{itemize}
+\item Data Analytics --- SASTRA Deemed University \quad $\mid$ \quad DSA to Development --- GeeksforGeeks
+\item Systems-first problem solver: isolates faults across databases, APIs, deployment, and frontend behaviour, and documents fixes clearly for the next person.
+\item Quick learner comfortable supporting multiple parallel projects and stakeholders; excellent verbal and written communication.
+\end{itemize}}
+\end{document}
