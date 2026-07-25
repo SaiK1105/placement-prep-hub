@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qualcomm OneIT Prep HQ — OA 28 July</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; line-height: 1.6; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px 90px; }
+  header { text-align: center; padding: 34px 0 16px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 28px; font-weight: 500; }
+  h1 span { color: #d97757; }
+  .tagline { color: #b8b5ad; font-size: 14px; max-width: 660px; margin: 8px auto 0; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 21px; font-weight: 500; margin: 32px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 5px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 2px 0 12px; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin-bottom: 11px; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.mint  { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.blue  { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .card.red   { border-left: 3px solid #c96f6f; border-radius: 0 14px 14px 0; }
+  .nav { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin: 16px 0 4px; position: sticky; top: 0; background: #262624; padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; }
+  .nav button { font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 11px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .nav button.active { border-color: #d97757; color: #f0efea; background: #3a332f; }
+  .tab { display: none; } .tab.visible { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #3f3e3a; }
+  th { color: #90a883; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  code { background: #262624; padding: 1px 5px; border-radius: 4px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; color: #e0987d; }
+  pre { background: #262624; border: 1px solid #3f3e3a; border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 7px 0; }
+  pre code { background: none; padding: 0; color: #dedbd3; font-size: 12.5px; line-height: 1.5; }
+  .rules li { margin: 5px 0 5px 18px; font-size: 13.5px; color: #dedbd3; }
+  .note { font-size: 12.5px; color: #d3a13f; margin-top: 7px; }
+  .warn { font-size: 13px; color: #e08c8c; }
+  .q { border-top: 1px solid #3f3e3a; padding-top: 10px; margin-top: 10px; }
+  .q:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .qnum { font-size: 11.5px; font-weight: 700; color: #7f9cc0; letter-spacing: .5px; }
+  .ans { display: none; margin-top: 7px; padding: 9px 11px; background: #2b3330; border-left: 3px solid #90a883; border-radius: 0 8px 8px 0; font-size: 13.5px; color: #dedbd3; }
+  .ans.show { display: block; }
+  .reveal { margin-top: 7px; font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: 9px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .reveal:hover { border-color: #d97757; color: #f0efea; }
+  .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 9px; border: 1px solid #45443f; color: #90a883; margin-left: 6px; }
+  .pill.hard { color: #c96f6f; } .pill.warn { color: #d3a13f; }
+  footer { border-top: 1px solid #3f3e3a; margin-top: 40px; padding-top: 18px; text-align: center; font-size: 12px; color: #8e8b83; }
+  footer a { color: #e0987d; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>📡 Qualcomm OneIT <span>Prep HQ</span></h1>
+  <p class="tagline">IT Internship · OA Tue 28 July · HirePro, proctored. This OA is <b>100% MCQ — no coding round.</b> Everything you drilled in Python does not apply to Section 2. Read the Format tab first.</p>
+</header>
+
+<div class="nav">
+  <button class="active" onclick="show('fmt',this)">⚠️ Format</button>
+  <button onclick="show('cpp',this)">🔧 C/C++ Drills</button>
+  <button onclick="show('core',this)">🧠 CS Core</button>
+  <button onclick="show('apt',this)">🧮 Aptitude</button>
+  <button onclick="show('plan',this)">📅 Plan</button>
+  <button onclick="show('log',this)">✅ Logistics</button>
+</div>
+
+<!-- ============ FORMAT ============ -->
+<div class="tab visible" id="fmt">
+  <div class="card red">
+    <h3>⚠️ Confidence warning — read this first</h3>
+    <p class="sub">No OneIT-specific OA report exists publicly. Everything below is the <b>general Qualcomm India campus OA</b>, corroborated by ~6 independent sources, which the OneIT drive most likely reuses (same campus team, same vendor). <b>Likely — not certain.</b> If the paper opens and looks different, adapt fast and don't panic: the aptitude and CS-core prep transfers to almost any MCQ paper.</p>
+  </div>
+
+  <h2>The paper</h2>
+  <table>
+    <tr><th>Item</th><th>What's reported</th></tr>
+    <tr><td><b>Total</b></td><td>60 questions · 90 minutes</td></tr>
+    <tr><td><b>Structure</b></td><td>3 sections × 20 MCQ</td></tr>
+    <tr><td><b>Clock</b></td><td><b>30 min per section, SECTIONALLY LOCKED</b> — cannot return, cannot bank time</td></tr>
+    <tr><td><b>Marking</b></td><td><b>+1 correct / −0.25 wrong</b></td></tr>
+    <tr><td><b>Coding</b></td><td><b>None.</b> Programming is tested as output-prediction MCQs</td></tr>
+    <tr><td><b>Platform</b></td><td>HirePro, audio + video proctored (same vendor as your Honeywell OA)</td></tr>
+    <tr><td><b>Cutoffs</b></td><td>Sectional cutoffs applied <i>in addition</i> to overall score</td></tr>
+  </table>
+
+  <div class="card blue">
+    <h3>Section 1 — Quantitative Aptitude + Logical Reasoning <span class="pill">easy–medium</span></h3>
+    <p class="sub">Speed/distance, ratio &amp; proportion, percentages, permutations &amp; combinations, mixtures/alligation, number systems, Venn diagrams, data interpretation.</p>
+  </div>
+  <div class="card red">
+    <h3>Section 2 — Programming MCQs <span class="pill hard">reported HARDEST</span></h3>
+    <p class="sub"><b>C/C++ output prediction</b>, error/debug spotting, pointers, storage classes, OOPS, number-base conversion. <span class="warn">The language is C/C++ — Python is not reported as an OA language anywhere. This is your biggest gap; the C/C++ Drills tab exists for this section.</span></p>
+  </div>
+  <div class="card mint">
+    <h3>Section 3 — Domain / Core <span class="pill warn">choice-based</span></h3>
+    <p class="sub"><b>If offered a choice, take Computer Science.</b> CS contents: OS, file systems, RDBMS (Oracle/MySQL), networking basics, routing, stacks/queues, linked lists, trees, sorting, DBMS. Sources disagree on what the other options are (Electronics / Digital / Data Interpretation / Verbal / Mechanical) — take CS whenever it appears.</p>
+  </div>
+
+  <h2>Strategy the format forces</h2>
+  <div class="card amber">
+    <ul class="rules">
+      <li><b>Negative marking changes everything.</b> +1/−0.25 means a blind 4-option guess is EV-negative-ish break-even at best. Eliminate to 2 options → then answer (EV positive). Can't eliminate anything → <b>skip</b>.</li>
+      <li><b>Sectional lock = pace inside each block.</b> You cannot rescue Section 2 with time saved in Section 1. Target ~90 seconds/question, and bail on any question eating over 2 minutes.</li>
+      <li><b>Sectional cutoffs mean you cannot punt a whole section.</b> Even if Section 2 is brutal, you must scrape a floor there — get the easy pointer/sizeof/precedence ones and don't burn the clock on exotic ones.</li>
+      <li><b>Two passes per section.</b> Pass 1: answer everything you know cold (~15 min). Pass 2: return to the eliminable ones. Never leave an eliminable question unanswered when time's left.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ C/C++ DRILLS ============ -->
+<div class="tab" id="cpp">
+  <h2>🔧 C/C++ Output Prediction</h2>
+  <p class="sub">The hardest section, and your biggest gap as a Python-primary candidate. Good news: you're <b>reading</b> code here, not authoring it — tracing is a skill you already have. Work through these, reveal only after committing to an answer out loud.</p>
+
+  <div class="card">
+    <div class="q">
+      <div class="qnum">Q1 · STORAGE CLASSES</div>
+      <pre><code>void f() { static int x = 0; x++; printf("%d ", x); }
+int main() { f(); f(); f(); return 0; }</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>1 2 3</b><br><code>static</code> inside a function: initialised ONCE, persists across calls, retains value. Without <code>static</code> it would print <code>1 1 1</code>. This is the single most-tested storage-class fact.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q2 · SIZEOF</div>
+      <pre><code>char str[] = "hello";
+printf("%lu", sizeof(str));</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>6</b> — 5 characters + the <code>'\0'</code> null terminator. Contrast <code>strlen(str)</code> which is <b>5</b> (stops at the null). sizeof-vs-strlen is a classic trap pair.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q3 · ARRAY DECAY <span class="pill hard">gotcha</span></div>
+      <pre><code>void f(int arr[]) { printf("%lu", sizeof(arr)); }
+int main() { int a[10]; f(a); }</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>8</b> (pointer size on 64-bit; 4 on 32-bit) — <b>not 40</b>. An array parameter <i>decays to a pointer</i>; the function has no idea of the original size. Inside <code>main</code>, <code>sizeof(a)</code> WOULD be 40. This is why C functions always take a length parameter.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q4 · POINTER ARITHMETIC</div>
+      <pre><code>int arr[] = {10,20,30,40,50};
+int *p = arr;
+printf("%d %d", *(p+2), *(arr+4));</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>30 50</b> — <code>p+2</code> advances by 2×sizeof(int), not 2 bytes. Pointer arithmetic scales by the pointed-to type. And <code>arr[i]</code> is literally defined as <code>*(arr+i)</code>.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q5 · THE COMMUTATIVE INDEX TRICK</div>
+      <pre><code>int a[] = {1,2,3};
+printf("%d", 2[a]);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>3</b> — since <code>a[2]</code> means <code>*(a+2)</code>, and addition commutes, <code>2[a]</code> means <code>*(2+a)</code> — identical. Legal C, and a favourite "is this even valid?" MCQ.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q6 · PRE / POST INCREMENT</div>
+      <pre><code>int i = 5;
+int j = i++;
+int k = ++i;
+printf("%d %d %d", i, j, k);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>7 5 7</b> — <code>i++</code> returns the OLD value (5) then increments i to 6. <code>++i</code> increments first (to 7) then returns 7. Final i = 7.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q7 · SHORT-CIRCUIT EVALUATION</div>
+      <pre><code>int i = 0;
+if (i++ && i++) { }
+printf("%d", i);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>1</b> — the first <code>i++</code> evaluates to 0 (falsy), so <code>&amp;&amp;</code> short-circuits and the second <code>i++</code> <i>never runs</i>. i incremented exactly once. Same idea with <code>||</code> when the left side is true.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q8 · INTEGER DIVISION + PRECEDENCE</div>
+      <pre><code>printf("%d %d", 7/2*2, 2+3*4);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>6 14</b> — <code>7/2</code> is integer division = 3 (truncates, doesn't round), then ×2 = 6. <code>*</code> binds tighter than <code>+</code>, so 2+12 = 14. Integer truncation is the most common silent-wrong-answer source.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q9 · UNSIGNED LOOP <span class="pill hard">infinite-loop trap</span></div>
+      <pre><code>for (unsigned int i = 5; i &gt;= 0; i--) printf("%u ", i);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>Infinite loop.</b> An <code>unsigned</code> can never be &lt; 0. When i is 0 and decrements, it <i>wraps around</i> to 4294967295. The condition <code>i &gt;= 0</code> is always true. Answer options usually include "5 4 3 2 1 0" as the trap.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q10 · CHAR ARITHMETIC</div>
+      <pre><code>char c = 'A';
+printf("%c %d", c + 2, c);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>C 65</b> — chars are small integers. 'A' is ASCII 65, +2 = 67 = 'C'. The format specifier decides how it's displayed. Remember: 'A'=65, 'a'=97, '0'=48.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q11 · BITWISE OPERATORS</div>
+      <pre><code>printf("%d %d %d %d %d", 5&amp;3, 5|3, 5^3, 5&lt;&lt;1, 5&gt;&gt;1);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>1 7 6 10 2</b> — 5=101, 3=011. AND=001=1 · OR=111=7 · XOR=110=6 · left-shift doubles (10) · right-shift halves, truncating (2). Left-shift by n = ×2ⁿ; right-shift by n = ÷2ⁿ.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q12 · NUMBER BASES</div>
+      <pre><code>printf("%d %d %d", 0x1A, 017, 0xFF);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>26 15 255</b> — <code>0x</code> prefix = hex (1A = 16+10 = 26). A <b>leading zero alone means OCTAL</b>, so 017 = 8+7 = 15, not 17. That octal trap appears constantly.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q13 · POINTER TO POINTER</div>
+      <pre><code>int x = 10; int *p = &amp;x; int **pp = &amp;p;
+printf("%d %d", **pp, *p);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>10 10</b> — <code>pp</code> holds the address of <code>p</code>, which holds the address of <code>x</code>. Each <code>*</code> dereferences one level. Count the stars: two stars = two hops to the value.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q14 · CONST POINTER vs POINTER TO CONST</div>
+      <pre><code>const int *p;     // A
+int * const q;    // B</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>A</b> = pointer to a const int — you CAN change what p points to, you CANNOT change <code>*p</code>.<br><b>B</b> = const pointer to int — you CANNOT change q itself, you CAN change <code>*q</code>.<br>Read right-to-left from the variable name. "const int *" → const applies to the int; "* const" → const applies to the pointer.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q15 · C++ CONSTRUCTOR / DESTRUCTOR ORDER</div>
+      <pre><code>class A { public: A(){cout&lt;&lt;"A";} ~A(){cout&lt;&lt;"~A";} };
+class B : public A { public: B(){cout&lt;&lt;"B";} ~B(){cout&lt;&lt;"~B";} };
+int main() { B b; }</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>AB~B~A</b> — construction goes BASE → DERIVED (build the foundation first); destruction is exactly reversed, DERIVED → BASE. Mnemonic: last built, first destroyed — a stack.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q16 · VIRTUAL FUNCTIONS <span class="pill hard">high-frequency</span></div>
+      <pre><code>class Base    { public: virtual void show(){cout&lt;&lt;"Base";} };
+class Derived : public Base { public: void show(){cout&lt;&lt;"Derived";} };
+int main() { Base *b = new Derived(); b-&gt;show(); }</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>Derived</b> — with <code>virtual</code>, the call resolves at RUNTIME by the actual object type (dynamic dispatch). <b>Remove <code>virtual</code> and it prints "Base"</b> — resolved at compile time by the pointer type. The whole question hinges on that one keyword; check for it first.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q17 · ARRAY SIZE IDIOM</div>
+      <pre><code>int arr[5];
+printf("%lu", sizeof(arr)/sizeof(arr[0]));</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>5</b> — total bytes (20) ÷ bytes per element (4). The standard C idiom for array length. Note it only works where the array hasn't decayed to a pointer (see Q3).</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q18 · STRING vs CHAR ARRAY</div>
+      <pre><code>char s[] = "Hi";
+char *p  = "Hi";
+// which one can legally do s[0]='h' / p[0]='h'?</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b><code>s[0]='h'</code> is fine; <code>p[0]='h'</code> is undefined behaviour</b> (typically a segfault). <code>s</code> is a modifiable copy on the stack; <code>p</code> points into a read-only string literal. Modifying a string literal is the classic crash MCQ.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q19 · STATIC AT FILE SCOPE</div>
+      <pre><code>// file1.c
+static int counter = 0;</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>Internal linkage</b> — the variable is visible only within this translation unit; another file cannot reach it with <code>extern</code>. So <code>static</code> means two different things: <i>inside a function</i> = persists across calls (Q1); <i>at file scope</i> = hides from other files. Both get tested.</div>
+    </div>
+    <div class="q">
+      <div class="qnum">Q20 · POST-INCREMENT ON A POINTER</div>
+      <pre><code>int a[] = {1,2,3}; int *p = a;
+printf("%d ", *p++);
+printf("%d", *p);</code></pre>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="ans"><b>1 2</b> — <code>*p++</code> parses as <code>*(p++)</code>: post-increment returns the OLD pointer, dereferenced → 1; p then points at element 2. Compare <code>(*p)++</code> which would leave p alone and change the array value to 2.</div>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <h3>⚡ If you only memorise five things</h3>
+    <ul class="rules">
+      <li><code>static</code> in a function persists; at file scope it hides.</li>
+      <li><code>sizeof(array)</code> = total bytes, but an array parameter has already decayed to a pointer.</li>
+      <li>Integer division truncates: <code>7/2 = 3</code>. Leading zero = octal: <code>017 = 15</code>.</li>
+      <li><code>virtual</code> → runtime dispatch (Derived); no <code>virtual</code> → compile-time (Base).</li>
+      <li>Construction base→derived, destruction derived→base.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ CS CORE ============ -->
+<div class="tab" id="core">
+  <h2>🧠 CS Core — Section 3 (take Computer Science)</h2>
+  <p class="sub">Theory, not coding. Skim these; they're the highest-density facts that appear in campus MCQs.</p>
+
+  <div class="card blue">
+    <h3>Operating Systems</h3>
+    <ul class="rules">
+      <li><b>Process vs Thread:</b> processes have separate address spaces; threads share code/data/heap but have their own stack + registers. Thread switching is cheaper.</li>
+      <li><b>Scheduling:</b> FCFS (convoy effect) · SJF (optimal average wait, needs burst prediction) · Round Robin (time quantum; small quantum = more context-switch overhead) · Priority (starvation → fix with aging).</li>
+      <li><b>Deadlock — 4 necessary conditions:</b> mutual exclusion, hold-and-wait, no preemption, circular wait. Break any one to prevent. Banker's algorithm = avoidance.</li>
+      <li><b>Paging vs Segmentation:</b> paging = fixed-size blocks, causes <i>internal</i> fragmentation; segmentation = variable-size logical units, causes <i>external</i> fragmentation.</li>
+      <li><b>Page replacement:</b> FIFO (suffers Belady's anomaly) · LRU · Optimal (theoretical benchmark).</li>
+      <li><b>Semaphore vs Mutex:</b> mutex = binary lock with ownership (only the locker unlocks); semaphore = counter, no ownership, can signal across threads.</li>
+      <li><b>Thrashing:</b> excessive paging because working set &gt; available frames.</li>
+    </ul>
+  </div>
+
+  <div class="card mint">
+    <h3>DBMS / RDBMS</h3>
+    <ul class="rules">
+      <li><b>ACID:</b> Atomicity (all-or-nothing) · Consistency (valid state→valid state) · Isolation (concurrent txns don't interfere) · Durability (committed survives crash).</li>
+      <li><b>Normal forms:</b> 1NF = atomic values, no repeating groups · 2NF = 1NF + no partial dependency on part of a composite key · 3NF = 2NF + no transitive dependency · BCNF = stricter 3NF (every determinant is a candidate key).</li>
+      <li><b>Keys:</b> super key ⊇ candidate key → one chosen as primary key (unique + NOT NULL, one per table). Foreign key references another table's PK. UNIQUE allows NULLs; PK doesn't.</li>
+      <li><b>Joins:</b> INNER (matches only) · LEFT (all left rows, NULLs on no match) · RIGHT · FULL OUTER · CROSS (cartesian product).</li>
+      <li><b>Indexing:</b> speeds SELECT, slows INSERT/UPDATE/DELETE. Clustered = physical row order (one per table); non-clustered = separate structure with pointers. Usually B+ trees.</li>
+      <li><b>NULL:</b> nothing ever <code>=</code> NULL — comparisons yield unknown. Use <code>IS NULL</code>. <code>COUNT(*)</code> counts rows including NULLs; <code>COUNT(col)</code> skips NULLs.</li>
+      <li><b>WHERE vs HAVING:</b> WHERE filters rows before grouping; HAVING filters groups after aggregation.</li>
+    </ul>
+  </div>
+
+  <div class="card blue">
+    <h3>Computer Networks</h3>
+    <ul class="rules">
+      <li><b>OSI 7 layers:</b> Physical · Data Link · Network · Transport · Session · Presentation · Application. ("Please Do Not Throw Sausage Pizza Away.") TCP/IP model collapses these into 4.</li>
+      <li><b>TCP vs UDP:</b> TCP = connection-oriented, reliable, ordered, 3-way handshake (SYN → SYN-ACK → ACK), flow + congestion control, 20-byte header. UDP = connectionless, unreliable, fast, 8-byte header (DNS, video, VoIP).</li>
+      <li><b>Layer→device:</b> hub = physical · switch = data link (MAC) · router = network (IP).</li>
+      <li><b>Ports:</b> HTTP 80 · HTTPS 443 · FTP 20/21 · SSH 22 · Telnet 23 · SMTP 25 · DNS 53.</li>
+      <li><b>IP classes:</b> A 1–126 · B 128–191 · C 192–223. Private ranges: 10.x, 172.16–31.x, 192.168.x. Loopback 127.0.0.1.</li>
+      <li><b>ARP</b> maps IP→MAC. <b>DNS</b> maps name→IP. <b>DHCP</b> assigns IPs dynamically.</li>
+    </ul>
+  </div>
+
+  <div class="card mint">
+    <h3>Data structures — theory, not implementation</h3>
+    <ul class="rules">
+      <li><b>Complexities:</b> array access O(1)/search O(n) · linked list access O(n)/insert-at-head O(1) · hash table avg O(1), worst O(n) · BST balanced O(log n), degenerate O(n) · heap insert/extract O(log n), peek O(1).</li>
+      <li><b>Sorting:</b> quicksort avg O(n log n), <b>worst O(n²)</b> (already-sorted with bad pivot), in-place, not stable · mergesort always O(n log n), O(n) space, stable · heapsort O(n log n), in-place, not stable · bubble/insertion/selection O(n²) — insertion is O(n) on nearly-sorted data.</li>
+      <li><b>Stack</b> = LIFO (function calls, undo, DFS) · <b>Queue</b> = FIFO (BFS, scheduling).</li>
+      <li><b>Traversals:</b> inorder on a BST yields sorted order. Preorder = root-left-right (copying a tree), postorder = left-right-root (deleting a tree).</li>
+      <li><b>BFS</b> uses a queue, finds shortest path in an unweighted graph. <b>DFS</b> uses a stack/recursion, used for cycle detection and topological sort.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ APTITUDE ============ -->
+<div class="tab" id="apt">
+  <h2>🧮 Aptitude — Section 1</h2>
+  <p class="sub">Easy–medium and a full third of the paper. Speed matters more than cleverness: 30 min for 20 questions = 90 seconds each.</p>
+
+  <div class="card mint">
+    <h3>Formula sheet</h3>
+    <ul class="rules">
+      <li><b>Speed/Time/Distance:</b> D = S×T. Average speed for equal distances = 2xy/(x+y), <i>not</i> (x+y)/2. Relative speed: same direction = |a−b|, opposite = a+b. Train passing a pole: length/speed; passing a platform: (length+platform)/speed.</li>
+      <li><b>Time &amp; Work:</b> if A takes x days, A's rate = 1/x per day. Together: 1/x + 1/y. Work done = rate × time. M₁D₁H₁/W₁ = M₂D₂H₂/W₂.</li>
+      <li><b>Percentages:</b> increase then decrease by same r% → net change = −r²/100 (always a loss). Successive changes a% then b% → a + b + ab/100.</li>
+      <li><b>Profit/Loss:</b> P% = (SP−CP)/CP × 100. Two items sold at same price, one at +r% one at −r% → always a net LOSS of r²/100 %.</li>
+      <li><b>Ratio/Proportion:</b> if a:b = c:d then ad = bc. Divide N in ratio a:b → parts are Na/(a+b), Nb/(a+b).</li>
+      <li><b>Mixtures/Alligation:</b> (cheaper qty)/(dearer qty) = (dearer price − mean)/(mean − cheaper price). Repeated replacement: final = initial × (1 − r/V)ⁿ.</li>
+      <li><b>P &amp; C:</b> nPr = n!/(n−r)! (order matters) · nCr = n!/(r!(n−r)!) (order doesn't). Circular arrangements of n = (n−1)!. At least one = total − none.</li>
+      <li><b>Probability:</b> P = favourable/total. P(A or B) = P(A)+P(B)−P(A and B). Independent: P(A and B) = P(A)×P(B). P(not A) = 1 − P(A).</li>
+      <li><b>Number systems:</b> divisibility — 3 (digit sum), 4 (last two digits), 8 (last three), 9 (digit sum), 11 (alternating sum). LCM×HCF = product of the two numbers.</li>
+      <li><b>SI/CI:</b> SI = PRT/100. CI amount = P(1+R/100)ᵀ. Difference for 2 years = P(R/100)².</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h3>Speed tactics</h3>
+    <ul class="rules">
+      <li><b>Check the options first.</b> Many MCQs are faster solved by substituting options than by solving forward.</li>
+      <li><b>Approximate aggressively</b> when options are far apart — exact arithmetic is wasted effort.</li>
+      <li><b>Percentage↔fraction:</b> 12.5%=1/8 · 16.67%=1/6 · 25%=1/4 · 33.33%=1/3 · 37.5%=3/8 · 66.67%=2/3 · 75%=3/4. Converting to fractions kills most percentage arithmetic instantly.</li>
+      <li><b>DI sets:</b> read the question before the chart — you usually need two numbers, not the whole table.</li>
+      <li><b>Skip the paragraph-heavy logical puzzle</b> if it's over 90 seconds. One puzzle can eat five easy marks' worth of time.</li>
+    </ul>
+  </div>
+
+  <div class="card blue">
+    <h3>Practice tools you already have</h3>
+    <ul class="rules">
+      <li><a href="../../Placement Training/mental_math_trainer.html" style="color:#7f9cc0">Mental Math Trainer</a> — timed speed arithmetic</li>
+      <li><a href="../Presidio/aptitude_sprint_60min.html" style="color:#7f9cc0">60-min Aptitude Sprint</a> (from Presidio prep) — closest thing to a timed section rehearsal</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PLAN ============ -->
+<div class="tab" id="plan">
+  <h2>📅 The two-day plan</h2>
+  <p class="sub">Staples Mon 27 · Qualcomm Tue 28. The two exams pull in opposite directions — Staples (unknown format, software GCC) rewards coding breadth; Qualcomm rewards MCQ speed, C/C++ tracing and CS theory.</p>
+
+  <div class="card mint">
+    <h3>Sunday 26 July — split day</h3>
+    <ul class="rules">
+      <li><b>Morning (~90 min):</b> C/C++ Drills tab, all 20 questions. Commit to an answer <i>out loud</i> before revealing. This is the highest-value block of the whole weekend — it's your biggest gap and it's cheaply closable.</li>
+      <li><b>Midday (~45 min):</b> CS Core tab — skim OS → DBMS → CN → DS. Recognition, not memorisation. You know most of the DBMS already from SQL work.</li>
+      <li><b>Afternoon (~45 min):</b> timed aptitude. Use the sprint tool. Enforce 90 s/question — the pacing is the point, not the score.</li>
+      <li><b>Evening (~45 min):</b> Staples hedge — light DSA (arrays/strings/hashmap, Python) + skim SQL joins. Format is unknown, so breadth is the only sane hedge.</li>
+      <li><b>Night:</b> Logistics tab for BOTH OAs. Then stop.</li>
+    </ul>
+  </div>
+
+  <div class="card blue">
+    <h3>Monday 27 July — Staples day</h3>
+    <ul class="rules">
+      <li><b>Morning:</b> Staples OA. Brute force first, submit early, never leave blanks.</li>
+      <li><b>Afternoon (~30 min):</b> decompress, then re-skim the five "if you only memorise five things" C/C++ facts.</li>
+      <li><b>Evening (~60 min):</b> Qualcomm-shaped only — re-do any C/C++ drills you got wrong, from cold. Plus one timed 20-question aptitude block to rehearse the 30-min lock.</li>
+      <li><b>Night:</b> HirePro logistics check. Sleep early — Qualcomm is the harder paper.</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h3>Tuesday 28 July — Qualcomm day</h3>
+    <ul class="rules">
+      <li>Nothing new. 15-minute skim of the five C/C++ facts + the aptitude formula sheet.</li>
+      <li>In the paper: <b>Section 3 → choose Computer Science.</b></li>
+      <li><b>Eliminate to 2 before answering</b> (−0.25). Truly clueless → skip.</li>
+      <li>~90 s/question. Two passes per section. Bail on anything over 2 min.</li>
+      <li>Sectional cutoffs — scrape a floor in Section 2 even if it's brutal. Grab the easy pointer/sizeof/precedence marks first.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ LOGISTICS ============ -->
+<div class="tab" id="log">
+  <h2>✅ Logistics</h2>
+
+  <div class="card red">
+    <h3>🔴 Do this FIRST, before any studying</h3>
+    <ul class="rules">
+      <li><b>Check the placement-cell email + OA invite for BOTH companies.</b> The sender domain names the platform outright (<code>@hirepro.in</code>, <code>@hackerrank.com</code>, <code>@hackerearth.com</code>, <code>@mettl.com</code>), and the platform's instruction page states duration, negative marking and allowed languages. <b>That email outranks every piece of research in this file.</b></li>
+      <li>Check the batch WhatsApp/Telegram group — seniors and classmates often post the exact pattern within hours.</li>
+      <li>If the real format contradicts anything here, <b>trust the email</b>, and tell me so we re-plan.</li>
+    </ul>
+  </div>
+
+  <div class="card amber">
+    <h3>HirePro platform rules (learned from your Honeywell OA)</h3>
+    <ul class="rules">
+      <li><b>Chrome 81+ only.</b> Laptop/desktop — phones show "Device not Compatible".</li>
+      <li>Webcam + mic mandatory (min 640×480), recorded throughout, AI + manual review. Face visible and well-lit.</li>
+      <li>Pop-ups and cookies enabled · no extensions · <b>disable VPN/proxy</b> · close other apps.</li>
+      <li><b>Tab switching / leaving fullscreen triggers warnings and can auto-logout.</b></li>
+      <li>Copy-paste is blocked/flagged; plagiarism scoring is built in.</li>
+      <li>Disconnection is recoverable — re-login with the same credentials inside the window. Don't panic.</li>
+    </ul>
+  </div>
+
+  <div class="card mint">
+    <h3>Night-before checklist (both OAs)</h3>
+    <ul class="rules">
+      <li>Log in once to confirm credentials work — don't discover a problem at start time.</li>
+      <li>Test webcam + mic in the platform's system check.</li>
+      <li>Laptop charged + charger plugged in. Stable internet; know your phone-hotspot fallback.</li>
+      <li>Quiet, well-lit room. Clear desk. Phone away and silent.</li>
+      <li>Water within reach. Bathroom before, not during.</li>
+      <li>Sleep. Tired MCQ pattern-matching is measurably worse, and this paper is 60 rapid judgement calls.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Built 26 July 2026 · Format is <b>[MULTI]</b>-sourced for the general Qualcomm India campus OA, <b>not</b> OneIT-confirmed · <a href="../../index.html">Placement Prep Hub</a>
+</footer>
+
+</div>
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('visible'));
+  document.getElementById(id).classList.add('visible');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function t(btn) {
+  const a = btn.nextElementSibling;
+  a.classList.toggle('show');
+  btn.textContent = a.classList.contains('show') ? 'Hide' : 'Reveal';
+}
+</script>
+</body>
+</html>

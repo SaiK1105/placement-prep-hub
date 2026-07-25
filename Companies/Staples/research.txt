@@ -1,0 +1,82 @@
+STAPLES OA — RESEARCH NOTES
+Compiled 26 July 2026 (~02:00), OA on 27 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
+Confidence labels: [CONFIRMED] official/2+ independent · [MULTI] multiple w/ inconsistency · [SINGLE] one report · [SPEC] inference
+
+=== HEADLINE: OA FORMAT IS PUBLICLY UNDOCUMENTED ===
+Zero credible candidate reports found. Searched and came up empty on:
+  - GeeksforGeeks interview experiences (no Staples article exists at all)
+  - LeetCode Discuss (no Staples OA thread)
+  - Reddit r/developersIndia
+  - PrepInsta / FACE Prep / IndiaBix (no Staples placement-paper page — notable,
+    since these cover nearly every recruiter running a standardized test)
+  - Tamil Nadu placement-alert sites
+
+UNKNOWN: platform · section count · section contents · duration · sectional vs
+pooled clock · number of coding problems · difficulty · ALLOWED LANGUAGES ·
+proctoring rules · negative marking · funnel numbers · later rounds.
+
+=== WHO IS ACTUALLY HIRING [CONFIRMED] ===
+Staples India Business Innovation Hub Pvt Ltd, CHENNAI — the Staples Inc. (US)
+Global Capability Center. NOT the US retail arm. ~235 people. Chennai→Thanjavur
+proximity makes this the near-certain recruiter for a SASTRA drive.
+ATS = Zoho Recruit (staples.zohorecruit.in). NOTE: Zoho Recruit is an applicant
+tracking system, NOT an assessment engine — tells us nothing about OA platform.
+
+Roles are SOFTWARE ENGINEERING (not analytics/IT-support).
+Entry-level title: "Associate Software Engineer – Full Stack".
+
+=== TECH STACK [CONFIRMED, from JDs] ===
+- Java + Spring Boot, Angular/React
+- PARALLEL .NET/C# TRACK: ASP.NET Core, C#, SQL Server
+- Azure/AWS, Docker/K8s, relational + NoSQL
+- Domain: e-commerce, merchandising/pricing, supply chain, inventory
+
+=== TWO ACTIONABLE HEDGES FROM THE STACK ===
+1. SQL is plausibly tested (SQL Server across both tracks) — worth 30 min revision.
+2. LANGUAGE RISK: org runs both Java and .NET. A language-restricted coding
+   section is a live risk for a Python-primary candidate. Have a Java fallback
+   ready for basic array/string/hashmap problems.
+
+=== CONTRADICTION — DO NOT PLAN AROUND THIS [MULTI, but WRONG ENTITY] ===
+Search engines heavily surface STAPLES US RETAIL hiring: "situational judgment
+test", 14-day process, Glassdoor difficulty 2.22/5, phone screen → in-person.
+That is the North America STORE-ASSOCIATE funnel. Different pipeline, different
+vendors. Any source citing Glassdoor's aggregate "Staples" difficulty is
+describing retail hiring, not a Chennai GCC engineering OA.
+
+=== SOURCES THAT LOOK AUTHORITATIVE BUT ARE NOT [flagged] ===
+dataford.io, prepfully.com, employers.io, interviewpal.com, lodely.com,
+shadecoder.com, jobzmall.com — all rank for "Staples India interview process
+2026" but are AI-GENERATED SEO AGGREGATOR PAGES with no cited candidate reports.
+Their claims (e.g. "two-hour technical interview with Python and SQL", "system
+design round") read as generated FROM the JD, not from real experiences.
+Treat any similar page found before the OA the same way.
+
+=== HIGHEST-VALUE ACTION ===
+The SASTRA placement cell drive notification is the ONLY reliable source.
+Companies this size send the TPO the exact pattern (platform, sections,
+duration, languages, proctoring) with the invite. Check:
+  1. Drive email / placement portal notice
+  2. Batch WhatsApp/Telegram group
+  3. THE OA INVITE EMAIL ITSELF — sender domain reveals the platform
+     (@hackerrank.com / @hackerearth.com / @mettl.com), and the platform's
+     own instructions page states duration, negative marking, allowed languages.
+
+=== [SPEC] — LOW CONFIDENCE INFERENCE, NOT EVIDENCE ===
+Realistic prior for a ~235-person Chennai GCC hiring one ASE title: vendor-
+standard campus test, most likely HackerRank or HackerEarth (both dominate
+Chennai GCC campus drives), possibly Mettl/SHL if HR-led. Typical shape for
+that tier: 60–90 min, aptitude/logical MCQs + technical MCQs (OOP, DBMS/SQL,
+OS/CN) + 1–2 coding problems easy/easy-medium, sectional timers common,
+moderate proctoring (fullscreen + tab-switch counter, webcam sometimes).
+CONFIDENCE: LOW. DO NOT PLAN AROUND THIS AS FACT.
+
+=== SOURCES ===
+https://staples.zohorecruit.in/jobs/Careers
+https://in.linkedin.com/company/staplesindia/jobs
+https://www.staplesindia.in/
+https://careers.staples.com/en
+https://tamilanalerts.in/staples-india-off-campus-drive-in-chennai/
+https://www.foundit.in/job/software-engineer-fullstack-staples-india-chennai-52171348
+https://www.naukri.com/staples-india-jobs-careers-in-chennai-gid-11981329
+https://www.glassdoor.com/Interview/Staples-Interview-Questions-E1909.htm  [US retail — contradiction source]

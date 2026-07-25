@@ -1,0 +1,115 @@
+QUALCOMM OneIT INDIA — IT INTERN OA RESEARCH
+Compiled 26 July 2026 (~02:10), OA on 28 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
+Confidence: [CONFIRMED] official/2+ independent · [MULTI] multiple sources · [SINGLE] one report · [SPEC] inference
+
+=== CRITICAL CAVEAT ===
+NO OneIT-SPECIFIC OA REPORT EXISTS PUBLICLY. Everything below describes the
+GENERAL QUALCOMM INDIA CAMPUS OA, which the OneIT drive most likely reuses
+(same campus team, same vendor) — but that inheritance is [SPEC], not confirmed.
+The local JAF contains no test-pattern info.
+
+=== THE HEADLINE: NO CODING ROUND. IT'S ALL MCQ. [MULTI] ===
+The Indian campus OA is consistently reported as MCQ-ONLY — no coding editor.
+Programming is tested via OUTPUT PREDICTION and DEBUG-SPOTTING MCQs.
+This is a fundamentally different exam from Tredence/Honeywell/Staples.
+
+=== FORMAT [MULTI, ~6 sources] ===
+60 questions / 90 minutes total
+3 sections x 20 MCQ each
+30 MINUTES PER SECTION, SECTIONALLY LOCKED (cannot return to a finished section)
+Sectional cutoffs applied IN ADDITION to overall score [SINGLE, BITS Pilani]
+
+  SECTION 1 — Quantitative Aptitude + Logical Reasoning
+    speed/distance, ratio & proportion, percentages, permutations, mixtures,
+    number systems, Venn diagrams, data interpretation. Reported EASY-MEDIUM.
+
+  SECTION 2 — Programming MCQs  *** REPORTED HARDEST ***
+    C/C++ OUTPUT PREDICTION, error/debug spotting, POINTERS, STORAGE CLASSES,
+    OOPS concepts, number-base conversion.
+    *** LANGUAGE IS C/C++ (some Java/OOPS). PYTHON DOES NOT HELP HERE. ***
+    *** Python is NOT reported as an OA language anywhere. ***
+
+  SECTION 3 — Domain/Core, CHOICE-BASED
+    *** IF A CHOICE APPEARS, TAKE COMPUTER SCIENCE ***
+    CS-option contents: OS, file systems, RDBMS (Oracle/MySQL), networking
+    basics, routing, stacks/queues, linked lists, trees, sorting, DBMS.
+    Maps well onto the OneIT JD stack.
+
+    CONTRADICTION on what the options actually are (varies by year/drive):
+      - "Computer Science or Electronics" (PrepInsta)
+      - "Communication / Data Interpretation / Digital" (GfG on-campus intern)
+      - "CS Core Subjects" only (GfG, different post)
+      - "Data Interpretation & Verbal" (GfG intern, Jul-2025)
+      - "Electronics / CS / Mechanical" (hitbullseye)
+
+NO SQL section, NO subjective/essay, NO separate verbal-English section
+reported for the Indian campus test. [MULTI, absence-based]
+
+=== NEGATIVE MARKING: +1 / -0.25 [MULTI, ~5 sources] ===
+*** DO NOT BLIND-GUESS. *** Eliminate to 2 options before answering.
+Two named-candidate Medium posts confirm this.
+CONTRADICTION: one 2026 SEO page (jobformore) claims "no negative marking" —
+LOW TRUST, HTTP-403 on fetch. PLAN FOR -0.25.
+
+=== PLATFORM: HirePro, audio+video proctored [MULTI] ===
+Same vendor as the Honeywell OA (21 July) — the platform rules you already
+learned apply: Chrome only, laptop/desktop, webcam+mic mandatory and recorded,
+no extensions, disable VPN, close other apps, don't leave fullscreen.
+HackerRank appears ONLY for (a) off-campus/US applicants and (b) later
+INTERVIEW rounds via HackerRank CodePair. [MULTI]
+NOT FOUND: explicit tab-switch limits, copy-paste policy, ID-verification flow.
+
+CONTRADICTION: SEO sites (lets-code.co.in, extern.com, jobformore) claim a
+"HackerRank OA with 2-3 LeetCode mediums." [SINGLE, low trust] — AI-generated
+content farms, no named candidate. The campus OA is consistently MCQ-only.
+
+=== FUNNEL (all HARDWARE+SW drives, NOT IT) ===
+NIT-K: ~500 sat -> 19 SW + 36 HW shortlisted (~11%) -> 4 SW + 4 HW offers [SINGLE]
+BITS Pilani: 250+ sat -> 45 to tech rounds (~18%) -> 12 offers [SINGLE]
+No OneIT funnel data exists.
+
+=== SUBSEQUENT ROUNDS [MULTI] ===
+OA -> 1-3 technical interviews (45-110 min, MS Teams, sometimes HackerRank
+CodePair) -> HR (often phone, ~30 min).
+Reported technical content: DSA + OS + C/C++ + OOPS + computer architecture.
+[SPEC] For OneIT expect JD-aligned questions instead: SQL, cloud (AWS/Azure),
+Linux, DevOps, ServiceNow/ITSM, ETL/BI. No evidence either way.
+
+=== HARDWARE-TRACK CONTAMINATION FLAGS (NOT your track) ===
+Any source mentioning Digital Design / Verilog / microprocessors / DSP /
+bit-manipulation-as-digital-fundamentals; the "Digital" Section-3 option;
+hitbullseye's "Electronics/Mechanical" core; the NIT-K hardware shortlist.
+
+=== COULD NOT FIND ===
+OneIT-specific: platform, sections, cutoffs, funnel, interview content.
+Any 2026-dated first-hand report. Any SASTRA-specific Qualcomm process note.
+Any confirmation Python is an allowed language.
+Glassdoor India and Naukri Code360 both blocked (403) — highest-value
+unexplored sources, worth checking manually in a browser.
+
+=== PREP IMPLICATIONS (differs sharply from every prior OA) ===
+1. NO Python DSA drilling helps Section 2. Revise C/C++ output prediction:
+   pointers, arrays-vs-pointers, storage classes (static/extern/auto/register),
+   pre/post increment, operator precedence, OOPS (virtual, inheritance,
+   constructors/destructors order).
+2. Aptitude is a full third of the paper and sectionally locked -> timed
+   practice matters more here than in any previous OA.
+3. CS core theory (OS/DBMS/CN) is a third of the paper. Not coding — theory.
+4. Negative marking changes strategy: eliminate then answer; skip true blanks.
+5. Sectional lock means you CANNOT bank time from an easy section for a hard
+   one. Pace inside each 30-min block.
+
+=== SOURCES ===
+https://www.geeksforgeeks.org/interview-experiences/qualcomm-internship-interview-experience-on-campus/
+https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-on-campus-for-internship/
+https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-internship/
+https://www.geeksforgeeks.org/interview-experiences/qualcomm-fte-interview-experience-for-software-engineer-on-campus/
+https://www.geeksforgeeks.org/qualcomm-recruitment-process/
+https://medium.com/@PranabNandy/qualcomm-interview-experience-2e0edc562d42
+https://medium.com/@Papai_Ghosh/qualcomm-interview-experience-for-fte-on-campus-bits-pilani-9c52983d09b5
+https://prepinsta.com/qualcomm/
+https://cpt.hitbullseye.com/Qualcomm/Qualcomm-Test-Pattern.php
+https://placementpapers.app/qualcomm/interview-experience/
+https://www.qualcomm.com/company/careers/internships-and-early-in-career-opportunities/india
+LOW-TRUST (flagged, not used as evidence):
+  jobformore.com, lets-code.co.in, extern.com
