@@ -75,12 +75,52 @@
 </div>
 
 <div class="switch">
-  <button id="btnB" class="active" onclick="showPlan('B')">🔥 Plan B — Hell Week (23–29 Jul)</button>
-  <button id="btnA" onclick="showPlan('A')">📜 Plan A — The Contract (30 Jul–21 Sep)</button>
+  <button id="btnS" class="active" onclick="showPlan('S')">🚨 OA Sprint (26–28 Jul)</button>
+  <button id="btnB" onclick="showPlan('B')">🔥 Plan B — Hell Week</button>
+  <button id="btnA" onclick="showPlan('A')">📜 Plan A — The Contract (from 29 Jul)</button>
+</div>
+
+<!-- ============ OA SPRINT ============ -->
+<div class="plan visible" id="planS">
+  <h2>🚨 OA Sprint <span class="pill hard">Staples Mon 27 · Qualcomm Tue 28</span></h2>
+  <p class="sub"><b>Hell Week is paused.</b> Two OAs inside 48 hours overrides the ladder — resume the Contract Wed 29 Jul. Check boxes as you go.</p>
+  <div class="bar-outer"><div class="bar-inner" id="barS"></div></div>
+  <div class="bar-label" id="barSlabel"></div>
+
+  <div class="card amber">
+    <h3>⚖️ The allocation call — read once, then stop second-guessing</h3>
+    <p class="sub"><b>Today is ~70% Qualcomm, ~30% Staples</b>, even though Staples comes first. Qualcomm's format is <i>known</i> (60Q / 90min MCQ · aptitude + C/C++ output prediction + CS core · +1/−0.25 · sectionally locked) and the C/C++ gap is closable in one afternoon. Staples' format is <b>publicly undocumented</b> — extra hours there buy breadth you already have. Prep where the marginal return is real.</p>
+    <p class="note">⚠️ Before anything else: check the placement-cell email + both OA invites. The sender domain names the platform, and its instructions page states duration, negative marking and allowed languages. That outranks every prediction in this repo.</p>
+  </div>
+
+  <div id="sprint"></div>
+
+  <div class="card red">
+    <h3>🎯 In-exam rules — Staples (format unknown)</h3>
+    <ul class="rules">
+      <li><b>Brute force first, submit early.</b> Partial test-case credit beats an elegant unfinished solution.</li>
+      <li><b>Never leave a blank</b> unless negative marking is confirmed on the instructions page. Check that page before question 1.</li>
+      <li><b>Language risk is live</b> (Java + .NET shop). If Python isn't offered, write the simplest correct thing you can in Java — don't attempt clever.</li>
+      <li>SQL is plausible (SQL Server across both their tracks). Joins, GROUP BY/HAVING, subqueries.</li>
+      <li>20-min cap per coding problem. Read every question before starting — grab the cheap ones first.</li>
+    </ul>
+  </div>
+
+  <div class="card red">
+    <h3>🎯 In-exam rules — Qualcomm (format known)</h3>
+    <ul class="rules">
+      <li><b>Section 3: choose Computer Science</b> if offered a choice.</li>
+      <li><b>+1 / −0.25 → eliminate to 2 options, then answer.</b> Zero eliminations → skip. Blind guessing is EV-negative.</li>
+      <li><b>Sectionally locked, 30 min each.</b> You cannot bank time. ~90 s/question; bail past 2 min.</li>
+      <li><b>Two passes per section:</b> pass 1 = everything you know cold (~15 min), pass 2 = the eliminable ones.</li>
+      <li><b>Sectional cutoffs exist</b> — you must scrape a floor in Section 2 even if brutal. Take the easy pointer / sizeof / precedence / octal marks first.</li>
+      <li>HirePro: Chrome only, webcam+mic on, fullscreen, no tab switching, copy-paste blocked. Disconnection is recoverable — re-login, don't panic.</li>
+    </ul>
+  </div>
 </div>
 
 <!-- ============ PLAN B — HELL WEEK ============ -->
-<div class="plan visible" id="planB">
+<div class="plan" id="planB">
   <h2>🔥 Hell Week <span class="pill hard">~6–7 h/day · 7 days</span></h2>
   <p class="sub">Daily shape: <b>Morning</b> 5 DSA (25-min caps) · <b>Midday</b> 7 SQL (executed, not eyeballed) · <b>Afternoon</b> re-solve yesterday's misses from a BLANK editor + 30 min timed aptitude · <b>Evening</b> odd days = cold mini-mock, even days = 2 hard problems with tutor. Sleep 7+ hrs — it's part of the plan. Miss a day → drop into Plan A. No making up.</p>
   <div class="bar-outer"><div class="bar-inner" id="barB"></div></div>
@@ -115,6 +155,82 @@
 <script>
 const LC = s => `https://leetcode.com/problems/${s}/`;
 const link = (name, slug) => `<a href="${LC(slug)}" target="_blank" rel="noopener">${name}</a>`;
+
+// ---------- OA SPRINT DATA (26–28 July 2026) ----------
+const APT = '<a href="aptitude_hard_drill.html" target="_blank">Aptitude Hard Drill</a>';
+const CPP = '<a href="../Companies/Qualcom/qualcomm_prep_hq.html" target="_blank">Qualcomm HQ → C/C++ Drills tab</a>';
+const CORE = '<a href="../Companies/Qualcom/qualcomm_prep_hq.html" target="_blank">Qualcomm HQ → CS Core tab</a>';
+const SPRINT = [
+  { d:'☀️ TODAY · Sun 26 Jul', theme:'the only prep day — 70% Qualcomm', blocks: [
+    ['🔴 First, before any studying (15 min)', [
+      'Check placement-cell email + <b>both</b> OA invites — platform, duration, negative marking, allowed languages',
+      'Check batch WhatsApp/Telegram for the actual pattern',
+      'Report back anything that contradicts the research — we re-plan on the spot' ]],
+    ['🧮 Block 1 · Aptitude, timed cold (45 min)', [
+      '22 questions on the 33-min clock: ' + APT + ' — no notes, commit before revealing',
+      'Then 15 min: list which <b>setups</b> you could not build in 90 s (not which answers you missed)' ]],
+    ['🔧 Block 2 · C/C++ output prediction (75 min) — HIGHEST VALUE', [
+      'All 20 drills: ' + CPP + ' — say your answer out loud before revealing',
+      'Re-do every miss from a blank slate, no peeking',
+      'Memorise the five facts in the "if you only memorise five things" card' ]],
+    ['🧠 Block 3 · CS core skim (45 min)', [
+      CORE + ' — OS → DBMS → CN → DS complexities',
+      'Recognition, not memorisation. You already know most of the DBMS from SQL work' ]],
+    ['💻 Block 4 · Staples hedge (60 min)', [
+      'Python DSA, arrays/strings/hashmap only — re-solve 2 already-solved problems cold for speed',
+      'SQL: joins + GROUP BY/HAVING + subqueries (LeetCode SQL 50, next unsolved few)' ]],
+    ['✅ Block 5 · Logistics, then stop (30 min)', [
+      'Both platforms: log in, test webcam + mic, confirm Chrome, disable VPN/extensions',
+      'Laptop charged · charger plugged · hotspot fallback known · desk clear',
+      '<b>Nothing new after this. Sleep early — Staples is tomorrow morning.</b>' ]],
+  ]},
+  { d:'📝 Mon 27 Jul', theme:'Staples OA day', blocks: [
+    ['🌅 Before the OA', [
+      'Re-read the instructions page: negative marking? allowed languages? sectional timers?',
+      'Skim the five C/C++ facts (2 min) — costs nothing, and Staples may test OOPS too' ]],
+    ['🧪 The OA', [
+      'Read every question first, then start with the cheapest',
+      'Brute force → submit → improve only if time remains',
+      '20-min cap per coding problem. No blanks.' ]],
+    ['🌇 Afternoon (30 min)', [
+      'Decompress properly — walk, eat, no screens for a bit',
+      'Write down what actually appeared in Staples while it is fresh (platform, sections, difficulty, languages)' ]],
+    ['🌙 Evening · Qualcomm only (75 min)', [
+      'Re-do every C/C++ drill you got wrong, <b>cold</b>: ' + CPP,
+      'One timed 20-question aptitude block to rehearse the 30-min sectional lock',
+      'Re-skim CS core weak spots (10 min)' ]],
+    ['😴 Night', [
+      'HirePro system check · logistics rerun',
+      '<b>Sleep early. Qualcomm is the harder paper and it is 60 rapid judgement calls.</b>' ]],
+  ]},
+  { d:'📡 Tue 28 Jul', theme:'Qualcomm OA day', blocks: [
+    ['🌅 Morning · 15 min skim only, nothing new', [
+      'The five C/C++ facts',
+      'Aptitude formula sheet (percentage↔fraction conversions especially)',
+      '<b>Section 3 → choose Computer Science</b>' ]],
+    ['🧪 The OA — the four rules', [
+      'Eliminate to 2 before answering (−0.25). Zero eliminations → skip',
+      '~90 s/question · bail past 2 min · sectional lock means no banking time',
+      'Two passes per section: known-cold first, eliminable second',
+      'Scrape a floor in Section 2 — sectional cutoffs are real' ]],
+    ['🌇 After', [
+      'Log what actually appeared in <code>Companies/Qualcom/research.txt</code> — this is how the next prediction gets better',
+      'Rest. Two OAs in two days is genuinely draining.' ]],
+  ]},
+  { d:'🔁 Wed 29 Jul onward', theme:'the Contract resumes — this is the part that actually compounds', blocks: [
+    ['📜 Daily, every day (~2–2.5 h)', [
+      '<b>3 DSA problems</b> from the 210-tracker in ladder order · 25-min cap each · typed and submitted',
+      '<b>20 min timed aptitude</b> — the hard drill, then generate more at that tier',
+      '<b>Mon/Wed/Fri: +30 min SQL</b> (LeetCode SQL 50, in order, actually executed)' ]],
+    ['📅 Sunday, every week (2 h)', [
+      'Cold mock: MCQ block + 2–3 DSA + 1 SQL, exam conditions, honestly scored',
+      'Root-cause every miss → next week drills exactly those' ]],
+    ['🎯 Standing rules', [
+      'A short day is 1 problem, never 0',
+      'Weeks 5–8: add 15 min/day Java revival (re-type one solved problem in Java)',
+      'Per-company prep = format recon + one format-matched mock, 2 days out. <b>No content-prediction cramming.</b>' ]],
+  ]},
+];
 
 // ---------- HELL WEEK DATA (23–29 July 2026) ----------
 const HW = [
@@ -225,6 +341,26 @@ function taskHTML(id, html) {
   return `<label class="task ${done}"><input type="checkbox" data-id="${id}" ${chk}> <span>${html}</span></label>`;
 }
 
+function renderSprint() {
+  const root = document.getElementById('sprint');
+  root.innerHTML = SPRINT.map((day, di) => {
+    const ids = [];
+    const body = day.blocks.map((b, bi) =>
+      `<div class="blockname">${b[0]}</div>` +
+      b[1].map((t, ti) => { const id = `sp-${di}-${bi}-${ti}`; ids.push(id); return taskHTML(id, t); }).join('')
+    ).join('');
+    const doneCount = ids.filter(id => state[id]).length;
+    const open = di === 0 || (doneCount > 0 && doneCount < ids.length) ? 'open' : '';
+    return `<div class="card ${di===3?'blue':'red'} collapsible ${open}" data-sday="${di}">
+      <div class="day-head" onclick="this.parentElement.classList.toggle('open')">
+        <h3>${day.d} — ${day.theme}</h3>
+        <span class="count">${doneCount}/${ids.length}</span>
+      </div>
+      <div class="body">${body}</div>
+    </div>`;
+  }).join('');
+}
+
 function renderHW() {
   const root = document.getElementById('hellweek');
   root.innerHTML = HW.map((day, di) => {
@@ -266,6 +402,11 @@ function renderContract() {
 }
 
 function renderBars() {
+  const spIds = [];
+  SPRINT.forEach((day, di) => day.blocks.forEach((b, bi) => b[1].forEach((_, ti) => spIds.push(`sp-${di}-${bi}-${ti}`))));
+  const sp = spIds.length ? Math.round(100 * spIds.filter(id => state[id]).length / spIds.length) : 0;
+  document.getElementById('barS').style.width = sp + '%';
+  document.getElementById('barSlabel').textContent = `OA Sprint: ${sp}% · ${spIds.filter(id=>state[id]).length}/${spIds.length} tasks`;
   const hwIds = [], ctIds = [];
   HW.forEach((day, di) => day.blocks.forEach((b, bi) => b[1].forEach((_, ti) => hwIds.push(`hw-${di}-${bi}-${ti}`))));
   WEEKS.forEach((w, wi) => { for (let di = 0; di < w[2]; di++) ctIds.push(`ct-${wi}-${di}`); ctIds.push(`ct-${wi}-mock`); });
@@ -277,23 +418,25 @@ function renderBars() {
   document.getElementById('barAlabel').textContent = `The Contract: ${cp}% · ${ctIds.filter(id=>state[id]).length}/${ctIds.length} day-blocks`;
 }
 
-function renderAll() { renderHW(); renderContract(); renderBars(); }
+function renderAll() { renderSprint(); renderHW(); renderContract(); renderBars(); }
 
 document.addEventListener('change', e => {
   if (e.target.matches('input[data-id]')) {
     state[e.target.dataset.id] = e.target.checked;
     save();
     const openDays = [...document.querySelectorAll('#hellweek .collapsible.open')].map(el => el.dataset.day);
+    const openS = [...document.querySelectorAll('#sprint .collapsible.open')].map(el => el.dataset.sday);
     renderAll();
     openDays.forEach(d => { const el = document.querySelector(`#hellweek .collapsible[data-day="${d}"]`); if (el) el.classList.add('open'); });
+    openS.forEach(d => { const el = document.querySelector(`#sprint .collapsible[data-sday="${d}"]`); if (el) el.classList.add('open'); });
   }
 });
 
 function showPlan(which) {
-  document.getElementById('planA').classList.toggle('visible', which === 'A');
-  document.getElementById('planB').classList.toggle('visible', which === 'B');
-  document.getElementById('btnA').classList.toggle('active', which === 'A');
-  document.getElementById('btnB').classList.toggle('active', which === 'B');
+  ['S','A','B'].forEach(k => {
+    document.getElementById('plan'+k).classList.toggle('visible', which === k);
+    document.getElementById('btn'+k).classList.toggle('active', which === k);
+  });
 }
 
 renderAll();
