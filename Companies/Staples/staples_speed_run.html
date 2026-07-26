@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staples Speed Run — 65 min OA</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; line-height: 1.6; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px 90px; }
+  header { text-align: center; padding: 30px 0 12px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 27px; font-weight: 500; }
+  h1 span { color: #d97757; }
+  .tagline { color: #b8b5ad; font-size: 14px; max-width: 660px; margin: 8px auto 0; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; margin: 28px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 5px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 2px 0 12px; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin-bottom: 11px; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.red   { border-left: 3px solid #c96f6f; border-radius: 0 14px 14px 0; }
+  .card.mint  { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.blue  { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .rules li { margin: 5px 0 5px 18px; font-size: 13.5px; color: #dedbd3; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #3f3e3a; vertical-align: top; }
+  th { color: #90a883; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  code { background: #262624; padding: 1px 5px; border-radius: 4px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; color: #e0987d; }
+  pre { background: #262624; border: 1px solid #3f3e3a; border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 7px 0; }
+  pre code { background: none; padding: 0; color: #dedbd3; font-size: 12.5px; line-height: 1.5; }
+  .nav { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin: 14px 0 4px; position: sticky; top: 0; background: #262624; padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; }
+  .nav button { font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 11px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .nav button.active { border-color: #d97757; color: #f0efea; background: #3a332f; }
+  .tab { display: none; } .tab.visible { display: block; }
+  .q { border-top: 1px solid #3f3e3a; padding-top: 11px; margin-top: 11px; }
+  .q:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .qnum { font-size: 11.5px; font-weight: 700; color: #7f9cc0; letter-spacing: .5px; }
+  .sol { display: none; margin-top: 7px; }
+  .sol.show { display: block; }
+  .reveal { margin-top: 6px; font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: 9px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .reveal:hover { border-color: #d97757; color: #f0efea; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 8px; border: 1px solid #45443f; color: #90a883; margin-left: 6px; }
+  .pill.hot { color: #c96f6f; }
+  .note { font-size: 12.5px; color: #d3a13f; margin-top: 7px; }
+  .big { font-size: 15px; color: #f0efea; font-weight: 600; }
+  footer { border-top: 1px solid #3f3e3a; margin-top: 40px; padding-top: 18px; text-align: center; font-size: 12px; color: #8e8b83; }
+  footer a { color: #e0987d; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>⚡ Staples <span>Speed Run</span></h1>
+  <p class="tagline"><b>65 minutes total</b> — Basic Aptitude MCQs + 3 coding problems. This is a <b>speed test, not a difficulty test</b>. At ~15 min per coding problem nobody sets medium-tier questions. Your bottleneck is how fast correct syntax leaves your fingers.</p>
+</header>
+
+<div class="nav">
+  <button class="active" onclick="show('strat',this)">⏱️ Strategy</button>
+  <button onclick="show('idioms',this)">🐍 Python Idioms</button>
+  <button onclick="show('drill',this)">🔥 15 Speed Problems</button>
+  <button onclick="show('java',this)">☕ Java Fallback</button>
+</div>
+
+<!-- ============ STRATEGY ============ -->
+<div class="tab visible" id="strat">
+  <div class="card red">
+    <h3>⏱️ The clock is the entire exam</h3>
+    <table>
+      <tr><th>Phase</th><th>Budget</th><th>Rule</th></tr>
+      <tr><td><b>Aptitude MCQs</b></td><td>15–18 min</td><td>Fast pass. Anything over 60 s → guess (if no negative marking) or skip and move</td></tr>
+      <tr><td><b>Read all 3 problems</b></td><td>3 min</td><td>Non-negotiable. Rank them easiest→hardest <i>for you</i></td></tr>
+      <tr><td><b>Problem A</b> (your easiest)</td><td>12 min</td><td>Bank a full solve early. Confidence + guaranteed marks</td></tr>
+      <tr><td><b>Problem B</b></td><td>13 min</td><td>Brute force, submit, move</td></tr>
+      <tr><td><b>Problem C</b> (hardest)</td><td>14 min</td><td>Even a partial pass scores. Never leave the editor empty</td></tr>
+      <tr><td><b>Buffer</b></td><td>3–5 min</td><td>Resubmit anything that failed on an edge case</td></tr>
+    </table>
+    <p class="note">⚠️ If the sections are individually timed, these budgets are fixed for you — check the instructions page first. If it's one pooled 65-min clock, YOU enforce the split. Put your phone timer where you can see it.</p>
+  </div>
+
+  <div class="card amber">
+    <h3>🎯 The five rules that decide this paper</h3>
+    <ul class="rules">
+      <li><b>Do NOT optimise.</b> At 15 min/problem, an O(n²) solution that passes is worth exactly the same as an elegant O(n). Write the obvious thing, submit, move on. Optimise only with leftover time.</li>
+      <li><b>Read all three first, solve easiest first.</b> Every problem is worth the same. Burning 25 min on the hardest and leaving two untouched is the single most common way to fail this format.</li>
+      <li><b>Type the I/O boilerplate before you think.</b> Function signature, return statement, print — get the skeleton down, then fill the logic. Blank-editor paralysis is the killer.</li>
+      <li><b>Test on the sample input only.</b> No custom test cases unless something fails. You don't have the time.</li>
+      <li><b>Never leave an empty editor.</b> Partial test-case credit is real. Even a loop that handles the simple case scores above zero.</li>
+    </ul>
+  </div>
+
+  <div class="card mint">
+    <h3>📊 What "3 easy problems" almost certainly means</h3>
+    <p class="sub">Indian campus entry-level screens draw from a very narrow, very predictable pool. Expect two of the three to come straight from here:</p>
+    <table>
+      <tr><th>Family</th><th>Typical asks</th></tr>
+      <tr><td><b>Strings</b> <span class="pill hot">most likely</span></td><td>reverse, palindrome check, vowel/char count, anagram, first non-repeating char, remove duplicates, capitalise/toggle case</td></tr>
+      <tr><td><b>Arrays</b> <span class="pill hot">most likely</span></td><td>max/min, second largest, sum/average, reverse, remove duplicates, count occurrences, missing number, move zeroes</td></tr>
+      <tr><td><b>Simple math</b></td><td>prime check, factorial, Fibonacci, Armstrong, perfect number, GCD/LCM, digit sum, reverse a number, palindrome number</td></tr>
+      <tr><td><b>Frequency / hashmap</b></td><td>most frequent element, first repeating, character frequency table, two-sum</td></tr>
+      <tr><td><b>Patterns</b></td><td>star/number pyramid printing — rare on modern judges but still appears in Indian OAs</td></tr>
+      <tr><td><b>Sorting-based</b></td><td>sort then pick k-th, merge two sorted arrays, sort by frequency</td></tr>
+    </table>
+    <p class="note">You have already solved and verified 5 of these families this week — Two Sum, Best Time to Buy/Sell, Contains Duplicate, Product Except Self, Rotate Array. You are not walking in cold.</p>
+  </div>
+</div>
+
+<!-- ============ PYTHON IDIOMS ============ -->
+<div class="tab" id="idioms">
+  <h2>🐍 Python idioms that buy you minutes</h2>
+  <p class="sub">Memorise the shape, not the theory. Every line here replaces 4–6 lines of manual loop — that's the difference between three submitted problems and two.</p>
+
+  <div class="card blue">
+    <h3>Strings</h3>
+<pre><code>s[::-1]                      # reverse a string
+s == s[::-1]                 # palindrome check
+s.lower(), s.upper()         # case normalise before comparing
+sorted(a) == sorted(b)       # anagram check (good enough at this tier)
+s.replace(" ", "")           # strip spaces
+sum(1 for c in s if c in 'aeiou')      # vowel count
+''.join(c for c in s if c.isalnum())   # keep letters+digits only
+s.split()                    # words list
+' '.join(words[::-1])        # reverse word order</code></pre>
+  </div>
+
+  <div class="card blue">
+    <h3>Counting / frequency — the single biggest time-saver</h3>
+<pre><code>from collections import Counter
+c = Counter(arr)             # {value: count} in ONE line
+c.most_common(1)[0][0]       # most frequent element
+c.most_common()              # all, sorted by count desc
+[k for k,v in c.items() if v == 1]     # elements appearing once
+
+# first non-repeating character
+for ch in s:
+    if c[ch] == 1:
+        return ch</code></pre>
+  </div>
+
+  <div class="card blue">
+    <h3>Arrays</h3>
+<pre><code>max(arr), min(arr), sum(arr)
+sum(arr)/len(arr)            # average
+sorted(arr)[-2]              # second largest (careful with duplicates)
+sorted(set(arr))[-2]         # second largest, distinct
+list(set(arr))               # remove duplicates (loses order)
+arr[::-1]                    # reverse
+arr.count(x)                 # occurrences of x
+len(arr) != len(set(arr))    # has duplicates?
+[x for x in arr if x != 0]   # filter
+n*(n+1)//2 - sum(arr)        # missing number from 1..n</code></pre>
+  </div>
+
+  <div class="card blue">
+    <h3>Math</h3>
+<pre><code>str(n)[::-1]                 # reverse a number (via string)
+sum(int(d) for d in str(n))  # digit sum
+n % 2 == 0                   # even
+divmod(a, b)                 # (quotient, remainder)
+import math
+math.gcd(a, b)               # GCD built in
+a*b // math.gcd(a,b)         # LCM
+math.sqrt(n), math.isqrt(n)  # isqrt = integer sqrt, no float error
+
+def is_prime(n):             # memorise this shape
+    if n &lt; 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True</code></pre>
+  </div>
+
+  <div class="card amber">
+    <h3>⚡ The boilerplate — type this BEFORE thinking</h3>
+<pre><code># If it's a LeetCode-style function:
+class Solution:
+    def solve(self, arr):
+        # skeleton first, logic second
+        return None
+
+# If it's stdin/stdout (HackerRank/HackerEarth style):
+n = int(input())
+arr = list(map(int, input().split()))
+s = input().strip()
+print(result)
+print(*arr)                  # print list space-separated</code></pre>
+    <p class="note">The blank editor is what costs you the problem, not the algorithm. Get the skeleton down in 20 seconds, then think.</p>
+  </div>
+</div>
+
+<!-- ============ DRILL ============ -->
+<div class="tab" id="drill">
+  <h2>🔥 15 speed problems</h2>
+  <p class="sub"><b>Target: 4 minutes each, typed not read.</b> These are the highest-frequency easy patterns in Indian campus screens. Write each in a real editor before revealing. If you can produce all 15 fluently, tomorrow's coding section is a formality.</p>
+
+  <div class="card">
+    <div class="q"><div class="qnum">S1 · STRINGS</div>
+      <b>Reverse a string without using built-in reverse.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def rev(s):
+    out = ""
+    for ch in s:
+        out = ch + out      # prepend each char
+    return out
+# or two-pointer on a list if they ban slicing:
+# l, r = 0, len(a)-1
+# while l &lt; r: a[l],a[r] = a[r],a[l]; l+=1; r-=1</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">S2 · STRINGS</div>
+      <b>Check if a string is a palindrome, ignoring case and non-alphanumeric characters.</b> ("A man, a plan, a canal: Panama" → true)
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def is_pal(s):
+    t = ''.join(c.lower() for c in s if c.isalnum())
+    return t == t[::-1]</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">S3 · STRINGS</div>
+      <b>First non-repeating character in a string</b> (return it, or '_' if none).
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>from collections import Counter
+def first_uniq(s):
+    c = Counter(s)
+    for ch in s:            # iterate the STRING, not the counter
+        if c[ch] == 1:
+            return ch
+    return '_'</code></pre>
+      <p class="note">Trap: iterating <code>c</code> instead of <code>s</code> loses original order in older Python semantics — always loop the string.</p></div>
+    </div>
+    <div class="q"><div class="qnum">S4 · STRINGS</div>
+      <b>Count vowels and consonants in a string.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def count(s):
+    v = sum(1 for c in s.lower() if c in 'aeiou')
+    cons = sum(1 for c in s.lower() if c.isalpha() and c not in 'aeiou')
+    return v, cons</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">S5 · STRINGS</div>
+      <b>Reverse the order of words</b> in a sentence. ("the sky is blue" → "blue is sky the")
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def rev_words(s):
+    return ' '.join(s.split()[::-1])
+# .split() with no args collapses multiple spaces for free</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">A1 · ARRAYS</div>
+      <b>Second largest element</b> in an array (handle duplicates).
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def second_largest(arr):
+    u = sorted(set(arr))
+    return u[-2] if len(u) &gt;= 2 else None</code></pre>
+      <p class="note">Trap: <code>sorted(arr)[-2]</code> returns the same value again for [5,5,3]. Dedupe first.</p></div>
+    </div>
+    <div class="q"><div class="qnum">A2 · ARRAYS</div>
+      <b>Find the missing number</b> from an array containing 1..n with exactly one missing.
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def missing(arr, n):
+    return n*(n+1)//2 - sum(arr)
+# O(n) time, O(1) space, no sorting needed</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">A3 · ARRAYS</div>
+      <b>Move all zeroes to the end</b>, keeping the order of non-zero elements.
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def move_zeroes(arr):
+    pos = 0                       # writer pointer
+    for x in arr:
+        if x != 0:
+            arr[pos] = x; pos += 1
+    while pos &lt; len(arr):
+        arr[pos] = 0; pos += 1
+    return arr</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">A4 · ARRAYS</div>
+      <b>Remove duplicates from a sorted array in place</b>, return the new length.
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def dedupe(arr):
+    if not arr: return 0
+    w = 1                         # writer pointer
+    for i in range(1, len(arr)):
+        if arr[i] != arr[i-1]:
+            arr[w] = arr[i]; w += 1
+    return w</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">A5 · ARRAYS</div>
+      <b>Most frequent element</b> in an array.
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>from collections import Counter
+def most_frequent(arr):
+    return Counter(arr).most_common(1)[0][0]</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">M1 · MATH</div>
+      <b>Check if a number is prime.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def is_prime(n):
+    if n &lt; 2: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True</code></pre>
+      <p class="note">Trap: forgetting <code>n &lt; 2</code> (1 and 0 are not prime), or looping to n instead of √n.</p></div>
+    </div>
+    <div class="q"><div class="qnum">M2 · MATH</div>
+      <b>Reverse an integer</b> (123 → 321, handle negatives).
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def rev_num(n):
+    sign = -1 if n &lt; 0 else 1
+    return sign * int(str(abs(n))[::-1])</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">M3 · MATH</div>
+      <b>Print the first n Fibonacci numbers.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def fib(n):
+    a, b, out = 0, 1, []
+    for _ in range(n):
+        out.append(a)
+        a, b = b, a + b     # simultaneous assignment, no temp var
+    return out</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">M4 · MATH</div>
+      <b>Armstrong number check</b> (153 = 1³+5³+3³).
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def is_armstrong(n):
+    d = str(n); p = len(d)
+    return n == sum(int(c)**p for c in d)</code></pre></div>
+    </div>
+    <div class="q"><div class="qnum">M5 · MATH</div>
+      <b>GCD and LCM of two numbers.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>import math
+def gcd_lcm(a, b):
+    g = math.gcd(a, b)
+    return g, a * b // g
+# manual GCD if they ban imports:
+# while b: a, b = b, a % b
+# return a</code></pre></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ JAVA FALLBACK ============ -->
+<div class="tab" id="java">
+  <h2>☕ Java fallback — only if Python isn't offered</h2>
+  <p class="sub">Staples runs Java + .NET. If the editor doesn't list Python 3, don't panic and don't get clever — write the plainest Java that compiles. These skeletons cover most of the easy tier.</p>
+
+  <div class="card red">
+    <h3>⚠️ First check the language dropdown before question 1</h3>
+    <p class="sub">If Python 3 is there, use it — this whole tab is irrelevant. If it isn't, the rule is <b>simplest thing that compiles</b>. No streams, no lambdas, no unfamiliar library calls under a 15-minute clock.</p>
+  </div>
+
+  <div class="card blue">
+    <h3>Boilerplate</h3>
+<pre><code>import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i &lt; n; i++) arr[i] = sc.nextInt();
+        String s = sc.next();          // next() = one token, nextLine() = whole line
+        System.out.println(result);
+    }
+}</code></pre>
+  </div>
+
+  <div class="card blue">
+    <h3>The five things you'll actually need</h3>
+<pre><code>// reverse a string
+new StringBuilder(s).reverse().toString()
+
+// palindrome
+s.equals(new StringBuilder(s).reverse().toString())
+
+// frequency map
+Map&lt;Character,Integer&gt; m = new HashMap&lt;&gt;();
+for (char c : s.toCharArray())
+    m.put(c, m.getOrDefault(c, 0) + 1);
+
+// sort
+Arrays.sort(arr);                  // primitives
+Arrays.sort(boxed, Collections.reverseOrder());  // descending needs Integer[]
+
+// max / min / sum
+int max = Arrays.stream(arr).max().getAsInt();
+int sum = Arrays.stream(arr).sum();
+// or just loop it — a loop always compiles</code></pre>
+  </div>
+
+  <div class="card amber">
+    <h3>Gotchas that eat Java minutes</h3>
+    <ul class="rules">
+      <li><code>==</code> compares references for Strings — always use <code>.equals()</code></li>
+      <li><code>int/int</code> truncates: <code>7/2 = 3</code>. Cast for a real average: <code>(double) sum / n</code></li>
+      <li>Arrays are fixed length. Need to grow? <code>ArrayList&lt;Integer&gt;</code></li>
+      <li><code>arr.length</code> (no parens) but <code>s.length()</code> (with parens) — the classic 30-second bug</li>
+      <li>Mixing <code>nextInt()</code> and <code>nextLine()</code> leaves a dangling newline — add an extra <code>sc.nextLine()</code> after the int read</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Built 26 Jul 2026 for the 65-min Staples OA · <a href="../../index.html">Placement Prep Hub</a> · <a href="../../Placement Training/aptitude_hard_drill.html">Aptitude Drill</a>
+</footer>
+
+</div>
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('visible'));
+  document.getElementById(id).classList.add('visible');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function t(btn) {
+  const s = btn.nextElementSibling;
+  s.classList.toggle('show');
+  btn.textContent = s.classList.contains('show') ? 'Hide' : 'Reveal';
+}
+</script>
+</body>
+</html>
