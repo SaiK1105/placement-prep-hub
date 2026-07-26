@@ -57,25 +57,25 @@
 
 <header>
   <h1>🧮 Aptitude — <span>Hard Drill</span></h1>
-  <p class="tagline">18 questions at real OA difficulty, calibrated against the late-chapter exercise problems in R.S. Aggarwal — not the worked examples. Every answer verified numerically before publishing. Target: <b>90 seconds each</b>.</p>
+  <p class="tagline">22 questions at real OA difficulty, calibrated against the late-chapter <i>exercise</i> problems in R.S. Aggarwal (not the worked examples) and cross-checked against GeeksforGeeks' topic pages. Every answer verified with exact arithmetic before publishing. Target: <b>90 seconds each</b>.</p>
 </header>
 
 <div class="bar">
-  <div id="clock">27:00</div>
-  <button class="go" onclick="startTimer()">▶ Start 27-min run</button>
+  <div id="clock">33:00</div>
+  <button class="go" onclick="startTimer()">▶ Start 33-min run</button>
   <button onclick="pauseTimer()">⏸ Pause</button>
   <button onclick="resetAll()">↺ Reset</button>
   <button onclick="revealAll()">👁 Reveal all</button>
 </div>
-<div id="score">Not started · 18 questions · pick an option, then reveal</div>
+<div id="score">Not started · 22 questions · pick an option, then reveal</div>
 
 <div class="card red">
   <h3>⚠️ How to use this</h3>
   <ul class="rules">
     <li><b>Commit to an option before revealing.</b> A question you "sort of would have got" is a question you got wrong.</li>
-    <li><b>90 seconds each.</b> If you're past 2 minutes, mark it, move on — that's the real skill being tested. The whole set is 27 minutes.</li>
+    <li><b>90 seconds each.</b> If you're past 2 minutes, mark it, move on — that's the real skill being tested. The whole set is 33 minutes.</li>
     <li>Every question has a <b>trap option</b> — the answer you get from the plausible-but-wrong setup. Read the "trap" note after each solution; that's where the marks actually go.</li>
-    <li>Don't grade yourself on score. Grade yourself on <b>which of the 18 setups you couldn't build in 90 seconds</b>. Those are the drills.</li>
+    <li>Don't grade yourself on score. Grade yourself on <b>which of the 22 setups you couldn't build in 90 seconds</b>. Those are the drills.</li>
   </ul>
 </div>
 
@@ -206,7 +206,31 @@ const QS = [
  q:'At what times between 4 and 5 o\'clock are the hands of a clock at right angles?',
  o:['4:05 5/11 only','4:38 2/11 only','4:05 5/11 and 4:38 2/11','4:10 and 4:40'], a:2,
  s:'At 4:00 the hour hand is at 120°. The minute hand gains <b>5.5° per minute</b>.<br>Angle between them after t minutes: <code>|120 − 5.5t|</code>.<br><b>Minute hand behind:</b> <code>120 − 5.5t = 90</code> → <code>t = 30/5.5 = 60/11 = 5 5/11 min</code>.<br><b>Minute hand ahead:</b> <code>5.5t − 120 = 90</code> → <code>t = 210/5.5 = 420/11 = 38 2/11 min</code>.<br>Both are valid → <b>4:05 5/11 and 4:38 2/11</b>.',
- t:'Trap (a)/(b): stopping after the first root. Right angles occur TWICE in almost every hour — the moment you write |…| = 90 you should expect two answers.'}
+ t:'Trap (a)/(b): stopping after the first root. Right angles occur TWICE in almost every hour — the moment you write |…| = 90 you should expect two answers.'},
+
+{n:19, topic:'Time & Distance · two-scenario time difference', hard:1,
+ q:'Walking from home at 5 km/hr, a man misses his train by <b>7 minutes</b>. Had he walked at 6 km/hr, he would have reached the station <b>5 minutes before</b> departure. The distance from his home to the station is:',
+ o:['5 km','6 km','6.5 km','7.5 km'], a:1,
+ s:'Both journeys cover the SAME distance d; only the times differ.<br>The gap between the two arrival times is <code>7 + 5 = <b>12 minutes</b> = 1/5 hour</code> (late by 7, then early by 5).<br><code>d/5 − d/6 = 1/5</code><br><code>d(6−5)/30 = 1/5</code> → <code>d/30 = 1/5</code> → <b>d = 6 km</b>.',
+ t:'Trap: using 7 − 5 = 2 minutes instead of 7 + 5 = 12. "Misses by 7" and "arrives 5 early" are on OPPOSITE sides of the departure time, so the gap ADDS. This single sign decision is the whole question.'},
+
+{n:20, topic:'Time & Distance · staggered starts', hard:0,
+ q:'Stations B and M are 465 km apart. A train leaves B towards M at 10 AM at 65 km/hr. Another leaves M towards B at 11 AM at 35 km/hr. At what time do they meet?',
+ o:['2 PM','3 PM','3:30 PM','4 PM'], a:1,
+ s:'Handle the head start first. By 11 AM the first train has already covered <code>65 km</code>.<br>Remaining gap: <code>465 − 65 = 400 km</code>.<br>Approaching each other → add speeds: <code>65 + 35 = 100 km/hr</code>.<br>Time = <code>400/100 = 4 hours</code> after 11 AM → <b>3 PM</b>.',
+ t:'Trap (a) 2 PM: from dividing 465 by 100 and ignoring the one-hour head start entirely. Whenever start times differ, advance the clock to the LATER start and recompute the gap before using relative speed.'},
+
+{n:21, topic:'Time & Distance · relative speed pursuit', hard:0,
+ q:'A policeman spots a robber 300 m away and gives chase at 10 km/hr. The robber simultaneously starts running at 8 km/hr. How far does the <b>robber</b> run before he is caught?',
+ o:['800 m','1 km','1.2 km','1.5 km'], a:2,
+ s:'Relative (closing) speed = <code>10 − 8 = 2 km/hr</code>.<br>Gap to close = 300 m = 0.3 km.<br>Time = <code>0.3 / 2 = 0.15 hr</code>.<br>Distance run by the <b>robber</b> = <code>8 × 0.15 = 1.2 km</code>.',
+ t:'Trap (d) 1.5 km: computing the POLICEMAN\'s distance (10 × 0.15) instead of the robber\'s. Read which runner the question asks about — the two differ by exactly the initial 300 m gap.'},
+
+{n:22, topic:'Time & Distance · system of equations', hard:1,
+ q:'To cover a certain distance, a man can either walk or ride. If he walks one way and rides back, it takes <b>4 hours</b>. If he walks <b>both</b> ways, it takes 6 hours. How long would it take to ride both ways?',
+ o:['1 hour','2 hours','3 hours','4 hours'], a:1,
+ s:'Let one-way walk time = w and one-way ride time = r.<br>Walking both ways: <code>2w = 6</code> → <b>w = 3</b>.<br>Walk one way + ride back: <code>w + r = 4</code> → <code>3 + r = 4</code> → <b>r = 1</b>.<br>Riding both ways = <code>2r = <b>2 hours</b></code>.',
+ t:'Trap (d) 4 hours: reusing the mixed-journey time as if it were the answer. Also note the classic shortcut here — <b>ride both ways = 2×(mixed) − (walk both ways)</b> = 8 − 6 = 2 — which is worth memorising for the clock.'}
 ];
 
 let answered = {}, revealed = {};
@@ -242,17 +266,17 @@ function render() {
 function pick(i,j){ answered[i]=j; render(); }
 function rev(i){ revealed[i]=!revealed[i]; render(); }
 function revealAll(){ QS.forEach((_,i)=>revealed[i]=true); render(); }
-function resetAll(){ answered={}; revealed={}; stopTimer(); left=27*60; paint(); render(); }
+function resetAll(){ answered={}; revealed={}; stopTimer(); left=33*60; paint(); render(); }
 function updateScore(){
   const done = Object.keys(answered).length;
   const graded = QS.filter((q,i)=>revealed[i] && answered[i]!==undefined);
   const right = graded.filter((q,i0)=>{const i=QS.indexOf(q); return answered[i]===q.a;}).length;
   document.getElementById('score').innerHTML = graded.length
-    ? `<b>${right}/${graded.length}</b> correct on revealed · ${done}/18 attempted`
-    : `${done}/18 attempted · pick an option, then reveal`;
+    ? `<b>${right}/${graded.length}</b> correct on revealed · ${done}/22 attempted`
+    : `${done}/22 attempted · pick an option, then reveal`;
 }
 
-let left = 27*60, timer = null;
+let left = 33*60, timer = null;
 function paint(){
   const m = Math.floor(Math.abs(left)/60), s = Math.abs(left)%60;
   const el = document.getElementById('clock');
