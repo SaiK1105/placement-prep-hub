@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aptitude — Hard Drill (OA tier)</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; line-height: 1.6; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 20px 16px 90px; }
+  header { text-align: center; padding: 32px 0 12px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 27px; font-weight: 500; }
+  h1 span { color: #d97757; }
+  .tagline { color: #b8b5ad; font-size: 14px; max-width: 640px; margin: 8px auto 0; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; margin: 28px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 5px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 2px 0 12px; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin-bottom: 11px; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.red   { border-left: 3px solid #c96f6f; border-radius: 0 14px 14px 0; }
+  .card.mint  { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .rules li { margin: 5px 0 5px 18px; font-size: 13.5px; color: #dedbd3; }
+  .bar { display: flex; gap: 9px; align-items: center; justify-content: center; flex-wrap: wrap; position: sticky; top: 0; background: #262624; padding: 11px 0; z-index: 20; border-bottom: 1px solid #3f3e3a; }
+  .bar button { font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 11px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .bar button:hover { border-color: #d97757; color: #f0efea; }
+  .bar button.go { border-color: #90a883; color: #cfe0c6; }
+  #clock { font-family: 'Cascadia Code', Consolas, monospace; font-size: 22px; font-weight: 700; color: #f0efea; min-width: 92px; text-align: center; }
+  #clock.warn { color: #d3a13f; } #clock.over { color: #e08c8c; }
+  .qcard { background: #30302e; border: 1px solid #3f3e3a; border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; padding: 14px 16px; margin-bottom: 11px; }
+  .qhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .qnum { font-size: 11.5px; font-weight: 700; color: #7f9cc0; letter-spacing: .5px; }
+  .topic { font-size: 11px; color: #8e8b83; }
+  .qtext { font-size: 14.5px; color: #f0efea; margin: 7px 0 9px; }
+  .opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 6px; margin-bottom: 8px; }
+  .opt { font-size: 13.5px; padding: 7px 11px; border: 1px solid #45443f; border-radius: 9px; color: #dedbd3; cursor: pointer; background: #2a2a28; }
+  .opt:hover { border-color: #7f9cc0; }
+  .opt.sel { border-color: #d97757; background: #3a332f; }
+  .opt.right { border-color: #90a883; background: #2b3330; color: #cfe0c6; }
+  .opt.wrong { border-color: #c96f6f; background: #352c2c; color: #e8b4b4; }
+  .sol { display: none; margin-top: 8px; padding: 10px 12px; background: #2b3330; border-left: 3px solid #90a883; border-radius: 0 8px 8px 0; font-size: 13.5px; color: #dedbd3; }
+  .sol.show { display: block; }
+  .sol b { color: #f0efea; }
+  .trap { margin-top: 7px; padding-top: 7px; border-top: 1px solid #3f4a44; font-size: 12.5px; color: #d3a13f; }
+  .reveal { font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: 9px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .reveal:hover { border-color: #d97757; color: #f0efea; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 8px; border: 1px solid #45443f; color: #c96f6f; margin-left: 6px; letter-spacing: .3px; }
+  .pill.med { color: #d3a13f; }
+  #score { font-size: 13.5px; color: #b8b5ad; text-align: center; margin: 10px 0 4px; }
+  code { background: #262624; padding: 1px 5px; border-radius: 4px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; color: #e0987d; }
+  footer { border-top: 1px solid #3f3e3a; margin-top: 40px; padding-top: 18px; text-align: center; font-size: 12px; color: #8e8b83; }
+  footer a { color: #e0987d; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🧮 Aptitude — <span>Hard Drill</span></h1>
+  <p class="tagline">18 questions at real OA difficulty, calibrated against the late-chapter exercise problems in R.S. Aggarwal — not the worked examples. Every answer verified numerically before publishing. Target: <b>90 seconds each</b>.</p>
+</header>
+
+<div class="bar">
+  <div id="clock">27:00</div>
+  <button class="go" onclick="startTimer()">▶ Start 27-min run</button>
+  <button onclick="pauseTimer()">⏸ Pause</button>
+  <button onclick="resetAll()">↺ Reset</button>
+  <button onclick="revealAll()">👁 Reveal all</button>
+</div>
+<div id="score">Not started · 18 questions · pick an option, then reveal</div>
+
+<div class="card red">
+  <h3>⚠️ How to use this</h3>
+  <ul class="rules">
+    <li><b>Commit to an option before revealing.</b> A question you "sort of would have got" is a question you got wrong.</li>
+    <li><b>90 seconds each.</b> If you're past 2 minutes, mark it, move on — that's the real skill being tested. The whole set is 27 minutes.</li>
+    <li>Every question has a <b>trap option</b> — the answer you get from the plausible-but-wrong setup. Read the "trap" note after each solution; that's where the marks actually go.</li>
+    <li>Don't grade yourself on score. Grade yourself on <b>which of the 18 setups you couldn't build in 90 seconds</b>. Those are the drills.</li>
+  </ul>
+</div>
+
+<div id="quiz"></div>
+
+<div class="card amber">
+  <h3>📌 The setups worth memorising</h3>
+  <ul class="rules">
+    <li><b>Two-scenario relative motion</b> (Q2): write both scenarios as equations, <i>subtract</i> them — the unknown starting distance cancels.</li>
+    <li><b>Proportional-reduction</b> (Q1): "reduction ∝ √n" means <code>speed = base − k√n</code>. Find k from the given case, then solve for the limit.</li>
+    <li><b>Repeated replacement</b> (Q6): <code>final = initial × (1 − r/V)ⁿ</code>. Never simulate it step by step under a clock.</li>
+    <li><b>Pairwise work rates</b> (Q8): summing all three pairs gives <b>2×</b> the combined rate — halve it before inverting.</li>
+    <li><b>Overlapping averages</b> (Q14): first-half + second-half counts the middle element twice; subtract the true total.</li>
+    <li><b>Clock right angles</b> (Q18): minute hand gains 5.5°/min; solve <code>|30H − 5.5t| = 90</code> for <i>both</i> roots — there are almost always two.</li>
+  </ul>
+</div>
+
+<footer>
+  Answers verified with exact arithmetic (Python <code>Fraction</code>) before publishing · <a href="../index.html">Placement Prep Hub</a> · <a href="training_plans.html">Training Plans</a>
+</footer>
+
+</div>
+<script>
+const QS = [
+{n:1, topic:'Time & Distance · proportional reduction', hard:1,
+ q:'The speed of a railway engine is 42 km/hr when no compartment is attached. The reduction in speed is directly proportional to the <b>square root</b> of the number of compartments attached. If the speed is 24 km/hr when 9 compartments are attached, the maximum number of compartments the engine can pull is:',
+ o:['35','41','48','49'], a:2,
+ s:'Model it as <code>speed = 42 − k√n</code>.<br>From n=9: <code>24 = 42 − k·3</code> → <b>k = 6</b>.<br>The engine can no longer pull when speed reaches 0: <code>42 − 6√n = 0</code> → <code>√n = 7</code> → <b>n = 49</b>.<br>At exactly 49 the speed is 0 — it cannot move. So the maximum it can actually <i>pull</i> is <b>48</b>.',
+ t:'Option (d) 49 is the trap: that\'s where speed hits zero, i.e. the first count it CANNOT pull. The question asks for the maximum it can pull.'},
+
+{n:2, topic:'Time & Distance · two-scenario relative motion', hard:1,
+ q:'A train approaches a tunnel AB. Inside the tunnel a cat sits at a point <b>3/8</b> of the distance AB, measured from entrance A. When the train whistles, the cat runs. If the cat runs to entrance A, the train catches it exactly at A. If it runs to exit B, the train catches it exactly at B. The ratio of the train\'s speed to the cat\'s speed is:',
+ o:['3 : 1','4 : 1','5 : 1','8 : 3'], a:1,
+ s:'Let tunnel length = L, cat speed = c, train speed = t, and let the train be distance <b>x</b> from A when it whistles.<br><b>Case 1</b> (cat → A): cat covers 3L/8 while train covers x → <code>x = t·(3L/8c)</code>.<br><b>Case 2</b> (cat → B): cat covers 5L/8 while train covers x + L → <code>x + L = t·(5L/8c)</code>.<br><b>Subtract</b> — x vanishes: <code>L = t·(2L/8c)</code> → <code>1 = t/(4c)</code> → <b>t : c = 4 : 1</b>.',
+ t:'Trap (d) 8:3 comes from reading the 3/8 fraction straight off as a ratio. The whole problem is the subtraction step — without it you have two equations and three unknowns.'},
+
+{n:3, topic:'Pipes & Cisterns', hard:0,
+ q:'Two pipes A and B can fill a tank in 20 and 30 minutes respectively. Both are opened together, but A is closed after some time. The tank is full in 18 minutes. After how many minutes was A closed?',
+ o:['5','8','10','12'], a:1,
+ s:'B runs the whole 18 minutes: <code>18/30 = 3/5</code> of the tank.<br>So A must supply <code>1 − 3/5 = 2/5</code>.<br>A fills at 1/20 per minute → time = <code>(2/5) × 20 = <b>8 minutes</b></code>.',
+ t:'Trap (c) 10: from splitting 18 minutes "evenly" or solving for when the tank is half full. Anchor on the pipe that runs the FULL duration.'},
+
+{n:4, topic:'Percentage · successive change', hard:0,
+ q:'The price of a commodity rises by 25%. A family responds by cutting its consumption by 10%. The net change in the family\'s expenditure on that commodity is:',
+ o:['increase of 15%','increase of 12.5%','decrease of 12.5%','no change'], o_:'',a:1,
+ s:'Expenditure = price × consumption. Take both as 1 initially.<br>New expenditure = <code>1.25 × 0.90 = 1.125</code>.<br>That\'s a <b>12.5% increase</b>.<br>Shortcut: successive changes a% then b% combine as <code>a + b + ab/100</code> = <code>25 − 10 − 250/100 = 12.5</code>.',
+ t:'Trap (a) 15%: from naively doing 25 − 10. The cross-term <code>ab/100</code> is exactly what successive-change questions test.'},
+
+{n:5, topic:'Profit & Loss · reverse discount', hard:0,
+ q:'An article is marked at ₹1200. It is sold after two successive discounts, the first being 20%. If the final selling price is ₹864, the second discount is:',
+ o:['8%','10%','12%','15%'], a:1,
+ s:'After the first discount: <code>1200 × 0.80 = ₹960</code>.<br>Second discount factor: <code>864 / 960 = 0.90</code>.<br>So the second discount is <b>10%</b>.',
+ t:'Trap (c) 12%: from computing the total discount off the marked price (1200→864 is 28%) and subtracting 20 to "get" 8, or similar single-step reasoning. Successive discounts multiply, they don\'t add.'},
+
+{n:6, topic:'Mixtures · repeated replacement', hard:1,
+ q:'A vessel contains 40 litres of pure milk. 4 litres are drawn out and replaced with water. This operation is repeated <b>two more times</b>. The quantity of pure milk remaining is:',
+ o:['26.40 L','28.00 L','29.16 L','32.40 L'], a:2,
+ s:'Repeated-replacement formula: <code>final = initial × (1 − r/V)ⁿ</code>, with r = 4, V = 40, n = 3.<br><code>40 × (1 − 1/10)³ = 40 × (0.9)³ = 40 × 0.729 = <b>29.16 L</b></code>.',
+ t:'Trap (b) 28 L: from subtracting 4 L three times (40 − 12). After the first draw you\'re removing a milk-water MIXTURE, not pure milk — that\'s the entire point of the question.'},
+
+{n:7, topic:'Alligation', hard:0,
+ q:'In what ratio must rice costing ₹9.30 per kg be mixed with rice costing ₹10.80 per kg so that the mixture is worth ₹10 per kg?',
+ o:['7 : 8','8 : 7','3 : 4','5 : 6'], a:1,
+ s:'Alligation: <code>(cheaper qty)/(dearer qty) = (dearer − mean)/(mean − cheaper)</code>.<br>= <code>(10.80 − 10) / (10 − 9.30) = 0.80 / 0.70</code> = <b>8 : 7</b>.',
+ t:'Trap (a) 7:8 — the ratio inverted. The quantity of the CHEAPER item pairs with the DEARER item\'s distance from the mean. Always label which side you wrote first.'},
+
+{n:8, topic:'Time & Work · pairwise rates', hard:1,
+ q:'A and B together can complete a piece of work in 12 days, B and C in 15 days, and C and A in 20 days. How long will all three working together take?',
+ o:['8 days','10 days','12 days','15 days'], a:1,
+ s:'Add all three pair-rates:<br><code>1/12 + 1/15 + 1/20 = 5/60 + 4/60 + 3/60 = 12/60 = 1/5</code>.<br>But that sum counts <b>each worker twice</b> — it equals <code>2(A + B + C)</code>.<br>So <code>A + B + C = 1/10</code> per day → <b>10 days</b>.',
+ t:'Trap (a) 8 days or (c) 12: from forgetting the factor of 2 and inverting 1/5 directly (→ 5 days), or averaging the three given numbers. The doubling step is the whole question.'},
+
+{n:9, topic:'Time & Work · alternate days', hard:1,
+ q:'A can do a piece of work in 8 days and B in 12 days. They work on alternate days, with <b>A starting</b>. The work will be completed in:',
+ o:['9 days','9½ days','10 days','10½ days'], a:1,
+ s:'A = 1/8 per day, B = 1/12 per day. Use 24ths: A = 3/24, B = 2/24.<br>A 2-day cycle does 5/24. After 4 cycles (<b>8 days</b>): 20/24 done, 4/24 left.<br><b>Day 9</b> (A): does 3/24 → total 23/24, leaving 1/24.<br><b>Day 10</b> (B): B does 2/24 per full day but only 1/24 is needed → <b>half a day</b>.<br>Total = <b>9½ days</b>.',
+ t:'Trap (c) 10 days: from rounding the final partial day up. Also note the answer CHANGES if B starts — always check who goes first.'},
+
+{n:10, topic:'Permutations · restricted position', hard:1,
+ q:'How many 4-letter words (meaningful or not) can be formed from the letters of <b>LOGARITHMS</b>, if repetition is not allowed and each word must begin with a vowel?',
+ o:['1512','2016','3024','5040'], a:0,
+ s:'LOGARITHMS has <b>10 distinct letters</b> (L,O,G,A,R,I,T,H,M,S). Vowels: O, A, I → <b>3</b>.<br>First position: 3 choices.<br>Remaining 3 positions from the other 9 letters: <code>⁹P₃ = 9×8×7 = 504</code>.<br>Total = <code>3 × 504 = <b>1512</b></code>.',
+ t:'Trap (d) 5040 = ¹⁰P₄, ignoring the vowel restriction entirely. Trap (c) 3024 = ⁹P₄. First check the letters are all distinct — if a letter repeated, the whole method changes.'},
+
+{n:11, topic:'Probability', hard:0,
+ q:'A bag contains 4 red, 5 blue and 3 green balls. Two balls are drawn at random. The probability that both are the same colour is:',
+ o:['19/66','2/11','5/22','7/33'], a:0,
+ s:'Total ways: <code>¹²C₂ = 66</code>.<br>Same colour: <code>⁴C₂ + ⁵C₂ + ³C₂ = 6 + 10 + 3 = 19</code>.<br>P = <b>19/66</b>.',
+ t:'Common error: computing P(red)+P(blue)+P(green) using with-replacement probabilities, or forgetting the green pair because 3 balls "feels too few". ³C₂ = 3 is a real contribution.'},
+
+{n:12, topic:'Number System · cyclicity', hard:0,
+ q:'The remainder when 2⁵¹ is divided by 7 is:',
+ o:['1','2','4','6'], a:0,
+ s:'Powers of 2 mod 7 cycle with period 3: <code>2¹=2, 2²=4, 2³=8≡1</code>, then repeat.<br><code>51 mod 3 = 0</code> → 51 lands on the end of a cycle, i.e. the same as 2³.<br>Remainder = <b>1</b>.',
+ t:'Trap: computing 51 mod 3 = 0 and then reading position "0" as 2⁰ = 1 by luck, or as 2¹ = 2 by mis-indexing. When the exponent is an exact multiple of the cycle length, you land on the LAST element of the cycle, not the first.'},
+
+{n:13, topic:'Ages · ratio shift', hard:0,
+ q:'The present ages of a father and son are in the ratio 7 : 3. After 10 years, the ratio will be 2 : 1. The father\'s present age is:',
+ o:['56','63','70','77'], a:2,
+ s:'Let ages be 7x and 3x.<br><code>(7x + 10) / (3x + 10) = 2/1</code><br><code>7x + 10 = 6x + 20</code> → <b>x = 10</b>.<br>Father = <b>70</b>, son = 30. Check: 80 : 40 = 2 : 1 ✓',
+ t:'Trap: adding 10 to only one side, or writing the future ratio as 1:2. Always sanity-check by plugging the answer back — it costs 5 seconds and catches sign errors.'},
+
+{n:14, topic:'Averages · overlapping groups', hard:1,
+ q:'The average of 11 numbers is 10.9. The average of the first six is 10.5 and the average of the last six is 11.4. The <b>sixth</b> number is:',
+ o:['11.5','11.4','10.9','12.0'], a:0,
+ s:'Total of all 11: <code>11 × 10.9 = 119.9</code>.<br>First six: <code>6 × 10.5 = 63</code>. Last six: <code>6 × 11.4 = 68.4</code>.<br>Their sum is <code>131.4</code>, but that covers 12 slots for 11 numbers — the <b>sixth number is counted twice</b>.<br>Sixth = <code>131.4 − 119.9 = <b>11.5</b></code>.',
+ t:'Trap (c) 10.9: assuming the middle number equals the overall average. The double-counting insight is the entire question — it appears whenever "first k" and "last k" overlap.'},
+
+{n:15, topic:'Boats & Streams', hard:1,
+ q:'A man rows to a place 48 km away and returns, taking 14 hours in total. He can row 4 km <b>with</b> the stream in the same time as 3 km <b>against</b> it. The rate of the stream is:',
+ o:['0.5 km/hr','1 km/hr','1.5 km/hr','2 km/hr'], a:1,
+ s:'"4 km downstream takes the same time as 3 km upstream" → speeds are in ratio <b>4 : 3</b>. Let downstream = 4k, upstream = 3k.<br><code>48/(4k) + 48/(3k) = 14</code> → <code>12/k + 16/k = 14</code> → <code>28/k = 14</code> → <b>k = 2</b>.<br>Downstream = 8, upstream = 6.<br>Stream rate = <code>(8 − 6)/2 = <b>1 km/hr</b></code>.',
+ t:'Trap (d) 2 km/hr: forgetting to halve. Stream = (down − up)/2 and boat = (down + up)/2 — the division by 2 is missed constantly under time pressure.'},
+
+{n:16, topic:'Compound Interest', hard:0,
+ q:'The difference between compound interest and simple interest on a sum at 10% per annum for 2 years is ₹631. The sum is:',
+ o:['₹31,550','₹63,100','₹6,310','₹12,620'], a:1,
+ s:'For exactly 2 years the difference is <code>P(R/100)²</code>.<br><code>631 = P × (0.1)² = P/100</code><br><b>P = ₹63,100</b>.',
+ t:'Trap (c) ₹6,310: from using P(R/100) instead of squaring. Note the 2-year formula is P(R/100)²; the 3-year one is different — check the duration before reaching for it.'},
+
+{n:17, topic:'Venn / Set theory', hard:0,
+ q:'In a group of 100 people, 65 like cricket, 40 like football, and 10 like neither. How many like <b>both</b>?',
+ o:['5','10','15','25'], a:2,
+ s:'People who like at least one: <code>100 − 10 = 90</code>.<br>Inclusion–exclusion: <code>|A ∪ B| = |A| + |B| − |A ∩ B|</code><br><code>90 = 65 + 40 − both</code> → <b>both = 15</b>.',
+ t:'Trap (d) 25: from computing 65 + 40 − 100 and forgetting the 10 who like neither. Always convert "neither" into the union total FIRST.'},
+
+{n:18, topic:'Clocks', hard:1,
+ q:'At what times between 4 and 5 o\'clock are the hands of a clock at right angles?',
+ o:['4:05 5/11 only','4:38 2/11 only','4:05 5/11 and 4:38 2/11','4:10 and 4:40'], a:2,
+ s:'At 4:00 the hour hand is at 120°. The minute hand gains <b>5.5° per minute</b>.<br>Angle between them after t minutes: <code>|120 − 5.5t|</code>.<br><b>Minute hand behind:</b> <code>120 − 5.5t = 90</code> → <code>t = 30/5.5 = 60/11 = 5 5/11 min</code>.<br><b>Minute hand ahead:</b> <code>5.5t − 120 = 90</code> → <code>t = 210/5.5 = 420/11 = 38 2/11 min</code>.<br>Both are valid → <b>4:05 5/11 and 4:38 2/11</b>.',
+ t:'Trap (a)/(b): stopping after the first root. Right angles occur TWICE in almost every hour — the moment you write |…| = 90 you should expect two answers.'}
+];
+
+let answered = {}, revealed = {};
+const quiz = document.getElementById('quiz');
+
+function render() {
+  quiz.innerHTML = QS.map((q,i) => {
+    const opts = q.o.map((txt,j) => {
+      let cls = 'opt';
+      if (answered[i] === j) cls += ' sel';
+      if (revealed[i]) {
+        if (j === q.a) cls += ' right';
+        else if (answered[i] === j) cls += ' wrong';
+      }
+      return `<div class="${cls}" onclick="pick(${i},${j})">${String.fromCharCode(97+j)}) ${txt}</div>`;
+    }).join('');
+    return `<div class="qcard">
+      <div class="qhead">
+        <span class="qnum">Q${q.n}${q.hard ? '<span class="pill">HARD</span>' : '<span class="pill med">MEDIUM</span>'}</span>
+        <span class="topic">${q.topic}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      <div class="opts">${opts}</div>
+      <button class="reveal" onclick="rev(${i})">${revealed[i]?'Hide solution':'Reveal solution'}</button>
+      <div class="sol ${revealed[i]?'show':''}">
+        <b>Answer: (${String.fromCharCode(97+q.a)}) ${q.o[q.a]}</b><br>${q.s}
+        <div class="trap"><b>⚠ Trap:</b> ${q.t}</div>
+      </div>
+    </div>`;
+  }).join('');
+  updateScore();
+}
+function pick(i,j){ answered[i]=j; render(); }
+function rev(i){ revealed[i]=!revealed[i]; render(); }
+function revealAll(){ QS.forEach((_,i)=>revealed[i]=true); render(); }
+function resetAll(){ answered={}; revealed={}; stopTimer(); left=27*60; paint(); render(); }
+function updateScore(){
+  const done = Object.keys(answered).length;
+  const graded = QS.filter((q,i)=>revealed[i] && answered[i]!==undefined);
+  const right = graded.filter((q,i0)=>{const i=QS.indexOf(q); return answered[i]===q.a;}).length;
+  document.getElementById('score').innerHTML = graded.length
+    ? `<b>${right}/${graded.length}</b> correct on revealed · ${done}/18 attempted`
+    : `${done}/18 attempted · pick an option, then reveal`;
+}
+
+let left = 27*60, timer = null;
+function paint(){
+  const m = Math.floor(Math.abs(left)/60), s = Math.abs(left)%60;
+  const el = document.getElementById('clock');
+  el.textContent = (left<0?'-':'') + m + ':' + String(s).padStart(2,'0');
+  el.className = left<0 ? 'over' : (left<300 ? 'warn' : '');
+}
+function startTimer(){ if(timer) return; timer = setInterval(()=>{ left--; paint(); }, 1000); }
+function pauseTimer(){ clearInterval(timer); timer=null; }
+function stopTimer(){ pauseTimer(); }
+render(); paint();
+</script>
+</body>
+</html>
