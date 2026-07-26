@@ -2,7 +2,30 @@ STAPLES OA — RESEARCH NOTES
 Compiled 26 July 2026 (~02:00), OA on 27 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
 Confidence labels: [CONFIRMED] official/2+ independent · [MULTI] multiple w/ inconsistency · [SINGLE] one report · [SPEC] inference
 
-=== HEADLINE: OA FORMAT IS PUBLICLY UNDOCUMENTED ===
+=== *** OFFICIAL PATTERN RECEIVED 26 Jul 13:14 [CONFIRMED — placement cell] *** ===
+  Section 1: Multiple-choice questions — Basic Aptitude and Problem Solving
+  Section 2: Coding round — THREE programming problems
+
+This SUPERSEDES the speculation below. Two sections, not the 3-4 guessed.
+Note what is ABSENT vs the [SPEC] prior: no technical MCQ section
+(OS/DBMS/CN/OOPS), no SQL section, no psychometric. Just aptitude + coding.
+Word "Basic" on the aptitude section suggests an easier tier than Qualcomm's.
+
+STILL UNKNOWN — get from the OA invite email / platform instructions page:
+  - Total duration and whether sections are individually timed
+  - *** ALLOWED LANGUAGES *** (critical: Staples is a Java + .NET shop;
+    Python may or may not be offered)
+  - Negative marking on Section 1 (decides whether to guess)
+  - Coding difficulty tier and whether partial test-case credit applies
+
+PREP IMPLICATION: 3 coding problems makes DSA breadth directly load-bearing
+for this OA — arrays/strings/hashmap/two-pointer are the likely tier for an
+entry-level "Associate Software Engineer" screen. The aptitude drill serves
+BOTH this OA and Qualcomm's Section 1.
+
+=== BELOW: pre-confirmation research (superseded on format, still valid on entity/stack) ===
+
+=== HEADLINE: OA FORMAT WAS PUBLICLY UNDOCUMENTED ===
 Zero credible candidate reports found. Searched and came up empty on:
   - GeeksforGeeks interview experiences (no Staples article exists at all)
   - LeetCode Discuss (no Staples OA thread)

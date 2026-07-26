@@ -87,22 +87,30 @@
   <div class="bar-outer"><div class="bar-inner" id="barS"></div></div>
   <div class="bar-label" id="barSlabel"></div>
 
+  <div class="card mint">
+    <h3>✅ Staples pattern CONFIRMED (placement cell, 26 Jul)</h3>
+    <p class="sub"><b>Section 1:</b> MCQ — Basic Aptitude and Problem Solving · <b>Section 2:</b> Coding round, <b>three programming problems</b>.<br>
+    Note what's <i>absent</i> vs the earlier guess: no technical-MCQ section (OS/DBMS/CN), no SQL section. Just aptitude + coding. The word "Basic" suggests an easier aptitude tier than Qualcomm's.</p>
+    <p class="note">Still unknown — get from the invite email: total duration · sectional timers · <b>allowed languages</b> (Staples is a Java + .NET shop, Python may not be offered) · negative marking on Section 1.</p>
+  </div>
+
   <div class="card amber">
-    <h3>⚖️ The allocation call — read once, then stop second-guessing</h3>
-    <p class="sub"><b>Today is ~70% Qualcomm, ~30% Staples</b>, even though Staples comes first. Qualcomm's format is <i>known</i> (60Q / 90min MCQ · aptitude + C/C++ output prediction + CS core · +1/−0.25 · sectionally locked) and the C/C++ gap is closable in one afternoon. Staples' format is <b>publicly undocumented</b> — extra hours there buy breadth you already have. Prep where the marginal return is real.</p>
-    <p class="note">⚠️ Before anything else: check the placement-cell email + both OA invites. The sender domain names the platform, and its instructions page states duration, negative marking and allowed languages. That outranks every prediction in this repo.</p>
+    <h3>⚖️ Allocation — REVISED after the confirmation</h3>
+    <p class="sub">The original 70/30 Qualcomm split assumed Staples was unknowable. It isn't: <b>3 coding problems makes DSA directly load-bearing tomorrow</b>, and coding is exactly what you've been drilling. Today is now roughly <b>50/50</b>.<br>
+    The efficient part: <b>the aptitude drill serves both exams</b> (Staples Section 1 and Qualcomm Section 1), so that block is double-value. What's Qualcomm-only is C/C++ output prediction and CS core. What's Staples-only is timed coding reps.</p>
   </div>
 
   <div id="sprint"></div>
 
   <div class="card red">
-    <h3>🎯 In-exam rules — Staples (format unknown)</h3>
+    <h3>🎯 In-exam rules — Staples (Section 1 aptitude MCQ · Section 2 three coding problems)</h3>
     <ul class="rules">
-      <li><b>Brute force first, submit early.</b> Partial test-case credit beats an elegant unfinished solution.</li>
-      <li><b>Never leave a blank</b> unless negative marking is confirmed on the instructions page. Check that page before question 1.</li>
-      <li><b>Language risk is live</b> (Java + .NET shop). If Python isn't offered, write the simplest correct thing you can in Java — don't attempt clever.</li>
-      <li>SQL is plausible (SQL Server across both their tracks). Joins, GROUP BY/HAVING, subqueries.</li>
-      <li>20-min cap per coding problem. Read every question before starting — grab the cheap ones first.</li>
+      <li><b>Read all three coding problems before writing anything.</b> Solve in order of <i>your</i> confidence, not their order. The cheapest problem is worth the same as the hardest.</li>
+      <li><b>Brute force first, submit, then optimise.</b> Partial test-case credit beats an elegant unfinished solution — this is how you avoid the Honeywell outcome.</li>
+      <li><b>~20 min per problem.</b> Three problems means the clock is the real opponent. Past 20 min → submit what runs and move on; come back only if time remains.</li>
+      <li><b>Check the instructions page for negative marking</b> before Section 1's first question. No negative marking → never leave a blank.</li>
+      <li><b>Language risk is live</b> (Java + .NET shop). If Python isn't offered, write the simplest correct thing in Java — no clever one-liners, no unfamiliar library calls.</li>
+      <li>State the invariant to yourself before coding. That one habit caught every bug in this week's drills.</li>
     </ul>
   </div>
 
@@ -176,9 +184,11 @@ const SPRINT = [
     ['🧠 Block 3 · CS core skim (45 min)', [
       CORE + ' — OS → DBMS → CN → DS complexities',
       'Recognition, not memorisation. You already know most of the DBMS from SQL work' ]],
-    ['💻 Block 4 · Staples hedge (60 min)', [
-      'Python DSA, arrays/strings/hashmap only — re-solve 2 already-solved problems cold for speed',
-      'SQL: joins + GROUP BY/HAVING + subqueries (LeetCode SQL 50, next unsolved few)' ]],
+    ['💻 Block 4 · Staples coding reps, TIMED (75 min) — now load-bearing', [
+      '<b>3 problems in 60 min, clock running</b> — mirrors tomorrow\'s Section 2 exactly',
+      'Tier: arrays / strings / hashmap / two-pointer (entry-level ASE screen)',
+      'Re-solve 2 of your 5 saved solutions <b>cold from blank</b> for raw speed, then 1 unseen easy-medium',
+      'Rule rehearsal: brute force first → submit → optimise only if time remains' ]],
     ['✅ Block 5 · Logistics, then stop (30 min)', [
       'Both platforms: log in, test webcam + mic, confirm Chrome, disable VPN/extensions',
       'Laptop charged · charger plugged · hotspot fallback known · desk clear',
