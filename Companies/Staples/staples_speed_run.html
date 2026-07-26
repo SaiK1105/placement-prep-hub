@@ -64,6 +64,38 @@
 
 <!-- ============ STRATEGY ============ -->
 <div class="tab visible" id="strat">
+  <div class="card mint">
+    <h3>☀️ MORNING OF — read this first, do nothing else</h3>
+    <p class="sub"><b class="big">No new problems today.</b> Anything you don't know at 8 AM you won't learn by 10. Today is about arriving calm, warm, and on time.</p>
+    <table>
+      <tr><th>When</th><th>Do</th></tr>
+      <tr><td><b>On waking</b></td><td>Eat properly. Low blood sugar costs more marks than one unrevised topic.</td></tr>
+      <tr><td><b>T-45 min</b></td><td>Logistics: laptop charged + plugged in · Chrome open, no extensions · VPN off · other apps closed · phone silent and out of reach · desk clear · water within reach · bathroom done</td></tr>
+      <tr><td><b>T-30 min</b></td><td>Log into HirePro. Run the system check — webcam + mic. <b>Check the language dropdown for Python 3.</b> If it's absent, open the Java Fallback tab and read the boilerplate.</td></tr>
+      <tr><td><b>T-15 min</b></td><td>Warm-up ONLY — skim the 3 idioms below. Do not attempt a fresh problem.</td></tr>
+      <tr><td><b>T-5 min</b></td><td>Read the instructions page: <b>negative marking?</b> sectional timers or one pooled clock? Set your phone timer accordingly.</td></tr>
+    </table>
+  </div>
+
+  <div class="card amber">
+    <h3>🔑 The three lines to have in your fingers</h3>
+<pre><code># 1. universal string cleanup
+s = ''.join(c.lower() for c in s if c.isalnum())
+
+# 2. frequency, then loop the ORIGINAL string for order
+from collections import Counter
+c = Counter(s)
+for ch in s:
+    if c[ch] == 1: return ch
+
+# 3. writer pointer — pos advances by 1 per write, never pos = i
+pos = 0
+for i in range(len(arr)):
+    if arr[i] != 0:
+        arr[pos] = arr[i]; pos += 1</code></pre>
+    <p class="note">These three cover the majority of the P1/P2 shapes. You drilled all three last night and every one passed its tests.</p>
+  </div>
+
   <div class="card red">
     <h3>⏱️ The clock is the entire exam</h3>
     <table>
