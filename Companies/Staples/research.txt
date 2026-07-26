@@ -2,6 +2,42 @@ STAPLES OA — RESEARCH NOTES
 Compiled 26 July 2026 (~02:00), OA on 27 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
 Confidence labels: [CONFIRMED] official/2+ independent · [MULTI] multiple w/ inconsistency · [SINGLE] one report · [SPEC] inference
 
+=== UPDATE 26 Jul 23:17 ===
+[CONFIRMED — placement cell] Platform is HIREPRO. Duration 65 min.
+  -> Same vendor as the Honeywell OA (21 Jul) and Qualcomm (28 Jul).
+     Platform rules already known: Chrome only, laptop/desktop, webcam+mic
+     mandatory and recorded, no extensions, disable VPN, close other apps,
+     no tab-switching / leaving fullscreen, copy-paste blocked/flagged,
+     disconnection recoverable by re-login with same credentials.
+[CONFIRMED — program] Staples Spark Internship: 12 months, Rs 30,000/month
+  stipend, based at the Staples office in CHENNAI.
+
+[SPEC — Google AI synthesis, WEAK SOURCES: a 2018 FACE Prep pattern page,
+ Scribd, codingshuttle. Topic lists plausible; difficulty scaling is
+ inference, NOT candidate reports. Do not treat as fact.]
+  Section 1 topic bank (HirePro-generic):
+    Quant: time & work (pipe leakage, alternating days), time-speed-distance
+      (train crossings, upstream/downstream relative speed), percentages,
+      profit & loss (successive discounts, partnership shares),
+      permutations/combinations/probability (dice, cards, ball selection)
+    Logical: data interpretation (bar/pie extraction), blood relations,
+      seating arrangements (linear/circular), clocks & calendars
+      (hand angle, leap-year day counts)
+  Section 2 difficulty scaling (3 problems, ~50 min):
+    P1 Easy        — array/string basics: sub-segment reversal, first
+                     non-repeating char, frequency/anagram checks
+    P2 Easy-Medium — two-pointer / greedy / math: two-sum variants,
+                     KADANE'S max subarray, interval merge/scheduling
+    P3 Medium      — hashing / matrix / basic recursion: 2D grid traversal,
+                     HashSet uniqueness, dynamic subarray tracking
+
+*** CORRECTION TO EARLIER PREP ADVICE ***
+Prior note said "~15 min/problem means these must all be easy tier."
+If the P1->P2->P3 escalation is real, P3 may be genuine Medium. This does
+NOT change the strategy — it REINFORCES it: read all three first, solve in
+ascending difficulty, never let P3 eat the time budget for P1+P2. Two clean
+solves beat one elegant solve plus two blanks.
+
 === *** OFFICIAL PATTERN RECEIVED 26 Jul 13:14 [CONFIRMED — placement cell] *** ===
   Section 1: Multiple-choice questions — Basic Aptitude and Problem Solving
   Section 2: Coding round — THREE programming problems
