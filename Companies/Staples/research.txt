@@ -2,6 +2,74 @@ STAPLES OA — RESEARCH NOTES
 Compiled 26 July 2026 (~02:00), OA on 27 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
 Confidence labels: [CONFIRMED] official/2+ independent · [MULTI] multiple w/ inconsistency · [SINGLE] one report · [SPEC] inference
 
+################################################################
+### *** WHAT ACTUALLY APPEARED — 27 Jul, post-OA [GROUND TRUTH] ***
+################################################################
+
+ACTUAL FORMAT (candidate report, first-hand):
+  Section 1: 15 aptitude questions / 15 min
+  Section 2: SQL / 10 min                     <-- NOT PREDICTED
+  Section 3: 2 coding problems / 50 min       <-- predicted 3, actual 2
+
+PREDICTION SCORECARD:
+  [HIT ] Platform HirePro
+  [HIT ] Aptitude MCQ section exists
+  [HIT ] Coding section exists
+  [MISS] "No SQL section" — WRONG. There was a dedicated 10-min SQL round.
+         The placement-cell 2-line pattern ("Section 1 MCQ / Section 2
+         coding") was INCOMPLETE, and I treated its silence as evidence
+         of absence. Silence in a summary is not evidence.
+  [MISS] "Three coding problems" — actual was two.
+  [MISS] Difficulty. Predicted P1 easy array/string, P2 easy-med
+         two-pointer/greedy. Actual was GRAPH TRAVERSAL + MATRIX DP.
+         Neither is array/string basics. Third consecutive OA where the
+         difficulty prediction ran LOW.
+
+--- SQL QUESTION (actual) ---
+  Tables: customer(id, firstname, lastname, email, phoneno, amount)
+          orderList(id, date, phoneno, Amount)
+  Ask: show all columns of customer AND orderList
+       where date > '2023-09-01'
+       order by name
+  Shape: INNER JOIN on phoneno + WHERE on date + ORDER BY name.
+  Note: join key is phoneno (not id) — the two id columns are unrelated.
+
+--- CODING PROBLEM 1 (actual) — GRAPH / PATH WITH BUDGET ---
+  Input:
+    5 4                 (5 cities, 4 routes)
+    1 2 10
+    2 3 10
+    3 4 20
+    4 5 10
+    amount = 120
+  Output: 1 2 3 4 3 2 1
+  Shape: weighted undirected graph, travel out from source and return,
+  total cost must stay within budget; print the route taken.
+  NOTE: exact objective still ambiguous from the recall — going 1..5 and
+  back costs 100 (<=120) yet the printed answer stops at city 4 (cost 80).
+  Need the full statement to pin the objective. Ask candidate.
+
+--- CODING PROBLEM 2 (actual) — MATRIX MIN PATH SUM ---
+  Input:
+    3 3
+    1 4 3
+    2 5 4
+    7 5 9
+  Output: 21   (path 1 -> 2 -> 5 -> 4 -> 9)
+  Shape: classic LeetCode 64 "Minimum Path Sum" — DP grid, move right/down
+  only, dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1]).
+  Verified: min over all right/down paths of this grid IS 21.
+
+--- LESSONS FOR NEXT OA PREP ---
+1. An official pattern summary listing N sections does NOT rule out an
+   N+1th section. Treat placement-cell summaries as a FLOOR, not a spec.
+2. Stop predicting difficulty downward from time budget. "50 min for 2
+   problems" did NOT mean easy — it meant graph + DP.
+3. Graphs and DP are no longer optional. They were the WHOLE coding
+   section here, and both sit late in the Contract ladder (weeks 7-8).
+   Pull them earlier.
+4. SQL joins must stay warm for every OA, not just analyst-flavoured ones.
+
 === UPDATE 26 Jul 23:17 ===
 [CONFIRMED — placement cell] Platform is HIREPRO. Duration 65 min.
   -> Same vendor as the Honeywell OA (21 Jul) and Qualcomm (28 Jul).
