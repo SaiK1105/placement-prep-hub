@@ -250,6 +250,10 @@ const SPRINT = [
     ['📅 Sunday, every week (2 h)', [
       'Cold mock: MCQ block + 2–3 DSA + 1 SQL, exam conditions, honestly scored',
       'Root-cause every miss → next week drills exactly those' ]],
+    ['🗄️ SQL is now every-OA, not analyst-only', [
+      'Staples had a dedicated 10-min SQL round nobody predicted — keep <b>joins + WHERE + ORDER BY</b> warm permanently',
+      'The exact shape asked: <code>SELECT * FROM customer c JOIN orderList o ON c.phoneno = o.phoneno WHERE o.date &gt; \'2023-09-01\' ORDER BY c.firstname</code>',
+      'Mon/Wed/Fri SQL block continues — LeetCode SQL 50, in order, executed not eyeballed' ]],
     ['🎯 Standing rules', [
       'A short day is 1 problem, never 0',
       'Weeks 5–8: add 15 min/day Java revival (re-type one solved problem in Java)',
@@ -342,15 +346,19 @@ const HW = [
 ];
 
 // ---------- CONTRACT DATA (30 Jul – 21 Sep 2026) ----------
+// LADDER REORDERED 27 Jul after the Staples OA: its ENTIRE coding section
+// was graph traversal + matrix DP. Both sat at weeks 7-8 in the original
+// ordering — far too late. Pulled forward; arrays/strings/hashing are
+// already drilled and demoted to maintenance reps inside later weeks.
 const WEEKS = [
-  ['Week 1 · Wed 30 Jul – Sun 3 Aug', 'Arrays & strings (ladder start)', 5],
-  ['Week 2 · Mon 4 – Sun 10 Aug', 'Hashing & prefix sums', 7],
-  ['Week 3 · Mon 11 – Sun 17 Aug', 'Two pointers & sliding window', 7],
-  ['Week 4 · Mon 18 – Sun 24 Aug', 'Binary search + stack & queue', 7],
-  ['Week 5 · Mon 25 – Sun 31 Aug', 'Linked list + trees & BFS/DFS', 7],
-  ['Week 6 · Mon 1 – Sun 7 Sep', 'Heap & greedy', 7],
-  ['Week 7 · Mon 8 – Sun 14 Sep', 'DP basics (1-D, knapsack, grid)', 7],
-  ['Week 8 · Mon 15 – Sun 21 Sep', 'Graphs + mixed hard sims', 7],
+  ['Week 1 · Wed 29 Jul – Sun 3 Aug', '🔥 GRID DP + matrix paths (min path sum, unique paths) — the exact Staples P2', 6],
+  ['Week 2 · Mon 4 – Sun 10 Aug', '🔥 GRAPHS I — BFS/DFS, adjacency lists, grid traversal, connected components', 7],
+  ['Week 3 · Mon 11 – Sun 17 Aug', '🔥 GRAPHS II — shortest path (Dijkstra), cycle detection, backtracking paths w/ constraints (the Staples P1 shape)', 7],
+  ['Week 4 · Mon 18 – Sun 24 Aug', 'DP core — 1-D, knapsack, LIS, coin change', 7],
+  ['Week 5 · Mon 25 – Sun 31 Aug', 'Greedy + intervals (merge, scheduling) + heap', 7],
+  ['Week 6 · Mon 1 – Sun 7 Sep', 'Trees & recursion — traversals, BST, LCA, depth problems', 7],
+  ['Week 7 · Mon 8 – Sun 14 Sep', 'Binary search + stack/queue + linked list', 7],
+  ['Week 8 · Mon 15 – Sun 21 Sep', 'Mixed hard sims — full OA papers under exam conditions', 7],
 ];
 const DAYNAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
