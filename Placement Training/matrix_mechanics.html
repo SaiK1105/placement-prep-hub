@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix Mechanics — the gap that killed 6 OAs</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', system-ui, sans-serif; background: #262624; color: #f0efea; line-height: 1.6; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px 90px; }
+  header { text-align: center; padding: 30px 0 12px; }
+  h1 { font-family: ui-serif, Georgia, serif; font-size: 27px; font-weight: 500; }
+  h1 span { color: #d97757; }
+  .tagline { color: #b8b5ad; font-size: 14px; max-width: 680px; margin: 8px auto 0; }
+  h2 { font-family: ui-serif, Georgia, serif; font-size: 20px; font-weight: 500; margin: 28px 0 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 5px; }
+  .sub { color: #b8b5ad; font-size: 13px; margin: 2px 0 12px; }
+  .card { background: #30302e; border: 1px solid #3f3e3a; border-radius: 14px; padding: 14px 16px; margin-bottom: 11px; }
+  .card.amber { border-left: 3px solid #d3a13f; border-radius: 0 14px 14px 0; }
+  .card.red   { border-left: 3px solid #c96f6f; border-radius: 0 14px 14px 0; }
+  .card.mint  { border-left: 3px solid #90a883; border-radius: 0 14px 14px 0; }
+  .card.blue  { border-left: 3px solid #7f9cc0; border-radius: 0 14px 14px 0; }
+  .rules li { margin: 5px 0 5px 18px; font-size: 13.5px; color: #dedbd3; }
+  code { background: #262624; padding: 1px 5px; border-radius: 4px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12.5px; color: #e0987d; }
+  pre { background: #262624; border: 1px solid #3f3e3a; border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 7px 0; }
+  pre code { background: none; padding: 0; color: #dedbd3; font-size: 12.5px; line-height: 1.55; }
+  .nav { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin: 14px 0 4px; position: sticky; top: 0; background: #262624; padding: 10px 0; z-index: 10; border-bottom: 1px solid #3f3e3a; }
+  .nav button { font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 11px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .nav button.active { border-color: #d97757; color: #f0efea; background: #3a332f; }
+  .tab { display: none; } .tab.visible { display: block; }
+  .q { border-top: 1px solid #3f3e3a; padding-top: 11px; margin-top: 11px; }
+  .q:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .qnum { font-size: 11.5px; font-weight: 700; color: #7f9cc0; letter-spacing: .5px; }
+  .sol { display: none; margin-top: 7px; }
+  .sol.show { display: block; }
+  .reveal { margin-top: 6px; font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: 9px; border: 1px solid #45443f; background: #30302e; color: #b8b5ad; cursor: pointer; }
+  .reveal:hover { border-color: #d97757; color: #f0efea; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 8px; border: 1px solid #45443f; color: #90a883; margin-left: 6px; }
+  .pill.hot { color: #c96f6f; }
+  .note { font-size: 12.5px; color: #d3a13f; margin-top: 7px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #3f3e3a; vertical-align: top; }
+  th { color: #90a883; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  .grid-demo { font-family: 'Cascadia Code', Consolas, monospace; font-size: 13px; color: #dedbd3; background:#262624; border:1px solid #3f3e3a; border-radius:8px; padding:10px; display:inline-block; margin:6px 0; }
+  footer { border-top: 1px solid #3f3e3a; margin-top: 40px; padding-top: 18px; text-align: center; font-size: 12px; color: #8e8b83; }
+  footer a { color: #e0987d; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🔲 Matrix <span>Mechanics</span></h1>
+  <p class="tagline">Built 27 Jul 2026 after the Staples OA. Self-diagnosis: <i>"every matrix problem in every OA — I recognised the pattern but couldn't implement it."</i> That is not an algorithms gap. It is <b>2D syntax not being in your fingers</b>. This page fixes exactly that, and nothing else.</p>
+</header>
+
+<div class="nav">
+  <button class="active" onclick="show('mech',this)">⚙️ Mechanics</button>
+  <button onclick="show('traps',this)">💀 The Traps</button>
+  <button onclick="show('templates',this)">📐 4 Templates</button>
+  <button onclick="show('drill',this)">🔥 10 Drills</button>
+</div>
+
+<!-- ============ MECHANICS ============ -->
+<div class="tab visible" id="mech">
+  <div class="card red">
+    <h3>🎯 Why this page exists</h3>
+    <p class="sub">Across six OAs, every matrix problem was lost — <b>despite recognising the pattern every time</b>. Staples P2 was textbook Minimum Path Sum and the recurrence was known. What was missing was the ability to type a 2D grid, iterate it, and index it without hesitating. Algorithm knowledge you already have. Mechanics you don't. <b>Mechanics are pure reps.</b></p>
+  </div>
+
+  <div class="card blue">
+    <h3>Creating a grid</h3>
+<pre><code>R, C = 3, 4
+
+grid = [[0] * C for _ in range(R)]     # ✅ THE ONLY correct way
+grid = [[0] * C] * R                   # ☠️ BROKEN — see Traps tab
+
+# from known values
+grid = [[1,4,3],
+        [2,5,4],
+        [7,5,9]]
+
+# dimensions — memorise this shape
+R = len(grid)          # number of ROWS
+C = len(grid[0])       # number of COLUMNS (length of first row)</code></pre>
+    <p class="note"><code>grid[row][col]</code> — <b>row first, always</b>. Not (x, y). The most common indexing bug is silently swapping them.</p>
+  </div>
+
+  <div class="card blue">
+    <h3>Reading a grid from input</h3>
+<pre><code># Typical OA input:
+#   3 3
+#   1 4 3
+#   2 5 4
+#   7 5 9
+
+R, C = map(int, input().split())
+grid = []
+for _ in range(R):
+    grid.append(list(map(int, input().split())))
+
+# one-liner version
+grid = [list(map(int, input().split())) for _ in range(R)]</code></pre>
+    <p class="note">Type this without thinking. In a 15-minute problem, fumbling input parsing costs a third of your budget.</p>
+  </div>
+
+  <div class="card blue">
+    <h3>Iterating</h3>
+<pre><code># every cell, row by row
+for i in range(R):
+    for j in range(C):
+        print(grid[i][j], end=' ')
+    print()
+
+# when you only need values, not positions
+for row in grid:
+    for val in row:
+        ...
+
+# a whole row     -> grid[i]
+# a whole column  -> [grid[i][j] for i in range(R)]
+# row sums        -> [sum(row) for row in grid]
+# column sums     -> [sum(grid[i][j] for i in range(R)) for j in range(C)]
+# total sum       -> sum(sum(row) for row in grid)
+# print nicely    -> for row in grid: print(*row)</code></pre>
+  </div>
+
+  <div class="card mint">
+    <h3>Coordinates — build the mental picture once</h3>
+    <div class="grid-demo">
+        j=0    j=1    j=2<br>
+i=0  [0,0]  [0,1]  [0,2]<br>
+i=1  [1,0]  [1,1]  [1,2]<br>
+i=2  [2,0]  [2,1]  [2,2]
+    </div>
+    <ul class="rules">
+      <li><b>i grows downward</b> (rows), <b>j grows rightward</b> (columns)</li>
+      <li>Move <b>down</b> = <code>i+1</code> · <b>up</b> = <code>i-1</code> · <b>right</b> = <code>j+1</code> · <b>left</b> = <code>j-1</code></li>
+      <li>Top-left = <code>grid[0][0]</code> · bottom-right = <code>grid[R-1][C-1]</code> (or <code>grid[-1][-1]</code>)</li>
+      <li>In bounds ⟺ <code>0 &lt;= i &lt; R and 0 &lt;= j &lt; C</code> — write this check as a helper, every time</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ TRAPS ============ -->
+<div class="tab" id="traps">
+  <h2>💀 The five traps</h2>
+
+  <div class="card red">
+    <h3>1. <code>[[0]*C]*R</code> — the silent killer <span class="pill hot">costs whole problems</span></h3>
+<pre><code>bad = [[0]*3]*3
+bad[0][0] = 99
+print(bad)   # [[99,0,0], [99,0,0], [99,0,0]]   ← ALL THREE ROWS CHANGED
+
+good = [[0]*3 for _ in range(3)]
+good[0][0] = 99
+print(good)  # [[99,0,0], [0,0,0], [0,0,0]]     ← correct</code></pre>
+    <p class="note"><code>*R</code> copies the <b>reference</b> to one row R times, so every "row" is the same list. Your DP table looks right, produces garbage, and gives no error. <b>Always use the list-comprehension form.</b></p>
+  </div>
+
+  <div class="card red">
+    <h3>2. Swapping i and j</h3>
+    <p class="sub"><code>grid[j][i]</code> instead of <code>grid[i][j]</code>. On a square grid it silently transposes your answer; on a rectangular grid it throws <code>IndexError</code>. Say "row, column" out loud as you type the brackets.</p>
+  </div>
+
+  <div class="card red">
+    <h3>3. Using R where C belongs</h3>
+<pre><code>for i in range(R):        # rows   → uses R
+    for j in range(C):    # cols   → uses C</code></pre>
+    <p class="sub">Swap them on a non-square grid and you get <code>IndexError</code>; on a square grid it works by luck and breaks on the hidden test case.</p>
+  </div>
+
+  <div class="card red">
+    <h3>4. Forgetting the bounds check before moving</h3>
+<pre><code># ALWAYS guard before stepping to a neighbour
+if 0 &lt;= ni &lt; R and 0 &lt;= nj &lt; C:
+    ...</code></pre>
+    <p class="note">Python's negative indexing makes this worse than in C: <code>grid[-1]</code> doesn't error, it silently wraps to the last row. Off-grid moves become wrong answers instead of crashes.</p>
+  </div>
+
+  <div class="card red">
+    <h3>5. Mutating the input grid when you needed a copy</h3>
+<pre><code>copy = [row[:] for row in grid]     # ✅ real copy of every row
+copy = grid[:]                      # ☠️ shallow — rows still shared
+import copy as cp; cp.deepcopy(grid)  # works, slower</code></pre>
+  </div>
+</div>
+
+<!-- ============ TEMPLATES ============ -->
+<div class="tab" id="templates">
+  <h2>📐 Four templates that cover almost every OA matrix problem</h2>
+  <p class="sub">Learn these four shapes and you can attempt essentially any grid question you'll meet at this tier.</p>
+
+  <div class="card amber">
+    <h3>1 · Grid DP <span class="pill hot">this was Staples P2</span></h3>
+<pre><code>def min_path_sum(grid):
+    R, C = len(grid), len(grid[0])
+    dp = [[0]*C for _ in range(R)]
+
+    for i in range(R):
+        for j in range(C):
+            if i == 0 and j == 0:
+                dp[i][j] = grid[i][j]              # start
+            elif i == 0:
+                dp[i][j] = dp[i][j-1] + grid[i][j]  # top row: only from left
+            elif j == 0:
+                dp[i][j] = dp[i-1][j] + grid[i][j]  # left col: only from above
+            else:
+                dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
+    return dp[-1][-1]</code></pre>
+    <p class="note">The four-case shape (start / top row / left column / general) is the whole template. Handle the edges first and the general case writes itself. Swap <code>min</code>→<code>max</code> for max-path, drop <code>grid[i][j]</code> and use <code>+</code> for counting paths.</p>
+  </div>
+
+  <div class="card amber">
+    <h3>2 · Grid DFS — flood fill / islands</h3>
+<pre><code>def num_islands(grid):
+    if not grid: return 0
+    R, C = len(grid), len(grid[0])
+    seen = set()
+
+    def dfs(i, j):
+        if i < 0 or i >= R or j < 0 or j >= C: return   # bounds
+        if (i,j) in seen or grid[i][j] != 1: return     # visited or water
+        seen.add((i,j))
+        dfs(i+1,j); dfs(i-1,j); dfs(i,j+1); dfs(i,j-1)  # 4 directions
+
+    count = 0
+    for i in range(R):
+        for j in range(C):
+            if grid[i][j] == 1 and (i,j) not in seen:
+                dfs(i,j); count += 1
+    return count</code></pre>
+  </div>
+
+  <div class="card amber">
+    <h3>3 · Grid BFS — shortest path in an unweighted grid</h3>
+<pre><code>from collections import deque
+
+def shortest(grid, start, goal):
+    R, C = len(grid), len(grid[0])
+    q = deque([(start[0], start[1], 0)])     # (i, j, distance)
+    seen = {start}
+    DIRS = [(1,0), (-1,0), (0,1), (0,-1)]    # keep this constant handy
+
+    while q:
+        i, j, d = q.popleft()
+        if (i,j) == goal: return d
+        for di, dj in DIRS:
+            ni, nj = i+di, j+dj
+            if 0 <= ni < R and 0 <= nj < C and (ni,nj) not in seen and grid[ni][nj] != 1:
+                seen.add((ni,nj))
+                q.append((ni, nj, d+1))
+    return -1</code></pre>
+    <p class="note">BFS (queue) gives the <b>shortest</b> path in an unweighted grid; DFS does not. Weighted edges → Dijkstra with a heap.</p>
+  </div>
+
+  <div class="card amber">
+    <h3>4 · Transform in place — transpose / rotate</h3>
+<pre><code># transpose (swap across the main diagonal)
+for i in range(R):
+    for j in range(i+1, C):          # note: j starts at i+1, not 0
+        grid[i][j], grid[j][i] = grid[j][i], grid[i][j]
+
+# rotate 90° clockwise = transpose, then reverse each row
+for row in grid:
+    row.reverse()
+
+# quick non-in-place transpose
+list(zip(*grid))                     # tuples
+[list(r) for r in zip(*grid)]        # lists</code></pre>
+    <p class="note">If <code>j</code> starts at 0 instead of <code>i+1</code>, you swap every pair twice and get the original grid back — a classic "my code does nothing" bug.</p>
+  </div>
+</div>
+
+<!-- ============ DRILL ============ -->
+<div class="tab" id="drill">
+  <h2>🔥 10 drills — mechanics first, patterns second</h2>
+  <p class="sub"><b>Type every one in a real editor.</b> Reading these teaches nothing; the whole point is fingers. D1–D5 are pure mechanics (target 3 min each), D6–D10 are the real OA patterns (target 8 min each). Every solution below was executed and verified.</p>
+
+  <div class="card">
+    <div class="q"><div class="qnum">D1 · MECHANICS</div>
+      <b>Read R, C then an R×C grid from input, and print its total sum.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>R, C = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(R)]
+print(sum(sum(row) for row in grid))</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">D2 · MECHANICS</div>
+      <b>Print each row's sum, then each column's sum.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>R, C = len(grid), len(grid[0])
+row_sums = [sum(row) for row in grid]
+col_sums = [sum(grid[i][j] for i in range(R)) for j in range(C)]
+print(*row_sums)
+print(*col_sums)</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">D3 · MECHANICS</div>
+      <b>Sum of both diagonals</b> of a square matrix (count the centre once if R is odd).
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>n = len(grid)
+main = sum(grid[i][i] for i in range(n))
+anti = sum(grid[i][n-1-i] for i in range(n))
+total = main + anti
+if n % 2 == 1:
+    total -= grid[n//2][n//2]      # centre counted twice</code></pre>
+      <p class="note"><code>grid[i][n-1-i]</code> is the anti-diagonal index — worth memorising outright.</p></div>
+    </div>
+
+    <div class="q"><div class="qnum">D4 · MECHANICS</div>
+      <b>Transpose a matrix in place.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>n = len(grid)
+for i in range(n):
+    for j in range(i+1, n):        # i+1 — not 0
+        grid[i][j], grid[j][i] = grid[j][i], grid[i][j]</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">D5 · MECHANICS</div>
+      <b>Rotate a matrix 90° clockwise, in place.</b>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>n = len(grid)
+for i in range(n):                          # transpose
+    for j in range(i+1, n):
+        grid[i][j], grid[j][i] = grid[j][i], grid[i][j]
+for row in grid:                            # reverse each row
+    row.reverse()</code></pre>
+      <p class="note">Anticlockwise = transpose, then reverse the <i>order of rows</i> (<code>grid.reverse()</code>) instead.</p></div>
+    </div>
+
+    <div class="q"><div class="qnum">D6 · PATTERN <span class="pill hot">Staples P2</span></div>
+      <b>Minimum path sum</b> from top-left to bottom-right, moving only right or down.
+      <br><code>[[1,4,3],[2,5,4],[7,5,9]] → 21</code>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def min_path_sum(grid):
+    R, C = len(grid), len(grid[0])
+    dp = [[0]*C for _ in range(R)]
+    for i in range(R):
+        for j in range(C):
+            if i == 0 and j == 0: dp[i][j] = grid[i][j]
+            elif i == 0:          dp[i][j] = dp[i][j-1] + grid[i][j]
+            elif j == 0:          dp[i][j] = dp[i-1][j] + grid[i][j]
+            else:                 dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
+    return dp[-1][-1]</code></pre>
+      <p class="note">This is the exact problem you couldn't touch in the Staples OA. Type it until it's automatic.</p></div>
+    </div>
+
+    <div class="q"><div class="qnum">D7 · PATTERN</div>
+      <b>Unique paths</b>: how many distinct right/down routes from top-left to bottom-right of an R×C grid?
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def unique_paths(R, C):
+    dp = [[1]*C for _ in range(R)]     # first row & col are all 1
+    for i in range(1, R):
+        for j in range(1, C):
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    return dp[-1][-1]
+# unique_paths(3,3) == 6</code></pre>
+      <p class="note">Same skeleton as D6 with <code>+</code> instead of <code>min</code>, and 1s instead of grid values. That substitution IS the pattern family.</p></div>
+    </div>
+
+    <div class="q"><div class="qnum">D8 · PATTERN</div>
+      <b>Number of islands</b> — count connected groups of 1s (4-directional).
+      <br><code>[[1,1,0],[0,1,0],[1,0,1]] → 3</code>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def num_islands(grid):
+    if not grid: return 0
+    R, C = len(grid), len(grid[0])
+    seen = set()
+    def dfs(i, j):
+        if i < 0 or i >= R or j < 0 or j >= C: return
+        if (i,j) in seen or grid[i][j] != 1: return
+        seen.add((i,j))
+        dfs(i+1,j); dfs(i-1,j); dfs(i,j+1); dfs(i,j-1)
+    count = 0
+    for i in range(R):
+        for j in range(C):
+            if grid[i][j] == 1 and (i,j) not in seen:
+                dfs(i,j); count += 1
+    return count</code></pre></div>
+    </div>
+
+    <div class="q"><div class="qnum">D9 · PATTERN</div>
+      <b>Spiral order traversal</b> — return all elements in spiral order.
+      <br><code>[[1,2,3],[4,5,6],[7,8,9]] → [1,2,3,6,9,8,7,4,5]</code>
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>def spiral(grid):
+    if not grid: return []
+    out = []
+    top, bot = 0, len(grid)-1
+    left, right = 0, len(grid[0])-1
+    while top <= bot and left <= right:
+        for j in range(left, right+1): out.append(grid[top][j])
+        top += 1
+        for i in range(top, bot+1): out.append(grid[i][right])
+        right -= 1
+        if top <= bot:                                  # guard needed
+            for j in range(right, left-1, -1): out.append(grid[bot][j])
+            bot -= 1
+        if left <= right:                               # guard needed
+            for i in range(bot, top-1, -1): out.append(grid[i][left])
+            left += 1
+    return out</code></pre>
+      <p class="note">Four boundaries that close inward. The two <code>if</code> guards matter — without them, single-row or single-column leftovers get emitted twice.</p></div>
+    </div>
+
+    <div class="q"><div class="qnum">D10 · PATTERN</div>
+      <b>Shortest path in a binary grid</b> (0 = open, 1 = wall), from (0,0) to (R-1,C-1), 4-directional. Return step count or −1.
+      <button class="reveal" onclick="t(this)">Reveal</button>
+      <div class="sol"><pre><code>from collections import deque
+
+def shortest_path(grid):
+    R, C = len(grid), len(grid[0])
+    if grid[0][0] == 1 or grid[R-1][C-1] == 1: return -1
+    q = deque([(0, 0, 0)])
+    seen = {(0,0)}
+    for_dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+    while q:
+        i, j, d = q.popleft()
+        if i == R-1 and j == C-1: return d
+        for di, dj in for_dirs:
+            ni, nj = i+di, j+dj
+            if 0 <= ni < R and 0 <= nj < C and (ni,nj) not in seen and grid[ni][nj] == 0:
+                seen.add((ni,nj))
+                q.append((ni, nj, d+1))
+    return -1</code></pre>
+      <p class="note">Mark cells as seen when you <b>enqueue</b>, not when you dequeue — otherwise the same cell enters the queue many times and BFS degenerates.</p></div>
+    </div>
+  </div>
+
+  <div class="card mint">
+    <h3>✅ How you'll know the gap is closed</h3>
+    <p class="sub">You can type D6 (min path sum) from a blank editor, correct first try, in under 4 minutes, without looking at anything. That single test covers grid creation, the aliasing trap, double iteration, edge-case handling, and the DP recurrence — every mechanic that has cost you OA problems.</p>
+  </div>
+</div>
+
+<footer>
+  Every solution executed and verified before publishing · <a href="../index.html">Placement Prep Hub</a> · <a href="training_plans.html">Training Plans</a>
+</footer>
+
+</div>
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('visible'));
+  document.getElementById(id).classList.add('visible');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function t(btn) {
+  const s = btn.nextElementSibling;
+  s.classList.toggle('show');
+  btn.textContent = s.classList.contains('show') ? 'Hide' : 'Reveal';
+}
+</script>
+</body>
+</html>
