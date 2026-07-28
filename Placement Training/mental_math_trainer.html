@@ -195,10 +195,12 @@
 <!-- ============ ARENA ============ -->
 <div class="page" id="m4">
   <h2>🎮 Drill Arena</h2>
-  <p class="small">Pick a mode, hit Enter to answer. Aim: 10 in a row under 15 seconds each. Your streak &amp; best are saved.</p>
+  <p class="small">Pick a mode, hit Enter to answer. Aim: 10 in a row under 15 seconds each (compound: 40s for the big ones — break it apart, left to right). Your streak &amp; best are saved.</p>
   <div class="modes" id="modes">
     <button data-m="pct" class="on">% of number</button>
     <button data-m="mult">2-digit ×</button>
+    <button data-m="comp">🧩 compound</button>
+    <button data-m="div">➗ division</button>
     <button data-m="sq">squares</button>
     <button data-m="chain">profit chains</button>
     <button data-m="frac">fraction ↔ %</button>
@@ -292,7 +294,59 @@ const GENS = {
       ? { q: m[0] + ' as % = ?', a: m[1], h: 'the sacred table 😄', tol: .2 }
       : { q: m[1] + '% of 144 = ?', a: Math.round(eval(m[0]) * 144 * 100) / 100, h: 'use the fraction: ' + m[0] + ' × 144', tol: .6 };
   },
-  mix() { return GENS[pick(['pct','mult','sq','chain','frac'])](); }
+  comp() {
+    const kind = R(1, 10);       // division weighted up (declared weak point): 30/30/40
+    const sign = Math.random() < .6 ? '+' : '−';
+    if (kind <= 3) {              // OA tier: (2d × 2d) ± c — the (34×56)+89 shape
+      const a = R(23, 89), b = R(12, 68), prod = a * b;
+      const c = sign === '+' ? R(47, 968) : R(47, Math.min(968, prod - 11));
+      return { q: '(' + a + ' × ' + b + ') ' + sign + ' ' + c + ' = ?',
+               a: sign === '+' ? prod + c : prod - c,
+               h: 'break: ' + a + '×' + (Math.floor(b/10)*10) + ' + ' + a + '×' + (b%10) + ' = ' + prod + ', then ' + sign + c };
+    }
+    if (kind <= 6) {              // heavy tier: (3-4d × 2d) ± c — the (1222×56)+888 shape
+      const a = R(102, 1499), b = pick([11, 12, 15, 21, 25, 31, 35, 41, 45, 51, 56, 61, 99]);
+      const prod = a * b, c = R(111, 999);
+      const h = (b === 99) ? 'round-fix: ' + a + '×100 − ' + a + ' = ' + prod + ', then ' + sign + c
+              : (b % 10 === 1) ? 'round-fix: ' + a + '×' + (b-1) + ' + ' + a + ' = ' + prod + ', then ' + sign + c
+              : 'break: ' + a + '×' + (Math.floor(b/10)*10) + ' + ' + a + '×' + (b%10) + ' = ' + prod + ', then ' + sign + c;
+      return { q: '(' + a + ' × ' + b + ') ' + sign + ' ' + c + ' = ?',
+               a: sign === '+' ? prod + c : prod - c, h };
+    }
+    // division tier: (a ÷ b) ± c, built backwards so it always divides clean
+    const b = pick([3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 25]), q0 = R(24, 192), aa = b * q0;
+    const sub = sign === '−' && q0 > 40;
+    const c = sub ? R(11, q0 - 9) : R(23, 480);
+    const dh = (b === 5) ? aa + '÷5 → ×2 ÷10 = ' + q0 : (b === 25) ? aa + '÷25 → ×4 ÷100 = ' + q0 : aa + '÷' + b + ' = ' + q0;
+    return { q: '(' + aa + ' ÷ ' + b + ') ' + (sub ? '−' : '+') + ' ' + c + ' = ?',
+             a: sub ? q0 - c : q0 + c, h: dh + ', then ' + (sub ? '−' : '+') + c };
+  },
+  div() {
+    const kind = R(1, 20);
+    if (kind <= 6) {              // chunk division: 3-4 digit ÷ 1 digit
+      const d = pick([3, 4, 6, 7, 8, 9]), q0 = R(87, 987), aa = d * q0;
+      const scale = q0 >= 100 ? 100 : 10, hi = Math.floor(q0 / scale) * scale;
+      return { q: aa + ' ÷ ' + d + ' = ?', a: q0,
+               h: 'chunk: ' + aa + ' = ' + (d * hi) + ' + ' + (aa - d * hi) + ' → ' + hi + ' + ' + (q0 - hi) };
+    }
+    if (kind <= 10) {             // trick divisors 5 / 25 / 125
+      const d = pick([5, 25, 125]), q0 = R(34, 480), aa = d * q0;
+      const h = d === 5 ? '÷5 → ×2 then ÷10' : d === 25 ? '÷25 → ×4 then ÷100' : '÷125 → ×8 then ÷1000';
+      return { q: aa + ' ÷ ' + d + ' = ?', a: q0, h };
+    }
+    if (kind <= 15) {             // 2-digit divisors → split into easy factors
+      const F = { 11: 'long-divide left→right', 12: '÷4 then ÷3', 14: '÷2 then ÷7', 15: '÷3 then ÷5', 16: 'halve four times', 18: '÷2 then ÷9', 21: '÷3 then ÷7', 24: '÷8 then ÷3', 36: '÷4 then ÷9', 45: '÷9 then ÷5' };
+      const d = pick(Object.keys(F).map(Number)), q0 = R(13, 96), aa = d * q0;
+      return { q: aa + ' ÷ ' + d + ' = ?', a: q0, h: '÷' + d + ' → ' + F[d] };
+    }
+    // compound: (a ÷ b) ± c
+    const b = pick([3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 25]), q0 = R(24, 192), aa = b * q0;
+    const sub = Math.random() < .4 && q0 > 40;
+    const c = sub ? R(11, q0 - 9) : R(23, 480);
+    return { q: '(' + aa + ' ÷ ' + b + ') ' + (sub ? '−' : '+') + ' ' + c + ' = ?',
+             a: sub ? q0 - c : q0 + c, h: aa + '÷' + b + ' = ' + q0 + ', then ' + (sub ? '−' : '+') + c };
+  },
+  mix() { return GENS[pick(['pct','mult','comp','div','sq','chain','frac'])](); }
 };
 
 function nextQ(fresh) {
