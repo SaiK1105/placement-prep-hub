@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qualcomm OneIT — Cheat Sheet</title>
+<style>
+:root{
+  --bg:#0f1115; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
+  --tx:#e6e8ee; --dim:#9aa3b2; --acc:#7c5cff; --warn:#ffb020; --ok:#3ddc97; --hot:#ff5c7a;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f6f7fa;--panel:#fff;--panel2:#eef1f6;--line:#d8dde6;--tx:#12151b;--dim:#5c6675;--acc:#5b3fd6;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:0 0 80px}
+header{background:linear-gradient(135deg,#3b1f8f,#1e1147);color:#fff;padding:28px 24px 22px;border-bottom:3px solid var(--acc)}
+h1{margin:0 0 6px;font-size:26px;letter-spacing:-.4px}
+.sub{opacity:.85;font-size:14px}
+nav{position:sticky;top:0;z-index:9;background:var(--panel);border-bottom:1px solid var(--line);
+  padding:10px 24px;display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;padding:6px 12px;
+  border:1px solid var(--line);border-radius:20px;white-space:nowrap}
+nav a:hover{color:var(--acc);border-color:var(--acc)}
+main{max-width:900px;margin:0 auto;padding:24px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;margin:0 0 20px}
+h2{margin:0 0 14px;font-size:20px;border-bottom:2px solid var(--line);padding-bottom:8px}
+h3{margin:20px 0 8px;font-size:15px;color:var(--acc);text-transform:uppercase;letter-spacing:.6px}
+p{margin:0 0 12px} ul{margin:0 0 12px;padding-left:20px} li{margin:0 0 6px}
+code{font-family:var(--mono);font-size:.88em;background:var(--panel2);padding:2px 6px;border-radius:4px}
+pre{font-family:var(--mono);font-size:13px;line-height:1.55;background:var(--panel2);
+  border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;
+  padding:14px;overflow-x:auto;margin:0 0 14px}
+pre code{background:none;padding:0}
+table{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--dim)}
+.alert{border-left:4px solid var(--warn);background:rgba(255,176,32,.08);padding:14px 16px;border-radius:8px;margin:0 0 16px}
+.alert.hot{border-color:var(--hot);background:rgba(255,92,122,.09)}
+.alert.ok{border-color:var(--ok);background:rgba(61,220,151,.08)}
+.alert strong{color:var(--warn)} .alert.hot strong{color:var(--hot)} .alert.ok strong{color:var(--ok)}
+.trap{color:var(--hot);font-weight:700}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.pill{background:rgba(255,255,255,.14);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600}
+ol.traps{counter-reset:t;list-style:none;padding:0}
+ol.traps li{counter-increment:t;position:relative;padding:10px 10px 10px 46px;margin:0 0 8px;
+  background:var(--panel2);border-radius:8px;border-left:3px solid var(--hot)}
+ol.traps li::before{content:counter(t);position:absolute;left:12px;top:10px;width:24px;height:24px;
+  background:var(--hot);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700}
+@media print{body{background:#fff;color:#000}nav{display:none}section{break-inside:avoid;border-color:#ccc}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Qualcomm OneIT — Cheat Sheet</h1>
+  <div class="sub">28 July 2026 · 19:00 · HirePro, audio + video proctored</div>
+  <div class="meta">
+    <span class="pill">60 MCQ / 90 min</span>
+    <span class="pill">3 × 20</span>
+    <span class="pill">30 min each — LOCKED</span>
+    <span class="pill">+1 / −0.25</span>
+    <span class="pill">No coding editor</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#strategy">Strategy</a>
+  <a href="#traps">The 10 traps</a>
+  <a href="#types">Types</a>
+  <a href="#ops">Operators</a>
+  <a href="#flow">Control flow</a>
+  <a href="#arrays">Arrays</a>
+  <a href="#ptr">Pointers</a>
+  <a href="#storage">Storage</a>
+  <a href="#struct">Structs</a>
+  <a href="#oops">C++ OOPS</a>
+  <a href="#os">OS</a>
+  <a href="#dbms">DBMS</a>
+  <a href="#cn">Networks</a>
+  <a href="#ds">DS theory</a>
+  <a href="#apt">Aptitude</a>
+  <a href="#log">Logistics</a>
+</nav>
+
+<main>
+
+<section id="strategy">
+<h2>Strategy the format forces</h2>
+<div class="alert hot">
+<strong>Sectional lock.</strong> 30 minutes per section, no returning. You <em>cannot</em> bank time
+from an easy section for a hard one. Pace inside each block: <strong>90 seconds per question</strong>.
+Finishing Section 1 in 18 minutes buys you nothing — so use the spare time to re-check, not to rush.
+</div>
+<div class="alert">
+<strong>Negative marking: +1 / −0.25.</strong> Eliminate to two options before you answer.
+<ul>
+  <li>Random 4-way guess → expected <strong>−0.0625</strong>. Not worth it.</li>
+  <li>2-way guess after elimination → expected <strong>+0.375</strong>. Always worth it.</li>
+  <li>Genuine blank → 0. Better than a blind guess.</li>
+</ul>
+</div>
+<div class="alert ok">
+<strong>Section 3 is choice-based → take COMPUTER SCIENCE.</strong> Reported options vary by year
+(CS / Electronics / Digital / DI+Verbal). Whatever the menu, CS maps to your stack.
+</div>
+<p><strong>The paper:</strong> S1 Quant + Logical (easy–medium) · S2 C/C++ programming MCQs (<strong>reported hardest</strong>) · S3 Domain/core.</p>
+</section>
+
+<section id="traps">
+<h2>Section 2 — the 10 traps</h2>
+<p>Before answering any C/C++ question, identify <em>which of these it is</em>. If it doesn't feel like one of them, re-read — you've probably misidentified it.</p>
+<ol class="traps">
+<li><strong>Integer division truncates.</strong> <code>7/2</code>=3, <code>-7/2</code>=-3. Never rounds. <code>7/2*2</code>=6.</li>
+<li><strong>sizeof vs strlen, and array decay.</strong> <code>char s[]="hello"</code> → sizeof 6, strlen 5. An array passed to a function decays to a pointer → sizeof inside = 8.</li>
+<li><strong>Pre vs post increment.</strong> <code>i++</code> yields the OLD value then increments; <code>++i</code> increments then yields the NEW. Both leave i incremented.</li>
+<li><strong>Short-circuit.</strong> <code>&amp;&amp;</code> stops at the first false, <code>||</code> at the first true — side effects on the skipped side never happen.</li>
+<li><strong>Leading zero = OCTAL.</strong> <code>017</code> = 15, not 17. <code>0x1A</code> = 26.</li>
+<li><strong>Unsigned is never &lt; 0.</strong> <code>for(unsigned i=5; i&gt;=0; i--)</code> is an infinite loop — 0 wraps to 4294967295.</li>
+<li><strong>static persists.</strong> A local <code>static</code> initialises once, keeps its value across calls, defaults to 0. Prints <code>1 2 3</code>, not <code>1 1 1</code>.</li>
+<li><strong>Precedence.</strong> <code>a &amp; 1 == 0</code> parses as <code>a &amp; (1==0)</code> — bitwise binds looser than <code>==</code>. <code>*p++</code> is <code>*(p++)</code>.</li>
+<li><strong>Ctor / dtor order.</strong> Construction base→derived, destruction derived→base. <code>B b;</code> → <code>A B ~B ~A</code>.</li>
+<li><strong>virtual present or absent.</strong> <code>Base* b = new Derived(); b-&gt;show();</code> — with <code>virtual</code> calls Derived, without calls Base. That one keyword IS the question.</li>
+</ol>
+<div class="alert ok">
+<strong>Method:</strong> build a two-column trace table — variable | value after each line. The answer
+falls out. Guessing from "reading the code" is where the −0.25 comes from. 90 s per question is
+generous for tracing; your risk is panic-skipping, not the clock.
+</div>
+</section>
+
+<section id="types">
+<h2>Types &amp; printf</h2>
+<table>
+<tr><th>Type</th><th>Size (64-bit)</th><th>Specifier</th></tr>
+<tr><td>char</td><td>1</td><td><code>%c</code> as char, <code>%d</code> as number</td></tr>
+<tr><td>int</td><td>4</td><td><code>%d</code></td></tr>
+<tr><td>unsigned int</td><td>4</td><td><code>%u</code></td></tr>
+<tr><td>long</td><td>8</td><td><code>%ld</code></td></tr>
+<tr><td>float / double</td><td>4 / 8</td><td><code>%f</code> / <code>%lf</code></td></tr>
+<tr><td>pointer (any)</td><td><strong>8</strong></td><td><code>%p</code></td></tr>
+<tr><td>sizeof result</td><td>—</td><td><code>%lu</code></td></tr>
+</table>
+<ul>
+  <li>A <code>char</code> <strong>is</strong> a small integer. <code>'A'</code>=65, <code>'a'</code>=97, <code>'0'</code>=48.</li>
+  <li><span class="trap">The specifier reinterprets the bits.</span> <code>printf("%d",'A')</code> → 65.</li>
+  <li>Mixed types promote: <code>7/2.0</code> = 3.5.</li>
+  <li><code>%</code> works on integers only. <code>7%2</code>=1.</li>
+</ul>
+</section>
+
+<section id="ops">
+<h2>Operators &amp; precedence</h2>
+<pre><code>()  []  -&gt;  .        postfix ++ --
+!  ~  prefix++ --    *deref   &amp;addr   sizeof   (cast)
+*   /   %
++   -
+&lt;&lt;  &gt;&gt;
+&lt;   &lt;=  &gt;  &gt;=
+==  !=
+&amp;                     &lt;-- bitwise AND: LOOSER than ==
+^
+|
+&amp;&amp;
+||
+?:
+=  +=  -=  ...</code></pre>
+
+<h3>Bitwise</h3>
+<pre><code>5 = 101, 3 = 011
+5&amp;3 = 1    5|3 = 7    5^3 = 6    5&lt;&lt;1 = 10    5&gt;&gt;1 = 2
+
+x &lt;&lt; n  =  x * 2^n
+x &gt;&gt; n  =  x / 2^n   (truncating)
+x ^ x   =  0         x &amp; 1 tests odd/even</code></pre>
+
+<h3>Other operators</h3>
+<ul>
+  <li><strong>Ternary</strong> nests right-to-left: <code>a?b:c?d:e</code> is <code>a?b:(c?d:e)</code>.</li>
+  <li><strong>Comma operator</strong> <code>(1,2,3)</code> evaluates all, yields the <strong>last</strong> → 3. Different from an initialiser <code>{1,2,3}</code>.</li>
+  <li>Number literals: <code>0x1A</code> hex = 26 · <code>017</code> <span class="trap">octal</span> = 15 · <code>17</code> decimal.</li>
+</ul>
+</section>
+
+<section id="flow">
+<h2>Control flow</h2>
+<ul>
+  <li><code>do…while</code> runs the body <strong>at least once</strong>, checks after.</li>
+  <li><code>while(i++ &lt; 3)</code> compares the <em>old</em> i, then increments. Off-by-one traps live here.</li>
+  <li><code>switch</code> <strong>falls through</strong> without <code>break</code> — count labels until the next break.</li>
+  <li>0 is false; <strong>every</strong> non-zero is true, including negatives.</li>
+  <li><span class="trap"><code>if (x = 5)</code></span> assigns and yields 5 → always true. Classic spot-the-bug answer.</li>
+  <li>No <code>elif</code> — it's <code>else if</code>.</li>
+</ul>
+</section>
+
+<section id="arrays">
+<h2>Arrays &amp; strings</h2>
+<ul>
+  <li>Zero-indexed, <strong>no bounds checking</strong>, no negative indexing. <code>a[-1]</code> is garbage, not the last element.</li>
+  <li>Partial init zero-fills: <code>int a[5]={1,2}</code> → <code>{1,2,0,0,0}</code>.</li>
+  <li><code>a[i]</code> is <em>defined as</em> <code>*(a+i)</code> — so <strong><code>2[a]</code> is legal C</strong> and equals <code>a[2]</code>.</li>
+  <li>Size idiom <code>sizeof(arr)/sizeof(arr[0])</code> — works only in the declaring scope.</li>
+  <li><code>char s[]="hello"</code> → sizeof <strong>6</strong> (5 + <code>'\0'</code>), strlen <strong>5</strong>.</li>
+  <li><code>char *s="abc"</code> is a read-only literal; <code>char s[]="abc"</code> is a modifiable copy.</li>
+  <li>2D <code>int a[3][4]</code>: sizeof(a)=48 · sizeof(a[0])=16 (one row) · sizeof(a[0][0])=4.</li>
+</ul>
+</section>
+
+<section id="ptr">
+<h2>Pointers</h2>
+<pre><code>int x = 10;
+int *p = &amp;x;     // p holds the ADDRESS of x
+*p               // 10  — "the value at"
+&amp;x               // the address of x
+int **pp = &amp;p;   // *pp is p, **pp is 10   — count the stars</code></pre>
+<ul>
+  <li><code>*</code> in a <em>declaration</em> = "is a pointer"; in an <em>expression</em> = "value at".</li>
+  <li><span class="trap">Pointer arithmetic scales by the pointed-to type.</span> <code>p+2</code> on an <code>int*</code> advances 8 bytes, not 2.</li>
+  <li><strong>Array decay:</strong> passing an array to a function passes only a pointer — the function cannot know the length. That's why C functions always take a separate size parameter.</li>
+  <li><strong>const, read right-to-left from the name:</strong><br>
+      <code>const int *p</code> → pointer to const int: can repoint p, <strong>cannot</strong> change <code>*p</code>.<br>
+      <code>int * const q</code> → const pointer: <strong>cannot</strong> repoint q, can change <code>*q</code>.</li>
+  <li><strong>C passes everything by value.</strong> <code>swap(int a, int b)</code> does nothing to the caller — it needs pointers.</li>
+</ul>
+</section>
+
+<section id="storage">
+<h2>Storage classes</h2>
+<table>
+<tr><th>Keyword</th><th>What's tested</th></tr>
+<tr><td>auto</td><td>default for locals; uninitialised value is <strong>garbage</strong></td></tr>
+<tr><td><strong>static</strong> (local)</td><td>initialised <strong>once</strong>, persists across calls, defaults to 0</td></tr>
+<tr><td>static (global/fn)</td><td>restricts visibility to that file</td></tr>
+<tr><td>extern</td><td>declared here, defined elsewhere</td></tr>
+<tr><td>register</td><td>CPU-register hint — <span class="trap">cannot take <code>&amp;</code> of it</span></td></tr>
+<tr><td>const / volatile</td><td>read-only after init / don't optimise away reads</td></tr>
+</table>
+<div class="alert">
+<strong>Expect it.</strong> The <code>static</code>-in-a-function question — printing <code>1 2 3</code>
+instead of <code>1 1 1</code> — is the most-asked storage-class MCQ in existence.
+</div>
+<p><strong>Recursion:</strong> trace the call stack. Anything printed <em>after</em> the recursive call runs on the way back up — deepest frame first.</p>
+</section>
+
+<section id="struct">
+<h2>Structs &amp; unions</h2>
+<pre><code>struct S { char c; int i; char d; };
+// 1 + 3 pad + 4 + 1 + 3 pad = 12   (NOT 6)</code></pre>
+<ul>
+  <li>Access: <code>s.field</code> for a value, <code>p-&gt;field</code> for a pointer (<code>p-&gt;i</code> ≡ <code>(*p).i</code>).</li>
+  <li><strong>Padding:</strong> members align to their own size; total rounds up to a multiple of the largest member's alignment. <span class="trap">Reordering members changes sizeof</span> — a favourite question.</li>
+  <li><code>union</code>: all members share the same memory. sizeof = largest member. Writing one clobbers the others.</li>
+</ul>
+</section>
+
+<section id="oops">
+<h2>C++ / OOPS</h2>
+<ul>
+  <li><strong>Ctor/dtor order:</strong> construction <strong>base → derived</strong>; destruction exactly reversed, <strong>derived → base</strong>. Mnemonic: last built, first destroyed — a stack. <code>class B : public A</code>, <code>B b;</code> → <code>A B ~B ~A</code>.</li>
+  <li>Members are constructed in <strong>declaration order</strong>, not initialiser-list order.</li>
+  <li><strong>virtual = runtime dispatch.</strong> <code>Base *b = new Derived(); b-&gt;show();</code> → with <code>virtual</code> calls Derived's (decided by the object); without, calls Base's (decided by the pointer type).</li>
+  <li><strong>Virtual destructor:</strong> <code>delete base_ptr</code> on a derived object runs <strong>only <code>~Base</code></strong> unless the base destructor is virtual. Hence: any class meant to be inherited from gets a virtual destructor.</li>
+  <li><strong>Overloading</strong> = same name, different parameters, resolved at <em>compile</em> time. <strong>Overriding</strong> = derived redefines a virtual, resolved at <em>runtime</em>.</li>
+  <li>Access: private (class only) · protected (class + derived) · public. Default: <code>class</code> → private, <code>struct</code> → public.</li>
+  <li>Pure virtual <code>virtual void f() = 0;</code> → abstract class → <strong>cannot be instantiated</strong>.</li>
+  <li>Four pillars: encapsulation, abstraction, inheritance, polymorphism (compile-time = overloading, runtime = overriding).</li>
+</ul>
+</section>
+
+<section id="os">
+<h2>Section 3 — Operating Systems</h2>
+<ul>
+  <li><strong>Process</strong> = program in execution with its own memory. <strong>Thread</strong> shares the process's memory.</li>
+  <li>States: new → ready → running → waiting → terminated.</li>
+  <li><strong>Scheduling:</strong> FCFS (convoy effect) · SJF (optimal average wait, needs burst times) · Round Robin (time quantum, fair) · Priority (starvation → fixed by ageing).</li>
+  <li><strong>Deadlock — 4 necessary conditions:</strong> mutual exclusion, hold-and-wait, no preemption, circular wait. Break any one to prevent. Banker's algorithm = avoidance.</li>
+  <li><strong>Paging</strong> = fixed-size pages → internal fragmentation. <strong>Segmentation</strong> = variable size → external fragmentation.</li>
+  <li>Page replacement: FIFO (suffers <strong>Belady's anomaly</strong>), LRU, Optimal. <strong>Thrashing</strong> = excessive page faults, near-zero throughput.</li>
+  <li><strong>Semaphore</strong> (counting or binary, any process can signal) vs <strong>mutex</strong> (ownership — only the locker unlocks).</li>
+  <li>Deadlock (circular wait) vs starvation (indefinitely postponed) vs race condition (order-dependent result).</li>
+</ul>
+</section>
+
+<section id="dbms">
+<h2>Section 3 — DBMS</h2>
+<ul>
+  <li><strong>Normal forms:</strong> 1NF atomic values · 2NF no partial dependency on part of a composite key · 3NF no transitive dependency · BCNF every determinant is a candidate key.</li>
+  <li><strong>Keys:</strong> super → candidate → primary. Foreign key references another table's primary key.</li>
+  <li><strong>ACID:</strong> Atomicity, Consistency, Isolation, Durability.</li>
+  <li>Isolation levels: Read Uncommitted (dirty read) → Read Committed → Repeatable Read (phantom reads) → Serializable.</li>
+  <li>Indexes speed reads, slow writes. Clustered index = physical row order, <strong>one per table</strong>.</li>
+  <li><strong>DELETE</strong> (DML, rollback-able, takes WHERE) vs <strong>TRUNCATE</strong> (DDL, no WHERE, resets) vs <strong>DROP</strong> (removes the structure).</li>
+  <li><code>COUNT(*)</code> counts all rows; <code>COUNT(col)</code> <span class="trap">skips NULLs</span>. WHERE filters rows before grouping, HAVING filters groups after.</li>
+</ul>
+</section>
+
+<section id="cn">
+<h2>Section 3 — Computer Networks</h2>
+<ul>
+  <li><strong>OSI 7 layers:</strong> Physical, Data Link, Network, Transport, Session, Presentation, Application. <em>(Please Do Not Throw Sausage Pizza Away)</em></li>
+  <li><strong>TCP</strong>: connection-oriented, reliable, ordered, 3-way handshake (SYN → SYN-ACK → ACK), slower. <strong>UDP</strong>: connectionless, no delivery guarantee, fast — streaming, DNS, VoIP.</li>
+  <li>Devices by layer: hub = L1 · switch = L2 · router = L3.</li>
+  <li>IPv4 = 32-bit, IPv6 = 128-bit. Private ranges: 10.x · 172.16–31.x · 192.168.x.</li>
+  <li><strong>Ports:</strong> HTTP 80 · HTTPS 443 · FTP 20/21 · SSH 22 · Telnet 23 · SMTP 25 · DNS 53.</li>
+  <li>DNS = name → IP · DHCP = assigns IPs · ARP = IP → MAC · NAT = private ↔ public.</li>
+  <li><strong>Routing:</strong> distance vector (RIP, Bellman-Ford, hop count) vs link state (OSPF, Dijkstra).</li>
+</ul>
+</section>
+
+<section id="ds">
+<h2>Section 3 — Data structures (theory)</h2>
+<ul>
+  <li><strong>Stack</strong> LIFO — function calls, undo, DFS, expression evaluation. <strong>Queue</strong> FIFO — BFS, scheduling.</li>
+  <li>Array: O(1) access, O(n) insert/delete. Linked list: O(n) access, O(1) insert at a known node.</li>
+  <li><strong>BST</strong>: search/insert average O(log n), worst O(n) when skewed. Balanced variants: AVL, Red-Black.</li>
+  <li><strong>Traversals:</strong> inorder (L, root, R) → <span class="trap">sorted order for a BST</span> · preorder (root, L, R) · postorder (L, R, root) · level-order uses a queue.</li>
+  <li>Hash table: average O(1); collisions handled by chaining or open addressing.</li>
+  <li><strong>Heap</strong> = complete binary tree. Min-heap root is smallest. Build O(n), insert/delete O(log n).</li>
+  <li><strong>Sorting:</strong> bubble/insertion/selection O(n²) · merge O(n log n) <em>stable</em>, O(n) extra space · quick O(n log n) average but <strong>O(n²) worst</strong> · heap O(n log n) in-place.</li>
+  <li>Graphs: BFS uses a queue (shortest path in unweighted), DFS uses a stack/recursion. Dijkstra = weighted shortest path, no negative edges.</li>
+</ul>
+</section>
+
+<section id="apt">
+<h2>Section 1 — Aptitude &amp; logical</h2>
+<ul>
+  <li><strong>Speed/distance:</strong> average speed over equal distances = <code>2xy/(x+y)</code>, never the plain average.</li>
+  <li><strong>Time &amp; work:</strong> set total work = LCM of the given days, then work in whole units.</li>
+  <li><strong>Percentages:</strong> successive x% then y% = <code>x + y + xy/100</code>. Increase then equal decrease → net loss.</li>
+  <li><strong>Profit/loss:</strong> always on <strong>cost price</strong> unless stated.</li>
+  <li><strong>Ratio:</strong> convert to a common multiplier k, solve for k.</li>
+  <li><strong>P&amp;C:</strong> arrangement → permutation, selection → combination. <code>nCr = nC(n−r)</code>.</li>
+  <li><strong>Probability:</strong> favourable/total. "At least one" → <code>1 − P(none)</code>.</li>
+  <li><strong>Venn:</strong> <code>n(A∪B) = n(A) + n(B) − n(A∩B)</code>.</li>
+  <li><strong>Number systems:</strong> divisibility rules; unit-digit cycles have length 4 for 2, 3, 7, 8.</li>
+  <li><strong>Mixtures:</strong> alligation — the ratio of quantities is the inverse ratio of the distances from the mean.</li>
+</ul>
+<div class="alert">
+<strong>90 s per question, and you can't bank the time.</strong> Eliminate via options and unit digits
+before computing fully. If a question needs more than 90 s, mark your best 2-way guess and move —
+in a locked section, a slow question steals from a question you'd have got right.
+</div>
+</section>
+
+<section id="log">
+<h2>Logistics — HirePro, proctored</h2>
+<ul>
+  <li>Chrome only. Laptop or desktop.</li>
+  <li><strong>Webcam and mic mandatory and recorded</strong> — audio + video proctoring.</li>
+  <li>No browser extensions. <strong>Disable VPN.</strong></li>
+  <li>Close every other application.</li>
+  <li><strong>Do not leave fullscreen.</strong> Exits are logged and may auto-submit.</li>
+  <li>Charger plugged in, stable network, seated 5 minutes early.</li>
+</ul>
+<div class="alert hot">
+<strong>Read the instructions page.</strong> Confirm the negative-marking value and whether sections
+are truly locked. Everything above assumes +1/−0.25 and hard locking — if the instructions say
+otherwise, your guessing strategy changes immediately.
+</div>
+<div class="alert ok">
+<strong>18:30–18:55 tonight:</strong> skim the 10 traps and the OOPS section only. No new material
+after 18:00 — late cramming displaces what's already consolidated.
+</div>
+</section>
+
+</main>
+</body>
+</html>

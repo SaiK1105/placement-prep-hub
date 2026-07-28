@@ -2,6 +2,22 @@ QUALCOMM OneIT INDIA — IT INTERN OA RESEARCH
 Compiled 26 July 2026 (~02:10), OA on 28 July. Candidate: S Sai Kumar, SASTRA, 2027 batch.
 Confidence: [CONFIRMED] official/2+ independent · [MULTI] multiple sources · [SINGLE] one report · [SPEC] inference
 
+=== UPDATE 28 JUL 2026, 09:40 (morning-of research pass) ===
+MCQ-ONLY FORMAT RE-CONFIRMED WITH 2025-DATED FIRST-HAND REPORTS [MULTI]:
+  - GfG off-campus, IIT Roorkee M.Tech (Jul 2025): HirePro, 60 MCQ/90 min/3x20,
+    NO coding editor, negative marking applied.
+  - GfG on-campus internship (Jul 2025): 60 MCQ/3x20, +1/-0.25 stated.
+  - Medium hardware internship (Dec 2025): "completely MCQ-based", no coding.
+  - A second Jul-2025 GfG on-campus report claims NO negative marking —
+    NEW CONTRADICTION within 2025 reports. Plan for -0.25; instructions page
+    is the arbiter.
+ONEIT-SPECIFIC: still zero public documentation. One Jointaro report
+(Interim Engineering Intern, Sep 2025) mentions an OA without describing it.
+Glassdoor + Naukri Code360 still 403. All "2-3 coding problems" claims trace
+to low-trust SEO farms or non-campus SWE roles. Working confidence: ~90%
+MCQ-only for the OneIT drive; coding-round hedge = Python (existing strength),
+no prep reallocation.
+
 === CRITICAL CAVEAT ===
 NO OneIT-SPECIFIC OA REPORT EXISTS PUBLICLY. Everything below describes the
 GENERAL QUALCOMM INDIA CAMPUS OA, which the OneIT drive most likely reuses

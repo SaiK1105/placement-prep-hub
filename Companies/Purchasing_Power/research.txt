@@ -1,0 +1,85 @@
+PURCHASING POWER — OLT RESEARCH
+Compiled 28 July 2026, 07:20 IST. OA at 09:30 the same morning (~2h lead time).
+Candidate: S Sai Kumar, SASTRA, 2027 batch.
+Confidence: [CONFIRMED] official/2+ independent · [MULTI] multiple · [SINGLE] one report · [SPEC] inference
+
+=== CRITICAL CAVEAT — READ FIRST ===
+Only TWO first-hand reports exist publicly, BOTH from the SAME on-campus drive,
+"last week of December 2020" — over five years stale. One is a Data Scientist
+profile, one is a Data Analyst/generalist. NO 2025/2026 report exists.
+NO SASTRA-specific report exists. Glassdoor (36 interview entries) returned
+HTTP 403 and could not be read — highest-value unexplored source.
+Treat the structure below as the best available prior, NOT as confirmed fact.
+
+=== PLATFORM: HIREPRO [SINGLE, but high-value] ===
+The Dec-2020 online test ran on HirePro — the SAME vendor as the Honeywell OA
+(21 Jul) and the Qualcomm OA (tonight, 28 Jul). If it still holds, every
+platform rule already learned applies:
+  Chrome only · laptop/desktop · webcam + mic mandatory and recorded ·
+  no extensions · disable VPN · close other apps · do not leave fullscreen.
+This is the single most actionable finding — the environment is already known.
+
+=== STRUCTURE — 3 SECTIONS [SINGLE, Dec 2020, Data Scientist profile] ===
+  SECTION 1 — Aptitude
+    "15 problems involving simple aptitude". Candidate rated it EASY and
+    recommended basic IndiaBix-level practice. No topic list given.
+
+  SECTION 2 — Technical MCQ  (~25-30 questions)
+    Data interpretation, data sufficiency, hypothesis testing, choosing the
+    right visualisation/graph type, Python, SQL.
+    Named specifics: box-plot applications, graph-selection scenarios,
+    lambda expressions, list comprehensions, dictionary questions.
+    NOTE: this section is plainly PROFILE-TAILORED (this candidate applied
+    for Data Scientist). A SiteOps / Front-End / Data Engineer candidate
+    very likely saw a different Section 2. [SPEC]
+
+  SECTION 3 — Coding + SQL
+    One coding question + one SQL question.
+    The remembered coding question: run-length DECODING —
+      input  "a3b2"  ->  output "aaabb"
+      (each character followed by a digit = repeat count)
+    Difficulty: EASY. String traversal, no algorithmic depth.
+
+NOT REPORTED (unknown, do not assume): per-section time limits, total
+duration, sectional locking, negative marking, allowed languages,
+tab-switch policy, ID verification flow.
+
+=== PROFILES OFFERED (Dec 2020 drive) ===
+SiteOps · Front End Developer · Data Engineer · Data Scientist
+=> The drive is MULTI-PROFILE and Section 2 tracks the chosen profile.
+
+=== SUBSEQUENT ROUNDS [MULTI, 2 reports] ===
+Round 1 interview: puzzles with light technical content.
+  Named puzzles: apple-weighing problem, squares-on-a-chessboard.
+Round 2 interview: role-specific.
+  Data Analyst: SQL JOINs across 3 given tables, database design scenario
+    (student-enrollment and programming-language tables).
+  Data Scientist: ML algorithms (supervised, deep learning), Decision Tree
+    and CART, Decision Tree vs logistic regression.
+  Front-end roles: React.
+OOPS and SQL came up across profiles.
+
+=== WHAT THIS MEANS FOR PREP (2h window) ===
+1. Aptitude is EASY-tier and only 15 questions — do not over-invest.
+2. SQL appears in BOTH the MCQ section AND the coding section, and again in
+   the interview. It is the highest-yield single topic. The 7 verified SQL
+   problems already drilled (JOINs, NULL handling) are directly on-target.
+3. Coding tier is LOW (string manipulation). Python is fine here — unlike
+   Qualcomm tonight, no C/C++ requirement is reported.
+4. Python idioms are explicitly tested as MCQs: lambda, list comprehension,
+   dict methods. Cheap marks, quick to revise.
+5. Data interpretation + "which graph for which data" is a real section —
+   box plot, histogram, scatter, bar. Low effort, worth 10 minutes.
+6. No negative marking is REPORTED, but it is also not ruled out. Default to
+   the safe rule: attempt everything only if the instructions page confirms
+   no negative marking. READ THE INSTRUCTIONS PAGE.
+
+=== COULD NOT FIND ===
+Any post-2020 report. Any SASTRA report. Total duration. Sectional locking.
+Negative marking. Allowed coding languages. The 2026 profile list.
+Glassdoor India (403) and AmbitionBox — worth a manual browser check.
+
+=== SOURCES ===
+https://www.geeksforgeeks.org/interview-experiences/purchasing-power-for-data-scientist-intern-on-campus/
+https://www.geeksforgeeks.org/interview-experiences/purchasing-power-internship-experience-for-internship-on-campus/
+BLOCKED (403, unread): https://www.glassdoor.com/Interview/Purchasing-Power-LLC-Interview-Questions-E252938.htm
