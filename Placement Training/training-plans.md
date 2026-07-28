@@ -21,9 +21,12 @@ The rule: this happens EVERY day. A short day is 1 problem, never 0.
 | Mon/Wed/Fri · 30 min | **SQL** — LeetCode SQL 50, in order | Executed against a real engine, never solved "by eye". |
 | Sunday · 2 h | **Cold mock**: MCQ block + 2–3 DSA + 1 SQL | Exam conditions. Scored honestly. Every miss → root cause → next week's drills target it. |
 
-**Ladder order:** arrays/strings → hashing → two pointers/sliding window →
-binary search → stack/queue → linked list → trees/BFS/DFS → heap → greedy →
-DP basics → graphs.
+**Ladder order (reordered 27 Jul after Staples ground truth — graphs/DP
+pulled forward, arrays/strings/hashing demoted to maintenance reps):**
+W1 grid DP + matrix paths → W2 graphs I (BFS/DFS, components, grid traversal)
+→ W3 graphs II (Dijkstra, cycles, constrained backtracking) → W4 DP core →
+W5 greedy/intervals/heap → W6 trees → W7 binsearch/stack/linked list →
+W8 mixed hard sims.
 
 **Weekly volume:** ~21 DSA + ~9 SQL + 1 mock.
 **8-week output:** ~170 DSA reps + SQL 50 done + 8 exam-tier mocks.
@@ -33,6 +36,16 @@ Milestones:
 - Week 4: clearing 2-of-3 mediums in Sunday mocks
 - Week 6: medium-hards entering the mix
 - Week 8: full OA sims at real difficulty, consistently above cut-line pace
+
+### Escalation — Daily 20 (declared 28 Jul)
+
+The "3 DSA problems/day" slot is **superseded** by the Daily 20 engine
+(20/day: 3 speed + 8 spine + 6 coverage + 3 revenge — see
+`daily-20-protocol.md` + `daily_20_tracker.html`). Everything else in the
+Contract — aptitude slot, SQL slot, Sunday mock, ladder order, language
+policy, non-negotiables — stands unchanged. Goal stack: 400+ LeetCode,
+Striver A2Z finished, every topic touched daily. Day 1 FULL = 30 Jul
+(Qualcomm 28 Jul and Purchasing Power 29 Jul are LIGHT days).
 
 ---
 
