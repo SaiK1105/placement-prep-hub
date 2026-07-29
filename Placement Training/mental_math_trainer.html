@@ -54,7 +54,7 @@
 <div class="wrap">
 
 <h1>🧮 Mental Math Trainer</h1>
-<div class="sub">From "mad mental math" → placement-ready. Learn the 5 moves, memorize the anchors, then live in the Drill Arena.</div>
+<div class="sub">From "mad mental math" → placement-ready. Learn the 7 moves, memorize the anchors, then live in the Drill Arena.</div>
 
 <nav id="nav">
   <button data-p="m1" class="on">🖐️ The 5 moves</button>
@@ -66,8 +66,8 @@
 
 <!-- ============ 5 MOVES ============ -->
 <div class="page on" id="m1">
-  <h2>The only 5 moves you need</h2>
-  <p class="small">Every placement calculation is one of these five. Learn the move, not the answer.</p>
+  <h2>The only 7 moves you need</h2>
+  <p class="small">Every placement calculation is one of these seven. Learn the move, not the answer. Moves 1–5 build numbers up; moves 6–7 break them down and hold a chain together — that's where most people (and most marks) fall over.</p>
 
   <div class="card mint">
     <div class="step"><div class="n">1</div><div>
@@ -113,6 +113,35 @@
       <code>5 × anything</code> → ×10, then halve. 5 × 86 → 860/2 → <b>430</b>
     </div></div>
   </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">6</div><div>
+      <span class="big">Divide by un-multiplying</span> — never long-divide in your head. Division is a <i>question</i>: "what times 36 gives 1584?" Three ways to answer it:<br><br>
+      <b>a) Split the divisor into factors.</b> Divide twice by something easy instead of once by something ugly.<br>
+      <code>1584 ÷ 36</code> → ÷4 = 396 → ÷9 → <b>44</b><br>
+      <code>4032 ÷ 56</code> → ÷8 = 504 → ÷7 → <b>72</b><br>
+      <span class="small">Same thing as cancelling a fraction before you compute it — 1584/36 → 396/9 → 44. Cancel first, always.</span><br><br>
+      <b>b) Scale both numbers.</b> The answer doesn't change if you do the same thing to both.<br>
+      <code>168 ÷ 14</code> → halve both → 84 ÷ 7 → <b>12</b><br>
+      <code>1400 ÷ 25</code> → ×4 both → 5600 ÷ 100 → <b>56</b><br>
+      <code>450 ÷ 15</code> → ×2 both → 900 ÷ 30 → <b>30</b><br><br>
+      <b>c) Chunk it.</b> For 1-digit divisors, take big friendly bites left to right.<br>
+      <code>5208 ÷ 8</code> → 8×<b>600</b>=4800, leaves 408 → 8×<b>50</b>=400, leaves 8 → 8×<b>1</b> → <b>651</b><br>
+      <span class="small">Remainder questions stop right there: 5210 ÷ 8 → 651 remainder 2.</span><br><br>
+      <b>Before any of it, size the answer.</b> 5208÷8 → 8×600=4800, 8×700=5600, so it's in the <i>600s</i>. Being off by a factor of 10 is the single most common division mistake in an OA, and this one habit kills it.
+    </div></div>
+  </div>
+
+  <div class="card mint">
+    <div class="step"><div class="n">7</div><div>
+      <span class="big">Chains: finish one thing, then park it</span> — for <code>(1222 × 56) + 888</code> the arithmetic isn't the hard part. Holding a number <i>while</i> doing more arithmetic is.<br><br>
+      <b>The rule: never interleave.</b> Finish the multiplication completely, say the result to yourself so it's locked, and only then touch the ± part.<br>
+      <code>1222 × 56</code> → 1222×50 = 61100, 1222×6 = 7332 → <b>68432</b>. Park it. → +888 → <b>69320</b><br>
+      <span class="small">A half-finished multiplication plus a running addition is where the error actually comes from — not from the multiplying.</span><br><br>
+      <b>Absorb the tail when it's a multiple.</b> <code>(34 × 56) + 68</code> → 68 is 2×34 → <code>34 × 58</code> → <b>1972</b>. Only when it's obvious; don't hunt for it.<br><br>
+      <b>MCQ killer — check the last digit first.</b> (1222×56)+888 → 2×6 ends in <b>2</b>; 2+8 ends in <b>0</b>. The answer ends in 0. Scan the options; most die before you compute anything.
+    </div></div>
+  </div>
 </div>
 
 <!-- ============ MEMORIZE ============ -->
@@ -137,7 +166,10 @@
   <table>
     <tr><td>11²=121</td><td>12²=144</td><td>13²=169</td><td>14²=196</td><td>15²=225</td></tr>
     <tr><td>16²=256</td><td>17²=289</td><td>18²=324</td><td>19²=361</td><td>20²=400</td></tr>
+    <tr><td>21²=441</td><td>22²=484</td><td>23²=529</td><td>24²=576</td><td>25²=625</td></tr>
+    <tr><td>26²=676</td><td>27²=729</td><td>28²=784</td><td>29²=841</td><td>30²=900</td></tr>
   </table>
+  <p class="small">The 21–30 row earns its keep in division too: see 576 and you should think "24×24" before you think "long division".</p>
 
   <h3>Cubes 1–12</h3>
   <table>
@@ -156,6 +188,23 @@
     <li><b>3:</b> digit sum divisible by 3 · <b>4:</b> last two digits · <b>6:</b> even + rule of 3</li>
     <li><b>8:</b> last three digits · <b>9:</b> digit sum divisible by 9 · <b>11:</b> alternating digit sum</li>
   </ul>
+
+  <h3>⭐ Divisor splits — the table that fixes division</h3>
+  <p class="small">Move 6a only works if the split is instant. These are the exact divisors the Drill Arena throws at you, so learn this row-by-row and the ➗ mode stops needing hints.</p>
+  <table>
+    <tr><th>÷</th><td>12 = ÷4 ÷3</td><td>14 = ÷2 ÷7</td><td>15 = ÷3 ÷5</td><td>16 = halve ×4</td><td>18 = ÷2 ÷9</td></tr>
+    <tr><th>÷</th><td>21 = ÷3 ÷7</td><td>24 = ÷8 ÷3</td><td>27 = ÷3 ÷9</td><td>28 = ÷4 ÷7</td><td>32 = ÷4 ÷8</td></tr>
+    <tr><th>÷</th><td>35 = ÷5 ÷7</td><td>36 = ÷4 ÷9</td><td>42 = ÷6 ÷7</td><td>45 = ÷9 ÷5</td><td>48 = ÷6 ÷8</td></tr>
+    <tr><th>÷</th><td>54 = ÷6 ÷9</td><td>56 = ÷8 ÷7</td><td>63 = ÷9 ÷7</td><td>72 = ÷8 ÷9</td><td>84 = ÷12 ÷7</td></tr>
+  </table>
+  <p class="small"><b>Always take the easier factor first</b> — 1584÷36 is much nicer as ÷4 then ÷9 (396→44) than ÷9 then ÷4. <b>The exceptions:</b> 11, 13, 17, 19 are prime — no split exists, so chunk them (move 6c). And 25 / 125 aren't worth splitting: use ×4÷100 and ×8÷1000.</p>
+
+  <h3>Powers of 2 (double duty: aptitude + your DSA complexity work)</h3>
+  <table>
+    <tr><td>2</td><td>4</td><td>8</td><td>16</td><td>32</td><td>64</td><td>128</td></tr>
+    <tr><td>256</td><td>512</td><td>1024</td><td>2048</td><td>4096</td><td>8192</td><td>16384</td></tr>
+  </table>
+  <p class="small">Recognising these on sight means ÷16, ÷32, ÷64 become "halve it that many times" — and it's the same table that tells you 2^10 ≈ 10³ when you're reasoning about O(log n) in the Daily 20.</p>
 </div>
 
 <!-- ============ TRICKS ============ -->
@@ -185,6 +234,55 @@
   <div class="card blue">
     <h3 style="margin-top:0">Division by 5, 25, 125</h3>
     <p>÷5 → ×2 then ÷10: <code>435 ÷ 5</code> → 870/10 → <b>87</b>. ÷25 → ×4 ÷100. ÷125 → ×8 ÷1000.</p>
+    <p class="small">Why it works: 5 = 10/2, so dividing by 5 is dividing by 10 and undoing the halving. Same logic gives you ÷50 → ×2 ÷100.</p>
+  </div>
+
+  <h3 style="margin-top:26px">➗ Division — the weak-point section</h3>
+  <p class="small">Four tricks, in the order you should reach for them. Everything here is move 6 made concrete.</p>
+
+  <div class="card blue">
+    <h3 style="margin-top:0">1. Size it before you solve it</h3>
+    <p><code>4728 ÷ 8</code> → 8×500=4000, 8×600=4800. So the answer is in the <b>500s</b>, and it's close to 600. Now compute: <b>591</b>. If you'd got 59 or 5910 you'd catch it instantly.</p>
+    <p class="small">Do this every single time. Magnitude errors cost more marks in OAs than arithmetic errors do, because they <i>look</i> like a plausible option.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">2. Chunk, don't long-divide</h3>
+    <p><code>5208 ÷ 8</code> → strip off 8×600 = 4800, leaving 408 → 8×50 = 400, leaving 8 → 8×1. Answer <b>600 + 50 + 1 = 651</b>.</p>
+    <p class="small">Big bite first, then clean up. You're allowed to take clumsy chunks — 8×600 then 8×50 then 8×1 is exactly as correct as elegant long division, and far easier to hold in your head.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">3. Split the divisor (2-digit divisors)</h3>
+    <p><code>1584 ÷ 36</code> → ÷4 → 396 → ÷9 → <b>44</b>. <code>4032 ÷ 56</code> → ÷8 → 504 → ÷7 → <b>72</b>.</p>
+    <p class="small">Needs the divisor-splits table on the Memorize page. Easier factor first — dividing by 4 before 9 keeps the intermediate number friendly.</p>
+  </div>
+  <div class="card blue">
+    <h3 style="margin-top:0">4. Scale both sides</h3>
+    <p>Multiply or divide <i>both</i> numbers and the answer is untouched. <code>1400 ÷ 25</code> → ×4 both → <code>5600 ÷ 100</code> → <b>56</b>. <code>168 ÷ 14</code> → halve both → <code>84 ÷ 7</code> → <b>12</b>.</p>
+    <p class="small">Best move when the divisor is <i>near</i> a friendly number. Aim the scaling at making the divisor 10, 100, or a single digit.</p>
+  </div>
+
+  <h3 style="margin-top:26px">✖️ Multiplier shortcuts (the ones the heavy drills use)</h3>
+  <div class="card blue">
+    <p><b>×15</b> → ×10 plus half of it. <code>1222 × 15</code> → 12220 + 6110 → <b>18330</b><br>
+    <b>×25</b> → ×100 then ÷4. <code>1222 × 25</code> → 122200/4 → <b>30550</b><br>
+    <b>×45</b> → ×90 then halve. <code>1222 × 45</code> → 109980/2 → <b>54990</b><br>
+    <b>×99</b> → ×100 minus once. <code>1222 × 99</code> → 122200 − 1222 → <b>120978</b><br>
+    <b>The ×n1 family (21, 31, 41, 51, 61)</b> → ×(the round part), then add the number once.<br>
+    <code>1222 × 51</code> → 61100 + 1222 → <b>62322</b></p>
+  </div>
+
+  <div class="card amber">
+    <h3 style="margin-top:0">Verification #1: the last-digit check (2 seconds)</h3>
+    <p>Multiply only the units digits, then apply the ± tail. <code>(1222 × 56) + 888</code> → 2×6 → ends in <b>2</b> → 2+8 → ends in <b>0</b>. Any option not ending in 0 is dead without a single real calculation.</p>
+    <p class="small">This is the highest return-per-second technique on the whole page. Use it <i>before</i> computing, to shrink the options — not after, to check.</p>
+  </div>
+  <div class="card amber">
+    <h3 style="margin-top:0">Verification #2: digit sums (casting out nines)</h3>
+    <p>Reduce every number to a single digit by summing digits repeatedly, then do the <i>same</i> operations on those digits. If the results don't match, you made an error.</p>
+    <p><code>(1222 × 56) + 888 = 69320</code>?<br>
+    1222→7 · 56→11→2 · 7×2=14→<b>5</b> · 888→24→<b>6</b> · 5+6=11→<b>2</b><br>
+    Answer 69320 → 6+9+3+2+0 = 20 → <b>2</b> ✔ match.</p>
+    <p class="small">Catches almost every slip except digit-swaps (it won't spot 69320 vs 69302). Worth the 5 seconds on a question you're unsure of — not on every question.</p>
   </div>
   <div class="card amber">
     <h3 style="margin-top:0">The exam meta-trick: estimate → eliminate</h3>
@@ -227,11 +325,14 @@
   <p>Mental math is a muscle, not knowledge — 5 minutes daily beats 2 hours once. Until placements end:</p>
   <div class="card">
     <ul>
-      <li><b>Min 1–2:</b> Drill Arena, "% of number" — beat yesterday's streak.</li>
-      <li><b>Min 3:</b> One column of the fraction↔% table out loud, from memory.</li>
-      <li><b>Min 4:</b> Five two-digit multiplications (Arena "2-digit ×").</li>
-      <li><b>Min 5:</b> One "profit chain" (Arena) — the exact skill Presidio MCQs test.</li>
+      <li><b>Min 1–2:</b> Arena <b>➗ division</b> — double time, because it's the weakest link. Watch whether the 💡 hint appears; that's your real score.</li>
+      <li><b>Min 3:</b> Arena <b>🧩 compound</b> — three or four questions. Practise <i>parking</i> the product before doing the ± (move 7).</li>
+      <li><b>Min 4:</b> Recite from memory — alternate days between the fraction↔% table and the divisor-splits table.</li>
+      <li><b>Min 5:</b> Alternate days: "% of number" ↔ "profit chains" — the exact skill placement MCQs test.</li>
     </ul>
+  </div>
+  <div class="card blue">
+    <b>How to know division is fixed:</b> you're done with the double-allocation when you can clear ten ➗ questions in a row without the hint line appearing and without pausing to picture long division. Then drop division to one minute and give the freed minute back to compound.
   </div>
   <div class="card amber">
     <b>Real-life reps (free practice):</b> mess prices (add your tray total before the cashier does), cricket strike rates, splitting bills, discount tags in shops. Every number you see is a rep.
