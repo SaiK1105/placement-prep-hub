@@ -50,8 +50,13 @@
   .topicrow.cur { border-color: #d97757; }
   .topicrow .tn { flex: 1; font-weight: 600; font-size: 14px; }
   .topicrow .prog { font-size: 12.5px; color: #8e8b83; }
-  .bar { height: 7px; border-radius: 5px; background: #3f3e3a; overflow: hidden; width: 110px; }
+  .bar { height: 7px; border-radius: 5px; background: #3f3e3a; overflow: hidden; width: 110px; display: flex; }
   .bar div { height: 100%; background: #d97757; }
+  .bar div.sh { background: #d3a13f; }
+  .pbh { font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: #8e8b83; margin: 22px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #3f3e3a; }
+  .pbh:first-child { margin-top: 0; }
+  .pbh.shaky { color: #e8c37a; border-color: #6b5a2e; }
+  .shakyc { font-size: 10.5px; color: #e8c37a; border: 1px solid #6b5a2e; border-radius: 20px; padding: 1px 7px; margin-left: 6px; white-space: nowrap; }
   .plist { border-top: 1px solid #3f3e3a; margin-top: 8px; padding-top: 8px; display: none; }
   .plist.show { display: block; }
   .pitem { display: flex; gap: 8px; align-items: center; font-size: 13px; padding: 5px 2px; color: #b8b5ad; }
@@ -357,6 +362,11 @@ const DAY = 86400000;
 const todayStr = () => new Date().toISOString().slice(0, 10);
 if (S.todayDate !== todayStr()) { S.todayDate = todayStr(); S.doneToday = 0; save(); }
 const rec = id => S.st[id] || {};
+// One definition of "done" for the whole app: solved AND reproducible cold.
+// A shaky solve counts for your streak but never for coverage — otherwise the
+// numbers drift ahead of the skill, which is the failure mode this fixes.
+const isClean = id => { const r = rec(id); return r.s === 'solved' && (r.c || 3) >= 3; };
+const isShaky = id => { const r = rec(id); return !!r.s && !isClean(id); };
 const dueList = () => P.filter(p => { const r = rec(p[0]); return r.s && r.rv !== false && r.due > 0 && r.due <= Date.now(); });
 function bumpStreak() {
   const t = todayStr();
@@ -478,19 +488,36 @@ function refresh() {
   tb.innerHTML = '';
   TOPICS.forEach(([tid, tname]) => {
     const probs = P.filter(p => p[1] === tid);
-    const done = probs.filter(p => rec(p[0]).s === 'solved').length;
+    const done = probs.filter(p => isClean(p[0])).length;
+    const shaky = probs.filter(p => isShaky(p[0])).length;
     const row = document.createElement('div');
     row.className = 'topicrow' + (tid === S.cur ? ' cur' : '');
-    row.innerHTML = `<span class="tn">${tname}${tid === S.cur ? ' <span style="color:#e0987d">· current</span>' : ''}</span><div class="bar"><div style="width:${Math.round(done / probs.length * 100)}%"></div></div><span class="prog">${done}/${probs.length}</span>`;
+    row.innerHTML = `<span class="tn">${tname}${tid === S.cur ? ' <span style="color:#e0987d">· current</span>' : ''}` +
+      `${shaky ? ` <span class="shakyc" title="solved but shaky — not counted as covered">${shaky} shaky</span>` : ''}</span>` +
+      `<div class="bar"><div style="width:${Math.round(done / probs.length * 100)}%"></div>` +
+      `<div class="sh" style="width:${Math.round(shaky / probs.length * 100)}%"></div></div>` +
+      `<span class="prog">${done}/${probs.length}</span>`;
     const pl = document.createElement('div');
     pl.className = 'plist';
-    pl.innerHTML = probs.map(p => { const r = rec(p[0]); const ic = r.s === 'solved' ? '✅' : r.s === 'assisted' ? '🟡' : r.s === 'failed' ? '🔴' : '⚪'; return `<div class="pitem"><span class="st">${ic}</span>${p[3]} <span class="diff ${p[2]}" style="margin-left:auto">${p[2]}</span></div>`; }).join('');
+    pl.innerHTML = probs.map(p => { const r = rec(p[0]); const ic = isClean(p[0]) ? '✅' : r.s === 'solved' ? '🟨' : r.s === 'assisted' ? '🟡' : r.s === 'failed' ? '🔴' : '⚪'; return `<div class="pitem"><span class="st">${ic}</span>${p[3]} <span class="diff ${p[2]}" style="margin-left:auto">${p[2]}</span></div>`; }).join('');
     row.onclick = () => { if (S.cur !== tid) setTopic(tid); else pl.classList.toggle('show'); };
     tb.appendChild(row); tb.appendChild(pl);
   });
   const pb = document.getElementById('patbox');
-  const learned = P.filter(p => rec(p[0]).s === 'solved');
-  pb.innerHTML = learned.length ? learned.map(p => `<div class="patline"><span class="t">${p[3]}:</span> ${p[7]}</div>`).join('') : '<div class="card small">Every problem you solve yourself adds its one-line pattern here.</div>';
+  // Shaky patterns lead — they're the ones you can't yet reproduce cold, so
+  // they're the highest-value thing to skim in the last hour before an OA.
+  const clean = P.filter(p => isClean(p[0]));
+  const shakyP = P.filter(p => isShaky(p[0]) && rec(p[0]).s === 'solved');
+  const line = p => `<div class="patline"><span class="t">${p[3]}:</span> ${p[7]}</div>`;
+  if (!clean.length && !shakyP.length) {
+    pb.innerHTML = '<div class="card small">Every problem you solve yourself adds its one-line pattern here.</div>';
+  } else {
+    pb.innerHTML =
+      (shakyP.length ? `<h3 class="pbh shaky">⚠ Shaky — review these first (${shakyP.length})</h3>` +
+        `<p class="small" style="margin:0 0 8px">You produced these patterns with effort or hesitation. They are not yet yours.</p>` +
+        shakyP.map(line).join('') : '') +
+      (clean.length ? `<h3 class="pbh">✅ Solid (${clean.length})</h3>` + clean.map(line).join('') : '');
+  }
 }
 // ---------------------------------------------------------------- BROWSE
 function matches(p) {
