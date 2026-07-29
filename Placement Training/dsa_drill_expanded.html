@@ -59,6 +59,26 @@
   .patline { padding: 10px 14px; border-left: 3px solid #90a883; background: #30302e; border-radius: 0 10px 10px 0; margin: 8px 0; font-size: 13.5px; }
   .patline .t { font-weight: 600; color: #f0efea; }
   ul li { margin-bottom: 7px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .filters select { background: #262624; color: #f0efea; border: 1px solid #3f3e3a; border-radius: 8px; padding: 7px 10px; font-size: 13px; font-family: inherit; }
+  .filters select:focus { outline: none; border-color: #d97757; }
+  .spinetog { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .spinetog input { accent-color: #d97757; width: 16px; height: 16px; }
+  .btn.warn { border-color: #d3a13f; color: #e8c37a; }
+  .btn.warn:hover { background: #d3a13f; color: #1a1915; }
+  .brow { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-bottom: 1px solid #2f2e2b; font-size: 13px; flex-wrap: wrap; }
+  .brow:last-child { border-bottom: none; }
+  .brow .nm { flex: 1; min-width: 160px; }
+  .brow a { color: #e0987d; text-decoration: none; }
+  .brow a:hover { text-decoration: underline; }
+  .chip { font-size: 10px; padding: 2px 7px; border-radius: 20px; border: 1px solid #3f3e3a; color: #b8b5ad; white-space: nowrap; }
+  .chip.spine { border-color: #d97757; color: #e0987d; }
+  .chip.t1 { border-color: #90a883; color: #a8c09a; }
+  .chip.t2 { border-color: #7f9cc0; color: #9bb4d4; }
+  .chip.t3 { border-color: #c07f7f; color: #d49b9b; }
+  .chip.seen { border-color: #d3a13f; color: #e8c37a; }
+  .rvbtn { cursor: pointer; background: none; border: none; font-size: 14px; opacity: .35; padding: 0 2px; }
+  .rvbtn.on { opacity: 1; }
 </style>
 </head>
 <body>
@@ -69,6 +89,7 @@
 
 <nav id="nav">
   <button data-p="today" class="on">Today</button>
+  <button data-p="browse">Browse</button>
   <button data-p="map">Roadmap</button>
   <button data-p="due" id="duetab">Re-solve</button>
   <button data-p="pat">Pattern book</button>
@@ -79,10 +100,27 @@
   <div class="grid4">
     <div class="stat"><div class="n" id="s-today">0/3</div><div class="l">today</div></div>
     <div class="stat"><div class="n" id="s-streak">0</div><div class="l">day streak</div></div>
-    <div class="stat"><div class="n" id="s-solved">0</div><div class="l">solved</div></div>
+    <div class="stat"><div class="n" id="s-solved">0</div><div class="l">spine solved</div></div>
     <div class="stat"><div class="n" id="s-due">0</div><div class="l">due</div></div>
   </div>
   <div id="arena"></div>
+</div>
+
+<div class="page" id="browse">
+  <h2>Browse</h2>
+  <p class="small">Pattern × difficulty × tier × status. The point is that the daily 3 picks itself — you should never spend willpower choosing.</p>
+  <div class="card" style="padding:12px 14px">
+    <label class="spinetog"><input type="checkbox" id="f-spine"> <b>Spine only</b> <span class="small">— the curated 60 that IS the Contract ladder. Rest is overflow.</span></label>
+    <div class="filters">
+      <select id="f-topic"><option value="">all patterns</option></select>
+      <select id="f-diff"><option value="">any difficulty</option><option value="E">easy</option><option value="M">medium</option><option value="H">hard</option></select>
+      <select id="f-tier"><option value="">any tier</option><option value="1">1 · Foundation</option><option value="2">2 · GCC / mid-product</option><option value="3">3 · Stretch / top</option></select>
+      <select id="f-status"><option value="">any status</option><option value="none">untouched</option><option value="solved">solved</option><option value="shaky">shaky (conf &lt; 3)</option><option value="rv">flagged revisit</option><option value="failed">failed</option></select>
+      <button class="btn" id="f-clear">clear</button>
+    </div>
+    <div class="small" id="f-count" style="margin-top:10px"></div>
+  </div>
+  <div id="browsebox"></div>
 </div>
 
 <div class="page" id="map">
@@ -288,15 +326,38 @@ r1:LC('fibonacci-number'),r2:GG('tower-of-hanoi-1587115621'),r3:LC('subsets'),r4
 g1:GG('bfs-traversal-of-graph'),g2:GG('depth-first-traversal-for-a-graph'),g3:LC('flood-fill'),g4:LC('number-of-islands'),g5:LC('rotting-oranges'),g6:GG('detect-cycle-in-an-undirected-graph'),g7:LC('course-schedule'),g8:GG('topological-sort'),g9:LC('is-graph-bipartite'),g10:GG('shortest-path-in-undirected-graph-having-unit-distance'),
 d1:LC('climbing-stairs'),d2:LC('unique-paths'),d3:LC('house-robber'),d4:LC('coin-change'),d5:LC('minimum-path-sum'),d6:LC('longest-increasing-subsequence'),d7:LC('longest-common-subsequence'),d8:LC('partition-equal-subset-sum'),d9:GG('0-1-knapsack-problem0945'),d10:LC('edit-distance')
 };
+// ---------------------------------------------------------------- SPINE (60)
+// Blind-75 logic applied to this set: the problems that, solved cold, cover the
+// pattern space. 144 is too many for 8 weeks at 3/day WITH revision — the spine
+// IS the Contract ladder; everything else is overflow you reach if time allows.
+const SPINE = new Set(('t1 t2 t5 t7 t9 a1 a2 a5 a6 h1 h5 h7 h8 w1 w4 w5 w6 s1 s6 s10 ' +
+  'b1 b4 b5 b9 l1 l4 l5 l9 k1 k5 k7 k9 e1 e3 e8 e9 y3 y6 y8 v3 v4 v5 x1 x3 x8 ' +
+  'r3 r4 r5 r6 g3 g4 g5 g7 g8 d1 d3 d4 d6 d7 d10').split(' '));
+
+// ---------------------------------------------------------------- TIERS
+// HEURISTIC, not scraped company data. Tier 3 = the genuinely hard/stretch set;
+// tier 1 = foundation that every drive assumes; tier 2 = the GCC / mid-product
+// band your actual drives sit in. Filter by this to stop grinding 144 blind.
+const T3 = new Set(['w9','w10','b10','k10','e8','e9','e10','r10','d10','s6','v8','g10','x7','t10']);
+const tierOf = p => T3.has(p[0]) ? 3 : (p[2] === 'H' ? 3 : (p[2] === 'E' ? 1 : 2));
+const TIERNAME = { 1: 'Foundation', 2: 'GCC / mid-product', 3: 'Stretch / top product' };
+
+// Problems matching what your OWN logged OAs actually contained. First-hand,
+// not inferred from a question bank. Pattern-level matches where the exact
+// problem wasn't recorded.
+const SEEN = { w4:'Tredence', h8:'Tredence', e1:'Tredence',
+               d5:'Staples', d2:'Staples', g10:'Staples', g5:'Staples' };
+
 const KEY = 'dsa-drill-expanded';
-let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '' };
+let S = { cur: 'trees', st: {}, streak: 0, last: '', doneToday: 0, todayDate: '',
+          spineOnly: false, f: { topic: '', diff: '', tier: '', status: '' } };
 try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
 const DAY = 86400000;
 const todayStr = () => new Date().toISOString().slice(0, 10);
 if (S.todayDate !== todayStr()) { S.todayDate = todayStr(); S.doneToday = 0; save(); }
 const rec = id => S.st[id] || {};
-const dueList = () => P.filter(p => { const r = rec(p[0]); return (r.s === 'assisted' || r.s === 'failed') && r.due <= Date.now(); });
+const dueList = () => P.filter(p => { const r = rec(p[0]); return r.s && r.rv !== false && r.due > 0 && r.due <= Date.now(); });
 function bumpStreak() {
   const t = todayStr();
   if (S.last === t) return;
@@ -304,15 +365,29 @@ function bumpStreak() {
   S.streak = (S.last === y) ? S.streak + 1 : 1;
   S.last = t;
 }
-function outcome(id, kind, isResolve) {
+// conf: 3 = clean, would repeat cold · 2 = shaky, come back · 1 = only with help.
+// A "solved" at confidence 2 still schedules a return — this is the gap the old
+// done/not-done model couldn't express, and it was the true state of most reps.
+function outcome(id, kind, isResolve, conf) {
   const r = rec(id);
-  if (kind === 'solved') { r.s = 'solved'; r.due = 0; }
-  else if (kind === 'assisted') { r.s = 'assisted'; r.due = Date.now() + 2 * DAY; }
-  else { r.s = 'failed'; r.due = Date.now() + 1 * DAY; }
+  if (kind === 'solved') {
+    r.s = 'solved';
+    r.c = conf || 3;
+    r.due = r.c >= 3 ? 0 : Date.now() + (r.c === 2 ? 4 : 2) * DAY;
+    if (r.c < 3) r.rv = true;
+  }
+  else if (kind === 'assisted') { r.s = 'assisted'; r.c = 2; r.due = Date.now() + 2 * DAY; r.rv = true; }
+  else { r.s = 'failed'; r.c = 1; r.due = Date.now() + 1 * DAY; r.rv = true; }
   r.n = (r.n || 0) + 1;
   S.st[id] = r;
   S.doneToday++; bumpStreak(); save(); refresh();
   if (isResolve) startDueUI(); else nextProblemUI();
+}
+function toggleRevisit(id) {
+  const r = rec(id); r.rv = !r.rv;
+  if (r.rv && !r.due) r.due = Date.now() + 3 * DAY;
+  if (!r.rv && r.s === 'solved') r.due = 0;
+  S.st[id] = r; save(); refresh(); renderBrowse();
 }
 let tick = null;
 function problemCard(p, isResolve) {
@@ -334,14 +409,18 @@ function problemCard(p, isResolve) {
       ${LINK[id] ? `<a class="btn solid" style="text-decoration:none" href="${LINK[id]}" target="_blank" rel="noopener">🚀 solve on ${LINK[id].includes('geeksforgeeks') ? 'GfG' : 'LeetCode'} ↗</a>` : ''}
       <button class="btn" id="bh">show hint</button>
       <button class="btn" id="ba">show approach</button>
-      <button class="btn good" id="b1">✓ solved myself</button>
+      <button class="btn good" id="b1">✓ solved — clean</button>
+      <button class="btn warn" id="b1b">✓ solved — but shaky</button>
       <button class="btn" id="b2">needed the approach</button>
       <button class="btn bad" id="b3">couldn't solve</button>
+      <button class="btn" id="brv">${rec(id).rv ? '🔖 revisiting' : '🔖 flag revisit'}</button>
     </div>
     <p class="small" style="margin-top:10px">Click through, solve it on the real judge, then come back and record the honest outcome. Honesty trains the schedule.</p>`;
   d.querySelector('#bh').onclick = () => d.querySelector('#rv-h').classList.add('show');
   d.querySelector('#ba').onclick = () => { d.querySelector('#rv-a').classList.add('show'); revealed = true; };
-  d.querySelector('#b1').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve);
+  d.querySelector('#b1').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve, 3);
+  d.querySelector('#b1b').onclick = () => outcome(id, revealed ? 'assisted' : 'solved', isResolve, 2);
+  d.querySelector('#brv').onclick = () => { toggleRevisit(id); d.querySelector('#brv').textContent = rec(id).rv ? '🔖 revisiting' : '🔖 flag revisit'; };
   d.querySelector('#b2').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'assisted', isResolve); };
   d.querySelector('#b3').onclick = () => { d.querySelector('#rv-a').classList.add('show'); outcome(id, 'failed', isResolve); };
   let s = 1500;
@@ -365,7 +444,10 @@ function nextProblemUI() {
 }
 function newProblem() {
   const arena = document.getElementById('arena');
-  const pool = P.filter(p => p[1] === S.cur && !rec(p[0]).s);
+  // Spine first, always. Overflow only once the spine for this topic is clear.
+  const untouched = P.filter(p => p[1] === S.cur && !rec(p[0]).s);
+  const spinePool = untouched.filter(p => SPINE.has(p[0]));
+  const pool = (S.spineOnly || spinePool.length) ? spinePool : untouched;
   if (!pool.length) {
     const idx = TOPICS.findIndex(t => t[0] === S.cur);
     const nxt = TOPICS[idx + 1];
@@ -387,7 +469,8 @@ function setTopic(t) { S.cur = t; save(); refresh(); document.querySelector('[da
 function refresh() {
   document.getElementById('s-today').textContent = S.doneToday + '/3';
   document.getElementById('s-streak').textContent = S.streak;
-  document.getElementById('s-solved').textContent = P.filter(p => rec(p[0]).s === 'solved').length;
+  document.getElementById('s-solved').textContent =
+    P.filter(p => SPINE.has(p[0]) && rec(p[0]).s === 'solved' && (rec(p[0]).c || 3) >= 3).length + '/' + SPINE.size;
   const due = dueList().length;
   document.getElementById('s-due').textContent = due;
   document.getElementById('duetab').innerHTML = 'Re-solve' + (due ? `<span class="badge">${due}</span>` : '');
@@ -409,6 +492,70 @@ function refresh() {
   const learned = P.filter(p => rec(p[0]).s === 'solved');
   pb.innerHTML = learned.length ? learned.map(p => `<div class="patline"><span class="t">${p[3]}:</span> ${p[7]}</div>`).join('') : '<div class="card small">Every problem you solve yourself adds its one-line pattern here.</div>';
 }
+// ---------------------------------------------------------------- BROWSE
+function matches(p) {
+  const [id, topic, diff] = p, r = rec(id), f = S.f;
+  if (S.spineOnly && !SPINE.has(id)) return false;
+  if (f.topic && topic !== f.topic) return false;
+  if (f.diff && diff !== f.diff) return false;
+  if (f.tier && String(tierOf(p)) !== f.tier) return false;
+  if (f.status === 'none' && r.s) return false;
+  if (f.status === 'solved' && r.s !== 'solved') return false;
+  if (f.status === 'failed' && r.s !== 'failed') return false;
+  if (f.status === 'shaky' && !(r.s && (r.c || 3) < 3)) return false;
+  if (f.status === 'rv' && !r.rv) return false;
+  return true;
+}
+function renderBrowse() {
+  const box = document.getElementById('browsebox');
+  if (!box) return;
+  const list = P.filter(matches);
+  const spineTotal = P.filter(p => SPINE.has(p[0])).length;
+  const spineDone = P.filter(p => SPINE.has(p[0]) && rec(p[0]).s === 'solved' && (rec(p[0]).c || 3) >= 3).length;
+  document.getElementById('f-count').innerHTML =
+    `<b>${list.length}</b> shown · spine progress <b>${spineDone}/${spineTotal}</b> solved clean` +
+    ` · <span style="color:#e8c37a">${P.filter(p => rec(p[0]).rv).length} flagged for revisit</span>`;
+  if (!list.length) { box.innerHTML = '<div class="card small">Nothing matches. Loosen a filter.</div>'; return; }
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.padding = '0';
+  card.innerHTML = list.map(p => {
+    const [id, topic, diff, name] = p, r = rec(id), tr = tierOf(p);
+    const ic = r.s === 'solved' ? ((r.c || 3) >= 3 ? '✅' : '🟨') : r.s === 'assisted' ? '🟡' : r.s === 'failed' ? '🔴' : '⚪';
+    const tn = TOPICS.find(t => t[0] === topic)[1];
+    return `<div class="brow">
+      <span>${ic}</span>
+      <span class="nm">${LINK[id] ? `<a href="${LINK[id]}" target="_blank" rel="noopener">${name} ↗</a>` : name}
+        <span class="small" style="display:block;color:#8a877f">${tn}</span></span>
+      ${SPINE.has(id) ? '<span class="chip spine">spine</span>' : ''}
+      ${SEEN[id] ? `<span class="chip seen" title="appeared in your own logged OA">seen · ${SEEN[id]}</span>` : ''}
+      <span class="chip t${tr}">T${tr}</span>
+      <span class="diff ${diff}">${diff}</span>
+      <button class="rvbtn ${r.rv ? 'on' : ''}" data-rv="${id}" title="flag for revisit">🔖</button>
+    </div>`;
+  }).join('');
+  box.innerHTML = '';
+  box.appendChild(card);
+  card.querySelectorAll('[data-rv]').forEach(b => b.onclick = () => toggleRevisit(b.dataset.rv));
+}
+function initFilters() {
+  const ts = document.getElementById('f-topic');
+  TOPICS.forEach(([tid, tn]) => ts.innerHTML += `<option value="${tid}">${tn}</option>`);
+  const bind = (elId, key) => {
+    const el = document.getElementById(elId);
+    el.value = S.f[key] || '';
+    el.onchange = () => { S.f[key] = el.value; save(); renderBrowse(); };
+  };
+  bind('f-topic', 'topic'); bind('f-diff', 'diff'); bind('f-tier', 'tier'); bind('f-status', 'status');
+  const sp = document.getElementById('f-spine');
+  sp.checked = !!S.spineOnly;
+  sp.onchange = () => { S.spineOnly = sp.checked; save(); renderBrowse(); };
+  document.getElementById('f-clear').onclick = () => {
+    S.f = { topic: '', diff: '', tier: '', status: '' }; S.spineOnly = false; save();
+    ['f-topic', 'f-diff', 'f-tier', 'f-status'].forEach(i => document.getElementById(i).value = '');
+    sp.checked = false; renderBrowse();
+  };
+}
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
   document.querySelectorAll('#nav button').forEach(x => x.classList.remove('on'));
   document.querySelectorAll('.page').forEach(x => x.classList.remove('on'));
@@ -416,9 +563,12 @@ document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
   document.getElementById(b.dataset.p).classList.add('on');
   if (b.dataset.p === 'due') startDueUI();
   if (b.dataset.p === 'today') nextProblemUI();
+  if (b.dataset.p === 'browse') renderBrowse();
   window.scrollTo({ top: 0 });
 });
+initFilters();
 refresh();
+renderBrowse();
 nextProblemUI();
 </script>
 </body>
