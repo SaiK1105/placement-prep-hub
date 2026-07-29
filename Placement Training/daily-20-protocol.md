@@ -59,6 +59,31 @@ Streak survives any day that meets its declared mode's floor.
 Contract 3/day for two days, then re-enter at FULL. Falling back is the plan
 working, not the plan failing.
 
+## Mental math warm-up — 5 min, and deliberately NOT part of the 20
+
+Runs before block A. It is a habit, not a rep: it never counts toward the 20,
+never feeds the streak, quota, coverage chips, or history bars. Inflating the
+20 with a math drill would make "20/day" a lie, and the whole system depends on
+that number being honest.
+
+| Min | Slot | Why |
+|---|---|---|
+| 1–2 | **➗ Division** (double time) | Declared weak point, 29 Jul. Gets two of the five minutes until it graduates. |
+| 3 | **🧩 Compound** | `(1222×56)+888` — finish the product, park it, then the ± tail. |
+| 4 | **📖 Recite** — alternates fraction↔% / divisor-splits by date parity | The two tables that make everything else fast. |
+| 5 | **⚡ % of number / profit chains** — alternates | The exact shape placement MCQs test. |
+
+**Graduation rule (the only way division's extra minute is released):** tick
+"cleared 10 division questions in a row with no 💡 hint" on **3 consecutive
+days**. The tracker then rewrites the routine itself — division drops to 1 min,
+compound takes the spare minute. Breaking the run restores the double
+allocation automatically. Warm-up streak is gated on the division slot alone;
+skipping it is skipping the point.
+
+Trainer and the seven moves behind the drills: `mental_math_trainer.html`.
+Tracked in `daily_20_tracker.html` as its own panel, with its own streak tile
+and a green underline on the history bars.
+
 ## Time cost — no fantasy
 
 A ≈ 25 min · B ≈ 2.5–3 h · C ≈ 2–2.5 h · D ≈ 40 min → **≈ 6–6.5 h/day**, plus

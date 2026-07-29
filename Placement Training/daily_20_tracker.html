@@ -51,10 +51,19 @@
   .slot input[type=number] { width:52px; }
   .miss-btn { background:none; border:1px solid var(--line2); color:var(--faint); border-radius:7px; font-size:11.5px; padding:2px 8px; cursor:pointer; }
   .miss-btn:hover,.miss-btn.flag { color:var(--amber); border-color:var(--amber); }
+  .mm-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:6px; }
+  .mm-item { display:flex; align-items:flex-start; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:10px; font-size:12.5px; color:var(--mut); cursor:pointer; }
+  .mm-item.done { border-color:var(--green); color:var(--ink); }
+  .mm-item input { width:16px; height:16px; margin-top:2px; accent-color:var(--acc); cursor:pointer; flex:0 0 auto; }
+  .mm-item .sub2 { display:block; font-size:11px; color:var(--faint); }
+  .mm-clean { display:flex; align-items:flex-start; gap:9px; margin-top:9px; padding:8px 10px; border:1px dashed var(--line2); border-radius:10px; font-size:12.5px; color:var(--mut); cursor:pointer; }
+  .mm-clean.grad { border-color:var(--green); border-style:solid; color:var(--green); }
+  .mm-clean input { width:16px; height:16px; margin-top:2px; accent-color:var(--green); cursor:pointer; flex:0 0 auto; }
   .hist { position:relative; height:110px; display:flex; align-items:flex-end; gap:2px; margin-top:8px; padding-top:12px; }
   .hbar { flex:1; background:var(--acc); border-radius:3px 3px 0 0; min-height:2px; opacity:.85; cursor:default; }
   .hbar.today { opacity:1; outline:2px solid var(--bg); }
   .hbar.zero { background:var(--line2); }
+  .hbar.mm { border-bottom:3px solid var(--green); }
   .target-line { position:absolute; left:0; right:0; border-top:1.5px dashed var(--faint); }
   .target-line span { position:absolute; right:0; top:-16px; font-size:10.5px; color:var(--faint); }
   .hlabels { display:flex; gap:2px; margin-top:4px; }
@@ -105,13 +114,20 @@
   <div class="chips" id="coverage"></div>
 </div>
 
+<h2>🧮 Mental math warm-up <span style="font-size:12px;color:var(--faint)">(5 min, before the 20 — deliberately not counted in it)</span></h2>
+<div class="panel">
+  <div class="mm-grid" id="mmGrid"></div>
+  <label class="mm-clean" id="mmCleanBox"><input type="checkbox" id="mmClean"><span id="mmCleanLbl"></span></label>
+  <p class="foot-note">Routine and the seven moves behind it: <a href="mental_math_trainer.html">mental_math_trainer.html</a>. This buys speed in the aptitude section and margin on the OA clock — it is not a DSA rep, so it never inflates the 20.</p>
+</div>
+
 <div id="blocks"></div>
 
 <h2>📊 Last 14 days</h2>
 <div class="panel">
   <div class="hist" id="hist"></div>
   <div class="hlabels" id="histLabels"></div>
-  <p class="foot-note">Dashed line = 20. Hover a bar for the day's detail.</p>
+  <p class="foot-note">Dashed line = 20. Green underline = mental math warm-up done. Hover a bar for the day's detail.</p>
 </div>
 
 <h2>🗂️ Striver A2Z sheet</h2>
@@ -156,6 +172,7 @@ const A2Z_DEF=[['1 Basics',31],['2 Sorting',7],['3 Arrays',40],['4 Binary Search
 const FLOORS={full:20,sunday:20,light:8,half:10};
 const MODES=['full','sunday','light','half'];
 const FAMS=['Arr/Str/Hash','BinSearch','LL / Stack-Q','Trees','Graphs','DP','Heap-Greedy','Window/Rec/Bits'];
+const MM_GRAD=3; // consecutive hint-free days before division drops to 1 min
 
 const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);
 const today=()=>iso(new Date());
@@ -181,6 +198,18 @@ function c6family(dateStr,i){
   if(i===4)return'DP';
   return['Heap / Greedy','Recursion / Bits','2-ptr / Window'][day%3];
 }
+// The 5-min warm-up from the trainer's routine page. Slot 0 is division — the
+// declared weak point — and it alone gates the warm-up streak.
+function mmRoutine(dateStr,graduated){
+  const odd=serial(dateStr)%2;
+  return[
+    {t:'➗ Division · '+(graduated?'1':'2')+' min',s:graduated?'graduated — maintenance reps':'weak point, double time · watch for the 💡 hint'},
+    {t:'🧩 Compound · '+(graduated?'2':'1')+' min',s:'(1222×56)+888 — finish the product, park it, then the tail'},
+    {t:'📖 Recite · '+(odd?'divisor splits':'fraction ↔ %'),s:'out loud, from memory, no peeking'},
+    {t:'⚡ '+(odd?'Profit chains':'% of number'),s:'arena — beat yesterday’s streak'},
+  ];
+}
+const newMM=()=>({d:[false,false,false,false],clean:false});
 function weekIdx(dateStr){
   const w=Math.floor((serial(dateStr)-serial(S.startDate))/7);
   return Math.min(Math.max(w,0),7);
@@ -201,9 +230,11 @@ function getDay(dateStr){
   if(!S.days[dateStr]){
     const wd=new Date(dateStr+'T00:00').getDay();
     const mode=wd===0?'sunday':'full';
-    S.days[dateStr]={mode,slots:buildSlots(mode,dateStr),mistakes:[]};
+    S.days[dateStr]={mode,slots:buildSlots(mode,dateStr),mistakes:[],mm:newMM()};
   }
-  return S.days[dateStr];
+  const r=S.days[dateStr];
+  if(!r.mm||!Array.isArray(r.mm.d)||r.mm.d.length!==4)r.mm=newMM(); // backfill days saved before the warm-up existed
+  return r;
 }
 
 // ---- derived --------------------------------------------------------
@@ -216,6 +247,19 @@ function streak(){
   while(S.days[d]&&doneCount(S.days[d])>=FLOORS[S.days[d].mode]){n++;d=addDays(d,-1);}
   return n;
 }
+// Warm-up streaks read S.days directly (never getDay) so they don't
+// materialise empty records for days that were never opened.
+const mmOf=d=>(S.days[d]&&S.days[d].mm)||null;
+function backRun(hit){
+  let n=0,d=today();
+  if(hit(mmOf(d)))n++;
+  d=addDays(d,-1);
+  while(hit(mmOf(d))){n++;d=addDays(d,-1);}
+  return n;
+}
+const mmStreak=()=>backRun(m=>m&&m.d[0]);          // division done = the floor
+const mmCleanRun=()=>backRun(m=>m&&m.clean);        // hint-free days in a row
+const mmGraduated=()=>mmCleanRun()>=MM_GRAD;
 function repVelocity(){
   const days=Object.keys(S.days).filter(d=>d<today()).sort().slice(-7);
   if(!days.length)return 0;
@@ -252,6 +296,7 @@ function render(){
     tile('LeetCode solved',S.lc.count,'tap to update from profile','lcTile'),
     tile('400 crossing',proj.txt,proj.sub),
     tile('A2Z sheet',Math.round(a2zDone/a2zTot*100)+'%',a2zDone+' / '+a2zTot),
+    tile('Mental math',mmStreak()+' 🧮',rec.mm.d.filter(Boolean).length+'/4 today · division-gated'),
   ].join('');
   el('lcTile').onclick=()=>{
     const v=prompt('LeetCode solved count (from your real profile):',S.lc.count);
@@ -274,6 +319,7 @@ function render(){
   const lit=f=>rec.slots.some(s=>s.done&&famOf(s.topic)===f);
   el('coverage').innerHTML=FAMS.map(f=>`<span class="chip${lit(f)?' lit':''}">${lit(f)?'✓ ':''}${f}</span>`).join('');
 
+  renderMM(rec);
   renderBlocks(rec);
   renderHist();
   renderA2Z();
@@ -322,19 +368,37 @@ function renderBlocks(rec){
     save();render();
   };
 }
+function renderMM(rec){
+  const grad=mmGraduated(),run=mmCleanRun();
+  el('mmGrid').innerHTML=mmRoutine(cur,grad).map((r,i)=>`<label class="mm-item${rec.mm.d[i]?' done':''}">
+    <input type="checkbox" data-mm="${i}" ${rec.mm.d[i]?'checked':''}>
+    <span>${r.t}<span class="sub2">${r.s}</span></span></label>`).join('');
+  el('mmGrid').onchange=e=>{
+    const i=e.target.dataset&&e.target.dataset.mm;
+    if(i===undefined)return;
+    getDay(cur).mm.d[i]=e.target.checked;
+    save();render();
+  };
+  el('mmClean').checked=rec.mm.clean;
+  el('mmCleanBox').className='mm-clean'+(grad?' grad':'');
+  el('mmCleanLbl').innerHTML=grad
+    ? `<b>✓ Division graduated</b> — ${run} hint-free days. It drops to 1 min and compound takes the spare minute. Keep ticking this; a miss restarts the run.`
+    : `Cleared <b>10 division questions in a row with no 💡 hint</b> today <span style="color:var(--faint)">— ${run}/${MM_GRAD} clean days. Hit ${MM_GRAD} and division drops to 1 min.</span>`;
+}
 function renderHist(){
   const days=Array.from({length:14},(_,i)=>addDays(today(),i-13));
   const max=Math.max(22,...days.map(d=>S.days[d]?doneCount(S.days[d]):0));
   el('hist').innerHTML=`<div class="target-line" style="bottom:${20/max*100}%"><span>20</span></div>`+
     days.map(d=>{
       const rec=S.days[d],n=rec?doneCount(rec):0;
-      return`<div class="hbar${d===today()?' today':''}${n===0?' zero':''}" style="height:${Math.max(n/max*100,2)}%" data-d="${d}" data-n="${n}" data-m="${rec?rec.mode:'—'}"></div>`;
+      const mm=mmOf(d)&&mmOf(d).d[0];
+      return`<div class="hbar${d===today()?' today':''}${n===0?' zero':''}${mm?' mm':''}" style="height:${Math.max(n/max*100,2)}%" data-d="${d}" data-n="${n}" data-m="${rec?rec.mode:'—'}" data-mm="${mm?'🧮 warm-up done':'no warm-up'}"></div>`;
     }).join('');
   el('histLabels').innerHTML=days.map((d,i)=>`<div>${i%2?'':d.slice(8)}</div>`).join('');
   el('hist').onmousemove=e=>{
     const t=e.target;if(!t.dataset||!t.dataset.d){el('tip').style.display='none';return;}
     const tip=el('tip');tip.style.display='block';
-    tip.textContent=`${t.dataset.d} · ${t.dataset.n} done · ${t.dataset.m}`;
+    tip.textContent=`${t.dataset.d} · ${t.dataset.n} done · ${t.dataset.m} · ${t.dataset.mm}`;
     tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-30)+'px';
   };
   el('hist').onmouseleave=()=>el('tip').style.display='none';
@@ -384,6 +448,8 @@ document.addEventListener('click',e=>{
     rec.mode=m;rec.slots=buildSlots(m,cur);save();render();
   }
 });
+
+el('mmClean').onchange=e=>{getDay(cur).mm.clean=e.target.checked;save();render();};
 
 el('mAdd').onclick=()=>{
   const pattern=el('mPattern').value.trim(),cat=el('mCat').value,note=el('mNote').value.trim();
