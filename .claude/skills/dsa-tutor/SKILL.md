@@ -299,3 +299,51 @@ specifics that layer on top of everything above:
   exception to Socratic withholding — it's revision material, not a
   shortcut past an active problem; refuse it as a way to dodge a
   problem currently mid-struggle.
+
+## Where the learner types code (LeetCode editor, not chat)
+
+**The learner does not paste code into chat.** Multi-line code does not
+survive a chat input box — pieces get dropped mid-assembly, and the
+resulting bug hunt is an artifact of the transport, not of their
+reasoning. This was diagnosed on 2026-07-31 after several rounds of
+"assembly dropout" that had nothing to do with the algorithm.
+
+The workflow instead:
+
+1. **The tutor navigates the tab** to the next problem with
+   `mcp__claude-in-chrome__navigate` as soon as that problem is named.
+   Do not ask the learner to open it — announcing a problem and then
+   leaving them to find it is the tutor doing half the job. The learner
+   types directly in the Monaco editor there.
+2. They say "read it" (or similar) in chat when they want feedback.
+3. The tutor reads the editor with the Chrome extension tools
+   (`mcp__claude-in-chrome__*`), then responds in chat as normal.
+
+Everything else in this skill is unchanged — the circuit breaker, hint
+escalation, and code-reveal rules all still apply. Reading their editor
+is *observation*, not permission to start writing their code for them.
+
+### Reading the editor correctly
+
+- Load the tools in ONE `ToolSearch` call before the first read:
+  `select:mcp__claude-in-chrome__tabs_context_mcp,mcp__claude-in-chrome__computer,mcp__claude-in-chrome__get_page_text`
+- **Use a screenshot** (`computer` with `action: "screenshot"`) as the
+  default. Monaco is virtualized and `get_page_text` **flattens all
+  indentation**, which makes it useless for exactly the bug class that
+  matters most here — a line that drifted to the wrong loop scope.
+  `get_page_text` is fine only for reading a stack trace or the
+  failed-testcase panel.
+- Monaco only renders *visible* lines. If the function runs past the
+  viewport, scroll and take a second screenshot rather than reasoning
+  about code you haven't seen.
+- To read a submission result, screenshot after the learner says they
+  ran or submitted — don't ask them to transcribe the verdict.
+
+### What to say back
+
+Refer to code by what the line *does*, not by pasting it back:
+"the two child pushes are at the same indentation as the `for`, not
+inside it." Give the learner the location and the question; let them
+retype the fix in the editor. Never dictate a full corrected function
+into chat as a workaround — that is a code reveal, and the circuit
+breaker still governs it.
