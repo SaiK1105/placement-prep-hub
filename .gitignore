@@ -27,3 +27,6 @@ Thumbs.db
 desktop.ini
 .DS_Store
 ~$*
+
+# Extracted text of third-party assessment papers (same content as the PDFs)
+Companies/**/sample_paper_text.txt

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prodapt Prep HQ — 5–6 Aug 2026</title>
+<style>
+:root{
+  --bg:#12100e; --bg-2:#1a1714; --bg-3:#221d19;
+  --ink:#f0ebe5; --ink-2:#b8ada1; --ink-3:#7d7166;
+  --accent:#d97757; --accent-dim:#8a4a33;
+  --good:#7fa87f; --warn:#d4a24e; --bad:#c96a5e; --info:#6f8fae;
+  --line:#2e2823;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;max-width:1400px;margin:0 auto}
+
+/* ---- sidebar ---- */
+nav{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);padding:28px 18px;background:var(--bg-2);
+}
+nav .brand{font-family:var(--serif);font-size:21px;line-height:1.2;margin-bottom:4px}
+nav .brand em{color:var(--accent);font-style:normal}
+nav .date{font:11px/1.4 var(--mono);color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+nav a{
+  display:block;color:var(--ink-2);text-decoration:none;padding:7px 10px;
+  border-radius:5px;font-size:13.5px;border-left:2px solid transparent;
+  transition:background .15s,color .15s,border-color .15s;
+}
+nav a:hover{background:var(--bg-3);color:var(--ink)}
+nav a .n{font:10px var(--mono);color:var(--ink-3);margin-right:8px}
+nav hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+
+main{padding:44px 52px 120px;min-width:0}
+
+/* ---- countdown ---- */
+.hero{border-bottom:1px solid var(--line);padding-bottom:34px;margin-bottom:44px}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,4.2vw,50px);line-height:1.05;font-weight:400;letter-spacing:-.01em}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero .sub{color:var(--ink-2);margin-top:14px;max-width:62ch;font-size:15.5px}
+.countdown{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.cd{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px 18px;min-width:104px}
+.cd .v{font:600 27px/1 var(--mono);color:var(--accent)}
+.cd .l{font:10px var(--mono);color:var(--ink-3);letter-spacing:.09em;text-transform:uppercase;margin-top:6px}
+.cd.next{border-color:var(--accent-dim)}
+
+section{margin-bottom:66px;scroll-margin-top:24px}
+h2{
+  font-family:var(--serif);font-size:27px;font-weight:400;margin-bottom:6px;
+  display:flex;align-items:baseline;gap:12px;
+}
+h2 .num{font:11px var(--mono);color:var(--accent);letter-spacing:.1em}
+h2+.lede{color:var(--ink-2);margin-bottom:24px;max-width:74ch;font-size:15px}
+h3{font-size:15px;font-weight:600;margin:26px 0 10px;color:var(--ink);letter-spacing:.01em}
+
+/* ---- confidence badges ---- */
+.badge{
+  display:inline-block;font:10px var(--mono);letter-spacing:.07em;
+  padding:2px 7px;border-radius:3px;vertical-align:middle;text-transform:uppercase;
+}
+.b-a{background:rgba(127,168,127,.16);color:var(--good);border:1px solid rgba(127,168,127,.3)}
+.b-b{background:rgba(212,162,78,.14);color:var(--warn);border:1px solid rgba(212,162,78,.3)}
+.b-c{background:rgba(201,106,94,.14);color:var(--bad);border:1px solid rgba(201,106,94,.3)}
+.b-x{background:var(--bg-3);color:var(--ink-3);border:1px solid var(--line);text-decoration:line-through}
+
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:11px var(--mono);color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+td code,p code,li code{font:12.5px var(--mono);background:var(--bg-3);padding:1.5px 5px;border-radius:3px;color:var(--accent)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:19px 21px}
+.card h4{font-size:14.5px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card p{font-size:14px;color:var(--ink-2)}
+.card ul{margin:9px 0 0 17px;font-size:14px;color:var(--ink-2)}
+.card li{margin-bottom:5px}
+
+.callout{border-left:3px solid var(--accent);background:var(--bg-2);padding:15px 19px;border-radius:0 7px 7px 0;margin:18px 0;font-size:14.5px}
+.callout.warn{border-left-color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)}
+.callout strong{color:var(--ink)}
+
+pre{background:#0d0b09;border:1px solid var(--line);border-radius:7px;padding:15px 17px;overflow-x:auto;font:12.5px/1.6 var(--mono);margin:12px 0;color:#d8d0c6}
+pre .c{color:var(--ink-3)}
+pre .k{color:var(--accent)}
+pre .s{color:var(--good)}
+
+/* ---- drills ---- */
+.q{border:1px solid var(--line);border-radius:8px;margin-bottom:13px;overflow:hidden;background:var(--bg-2)}
+.q>.stem{padding:15px 18px;font-size:14.5px}
+.q .tag{font:10px var(--mono);color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;display:block}
+.q .opts{margin:10px 0 0 18px;font-size:14px;color:var(--ink-2)}
+.q button{
+  background:none;border:0;border-top:1px solid var(--line);width:100%;text-align:left;
+  padding:10px 18px;color:var(--accent);font:12px var(--mono);cursor:pointer;letter-spacing:.05em;
+}
+.q button:hover{background:var(--bg-3)}
+.q .ans{display:none;padding:15px 18px;border-top:1px solid var(--line);background:#0f0d0b;font-size:14px;color:var(--ink-2)}
+.q .ans.on{display:block}
+.q .ans b{color:var(--good)}
+.q .ans .why{margin-top:8px;display:block;color:var(--ink-2)}
+
+/* ---- plan ---- */
+.day{border:1px solid var(--line);border-radius:9px;margin-bottom:14px;background:var(--bg-2);overflow:hidden}
+.day .hd{display:flex;justify-content:space-between;align-items:center;padding:13px 19px;background:var(--bg-3);gap:12px;flex-wrap:wrap}
+.day .hd h4{font-size:15px}
+.day .hd .meta{font:11px var(--mono);color:var(--ink-3)}
+.day .bd{padding:15px 19px}
+.task{display:flex;gap:11px;align-items:flex-start;padding:7px 0;font-size:14px;border-bottom:1px solid rgba(46,40,35,.55)}
+.task:last-child{border-bottom:0}
+.task input{margin-top:4px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.task label{cursor:pointer;color:var(--ink-2)}
+.task input:checked+label{color:var(--ink-3);text-decoration:line-through}
+.task .t{font:10px var(--mono);color:var(--ink-3);margin-left:auto;flex-shrink:0;padding-left:10px}
+
+.bar{height:5px;background:var(--bg-3);border-radius:3px;overflow:hidden;margin-top:9px}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+
+footer{border-top:1px solid var(--line);padding-top:24px;color:var(--ink-3);font-size:13px}
+footer a{color:var(--ink-2)}
+.srcs{font-size:13px;color:var(--ink-2)}
+.srcs li{margin-bottom:7px;margin-left:18px}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  nav a{display:inline-block;margin-right:4px}
+  main{padding:28px 20px 80px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div class="brand">Prodapt <em>Prep HQ</em></div>
+  <div class="date">Drive · 5–6 Aug 2026</div>
+  <a href="#reality"><span class="n">01</span>Reality check</a>
+  <a href="#format"><span class="n">02</span>What's on the paper</a>
+  <a href="#plan"><span class="n">03</span>4-day plan</a>
+  <hr>
+  <a href="#di"><span class="n">04</span>Data Interpretation</a>
+  <a href="#lr"><span class="n">05</span>Logical &amp; Critical</a>
+  <a href="#quant"><span class="n">06</span>Quantitative</a>
+  <a href="#verbal"><span class="n">07</span>Verbal (GRE)</a>
+  <a href="#mcq"><span class="n">08</span>Tech MCQ</a>
+  <a href="#coding"><span class="n">09</span>Coding</a>
+  <hr>
+  <a href="#drill"><span class="n">10</span>Drill deck</a>
+  <a href="#mock"><span class="n">11</span>Mock protocol</a>
+  <a href="#unknowns"><span class="n">12</span>Open unknowns</a>
+  <a href="#sources"><span class="n">13</span>Sources</a>
+</nav>
+
+<main>
+
+<div class="hero">
+  <h1>Prodapt is not a<br><em>DSA test.</em></h1>
+  <p class="sub">Five sections. Coding is one of them, and two of its three problems need no algorithm at all.
+  Roughly four-fifths of the marks sit in data interpretation, reasoning, quant and GRE-format verbal.
+  This page is built from Prodapt's own 25-page sample paper, not from guesswork.</p>
+  <div class="countdown">
+    <div class="cd next"><div class="v" id="cd-prodapt">—</div><div class="l">Days · Prodapt</div></div>
+    <div class="cd"><div class="v" id="cd-bp">—</div><div class="l">Days · BluePond</div></div>
+    <div class="cd"><div class="v" id="cd-tcs">—</div><div class="l">Days · TCS</div></div>
+    <div class="cd"><div class="v" id="cd-done">0%</div><div class="l">Plan complete</div></div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<section id="reality">
+  <h2><span class="num">01</span> Reality check</h2>
+  <p class="lede">Read this before touching anything else. It is the reason the plan looks the way it does.</p>
+
+  <div class="callout bad">
+    <strong>The prep that was in progress does not map to this paper.</strong>
+    Trees, BFS, level-order traversal and binary search — the last two days of work — appear
+    <em>nowhere</em> in Prodapt's sample paper. Not one question. That work is not wasted for
+    Viasat in October, but it earns approximately zero marks here.
+  </div>
+
+  <div class="callout warn">
+    <strong>The one algorithmic gap that does matter is DP.</strong>
+    Problem 2 of the coding section is a string-partition dynamic program.
+    <code>Placement Training/DSA/</code> currently has zero DP files. That is the single
+    highest-value algorithm to build before the 5th — and it is worth exactly one problem,
+    so it does not get the whole plan either.
+  </div>
+
+  <div class="callout">
+    <strong>The overlap with TCS is the real argument.</strong>
+    TCS (16 Aug) is your stated primary goal and is also quant / reasoning / verbal heavy.
+    Every hour spent on DI, data sufficiency, critical reasoning and percentages counts twice.
+    Prodapt prep <em>is</em> TCS prep. That is not a rationalisation — it is why this ordering wins.
+  </div>
+
+  <h3>Where the marks actually live</h3>
+  <table>
+    <tr><th>Section</th><th>Nature</th><th>Current coverage</th><th>Priority</th></tr>
+    <tr><td>Data Interpretation</td><td>Tables, pie charts in degrees, caselets, Venn</td><td style="color:var(--bad)">None</td><td><b>1</b></td></tr>
+    <tr><td>Logical &amp; Critical Thinking</td><td>Puzzles, data sufficiency, GMAT-style CR</td><td style="color:var(--bad)">None</td><td><b>1</b></td></tr>
+    <tr><td>Quantitative Aptitude</td><td>SI/CI, %, profit-loss, probability</td><td style="color:var(--warn)">Books only, undrilled</td><td><b>2</b></td></tr>
+    <tr><td>Verbal Reasoning</td><td>Literal GRE formats, no partial credit</td><td style="color:var(--bad)">None</td><td><b>2</b></td></tr>
+    <tr><td>Coding</td><td>2 trivial + 1 hard DP</td><td style="color:var(--good)">Strong on easy, no DP</td><td><b>3</b></td></tr>
+    <tr><td>Tech MCQ</td><td>Java, SQL, Angular, Mockito, logic gates</td><td style="color:var(--warn)">Partial (SQL ok)</td><td><b>3</b></td></tr>
+  </table>
+</section>
+
+<!-- ============================================ -->
+<section id="format">
+  <h2><span class="num">02</span> What's on the paper</h2>
+  <p class="lede">Everything here is read directly out of
+  <code>Prodapt Sample Campus Assessment Paper.pdf</code> (25 pages, supplied by Prodapt).
+  Confidence is marked on every claim.</p>
+
+  <h3>Process <span class="badge b-a">confirmed</span></h3>
+  <p style="color:var(--ink-2);font-size:14.5px">Written assessment → technical interview → HR round.
+  Eligibility: UG, cumulative GPA ≥ 60%, must commit to a 2–4 month internship (obligatory for
+  Dream / Super Dream applicants). Source: Prodapt's own career portal FAQ.</p>
+
+  <h3>Sections, in the paper's own order <span class="badge b-a">confirmed</span></h3>
+  <table>
+    <tr><th>#</th><th>Section</th><th>What appears in the sample</th></tr>
+    <tr><td>1</td><td><b>Data Interpretation</b></td><td>Multi-currency cost table; machine-scheduling optimisation; constraint puzzle; ratio caselet; Venn sets; <b>pie chart with values in degrees</b></td></tr>
+    <tr><td>2</td><td><b>Logical Reasoning &amp; Critical Thinking</b></td><td>Season-scheduling constraints; circular seating; statement–conclusion; <b>GMAT-style assumption / weaken / must-be-true / explain-discrepancy</b>; number &amp; letter series; coding-decoding; <b>data sufficiency</b></td></tr>
+    <tr><td>3</td><td><b>Problem Solving — Coding &amp; MCQ</b></td><td>Java OOP output; SQL primary key &amp; joins; Angular <code>*ngIf</code> + pipes; Mockito <code>@InjectMocks</code>; NAND / XOR truth tables; <b>3 coding problems</b></td></tr>
+    <tr><td>4</td><td><b>Quantitative Aptitude</b></td><td>Weighted-average interest; CI over 2 yr 4 mo; income–expenditure–savings %; profit as % of SP; probability; syllogism; averages</td></tr>
+    <tr><td>5</td><td><b>Verbal Reasoning</b></td><td>Verbatim <b>GRE</b> formats — RC single &amp; multi-answer, Select-in-Passage, Text Completion, Sentence Equivalence</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <strong>Timing, question count and negative marking are unknown.</strong>
+    Prodapt's official FAQ does not publish them, and the one site that states numbers
+    ("75 questions / 50 minutes") describes a paper that does not match the sample at all —
+    it lists para-jumbles, which appear nowhere, and cannot accommodate three coding problems.
+    That source is rejected. <b>Assume marking is unknown; do not blind-guess until you can
+    read the instructions on the day.</b>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="plan">
+  <h2><span class="num">03</span> The four-day plan</h2>
+  <p class="lede">Tonight is short. Days 2–4 are full. The mock runs on the 4th so there is a day to fix what it exposes.
+  Checkboxes persist in this browser.</p>
+  <div class="bar"><i id="progress"></i></div>
+
+  <div class="day">
+    <div class="hd"><h4>Tonight · 1 Aug</h4><span class="meta">~90 min · bank the free marks</span></div>
+    <div class="bd" data-day="d0">
+      <div class="task"><input type="checkbox" id="t01"><label for="t01">Solve <b>winner</b> from the real paper — loop + score map, return Erica/Bob/Tie</label><span class="t">15m</span></div>
+      <div class="task"><input type="checkbox" id="t02"><label for="t02">Solve <b>removeVowels</b> — <b>trailing run only</b>, walk from the end and stop at the first consonant</label><span class="t">15m</span></div>
+      <div class="task"><input type="checkbox" id="t03"><label for="t03">Cold-time one DI set (the pie chart in <b>degrees</b>) — no help, note the clock</label><span class="t">20m</span></div>
+      <div class="task"><input type="checkbox" id="t04"><label for="t04">Cold-time the 8 quant questions in the sample — record raw score honestly</label><span class="t">25m</span></div>
+      <div class="task"><input type="checkbox" id="t05"><label for="t05">Write both baselines down. They decide how days 2–4 get weighted.</label><span class="t">5m</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>Day 1 · 2 Aug</h4><span class="meta">DI + Quant — the biggest gap</span></div>
+    <div class="bd" data-day="d1">
+      <div class="task"><input type="checkbox" id="t11"><label for="t11">DI drills: pie charts in degrees, multi-table costing, ratio caselets — 25 questions timed</label><span class="t">75m</span></div>
+      <div class="task"><input type="checkbox" id="t12"><label for="t12">Quant block A: percentages, income–expenditure–savings, profit as % of SP</label><span class="t">60m</span></div>
+      <div class="task"><input type="checkbox" id="t13"><label for="t13">Quant block B: SI/CI including <b>fractional periods</b> (2 yr 4 mo)</label><span class="t">45m</span></div>
+      <div class="task"><input type="checkbox" id="t14"><label for="t14">Venn: 2-set and 3-set formulas + the "neither" case</label><span class="t">30m</span></div>
+      <div class="task"><input type="checkbox" id="t15"><label for="t15">Source from <code>Placement material/</code>: FACE Aptitude primer, Durgasoft CRT, 500 most-asked apti</label><span class="t">—</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>Day 2 · 3 Aug</h4><span class="meta">Reasoning + Verbal — the unfamiliar formats</span></div>
+    <div class="bd" data-day="d2">
+      <div class="task"><input type="checkbox" id="t21"><label for="t21"><b>Data sufficiency</b> — learn the 5-option grid cold, then 15 questions</label><span class="t">50m</span></div>
+      <div class="task"><input type="checkbox" id="t22"><label for="t22"><b>Critical reasoning</b> — assumption / weaken / must-be-true / explain-discrepancy, 4 of each</label><span class="t">70m</span></div>
+      <div class="task"><input type="checkbox" id="t23"><label for="t23">Puzzles: circular seating + constraint scheduling, 6 sets</label><span class="t">50m</span></div>
+      <div class="task"><input type="checkbox" id="t24"><label for="t24">Coding-decoding: derive rules from examples (see the <code>@E4</code> worked case below)</label><span class="t">30m</span></div>
+      <div class="task"><input type="checkbox" id="t25"><label for="t25">GRE Text Completion + Sentence Equivalence — 20 questions, <b>no partial credit</b></label><span class="t">45m</span></div>
+      <div class="task"><input type="checkbox" id="t26"><label for="t26">Word Power Made Easy — 2 chapters (it's in <code>Placement material/</code>)</label><span class="t">30m</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>Day 3 · 4 Aug</h4><span class="meta">Coding + MCQ, then the full mock</span></div>
+    <div class="bd" data-day="d3">
+      <div class="task"><input type="checkbox" id="t31"><label for="t31">Build <b>calculateMinCost</b> — partition DP, the one hard problem</label><span class="t">90m</span></div>
+      <div class="task"><input type="checkbox" id="t32"><label for="t32">Tech MCQ: Java static vs instance, widening, SQL joins vs correlated subquery</label><span class="t">40m</span></div>
+      <div class="task"><input type="checkbox" id="t33"><label for="t33">Tech MCQ: NAND/XOR truth tables, Mockito <code>@Mock</code> vs <code>@InjectMocks</code>, Angular pipes</label><span class="t">30m</span></div>
+      <div class="task"><input type="checkbox" id="t34"><label for="t34"><b>Full mock under exam conditions</b> — phone away, single sitting, all five sections</label><span class="t">2h</span></div>
+      <div class="task"><input type="checkbox" id="t35"><label for="t35">Mark it. Write down every miss and its <em>cause</em>, not just the topic.</label><span class="t">30m</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>Drive day · 5–6 Aug</h4><span class="meta">triage only</span></div>
+    <div class="bd" data-day="d4">
+      <div class="task"><input type="checkbox" id="t41"><label for="t41">Morning: re-drill <em>only</em> the mock misses. Nothing new.</label><span class="t">45m</span></div>
+      <div class="task"><input type="checkbox" id="t42"><label for="t42">Read the instruction screen properly — marking scheme, section locking, language options</label><span class="t">—</span></div>
+      <div class="task"><input type="checkbox" id="t43"><label for="t43">Coding order: <b>winner → removeVowels → the hard one.</b> Bank the certain marks first.</label><span class="t">—</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="di">
+  <h2><span class="num">04</span> Data Interpretation</h2>
+  <p class="lede">Highest-priority section and currently at zero coverage. The sample's DI is
+  arithmetic-heavy rather than clever — the marks are lost to setup errors and clock, not to difficulty.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Pie charts in degrees <span class="badge b-a">in paper</span></h4>
+      <p>The sample gives sector values in <b>degrees</b>, total marks 900. Every question needs
+      <code>marks = degrees × 900 / 360</code> first — i.e. <code>× 2.5</code>.</p>
+      <ul>
+        <li>Convert once, write all five values in the margin, then answer.</li>
+        <li>Ratio questions ("A+B less than C+D by what %") need no conversion at all — degrees are proportional.</li>
+        <li><b>Prove it:</b> a sector of 55° with total 900 — what are the marks?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Multi-currency costing <span class="badge b-a">in paper</span></h4>
+      <p>Parts priced in local currencies, a USD exchange table, plus a flat INR 20,000 per car.</p>
+      <ul>
+        <li>Normalise <em>everything</em> to one currency before comparing anything.</li>
+        <li>The flat add-on is a red herring for "which country is cheapest" — it's constant.</li>
+        <li><b>Prove it:</b> why does the INR 20,000 not affect the cheapest-country answer?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Ratio caselets <span class="badge b-a">in paper</span></h4>
+      <p>1650 students, M:F = 86:79, five departments, facts given as chained dependencies.</p>
+      <ul>
+        <li>Draw the 5×3 grid (dept × M / F / total) and fill only what's stated.</li>
+        <li>Work the <em>most-constrained</em> cell first, never left-to-right.</li>
+        <li><b>Prove it:</b> 86:79 of 1650 — how many males? (parts sum to 165, so 1 part = 10)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Machine scheduling <span class="badge b-a">in paper</span></h4>
+      <p>3 machines × 3 products, minutes per unit, 720 min/machine/day.</p>
+      <ul>
+        <li>"Maximum units" = assign each machine the product it makes <em>fastest</em>.</li>
+        <li>Worked answer in the paper is 212 = 72 + 80 + 60.</li>
+        <li><b>Prove it:</b> why does maximising count mean minimising per-unit time?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Venn / set logic <span class="badge b-a">in paper</span></h4>
+      <p>150 students, 90 football, 60 basketball, 30 both.</p>
+      <ul>
+        <li>Only-A = A − both. Neither = Total − (A + B − both).</li>
+        <li>The trap: "like Football" includes the 30, "only Football" doesn't.</li>
+        <li><b>Prove it:</b> how many like neither? (150 − 120 = 30)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Clock discipline <span class="badge b-b">tactic</span></h4>
+      <p>DI sets share a stem across 3–5 questions — the setup cost is paid once.</p>
+      <ul>
+        <li>Never abandon a set after doing the setup work; that's the sunk cost you want.</li>
+        <li>Do skip a set whose <em>stem</em> looks heavy before you've invested in it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="lr">
+  <h2><span class="num">05</span> Logical Reasoning &amp; Critical Thinking</h2>
+  <p class="lede">The widest section, and the one with two formats you have not met:
+  <b>data sufficiency</b> and <b>GMAT-style critical reasoning</b>. Both are learnable in an evening
+  because they're rule-driven.</p>
+
+  <h3>Data sufficiency — memorise the grid</h3>
+  <p style="color:var(--ink-2);font-size:14.5px">You are not asked to answer the question. You are asked
+  whether it <em>can</em> be answered. Solving it fully is the classic time sink.</p>
+  <table>
+    <tr><th>Option</th><th>Means</th></tr>
+    <tr><td>A</td><td>I alone sufficient, II alone not</td></tr>
+    <tr><td>B</td><td>II alone sufficient, I alone not</td></tr>
+    <tr><td>C</td><td>Either alone is sufficient</td></tr>
+    <tr><td>D</td><td>Both together still not sufficient</td></tr>
+    <tr><td>E</td><td>Both together needed (neither alone)</td></tr>
+  </table>
+  <div class="callout">
+    <strong>Method:</strong> test statement I alone → eliminate. Test II alone → eliminate.
+    Only then consider them together. Never carry knowledge from I into your test of II —
+    that single leak causes most wrong answers in this format.
+  </div>
+
+  <h3>Critical reasoning — four question types, four different jobs</h3>
+  <div class="grid2">
+    <div class="card"><h4>Assumption</h4><p>An unstated fact the argument <em>needs</em> to be true. Negate the option — if the argument collapses, that's the assumption.</p></div>
+    <div class="card"><h4>Weaken</h4><p>Attack the link between evidence and conclusion, not the evidence itself. The right answer often supplies an alternative cause.</p></div>
+    <div class="card"><h4>Must be true</h4><p>Provable <em>only</em> from the stated text. Anything requiring outside knowledge or a plausible extra step is wrong, however reasonable.</p></div>
+    <div class="card"><h4>Explain the discrepancy</h4><p>Two facts that seem to conflict. The answer is a third fact making both true at once — it does not pick a side.</p></div>
+  </div>
+
+  <h3>Coding-decoding — the sample's actual rule</h3>
+  <p style="color:var(--ink-2);font-size:14.5px">Given <code>'given time simple plan' → '@E4 &amp;N4 %N5 #E6'</code>,
+  the rule decomposes into three independent parts. Derive each separately rather than trying to see the whole code at once:</p>
+  <pre><span class="c"># given(5) time(4) simple(6) plan(4)  ->  @E4  &amp;N4  %N5  #E6</span>
+symbol  ->  position of the word in the sentence  (@ = 1st, &amp; = 2nd, % = 3rd, # = 4th)
+letter  ->  LAST letter of the word               (giveN, timE, simplE, plaN)
+digit   ->  LENGTH of the word
+
+<span class="c"># check against row 3: 'sick point good turn' -> '#K4 %D4 @N4 &amp;T5'</span>
+<span class="c"># turn is 4th word... but carries &amp; (2nd). So the CODES ARE SHUFFLED,</span>
+<span class="c"># not aligned to the word order. Match each code to its word by</span>
+<span class="c"># last-letter + length, then read the symbol off. That is the real trap.</span></pre>
+</section>
+
+<!-- ============================================ -->
+<section id="quant">
+  <h2><span class="num">06</span> Quantitative Aptitude</h2>
+  <p class="lede">Eight questions in the sample, all standard placement quant. Three carry a specific trap worth pre-loading.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>CI over 2 years 4 months <span class="badge b-a">in paper</span></h4>
+      <p>Fractional periods break naive compounding. Compound for the whole years, then apply
+      <em>simple</em> interest on the resulting amount for the leftover fraction.</p>
+      <pre>A = P(1+r)² × (1 + r×(4/12))</pre>
+    </div>
+    <div class="card">
+      <h4>Savings % change <span class="badge b-a">in paper</span></h4>
+      <p>Spends 60% → saves 40%. Income +21%, expenditure +5%. Take income = 100 and just compute:
+      new savings = 121 − 63 = 58, from 40. That's +45%.</p>
+      <p style="color:var(--ink-3);margin-top:6px">Assume 100. Never do this one symbolically.</p>
+    </div>
+    <div class="card">
+      <h4>Profit as % of SP <span class="badge b-a">in paper</span></h4>
+      <p>Profit = 320% of cost → CP 100, profit 320, SP 420. Cost rises 25% → CP 125, SP fixed at 420,
+      profit 295. As % of SP: 295/420 ≈ <b>70%</b>.</p>
+      <p style="color:var(--ink-3);margin-top:6px">Trap: the question switches the base from CP to SP mid-way.</p>
+    </div>
+    <div class="card">
+      <h4>Weighted average interest <span class="badge b-a">in paper</span></h4>
+      <p>Total interest from known parts, subtract from overall, divide by the remaining principal.
+      Find the leftover principal <em>first</em> — 20000 − 4000 − 8000 − 2800.</p>
+    </div>
+    <div class="card">
+      <h4>Averages logic <span class="badge b-a">in paper</span></h4>
+      <p>"Average of 20 numbers is zero — at most how many exceed zero?" Answer 19: one sufficiently
+      negative number balances the rest. Tests reasoning, not computation.</p>
+    </div>
+    <div class="card">
+      <h4>Syllogism <span class="badge b-a">in paper</span></h4>
+      <p>No A are B; no B are C. Nothing follows about A–C. "Some grapefruits are not tangerine"
+      does follow from "no tangerine is grapefruit". Draw the circles — don't reason verbally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="verbal">
+  <h2><span class="num">07</span> Verbal Reasoning — literally GRE</h2>
+  <p class="lede">The sample paper's verbal pages are headed <em>"Sample GRE® General Test Questions"</em>.
+  This is a higher bar than typical placement verbal, and the scoring rule makes it harsher still.</p>
+
+  <div class="callout bad">
+    <strong>No partial credit.</strong> Text Completion with three blanks needs all three correct
+    for any marks. Sentence Equivalence needs both choices. Getting two of three earns exactly
+    the same as getting zero of three.
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Text Completion</h4>
+      <p>1–3 blanks, three choices each. Find the sentence's <b>directional pivot</b> first —
+      <em>although, nonetheless, because, yet</em> — then predict your own word before reading options.</p>
+      <p style="color:var(--ink-3);margin-top:6px">Sample answer set: <em>overshadowed / obscure / superficiality of our theories</em>.</p>
+    </div>
+    <div class="card">
+      <h4>Sentence Equivalence</h4>
+      <p>Six options, pick <b>two</b> producing sentences with the same meaning. Two options are
+      near-synonyms of each other — find that pair. A word that fits but has no partner is a trap.</p>
+    </div>
+    <div class="card">
+      <h4>RC — select one or more</h4>
+      <p>Each of three statements is judged independently; all correct ones must be selected.
+      Verify each against the passage separately.</p>
+    </div>
+    <div class="card">
+      <h4>Select-in-Passage</h4>
+      <p>Click the sentence doing a specific job. Match the <em>function</em> asked for
+      ("distinguishes two ways") rather than topic keywords.</p>
+    </div>
+  </div>
+  <p style="color:var(--ink-2);font-size:14.5px;margin-top:16px">Vocabulary is the binding constraint here.
+  <code>Placement material/Norman Lewis - Word Power Made Easy</code> is already in the repo — two chapters
+  a day between now and the 4th is the realistic move.</p>
+</section>
+
+<!-- ============================================ -->
+<section id="mcq">
+  <h2><span class="num">08</span> Technical MCQ</h2>
+  <p class="lede">Deliberately broad rather than deep — Java, SQL, Angular, unit-test mocking and digital logic
+  all appear. Each is one or two questions, so breadth beats depth.</p>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Java · from the paper</span>
+      <pre>public class A { int add(int i, int j){ return i+j; } }
+public class B extends A{
+  public static void main(String argv[]){
+    short s = 9;
+    System.out.println(add(s,6));
+  }
+}</pre>
+      <div class="opts">A) error on line 2 &nbsp; B) non-static method from static context &nbsp; C) type mismatch &nbsp; D) 15</div>
+    </div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>B</b> — compilation fails: <code>add</code> is an instance method called from <code>static main</code> with no object.
+      <span class="why">The <code>short → int</code> widening is legal and is the distractor. Inheritance doesn't help — <code>main</code> is static, so there's no <code>this</code>.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">SQL · from the paper</span>
+      Which statement about primary keys is <b>not</b> correct?
+      <div class="opts">A) Uniquely identifies each record &nbsp; B) Must contain unique values &nbsp; C) Can contain NULL, but undesirable for performance &nbsp; D) A table can have only one</div>
+    </div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>C</b> — a primary key can <em>never</em> contain NULL. It's a correctness constraint, not a performance preference.
+      <span class="why">The option is phrased to sound like a nuanced tradeoff. That phrasing is the trap.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Mockito · from the paper</span>
+      Which snippet correctly mocks <code>CalculatorManager</code> inside <code>Calculator</code>?
+      <div class="opts">A) <code>Calculator calculator = new Calculator();</code> with <code>@Mock</code> on the manager<br>
+      B) <code>@InjectMocks Calculator calculator</code> with <code>@Mock</code> on the manager</div>
+    </div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>B</b> — <code>@InjectMocks</code> is what pushes the mock into the object under test.
+      <span class="why">In A the mock is created but never injected, so <code>Calculator</code> still builds its own real <code>CalculatorManager</code> internally and the stubbing has no effect.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Digital logic · from the paper</span>
+      2-input XOR, A = 1 and B = 1. Output?
+      <div class="opts">A) 0 &nbsp; B) 1 &nbsp; C) −1 &nbsp; D) None</div>
+    </div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>A) 0</b> — XOR is 1 only when inputs <em>differ</em>.
+      <span class="why">Also memorise NAND: output 0 only when both inputs are 1; 1 in all three other rows.</span></div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="coding">
+  <h2><span class="num">09</span> Coding — three problems, one of them hard</h2>
+  <p class="lede">Order of attack is the whole strategy here. Two problems are near-free;
+  one is a genuine dynamic program. Bank the free ones before touching the third.</p>
+
+  <div class="card" style="margin-bottom:14px">
+    <h4>1 · <code>winner(erica, bob)</code> <span class="badge b-a">trivial</span></h4>
+    <p>Each character is E / M / H with points by difficulty. Sum both, compare, return
+    <code>"Erica"</code>, <code>"Bob"</code> or <code>"Tie"</code>. <code>n &lt; 10</code>.</p>
+    <pre><span class="c"># the only real decision is the points map — the paper's</span>
+<span class="c"># scoring table is an image, so READ IT ON THE DAY.</span>
+<span class="c"># E/M/H = 1/3/5 is the common convention; do not assume it.</span>
+pts = {"E":1, "M":3, "H":5}
+e = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> erica)
+b = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> bob)
+<span class="k">return</span> <span class="s">"Erica"</span> <span class="k">if</span> e&gt;b <span class="k">else</span> <span class="s">"Bob"</span> <span class="k">if</span> b&gt;e <span class="k">else</span> <span class="s">"Tie"</span></pre>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h4>3 · <code>removeVowels(N, S)</code> <span class="badge b-a">trivial + 1 trap</span></h4>
+    <p>Remove vowels <b>occurring at the end</b> of S. Both cases count. <code>N ≤ 1e5</code>.</p>
+    <div class="callout warn" style="margin:10px 0">
+      <strong>The trap is the whole problem.</strong> It is <em>not</em> "remove all vowels".
+      It is "strip the trailing run of vowels". <code>"education"</code> → <code>"education"</code>
+      (ends in <code>n</code>, nothing to strip), not <code>"dctn"</code>.
+    </div>
+    <pre>i = len(S)
+<span class="k">while</span> i &gt; 0 <span class="k">and</span> S[i-1] <span class="k">in</span> <span class="s">"aeiouAEIOU"</span>:
+    i -= 1
+<span class="k">return</span> S[:i]
+
+<span class="c"># "beautiful" -> "beautiful"   (ends in l)</span>
+<span class="c"># "India"     -> "Ind"         (a, i, ... wait: 'a' then 'i' -&gt; strips "ia")</span>
+<span class="c"># guaranteed non-empty output, so no empty-string guard needed</span></pre>
+  </div>
+
+  <div class="card">
+    <h4>2 · <code>calculateMinCost(N, K, S)</code> <span class="badge b-c">hard — partition DP</span></h4>
+    <p>Split S into exactly K contiguous parts. A part's cost is the number of ways to choose
+    two equal substrings inside it (overlaps allowed). Minimise the total.
+    <code>N ≤ 200</code>, <code>K ≤ 10</code>.</p>
+
+    <p style="margin-top:10px">Two independent pieces — build and test them separately:</p>
+    <pre><span class="c"># STEP 1 — cost[i][j] for every substring S[i..j], O(N^2) of them.</span>
+<span class="c"># For a part, group its substrings by content; a group of size m</span>
+<span class="c"># contributes C(m,2) = m*(m-1)/2 pairs. Sum over all groups.</span>
+<span class="c"># N=200 means ~20k substrings per part — brute force is too slow if</span>
+<span class="c"># done naively per part; precompute with rolling hashes or by</span>
+<span class="c"># extending j one char at a time and maintaining counts.</span>
+
+<span class="c"># STEP 2 — the partition DP itself, the standard shape:</span>
+<span class="c">#   dp[k][i] = min cost to split the first i chars into k parts</span>
+<span class="c">#   dp[k][i] = min over j &lt; i of  dp[k-1][j] + cost[j][i-1]</span>
+<span class="c">#   dp[0][0] = 0, everything else starts at infinity</span>
+<span class="c">#   answer = dp[K][N]</span>
+<span class="c"># Complexity O(N^2 * K) = 200*200*10 = 400k. Comfortable.</span></pre>
+
+    <div class="callout" style="margin-top:12px">
+      <strong>Partial credit strategy.</strong> If step 1 defeats you, still submit the DP with a
+      brute-force cost function. It will pass the small cases and time out on the big ones —
+      which scores more than an empty function. <b>Never leave this blank.</b>
+    </div>
+    <p style="color:var(--ink-3);font-size:13.5px;margin-top:10px">Verify the given example before trusting your cost function:
+    the part <code>"aaaa"</code> must come out as <b>10</b> (6 single-char pairs + 3 "aa" pairs + 1 "aaa" pair).</p>
+  </div>
+
+  <div class="callout warn">
+    <strong>Confirm the language options on the day.</strong> The MCQs use Java, SQL and Angular,
+    so Java is certainly supported. Python is not evidenced either way in the sample paper —
+    check before you commit, since your solutions are all Python.
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="drill">
+  <h2><span class="num">10</span> Drill deck</h2>
+  <p class="lede">Questions in the paper's own style. Attempt before revealing — a revealed answer you didn't
+  try teaches nothing.</p>
+
+  <div class="q">
+    <div class="stem"><span class="tag">DI · pie chart in degrees</span>
+      A pie chart shows marks by subject with sector values in degrees; total marks are 900.
+      Mathematics occupies 100°. What are the Mathematics marks, and what would they be if the total were 3000?</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>250 marks; 833⅓ at a total of 3000.</b>
+      <span class="why">degrees × total / 360. The second part needs no re-derivation — scale by 3000/900.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Quant · savings</span>
+      A man spends 60% of his income. Income rises 21%, expenditure rises 5%. Percentage increase in savings?
+      <div class="opts">A) 60% &nbsp; B) 18% &nbsp; C) 40% &nbsp; D) 45%</div></div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>D) 45%</b>
+      <span class="why">Income 100 → 121. Expenditure 60 → 63. Savings 40 → 58. 18/40 = 45%. Assume 100; never do this symbolically.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Reasoning · data sufficiency</span>
+      How many children are between Priya and Rashmi in a row?<br>
+      <b>I.</b> Priya is fifteenth from the left. &nbsp; <b>II.</b> Rashmi is exactly in the middle with ten children to her right.</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>E — both statements are needed.</b>
+      <span class="why">II fixes the row length (21) and Rashmi's position (11th). I fixes Priya's. Neither alone locates both people. The paper confirms E.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Reasoning · averages</span>
+      If zero is the average of 20 numbers, at most how many can be greater than zero?</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>19</b>
+      <span class="why">A single sufficiently negative number can offset nineteen positives. Not all 20 — they couldn't sum to zero.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Reasoning · series</span>
+      2, 1, (1/2), (1/4), … &nbsp; and &nbsp; SCD, TEF, UGH, ____, WKL</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>1/8, and VIJ.</b>
+      <span class="why">First: halving each time. Second: each letter advances — S→T→U→V, C→E→G→I, D→F→H→J.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">CR · explain the discrepancy</span>
+      Median house value in Butlerville has fallen significantly, yet homes sold are at a seven-year low.
+      Which best explains this?</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>The local economy is struggling and unemployment has hit historic rates.</b>
+      <span class="why">A third fact making both observations true at once. "Value isn't the only determinant" restates the puzzle rather than resolving it — a very common wrong-answer shape.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Coding · trap check</span>
+      <code>removeVowels</code> on <code>"HELLO"</code>, <code>"aeiou"</code> is impossible (output guaranteed non-empty),
+      and on <code>"Programme"</code>?</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>"HELL" and "Programm".</b>
+      <span class="why">Only the trailing run goes. Interior vowels survive. If you returned "PRGRMM" you solved a different problem.</span></div>
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Venn</span>
+      150 students: 90 like football, 60 basketball, 30 both. How many like only basketball, and how many like neither?</div>
+    <button onclick="rev(this)">Reveal</button>
+    <div class="ans"><b>30 only basketball; 30 neither.</b>
+      <span class="why">60 − 30 = 30. Union = 90 + 60 − 30 = 120, so 150 − 120 = 30.</span></div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="mock">
+  <h2><span class="num">11</span> Mock protocol — 4 Aug</h2>
+  <p class="lede">The mock's only job is calibration. Run it wrong and it tells you nothing.</p>
+  <div class="grid2">
+    <div class="card"><h4>Conditions</h4><ul>
+      <li>Single unbroken sitting, phone in another room</li>
+      <li>No lookups, no restarts, no "I'll redo that one"</li>
+      <li>Same section order as the paper: DI → LR → Coding/MCQ → Quant → Verbal</li>
+      <li>Timing is unknown, so impose your own: 2 hours total, and note where you ran out</li>
+    </ul></div>
+    <div class="card"><h4>Marking</h4><ul>
+      <li>Score each section separately — the aggregate hides everything useful</li>
+      <li>For every miss write the <em>cause</em>: misread / didn't know / ran out of time / arithmetic</li>
+      <li>Those four causes need four different fixes; the topic label needs none</li>
+      <li>Day 4 drills only the misses. Nothing new enters after the mock.</li>
+    </ul></div>
+  </div>
+  <div class="callout">
+    <strong>The thing this actually tests.</strong> Every problem solved this week has been solved with
+    a tutor in the loop. The mock is the first unassisted measurement — and unassisted performance
+    is the only number the drive will read.
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section id="unknowns">
+  <h2><span class="num">12</span> Open unknowns</h2>
+  <p class="lede">Recorded so they aren't mistaken for settled facts. Resolve on the day, from the instruction screen.</p>
+  <table>
+    <tr><th>Unknown</th><th>Why it matters</th></tr>
+    <tr><td>Total duration &amp; per-section limits</td><td>Decides whether to skip the hard DP entirely</td></tr>
+    <tr><td>Question count per section</td><td>Sets the per-question clock</td></tr>
+    <tr><td><b>Negative marking</b></td><td>One weak source claims none — <b>unverified</b>. Governs whether to guess.</td></tr>
+    <tr><td>Section locking</td><td>Whether you can return to skipped questions</td></tr>
+    <tr><td>Coding language options</td><td>All your solutions are Python; only Java is evidenced</td></tr>
+    <tr><td>Points table for E/M/H in <code>winner</code></td><td>It's an image in the sample; read it on the day</td></tr>
+  </table>
+</section>
+
+<!-- ============================================ -->
+<section id="sources">
+  <h2><span class="num">13</span> Sources</h2>
+  <ul class="srcs">
+    <li><span class="badge b-a">confirmed</span> <b>Prodapt Sample Campus Assessment Paper.pdf</b> — 25 pages, supplied by Prodapt. Primary source for every section claim above.</li>
+    <li><span class="badge b-a">confirmed</span> <a href="https://career-portal.prodapt.com/faqs/">career-portal.prodapt.com/faqs</a> — official: three rounds, GPA ≥ 60%, 2–4 month internship commitment.</li>
+    <li><span class="badge b-c">weak</span> <a href="https://www.glassdoor.co.in/Interview/Prodapt-Solutions-Interview-Questions-E518979.htm">Glassdoor (209 entries)</a> — 2.8/5 difficulty, 68% positive. Mostly lateral/experienced hires, so useful for interview rounds only, not the campus OA.</li>
+    <li><span class="badge b-x">rejected</span> <a href="https://freshers.jobs/prodapt-recruitment/">freshers.jobs</a> — claims "75 questions / 50 minutes" with para-jumbles. Contradicts the official sample paper outright (verbal is GRE-format; three coding problems can't fit). Reads as recycled generic content.</li>
+    <li><span class="badge b-x">rejected</span> Assorted "Prodapt placement paper" aggregators — undated, no provenance.</li>
+  </ul>
+  <p style="color:var(--ink-3);font-size:13.5px;margin-top:14px">Full working notes: <code>Companies/Prodapt/research.txt</code></p>
+</section>
+
+<footer>
+  Built 1 Aug 2026 from Prodapt's own sample paper · S Sai Kumar (126156127)<br>
+  Next: BluePond.AI 9 Aug · TCS 16 Aug · Viasat OA October
+</footer>
+
+</main>
+</div>
+
+<script>
+// ---- countdowns ----
+(function(){
+  var today = new Date(2026,7,1);
+  function days(y,m,d){ return Math.max(0, Math.round((new Date(y,m,d)-today)/864e5)); }
+  document.getElementById('cd-prodapt').textContent = days(2026,7,5);
+  document.getElementById('cd-bp').textContent      = days(2026,7,9);
+  document.getElementById('cd-tcs').textContent     = days(2026,7,16);
+})();
+
+// ---- reveal ----
+function rev(btn){
+  var a = btn.nextElementSibling;
+  a.classList.toggle('on');
+  btn.textContent = a.classList.contains('on') ? 'Hide' : 'Reveal';
+}
+
+// ---- persistent checkboxes ----
+(function(){
+  var KEY='prodapt_prep_v1';
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ saved={}; }
+  var boxes=document.querySelectorAll('.task input[type=checkbox]');
+
+  function paint(){
+    var done=0;
+    boxes.forEach(function(b){ if(b.checked) done++; });
+    var pct = boxes.length ? Math.round(done*100/boxes.length) : 0;
+    document.getElementById('progress').style.width = pct+'%';
+    document.getElementById('cd-done').textContent = pct+'%';
+  }
+
+  boxes.forEach(function(b){
+    if(saved[b.id]) b.checked=true;
+    b.addEventListener('change',function(){
+      saved[b.id]=b.checked;
+      try{ localStorage.setItem(KEY,JSON.stringify(saved)); }catch(e){}
+      paint();
+    });
+  });
+  paint();
+})();
+
+// ---- nav highlight ----
+(function(){
+  var links={}, secs=document.querySelectorAll('section');
+  document.querySelectorAll('nav a').forEach(function(a){ links[a.getAttribute('href').slice(1)]=a; });
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var a=links[e.target.id]; if(!a) return;
+      if(e.isIntersecting){
+        Object.keys(links).forEach(function(k){ links[k].style.borderLeftColor='transparent'; links[k].style.color=''; });
+        a.style.borderLeftColor='var(--accent)'; a.style.color='var(--ink)';
+      }
+    });
+  },{rootMargin:'-10% 0px -80% 0px'});
+  secs.forEach(function(s){ io.observe(s); });
+})();
+</script>
+</body>
+</html>

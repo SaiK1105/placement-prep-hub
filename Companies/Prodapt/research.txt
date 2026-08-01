@@ -1,0 +1,204 @@
+PRODAPT — OA / CAMPUS DRIVE RESEARCH
+Compiled 2026-08-01. Drive: 5-6 August 2026 (on-campus).
+Candidate: S Sai Kumar (126156127)
+
+=====================================================================
+CONFIDENCE LEGEND
+  [A] CONFIRMED — from Prodapt's own material
+  [B] LIKELY    — official but incomplete, or corroborated by 2+ sources
+  [C] WEAK      — single low-trust source, treat as unverified
+  [X] REJECTED  — found and deliberately discarded, with reason
+=====================================================================
+
+--------------------------------------------------------------------
+1. PROCESS SHAPE
+--------------------------------------------------------------------
+[A] Three stages: written assessment -> technical interview -> HR round.
+    Source: https://career-portal.prodapt.com/faqs/ (official career portal)
+
+[A] Eligibility: undergraduate, cumulative GPA >= 60%, must commit to a
+    2-4 month internship. Internship is obligatory for "Dream" and
+    "Super Dream" applicants.
+    Source: same official FAQ.
+
+[B] The official FAQ does NOT publish section count, question count, or
+    duration. Anyone stating those numbers confidently is guessing.
+
+--------------------------------------------------------------------
+2. WRITTEN ASSESSMENT CONTENT  — PRIMARY SOURCE
+--------------------------------------------------------------------
+[A] Source: "Prodapt Sample Campus Assessment Paper.pdf", 25 pages,
+    supplied by Prodapt, held at Companies/Prodapt/.
+    This is the single highest-trust artifact available and everything
+    below is read directly out of it.
+
+Five named sections, in this order:
+
+  1. Data Interpretation
+  2. Logical Reasoning & Critical Thinking
+  3. Problem Solving — Coding & MCQ
+  4. Quantitative Aptitude
+  5. Verbal Reasoning
+
+--- 1. DATA INTERPRETATION -------------------------------------------
+  - Multi-table cost/currency problem (car parts sourced per country,
+    USD exchange table, fixed INR 20,000 add-on per unit). Asks least
+    total cost, best single-source country, cross-currency difference.
+  - Machine/product scheduling table (3 machines x 3 products, minutes
+    per unit, 12 h/day = 720 min per machine). Asks max units/day, then
+    a constrained variant, then a precedence-constrained variant.
+  - Constraint-logic puzzle (10 rooms, 7 paint colours, conditional
+    rules) — placed under DI but is really analytical reasoning.
+  - Caselet: 1650 students, male:female 86:79, five departments, chained
+    ratio/percentage deductions.
+  - Venn diagram: 150 students, football 90, basketball 60, both 30.
+  - Venn probability over prime vs even number sets.
+  - PIE CHART WITH VALUES GIVEN IN DEGREES, total marks 900.
+    ^ Explicit trap: must convert degrees -> marks (x900/360) before
+      any arithmetic.
+
+--- 2. LOGICAL REASONING & CRITICAL THINKING -------------------------
+  - Constraint scheduling (7 flower types across 3 seasons, 5 rules).
+  - Circular seating, 8 people facing centre, partial-info deductions.
+  - Statement + Conclusions ("which conclusion follows").
+  - GMAT-style CRITICAL REASONING, and this is the heaviest sub-block:
+      * assumption questions   (20th-century art / "beautiful"; Dvorak)
+      * must-be-true           (impulse purchase study)
+      * weaken the conclusion  (Dvorak keyboard adoption)
+      * explain the discrepancy (Butlerville house values vs sales)
+  - Number series: 2, 1, 1/2, 1/4, ...
+  - Letter series: SCD, TEF, UGH, ___, WKL
+  - Odd-one-out (dodge / flee / duck / avoid)
+  - Courses of action (car booking queues)
+  - Analogy pairs (8:4)
+  - CODING-DECODING, non-trivial construction:
+      'given time simple plan' -> '@E4 &N4 %N5 #E6'
+      Decoded rule: symbol encodes word position in the sentence,
+      letter = last letter of the word, digit = word length.
+  - DATA SUFFICIENCY, 5-option format (I alone / II alone / either /
+    neither / both needed). Four worked examples with answers given.
+
+--- 3. PROBLEM SOLVING — CODING & MCQ --------------------------------
+  MCQ topics found (this is a wide, non-DSA spread):
+   - Java OOP output prediction: calling a non-static method from a
+     static context; short -> int widening. (Answer hinges on the
+     static-context error, not the arithmetic.)
+   - SQL: primary key properties (which statement is FALSE — the NULL
+     one); and a join-vs-subquery correctness question comparing
+     customer city to order city.
+   - Angular / TypeScript: *ngIf with "as value; else elseBlock",
+     chained pipes (uppercase | lowercase).
+   - Testing: Mockito / JUnit — @RunWith, @Mock vs @InjectMocks.
+     Correct answer is the @InjectMocks variant.
+   - Digital logic: 2-input NAND truth table; 2-input XOR with A=1,B=1.
+
+  CODING — exactly three problems in the sample:
+   (1) "winner" — strings erica[], bob[], each char in {E,M,H}, score by
+       difficulty, return "Erica" / "Bob" / "Tie". n < 10.
+       DIFFICULTY: trivial. Pure loop + dict.
+   (2) "calculateMinCost" — partition string S into exactly K
+       contiguous parts; cost of a part = number of ways to choose two
+       equal substrings within it (overlaps allowed); minimise total.
+       N <= 200, K <= min(N,10).
+       DIFFICULTY: HARD. Partition DP, O(N^2 K) with a precomputed
+       part-cost table. This is the only hard item in the whole paper.
+   (3) "removeVowels" — remove vowels occurring AT THE END of S.
+       N <= 1e5, both cases count as vowels.
+       DIFFICULTY: trivial, but note it is a TRAILING RUN, not all
+       vowels. Misreading this is the entire risk.
+
+  Interpretation: two free problems and one hard one. Sequencing
+  matters more than algorithmic depth — bank (1) and (3) first.
+
+--- 4. QUANTITATIVE APTITUDE -----------------------------------------
+  - Weighted average interest across four lending parts
+  - Compound interest for 2 years AND 4 MONTHS (fractional period)
+  - Income up 21%, expenditure up 5%, spends 60% -> % change in savings
+  - Profit = 320% of cost, SP constant, cost +25% -> profit as % of SP
+  - Simple probability (6 defective of 15)
+  - Syllogism (No apples are tangerine / no tangerine is grapefruit)
+  - Average = 0 over 20 numbers -> at most how many > 0
+  - Linear equation word problem
+
+--- 5. VERBAL REASONING ----------------------------------------------
+[A] The verbal section of the sample paper is taken VERBATIM from
+    official GRE General Test sample questions — the pages are even
+    headed "Sample GRE(R) General Test Questions".
+
+  Formats present:
+   - Reading Comprehension, select ONE answer
+   - Reading Comprehension, select ONE OR MORE answers, no partial
+     credit
+   - Select-in-Passage (click the sentence that does X)
+   - Text Completion with 1-3 blanks, three choices per blank,
+     NO partial credit
+   - Sentence Equivalence — pick TWO choices producing equivalent
+     sentences, no partial credit
+
+  Implication: this is a materially higher verbal bar than the usual
+  TCS/Infosys-style verbal, and the no-partial-credit rule means
+  vocabulary gaps are expensive. Passages seen: carbon sequestration
+  economics; composer Philip Glass.
+
+--------------------------------------------------------------------
+3. WHAT IS *NOT* IN THE PAPER
+--------------------------------------------------------------------
+Worth recording because it contradicts the prep that was in progress:
+  - No trees, no BFS/DFS, no binary search, no graphs.
+  - No linked lists, stacks, or heaps.
+  - The only algorithmic depth anywhere is the single partition-DP
+    problem.
+  => Two days of tree/binary-search work maps onto ~0 marks here.
+     DP has zero coverage in Placement Training/DSA/ and is the one
+     algorithmic gap that matters for this drive.
+
+--------------------------------------------------------------------
+4. SOURCES CHECKED AND REJECTED
+--------------------------------------------------------------------
+[X] freshers.jobs/prodapt-recruitment/
+    Claims "seven areas, 75 questions, 50 minutes", verbal para-jumbles
+    and para-completion, no negative marking.
+    REJECTED as a format basis: the section names do not match the
+    official sample paper at all (no para-jumbles anywhere in it; the
+    verbal is GRE-format), and 75 questions in 50 minutes is
+    incompatible with a paper containing three coding problems. Reads
+    as recycled generic-fresher-site content.
+    The "no negative marking" claim is UNVERIFIED — do not rely on it.
+    Assume marking is unknown and do not blind-guess until confirmed
+    on the day.
+
+[C] Glassdoor (209 Prodapt interview entries)
+    Aggregate difficulty 2.8/5, 68.1% positive. Mentions a coding round
+    and, for experienced roles, system-design and telecom domain rounds
+    (BSS/OSS, product modelling in telecom). One reported coding
+    question: search an element in a BST optimally.
+    These are predominantly LATERAL/experienced entries, not the campus
+    fresher track. Useful only for the interview stage, not the OA.
+
+[X] Various "Prodapt placement paper" aggregator pages (vyoms etc.)
+    Generic, undated, no provenance. Not used.
+
+--------------------------------------------------------------------
+5. OPEN QUESTIONS TO RESOLVE ON THE DAY
+--------------------------------------------------------------------
+  - Total duration and per-section time limits — UNKNOWN
+  - Question count per section — UNKNOWN
+  - Negative marking — UNKNOWN (one weak source says none; unverified)
+  - Whether sections are individually timed / locked — UNKNOWN
+  - Assessment platform / proctoring vendor — UNKNOWN
+  - Language options for the coding section — UNKNOWN
+    (sample MCQs use Java, Angular/TS and SQL, so Java is certainly
+     supported; Python is not evidenced either way. Confirm before
+     committing to Python in the coding section.)
+
+--------------------------------------------------------------------
+6. DOWNSTREAM SCHEDULE (candidate-supplied)
+--------------------------------------------------------------------
+  05-06 Aug 2026  Prodapt on-campus drive
+  09 Aug 2026     BluePond.AI          (folder exists: Companies/BLUEPOND.AI)
+  16 Aug 2026     TCS                  (stated primary goal)
+  Oct 2026        Viasat OA
+
+  Note: the DI / LR / quant / verbal work done for Prodapt transfers
+  almost entirely to TCS. This is not a detour from the stated primary
+  goal — it is the overlap.

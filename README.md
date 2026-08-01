@@ -29,6 +29,8 @@ Companies I've applied to where the JD is on file and my resume was tailored to 
 
 | Company | Role | Materials | Status |
 |---------|------|-----------|--------|
+| Prodapt | On-campus drive | Sample assessment paper, prep HQ, research notes | Drive 5–6 Aug 2026 |
+| Viasat India | Software Engineer Intern 2027 | JD, benefits summary, tailored resume | OA October 2026 |
 | Qualcomm | IT Intern — OneIT India | JD, tailored resume | TBD |
 | Trimble | Graduate Technical Intern 2026–27 | JD, Codility prerequisites, tailored resume | TBD |
 | IDFC First Bank | Application Engineer (2027) | JD, tailored resume | TBD |
