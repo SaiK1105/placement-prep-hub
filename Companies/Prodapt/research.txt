@@ -141,6 +141,33 @@ Five named sections, in this order:
   economics; composer Philip Glass.
 
 --------------------------------------------------------------------
+2b. PROMPT ENGINEERING  — official notice, 4 Aug 2026
+--------------------------------------------------------------------
+[A] Verbatim, from an official Prodapt process update:
+
+    "Students are advised to have a basic understanding of Prompt
+     Engineering, including how to write effective prompts for
+     Generative AI tools. This knowledge may be useful during the
+     selection process."
+
+Reading of the wording: "basic understanding" and "may be useful"
+point at an interview conversation, an MCQ on terminology, or a short
+written task — NOT a deep technical assessment. It does not appear in
+the sample assessment paper at all, so it is most likely attached to
+the technical interview stage rather than the written round.
+
+Prepared coverage (section 10 of the prep HQ): the five components of
+a prompt (task / context / constraints / output format / examples),
+named techniques (zero-shot, few-shot, chain-of-thought, role,
+decomposition, iterative refinement), a weak-vs-strong worked example,
+and failure modes. Deliberately time-boxed to ~45 min — the phrasing
+does not justify more, and the written round is still 80% aptitude.
+
+Note for the interview: Prodapt is a telecom engineering services
+firm. The limitations answer they are most likely listening for is the
+one about customer data and privacy, not the one about hallucination.
+
+--------------------------------------------------------------------
 3. WHAT IS *NOT* IN THE PAPER
 --------------------------------------------------------------------
 Worth recording because it contradicts the prep that was in progress:

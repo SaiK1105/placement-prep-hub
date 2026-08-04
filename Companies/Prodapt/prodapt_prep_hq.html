@@ -154,10 +154,12 @@ footer a{color:var(--ink-2)}
   <a href="#mcq"><span class="n">08</span>Tech MCQ</a>
   <a href="#coding"><span class="n">09</span>Coding</a>
   <hr>
-  <a href="#drill"><span class="n">10</span>Drill deck</a>
-  <a href="#mock"><span class="n">11</span>Mock protocol</a>
-  <a href="#unknowns"><span class="n">12</span>Open unknowns</a>
-  <a href="#sources"><span class="n">13</span>Sources</a>
+  <a href="#prompt"><span class="n">10</span>Prompt Engineering</a>
+  <hr>
+  <a href="#drill"><span class="n">11</span>Drill deck</a>
+  <a href="#mock"><span class="n">12</span>Mock protocol</a>
+  <a href="#unknowns"><span class="n">13</span>Open unknowns</a>
+  <a href="#sources"><span class="n">14</span>Sources</a>
 </nav>
 
 <main>
@@ -629,8 +631,75 @@ b = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> bob)
 </section>
 
 <!-- ============================================ -->
+<section id="prompt">
+  <h2><span class="num">10</span> Prompt Engineering</h2>
+  <p class="lede">Added 4 Aug from an official Prodapt notice: <em>"Students are advised to have a basic
+  understanding of Prompt Engineering, including how to write effective prompts for Generative AI tools.
+  This knowledge may be useful during the selection process."</em></p>
+
+  <div class="callout">
+    <strong>Read the wording carefully — it says "basic understanding" and "may be useful".</strong>
+    That is interview-conversation and MCQ territory, not a deep technical exam. Prodapt is a telecom
+    engineering services firm; the plausible framings are a technical-interview question
+    ("how would you prompt an LLM to do X?"), an MCQ on terminology, or a short written task.
+    Do not spend the night on this — 45 minutes gets you everything the phrasing implies.
+  </div>
+
+  <h3>The anatomy of an effective prompt</h3>
+  <p style="color:var(--ink-2);font-size:14.5px">Five components. Naming them is most of what "basic
+  understanding" means, and it's what makes an interview answer sound structured rather than vague.</p>
+  <table>
+    <tr><th>Component</th><th>What it does</th><th>Weak vs strong</th></tr>
+    <tr><td><b>Task</b></td><td>The actual instruction, stated as a verb</td><td>"about logs" → "extract every ERROR line and group by service"</td></tr>
+    <tr><td><b>Context</b></td><td>Background the model can't infer</td><td>add the log format, the system, what the output feeds into</td></tr>
+    <tr><td><b>Constraints</b></td><td>Boundaries and rules</td><td>"only the last 24 h", "do not invent service names"</td></tr>
+    <tr><td><b>Output format</b></td><td>Exact shape of the answer</td><td>"JSON array with keys service, count, first_seen"</td></tr>
+    <tr><td><b>Examples</b></td><td>One or two input→output pairs</td><td>turns a zero-shot prompt into few-shot</td></tr>
+  </table>
+
+  <h3>Named techniques — know the vocabulary</h3>
+  <div class="grid2">
+    <div class="card"><h4>Zero-shot</h4><p>Instruction only, no examples. Fine for common, well-specified tasks.</p></div>
+    <div class="card"><h4>Few-shot</h4><p>Two or three input→output examples. The fastest fix when output <em>format</em> or <em>style</em> is wrong — showing beats describing.</p></div>
+    <div class="card"><h4>Chain-of-thought</h4><p>"Reason step by step before answering." Helps on multi-step logic and arithmetic; largely wasted on retrieval or formatting.</p></div>
+    <div class="card"><h4>Role / persona</h4><p>"You are a network engineer reviewing a BGP config." Sets vocabulary and depth. Useful, and routinely overrated — it never substitutes for a clear task.</p></div>
+    <div class="card"><h4>Decomposition</h4><p>Split one large ask into chained smaller prompts, each verifiable. The single most practical technique in real work.</p></div>
+    <div class="card"><h4>Iterative refinement</h4><p>Treat the first output as a draft; state precisely what was wrong and re-prompt. Say this out loud in an interview — it shows you've actually used these tools.</p></div>
+  </div>
+
+  <h3>Before and after</h3>
+  <pre><span class="c"># WEAK — vague task, no context, no format, no constraints</span>
+"Write code to process the customer data."
+
+<span class="c"># STRONG — all five components present</span>
+"You are reviewing a Python ETL script for a telecom billing pipeline.   <span class="c">&lt;- role</span>
+Read the CSV below, which has columns msisdn, plan_id, usage_mb, and     <span class="c">&lt;- context</span>
+may contain duplicate msisdn rows.
+Write a function that de-duplicates by msisdn, keeping the row with the  <span class="c">&lt;- task</span>
+highest usage_mb.
+Use only the standard library, and do not modify the input list.        <span class="c">&lt;- constraints</span>
+Return the function only, with type hints and no explanation."          <span class="c">&lt;- output format</span></pre>
+
+  <h3>Failure modes worth naming</h3>
+  <ul style="color:var(--ink-2);font-size:14.5px;margin-left:18px">
+    <li><b>Ambiguity</b> — "summarise this" without saying for whom, how long, or what to keep.</li>
+    <li><b>Buried instruction</b> — the real ask sits in the middle of a wall of context.</li>
+    <li><b>No verification path</b> — nothing in the output tells you whether it's right.</li>
+    <li><b>Hallucination risk left open</b> — no instruction to say "not in the source" when the answer isn't there.</li>
+    <li><b>Over-stuffing</b> — five unrelated tasks in one prompt. Decompose instead.</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>If asked about limitations, don't oversell.</strong> A good answer names the real ones:
+    models hallucinate confidently, they can't verify their own output, prompt quality doesn't fix a
+    model that lacks the knowledge, and anything touching customer data raises privacy questions —
+    which for a telecom services company is the answer they're most likely listening for.
+  </div>
+</section>
+
+<!-- ============================================ -->
 <section id="drill">
-  <h2><span class="num">10</span> Drill deck</h2>
+  <h2><span class="num">11</span> Drill deck</h2>
   <p class="lede">Questions in the paper's own style. Attempt before revealing — a revealed answer you didn't
   try teaches nothing.</p>
 
@@ -706,7 +775,7 @@ b = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> bob)
 
 <!-- ============================================ -->
 <section id="mock">
-  <h2><span class="num">11</span> Mock protocol — 4 Aug</h2>
+  <h2><span class="num">12</span> Mock protocol — 4 Aug</h2>
   <p class="lede">The mock's only job is calibration. Run it wrong and it tells you nothing.</p>
   <div class="grid2">
     <div class="card"><h4>Conditions</h4><ul>
@@ -731,7 +800,7 @@ b = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> bob)
 
 <!-- ============================================ -->
 <section id="unknowns">
-  <h2><span class="num">12</span> Open unknowns</h2>
+  <h2><span class="num">13</span> Open unknowns</h2>
   <p class="lede">Recorded so they aren't mistaken for settled facts. Resolve on the day, from the instruction screen.</p>
   <table>
     <tr><th>Unknown</th><th>Why it matters</th></tr>
@@ -746,7 +815,7 @@ b = sum(pts[c] <span class="k">for</span> c <span class="k">in</span> bob)
 
 <!-- ============================================ -->
 <section id="sources">
-  <h2><span class="num">13</span> Sources</h2>
+  <h2><span class="num">14</span> Sources</h2>
   <ul class="srcs">
     <li><span class="badge b-a">confirmed</span> <b>Prodapt Sample Campus Assessment Paper.pdf</b> — 25 pages, supplied by Prodapt. Primary source for every section claim above.</li>
     <li><span class="badge b-a">confirmed</span> <a href="https://career-portal.prodapt.com/faqs/">career-portal.prodapt.com/faqs</a> — official: three rounds, GPA ≥ 60%, 2–4 month internship commitment.</li>
