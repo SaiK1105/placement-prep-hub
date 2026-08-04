@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prodapt Cheat Sheet — night before</title>
+<style>
+:root{
+  --bg:#faf8f5; --card:#fff; --ink:#1c1815; --ink-2:#5a5148; --ink-3:#8c8175;
+  --accent:#c2410c; --good:#2f6b46; --warn:#8a6100; --bad:#a52f22;
+  --line:#e5ded4; --code:#f2ede6;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#14120f; --card:#1c1916; --ink:#f0ebe5; --ink-2:#b6aa9d; --ink-3:#847869;
+    --accent:#e8845c; --good:#7fb08c; --warn:#d4a24e; --bad:#d1746a;
+    --line:#2e2822; --code:#231f1a;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:0 0 80px}
+.wrap{max-width:920px;margin:0 auto;padding:20px 18px}
+
+header{border-bottom:2px solid var(--accent);padding-bottom:14px;margin-bottom:8px}
+h1{font-size:23px;font-weight:700;letter-spacing:-.01em}
+header p{color:var(--ink-2);font-size:14px;margin-top:5px}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 26px}
+nav.toc a{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:6px 13px;font-size:13px;color:var(--ink-2);text-decoration:none;
+}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:18px;scroll-margin-top:14px}
+h2{font-size:19px;margin-bottom:4px;color:var(--accent);font-weight:700}
+h2 .n{font:11px var(--mono);color:var(--ink-3);margin-right:7px}
+.sub{color:var(--ink-3);font-size:13px;margin-bottom:16px}
+h3{font-size:14.5px;font-weight:700;margin:20px 0 8px}
+h3:first-of-type{margin-top:14px}
+p,li{font-size:14.5px;color:var(--ink-2)}
+ul,ol{margin:8px 0 8px 20px}
+li{margin-bottom:5px}
+b,strong{color:var(--ink)}
+
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:12px 14px;overflow-x:auto;font:12.5px/1.55 var(--mono);margin:10px 0;color:var(--ink)}
+code{font:12.5px var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;color:var(--accent)}
+pre code{background:none;padding:0;color:inherit}
+
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:11px var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;font-weight:400}
+td:first-child{white-space:nowrap}
+
+.box{border-left:3px solid var(--accent);background:var(--code);padding:12px 15px;border-radius:0 6px 6px 0;margin:12px 0;font-size:14px}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box b{color:var(--ink)}
+
+.tag{display:inline-block;font:10px var(--mono);padding:2px 7px;border-radius:3px;background:var(--code);color:var(--ink-3);border:1px solid var(--line);text-transform:uppercase;letter-spacing:.05em}
+
+@media print{
+  body{background:#fff;color:#000}
+  section{break-inside:avoid;border:1px solid #ccc}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Prodapt — one-page-per-section cheat sheet</h1>
+  <p>Written the night of 4 Aug 2026 for the 5–6 Aug drive. Everything here is derived from
+  Prodapt's own sample assessment paper. Read the boxes; skip the prose if short on time.</p>
+</header>
+
+<nav class="toc">
+  <a href="#tactics">00 · Exam tactics</a>
+  <a href="#di">01 · Data Interpretation</a>
+  <a href="#ds">02 · Data Sufficiency</a>
+  <a href="#cr">03 · Critical Reasoning</a>
+  <a href="#lr">04 · Puzzles &amp; Series</a>
+  <a href="#quant">05 · Quant</a>
+  <a href="#verbal">06 · Verbal (GRE)</a>
+  <a href="#mcq">07 · Tech MCQ</a>
+  <a href="#code">08 · Coding</a>
+</nav>
+
+<!-- ================= 00 TACTICS ================= -->
+<section id="tactics">
+  <h2><span class="n">00</span>Exam-day tactics</h2>
+  <div class="sub">The marks lost to process rather than to knowledge.</div>
+
+  <div class="box bad">
+    <b>Read the instruction screen before anything else.</b> Timing, question count, negative
+    marking and section locking are all UNKNOWN — Prodapt doesn't publish them. Everything below
+    branches on what that screen says.
+    <ul style="margin-top:8px">
+      <li><b>No negative marking</b> → never leave a blank. Guess everything in the last minute.</li>
+      <li><b>Negative marking</b> → answer only when you've eliminated at least two options.</li>
+      <li><b>Sections locked</b> → budget per section and stick to it; you can't come back.</li>
+    </ul>
+  </div>
+
+  <h3>Order of attack</h3>
+  <ol>
+    <li><b>Coding first if you can choose.</b> Two of the three are near-free; bank them while fresh.</li>
+    <li>Within coding: <code>winner</code> → <code>removeVowels</code> → the hard one. Never the reverse.</li>
+    <li>In MCQ sections, do one pass answering everything you know, flagging the rest. Second pass on the flagged.</li>
+    <li>DI sets share a stem across 3–5 questions — the setup cost is paid once. Judge the <em>stem</em> before starting; once you've done the setup, finish the set.</li>
+  </ol>
+
+  <div class="box warn">
+    <b>The plausibility check.</b> Every numeric answer, two seconds: is the magnitude sane?
+    A part-year interest tail can't exceed the whole-year interest. A percentage decrease can't
+    exceed 100%. A profit can't be bigger than the selling price. Three of your misses this week
+    would have been caught by this alone.
+  </div>
+
+  <div class="box">
+    <b>If a question looks blank, run the procedure — don't wait to recognise it.</b>
+    Add the ratio terms. Write the subtraction. Draw the circles. Cover statement II.
+    The method produces the answer without the flash of recognition, and it's the flash that
+    fails under a clock.
+  </div>
+</section>
+
+<!-- ================= 01 DI ================= -->
+<section id="di">
+  <h2><span class="n">01</span>Data Interpretation</h2>
+  <div class="sub">Arithmetic-heavy, not clever. Marks are lost to setup errors and clock, not difficulty.</div>
+
+  <div class="box bad">
+    <b>PIE CHARTS ARE IN DEGREES.</b> The sample paper gives sector values in degrees with a total
+    of 900 marks. <code>value = degrees × total / 360</code>. With total 900 that's <b>× 2.5</b>.
+    Convert all sectors once, write them in the margin, then answer everything.
+    <br><br>
+    Exception: ratio and "% more than" questions need <em>no</em> conversion — degrees are already
+    proportional. Spot those and skip the arithmetic entirely.
+  </div>
+
+  <h3>Multi-currency / multi-table costing</h3>
+  <ul>
+    <li>Normalise <b>everything to one currency</b> before comparing anything.</li>
+    <li>A flat per-unit add-on (the paper's INR 20,000) is <b>constant</b> — it can't change which option is cheapest. Ignore it for "which is minimum", include it for "what is the total".</li>
+  </ul>
+
+  <h3>Ratio caselets</h3>
+  <ul>
+    <li>Draw the grid (dept × M / F / total) and fill only what's stated.</li>
+    <li>Work the <b>most-constrained cell first</b>, never left-to-right.</li>
+    <li>86:79 of 1650 → parts sum to 165 → one part = 10. Always <b>count the parts</b>.</li>
+  </ul>
+
+  <h3>Venn</h3>
+  <pre>only A   = A − both
+neither  = Total − (A + B − both)
+"like football" INCLUDES the overlap; "only football" does not.</pre>
+
+  <h3>Machine / resource scheduling</h3>
+  <p>"Maximum units in a day" → give each machine the product it makes <b>fastest</b>.
+  The paper's answer: 720 min each → 72 + 80 + 60 = 212.</p>
+
+  <h3>Speed table — memorise, this is where DI time goes</h3>
+  <pre>1/2  50%      1/8   12.5%     2/3  66.67%     3/8  37.5%
+1/3  33.33%   1/9   11.11%    3/4  75%        5/8  62.5%
+1/4  25%      1/10  10%       2/5  40%
+1/5  20%      1/12  8.33%     3/5  60%
+1/6  16.67%   1/16  6.25%     4/5  80%
+1/7  14.28%   1/20  5%</pre>
+  <p>"37.5% of 640" is slow. <code>3/8 of 640 = 240</code> is instant.</p>
+</section>
+
+<!-- ================= 02 DS ================= -->
+<section id="ds">
+  <h2><span class="n">02</span>Data Sufficiency</h2>
+  <div class="sub">You scored 9/14 on this. The two rules below are where all five misses came from.</div>
+
+  <pre>A   I alone sufficient,  II alone not
+B   II alone sufficient, I alone not
+C   EITHER alone is sufficient
+D   Both together STILL not sufficient
+E   Both together needed (neither alone)</pre>
+
+  <h3>Method — three steps, this order</h3>
+  <ol>
+    <li>Cover II. Can I answer with <b>only</b> I?</li>
+    <li>Cover I. Can I answer with <b>only</b> II?</li>
+    <li>Only if both were No — together?</li>
+  </ol>
+
+  <div class="box bad">
+    <b>Rule 1 — "sufficient" means EXACTLY ONE value, not "a few".</b>
+    <ul style="margin-top:8px">
+      <li><code>x² = 49</code> → x = ±7. Two values = insufficient.</li>
+      <li>Primes 10–20 with n+2 prime → 11 <em>and</em> 17 survive. Two = insufficient → <b>D</b>.</li>
+    </ul>
+    Finish the sentence out loud: <em>"…therefore the answer is exactly ____ and nothing else."</em>
+    If you can't name it, it's not sufficient.
+    <br><br>
+    When the candidate set is enumerable — primes in a range, two-digit multiples, roots of a
+    quadratic — <b>LIST THEM ALL and count survivors.</b> Stopping at the first hit is the bug.
+  </div>
+
+  <div class="box warn">
+    <b>Rule 2 — when testing II, statement I DOES NOT EXIST.</b> Physically cover it.
+    Leaking info from I into II is the single most common miss in this format.
+  </div>
+
+  <div class="box">
+    <b>Statements can be redundant.</b> "Digit sum is 9" and "divisible by 9" are the <em>same</em>
+    condition for a two-digit number. When II restates I, "together" is no stronger than either
+    alone — so the answer is D, not C or E.
+  </div>
+
+  <h3>Divisibility direction — implication runs from the BIGGER divisor</h3>
+  <pre>divisible by 6  =>  divisible by 2 and 3     ALWAYS
+divisible by 8  =>  divisible by 4 and 2     ALWAYS
+divisible by 2  =>  divisible by 4           NOT always  (2, 6, 10)
+divisible by 3  =>  divisible by 6           NOT always  (3, 9, 15)</pre>
+  <p>Test the doubtful direction with the smallest counterexample. One second.</p>
+
+  <div class="box warn">
+    <b>You answered E seven times in a row.</b> E is where uncertainty defaults. If you're about to
+    write E, check you're not just unsure — D and E look alike and the difference is whether the
+    combination actually pins one value.
+  </div>
+</section>
+
+<!-- ================= 03 CR ================= -->
+<section id="cr">
+  <h2><span class="n">03</span>Critical Reasoning</h2>
+  <div class="sub">GMAT-format, and heavily represented. Four question types, four different jobs.</div>
+
+  <div class="box">
+    <b>Always find the conclusion first.</b> It's the claim the rest of the passage exists to
+    support. Look for <em>therefore, thus, clearly, so</em> — or the sentence that would still
+    be contentious if you deleted everything else.
+  </div>
+
+  <table>
+    <tr><th>Type</th><th>What the answer must do</th><th>Test</th></tr>
+    <tr><td><b>Assumption</b></td><td>An unstated fact the argument NEEDS</td><td><b>Negate it.</b> If the argument collapses, that's the assumption.</td></tr>
+    <tr><td><b>Weaken</b></td><td>Break the link between evidence and conclusion</td><td>Often supplies an <b>alternative cause</b>. Attacking the evidence itself is usually the trap.</td></tr>
+    <tr><td><b>Strengthen</b></td><td>Close a gap in the same link</td><td>Rules out an alternative explanation.</td></tr>
+    <tr><td><b>Must be true</b></td><td>Provable ONLY from the stated text</td><td>Anything needing outside knowledge or one extra reasonable step is <b>wrong</b>, however sensible.</td></tr>
+    <tr><td><b>Explain discrepancy</b></td><td>Make two conflicting facts both true at once</td><td>It does <b>not</b> pick a side. Restating the puzzle is the classic wrong answer.</td></tr>
+  </table>
+
+  <div class="box bad">
+    <b>Three wrong-answer shapes that appear constantly:</b>
+    <ul style="margin-top:8px">
+      <li><b>Right topic, wrong job</b> — true and relevant, but doesn't do what the question asked.</li>
+      <li><b>Too extreme</b> — "all", "never", "sole determinant". Real answers hedge.</li>
+      <li><b>Restates the stimulus</b> — feels familiar and therefore correct. It adds nothing.</li>
+    </ul>
+  </div>
+
+  <h3>Worked — the paper's Butlerville question</h3>
+  <p><em>House values have fallen significantly, yet homes sold are at a seven-year low. Explain.</em></p>
+  <ul>
+    <li>✅ <b>The local economy is struggling; unemployment at historic highs.</b> A third fact making both true — cheap houses, but nobody can buy.</li>
+    <li>❌ "Value isn't the only determinant of whether a house sells." True, but it <em>restates the puzzle</em> instead of resolving it.</li>
+  </ul>
+
+  <h3>Statement–Conclusion (Indian-exam style, also present)</h3>
+  <p>Different discipline from GMAT CR: accept the statement as <b>100% true</b> even if absurd, then
+  ask whether the conclusion <em>necessarily</em> follows. Don't import real-world knowledge.</p>
+</section>
+
+<!-- ================= 04 LR ================= -->
+<section id="lr">
+  <h2><span class="n">04</span>Puzzles, Series, Coding-Decoding</h2>
+  <div class="sub">Mechanical once you know the drill. Heavy time sinks if you improvise.</div>
+
+  <h3>Circular seating</h3>
+  <ul>
+    <li><b>Facing the centre</b> → left/right are <em>reversed</em> from your view. Facing outward → normal. Getting this wrong invalidates the whole set.</li>
+    <li>Draw the circle. Place the <b>most constrained person first</b> (the one in the most clues).</li>
+    <li>"Immediate left of P" = adjacent, one seat. "Third to the right" = count three seats.</li>
+  </ul>
+
+  <h3>Constraint scheduling (the flowers/seasons type)</h3>
+  <ul>
+    <li>Write the rules as symbols: <code>B needs A in the preceding season</code>, <code>C and D always together</code>.</li>
+    <li>For "which is an acceptable schedule" — <b>test each option against each rule</b> and eliminate. Never construct from scratch; that's 5× slower.</li>
+    <li>"Must be false" = find the option violating a rule. "Could be true" = find the one that violates none.</li>
+  </ul>
+
+  <h3>Coding-decoding — the paper's actual rule, decoded</h3>
+  <pre>'given time simple plan'  ->  '@E4  &amp;N4  %N5  #E6'
+
+symbol  =  position of the word in the sentence
+letter  =  LAST letter of the word
+digit   =  LENGTH of the word
+
+TRAP: the codes are SHUFFLED, not aligned to word order.
+Match each code to its word by (last letter + length) FIRST,
+then read the symbol off. Never assume positional alignment.</pre>
+
+  <h3>Series</h3>
+  <pre>Numbers: check in order — difference, ratio, ×then±, squares/cubes,
+         alternating two interleaved series.
+         2, 1, 1/2, 1/4  ->  halving  ->  1/8
+
+Letters: track EACH position independently.
+         SCD, TEF, UGH, ___, WKL
+         S→T→U→V   C→E→G→I   D→F→H→J   =>  VIJ</pre>
+
+  <h3>Odd one out / analogy</h3>
+  <p>Find the <b>relationship</b>, not the category. <code>8:4</code> is ÷2, so 27:9 (÷3) is wrong but
+  <code>72:24</code>… check each candidate against the exact operation. For odd-one-out, the three
+  that match share a <em>precise</em> sense: dodge/duck/avoid are evasion; <em>flee</em> is escape.</p>
+</section>
+
+<!-- ================= 05 QUANT ================= -->
+<section id="quant">
+  <h2><span class="n">05</span>Quantitative Aptitude</h2>
+  <div class="sub">Full detail in <code>quant_formula_card.md</code>. This is the compressed version.</div>
+
+  <div class="box good">
+    <b>ASSUME 100.</b> The paper never asks for the actual income or cost — only the change.
+    So the base is free. Pick 100 and the algebra disappears.
+    <br><br>
+    Spends 60%, income +21%, expenditure +5% → <code>100−60=40</code>, then <code>121−63=58</code>,
+    so <code>18/40 = 45%</code>. Fifteen seconds.
+  </div>
+
+  <h3>CP / Profit / SP — write three lines before any arithmetic</h3>
+  <pre>CP     = 100
+profit =            &lt;- from the phrasing
+SP     = CP + profit</pre>
+  <table>
+    <tr><td>"profit of 20%"</td><td>20% <b>of CP</b></td><td>SP = 1.2 CP</td></tr>
+    <tr><td>"profit is 320% of cost"</td><td>profit = 3.2 CP</td><td>SP = <b>4.2 CP</b></td></tr>
+    <tr><td>"profit is 20% <b>of SP</b>"</td><td>profit = 0.2 SP</td><td>CP = 0.8 SP</td></tr>
+    <tr><td>"discount of 10%"</td><td>10% <b>of MP</b></td><td>SP = 0.9 MP</td></tr>
+  </table>
+  <div class="box warn">
+    You missed this exact one today: <b>"profit is 150% of cost"</b> means profit = 150 and
+    <b>SP = 250</b> — not SP = 150. And the question asked for <em>profit</em> as % of SP, not cost.
+    Name the base, then check what the numerator should be.
+  </div>
+  <pre>profit x% on cost  ->  as % of SP  =  x / (100 + x)
+profit y% of SP    ->  on cost     =  y / (100 − y)
+successive discounts a% then b%    =  a + b − ab/100   (MINUS)
+successive increases a% then b%    =  a + b + ab/100   (PLUS)</pre>
+
+  <h3>SI / CI</h3>
+  <pre>SI = P·r·t/100                A = P(1 + r/100)^t
+
+2-year shortcut:  effective rate = 2r + r²/100
+                  5% → 10.25%   10% → 21%   20% → 44%
+
+FRACTIONAL PERIOD (paper asks 2 yr 4 mo):
+  compound the WHOLE years, then SIMPLE interest on the AMOUNT
+  A = P(1 + r/100)^n × (1 + r·f/100)      f in YEARS (4 months = 4/12)
+
+CI − SI,  2 years:  P(r/100)²
+          3 years:  P(r/100)² × (3 + r/100)</pre>
+  <div class="box bad">
+    Both of today's CI errors were in the tail: <b>f must be in years</b> (6 months = 0.5, not 6),
+    and the tail is earned on the <b>AMOUNT</b>, not on the interest.
+    Sanity check: the tail can never exceed the whole-year interest, and never goes negative.
+  </div>
+
+  <h3>Weighted-average interest — work in RUPEES, never rates</h3>
+  <pre>1. total interest = average rate × total principal
+2. subtract the interest from the known parts
+3. remainder ÷ remaining principal = the missing rate</pre>
+  <p>Rates can't be averaged directly unless the principals are equal. That's the whole trap.</p>
+
+  <h3>Fast facts</h3>
+  <ul>
+    <li><b>Ratio = parts.</b> Add the terms, divide the total, multiply back. <code>3:5</code> of 64 → 8 parts → 1 part = 8 → larger = 40.</li>
+    <li><b>Translation:</b> "is" = <code>=</code>, "of" = <code>×</code>, "A is n more than B" = <code>A − B = n</code>.</li>
+    <li><b>% change</b> always divides by the <b>original</b>. 40→58 is 18/40, not 18/58.</li>
+    <li><b>Average of n numbers is 0</b> → at most <code>n−1</code> can exceed zero.</li>
+    <li><b>Syllogism:</b> draw circles, don't reason verbally. "No A are B" + "No B are C" → nothing follows about A and C.</li>
+  </ul>
+</section>
+
+<!-- ================= 06 VERBAL ================= -->
+<section id="verbal">
+  <h2><span class="n">06</span>Verbal Reasoning — literally GRE</h2>
+  <div class="sub">The sample's verbal pages are headed "Sample GRE® General Test Questions".</div>
+
+  <div class="box bad">
+    <b>No partial credit.</b> Text Completion with three blanks needs <em>all three</em>.
+    Sentence Equivalence needs <em>both</em>. Two of three scores the same as zero of three.
+  </div>
+
+  <h3>Text Completion — method</h3>
+  <ol>
+    <li>Find the <b>directional pivot</b>: <em>although, nonetheless, yet, because, despite, however</em>. It tells you whether the blank agrees with or opposes the rest.</li>
+    <li><b>Predict your own word</b> before reading the options. This is the whole technique — read the options first and they'll all look plausible.</li>
+    <li>Multi-blank: start with the blank you're <b>most confident</b> about, not the first one. Then use it to constrain the others.</li>
+  </ol>
+
+  <h3>Sentence Equivalence — different game</h3>
+  <ul>
+    <li>Six options, pick <b>two</b> giving the same meaning.</li>
+    <li><b>Hunt for the synonym pair</b> among the options. A word that fits the sentence but has no partner is a deliberate trap.</li>
+    <li>If you find three that fit, you've misread the sentence — only one pair is intended.</li>
+  </ul>
+
+  <h3>Reading Comprehension</h3>
+  <ul>
+    <li><b>Select one or more</b>: each of the three statements is judged <em>independently</em>. Verify each against the text separately; don't compare them.</li>
+    <li><b>Select-in-Passage</b>: match the <b>function</b> asked for ("distinguishes two ways") rather than topic keywords.</li>
+    <li>The answer is always <em>in</em> the passage. If you're using knowledge from outside it, you're on a wrong option.</li>
+  </ul>
+
+  <div class="box">
+    <b>Tonight is too late for vocabulary.</b> Don't cram word lists. Use the structural techniques
+    above — pivots, prediction, synonym pairing — which work even when a word is unfamiliar.
+    If genuinely stuck: eliminate on <em>tone</em> (positive/negative) rather than precise meaning.
+  </div>
+</section>
+
+<!-- ================= 07 MCQ ================= -->
+<section id="mcq">
+  <h2><span class="n">07</span>Technical MCQ</h2>
+  <div class="sub">Broad not deep — one or two questions each. Cheapest marks on the paper; pure recall.</div>
+
+  <h3>Digital logic — memorise these two tables</h3>
+  <pre>A B | AND  OR  NAND  NOR  XOR  XNOR
+0 0 |  0    0    1     1    0     1
+0 1 |  0    1    1     0    1     0
+1 0 |  0    1    1     0    1     0
+1 1 |  1    1    0     0    0     1
+
+NAND = 0 ONLY when both are 1        (NOT of AND)
+XOR  = 1 ONLY when inputs DIFFER     ->  A=1,B=1 gives 0</pre>
+
+  <h3>Java</h3>
+  <ul>
+    <li><b>Static context.</b> <code>main</code> is static, so it can't call an instance method without an object — even one inherited from a parent. That's the paper's Q1, and the answer is the compile error, not the arithmetic.</li>
+    <li><b>Widening is automatic</b> (<code>short → int → long → float → double</code>); narrowing needs a cast. So <code>short s = 9; add(s, 6)</code> is legal — it's the distractor.</li>
+    <li><code>==</code> compares references for objects, values for primitives. <code>.equals()</code> compares content.</li>
+    <li>Overloading = same name, different parameters, compile time. Overriding = same signature in a subclass, runtime.</li>
+  </ul>
+
+  <h3>SQL</h3>
+  <ul>
+    <li><b>PRIMARY KEY: unique, NOT NULL, one per table.</b> "Can contain NULL but undesirable for performance" is <b>false</b> — that's the paper's trap, phrased to sound like a nuanced trade-off.</li>
+    <li>To compare columns from two tables you must <b>JOIN</b> them. A correlated subquery returning multiple rows with <code>=</code> fails.</li>
+    <li><code>WHERE</code> filters rows before grouping; <code>HAVING</code> filters after. Aggregates only work in <code>HAVING</code>.</li>
+    <li><code>INNER JOIN</code> keeps matches only; <code>LEFT JOIN</code> keeps all left rows with NULLs where unmatched.</li>
+    <li><code>COUNT(*)</code> counts rows; <code>COUNT(col)</code> skips NULLs.</li>
+  </ul>
+
+  <h3>Mockito / JUnit</h3>
+  <ul>
+    <li><code>@Mock</code> creates the fake. <code>@InjectMocks</code> <b>puts it into the object under test</b>. You need both — the paper's correct answer is the <code>@InjectMocks</code> variant.</li>
+    <li>With only <code>@Mock</code> and a <code>new</code>-ed object, the real dependency is still used and the stubbing does nothing.</li>
+    <li><code>when(x).thenReturn(y)</code> stubs; <code>verify(x)</code> asserts it was called.</li>
+  </ul>
+
+  <h3>Angular / TypeScript</h3>
+  <ul>
+    <li><b>Pipes chain left to right.</b> <code>{{name | uppercase | lowercase}}</code> → uppercase first, then lowercase → <b>all lowercase</b>. Reverse order → all uppercase.</li>
+    <li><code>*ngIf="cond as value; else block"</code> renders the main template when truthy, the <code>ng-template</code> when not.</li>
+    <li><code>{{ }}</code> interpolation, <code>[prop]</code> property binding, <code>(event)</code> event binding, <code>[(ngModel)]</code> two-way.</li>
+  </ul>
+</section>
+
+<!-- ================= 08 CODING ================= -->
+<section id="code">
+  <h2><span class="n">08</span>Coding</h2>
+  <div class="sub">Three problems. Two are near-free and already solved. Order of attack is the strategy.</div>
+
+  <div class="box bad">
+    <b>Confirm the language options before you start.</b> The MCQs use Java, SQL and Angular, so Java
+    is certainly supported. Python is <em>not evidenced either way</em> in the sample paper, and all
+    your solutions are Python.
+  </div>
+
+  <h3>Q1 — <code>winner(erica, bob)</code> <span class="tag">solved</span></h3>
+  <pre>pts = {"E":1, "M":3, "H":5}      # READ THE REAL TABLE ON SCREEN
+e = sum(pts[c] for c in erica)
+b = sum(pts[c] for c in bob)
+return "Erica" if e&gt;b else "Bob" if b&gt;e else "Tie"</pre>
+  <p>The points table is an <b>image</b> in the PDF, so those values are a guess. Read the real one
+  and change the dict. It compares <b>totals</b>, never who won more days.</p>
+
+  <h3>Q3 — <code>removeVowels(N, S)</code> <span class="tag">solved</span></h3>
+  <pre>i = len(S)
+while i &gt; 0 and S[i-1] in "AEIOUaeiou":
+    i -= 1
+return S[:i]
+
+# TRAILING RUN only.  "Programme" -> "Programm",  "India" -> "Ind"
+# NOT "remove all vowels".
+# Do NOT loop with S = S[:-1]  -> O(n²) at N=1e5.
+# Careful: S[:-0] is S[:0] == ""  -> track the POSITION, not the count.</pre>
+
+  <h3>Q2 — <code>calculateMinCost(N, K, S)</code> <span class="tag">the hard one</span></h3>
+  <p>Split S into exactly K contiguous parts; a part's cost = number of ways to pick two equal
+  substrings inside it; minimise the total. <code>N ≤ 200</code>, <code>K ≤ 10</code>.</p>
+  <pre># Two independent pieces. Build and test them SEPARATELY.
+
+# 1) cost[i][j] for substring S[i..j]
+#    group identical substrings; a group of size m contributes
+#    C(m,2) = m(m-1)/2 pairs. Sum over all groups.
+#    Verify: cost of "aaaa" must be 10.
+
+# 2) the partition DP — standard shape
+#    dp[k][i] = min cost to split first i chars into k parts
+#    dp[k][i] = min over j&lt;i of  dp[k-1][j] + cost[j][i-1]
+#    dp[0][0] = 0, everything else = infinity
+#    answer = dp[K][N]
+#    O(N²K) = 200·200·10 = 400k. Comfortable.</pre>
+  <div class="box good">
+    <b>Partial credit beats a blank.</b> If the cost function defeats you, submit the DP with a
+    brute-force cost anyway — it passes the small cases and times out on the big ones, which
+    scores more than an empty function. <b>Never leave this blank.</b>
+  </div>
+
+  <h3>Python speed idioms</h3>
+  <pre>from collections import Counter, defaultdict, deque
+c = Counter(s)                  # frequency map in one line
+d = defaultdict(int)            # no KeyError
+sorted(x, key=lambda t: (-t[1], t[0]))   # desc by 2nd, asc by 1st
+"".join(parts)                  # NEVER s += x in a loop
+for i, ch in enumerate(s): ...
+math.inf                        # DP initial value</pre>
+
+  <div class="box warn">
+    <b>Read the constraints before choosing an approach.</b> <code>N ≤ 200</code> permits O(N³);
+    <code>N ≤ 1e5</code> demands O(n log n) or better. The constraint tells you the intended
+    algorithm — it's a hint, not decoration.
+  </div>
+</section>
+
+<p style="color:var(--ink-3);font-size:13px;text-align:center;margin-top:26px">
+  Sleep beats one more topic. Five sections of sustained attention tomorrow, GRE verbal at the end.
+</p>
+
+</div>
+</body>
+</html>
