@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BluePond.AI Prep HQ — Campus Hiring, 7 Aug 2026</title>
+<style>
+:root{
+  --bg:#0d1117; --bg-2:#151b23; --bg-3:#1b232d;
+  --ink:#eaf0f7; --ink-2:#a9b7c6; --ink-3:#6f7f8f;
+  --accent:#5b9aee; --accent-dim:#2f5c93;
+  --good:#7fbf8f; --warn:#d4a24e; --bad:#d17a72; --info:#5b9aee;
+  --line:#232c37;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;max-width:1400px;margin:0 auto}
+
+nav{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);padding:28px 18px;background:var(--bg-2);
+}
+nav .brand{font-family:var(--serif);font-size:20px;line-height:1.25;margin-bottom:4px}
+nav .brand em{color:var(--accent);font-style:normal}
+nav .date{font:11px/1.4 var(--mono);color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+nav a{
+  display:block;color:var(--ink-2);text-decoration:none;padding:7px 10px;
+  border-radius:5px;font-size:13.5px;border-left:2px solid transparent;
+  transition:background .15s,color .15s,border-color .15s;
+}
+nav a:hover{background:var(--bg-3);color:var(--ink)}
+nav a .n{font:10px var(--mono);color:var(--ink-3);margin-right:8px}
+nav hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+
+main{padding:44px 52px 120px;min-width:0}
+
+.hero{border-bottom:1px solid var(--line);padding-bottom:34px;margin-bottom:44px}
+.hero h1{font-family:var(--serif);font-size:clamp(28px,4vw,46px);line-height:1.08;font-weight:400;letter-spacing:-.01em}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero .sub{color:var(--ink-2);margin-top:14px;max-width:66ch;font-size:15.5px}
+.countdown{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.cd{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px 18px;min-width:104px}
+.cd .v{font:600 27px/1 var(--mono);color:var(--accent)}
+.cd .l{font:10px var(--mono);color:var(--ink-3);letter-spacing:.09em;text-transform:uppercase;margin-top:6px}
+.cd.next{border-color:var(--accent-dim)}
+
+section{margin-bottom:66px;scroll-margin-top:24px}
+h2{
+  font-family:var(--serif);font-size:26px;font-weight:400;margin-bottom:6px;
+  display:flex;align-items:baseline;gap:12px;
+}
+h2 .num{font:11px var(--mono);color:var(--accent);letter-spacing:.1em}
+h2+.lede{color:var(--ink-2);margin-bottom:24px;max-width:74ch;font-size:15px}
+h3{font-size:15px;font-weight:600;margin:26px 0 10px;color:var(--ink);letter-spacing:.01em}
+
+.badge{
+  display:inline-block;font:10px var(--mono);letter-spacing:.07em;
+  padding:2px 7px;border-radius:3px;vertical-align:middle;text-transform:uppercase;
+}
+.b-a{background:rgba(127,191,143,.16);color:var(--good);border:1px solid rgba(127,191,143,.3)}
+.b-b{background:rgba(212,162,78,.14);color:var(--warn);border:1px solid rgba(212,162,78,.3)}
+.b-c{background:rgba(209,122,114,.14);color:var(--bad);border:1px solid rgba(209,122,114,.3)}
+.b-x{background:var(--bg-3);color:var(--ink-3);border:1px solid var(--line);text-decoration:line-through}
+
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:11px var(--mono);color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+td code,p code,li code{font:12.5px var(--mono);background:var(--bg-3);padding:1.5px 5px;border-radius:3px;color:var(--accent)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:19px 21px}
+.card h4{font-size:14.5px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card p{font-size:14px;color:var(--ink-2)}
+.card ul{margin:9px 0 0 17px;font-size:14px;color:var(--ink-2)}
+.card li{margin-bottom:5px}
+
+.callout{border-left:3px solid var(--accent);background:var(--bg-2);padding:15px 19px;border-radius:0 7px 7px 0;margin:18px 0;font-size:14.5px}
+.callout.warn{border-left-color:var(--warn)}
+.callout.bad{border-left-color:var(--bad)}
+.callout strong{color:var(--ink)}
+
+pre{background:#080b0f;border:1px solid var(--line);border-radius:7px;padding:15px 17px;overflow-x:auto;font:12.5px/1.6 var(--mono);margin:12px 0;color:#d8e0e8}
+pre .c{color:var(--ink-3)}
+pre .k{color:var(--accent)}
+pre .s{color:var(--good)}
+
+.q{border:1px solid var(--line);border-radius:8px;margin-bottom:13px;overflow:hidden;background:var(--bg-2)}
+.q>.stem{padding:15px 18px;font-size:14.5px}
+.q .tag{font:10px var(--mono);color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;display:block}
+.q .opts{margin:10px 0 0 18px;font-size:14px;color:var(--ink-2)}
+.q button{
+  background:none;border:0;border-top:1px solid var(--line);width:100%;text-align:left;
+  padding:10px 18px;color:var(--accent);font:12px var(--mono);cursor:pointer;letter-spacing:.05em;
+}
+.q button:hover{background:var(--bg-3)}
+.q .ans{display:none;padding:15px 18px;border-top:1px solid var(--line);background:#0a0d11;font-size:14px;color:var(--ink-2)}
+.q .ans.on{display:block}
+.q .ans b{color:var(--good)}
+.q .ans .why{margin-top:8px;display:block;color:var(--ink-2)}
+
+.day{border:1px solid var(--line);border-radius:9px;margin-bottom:14px;background:var(--bg-2);overflow:hidden}
+.day .hd{display:flex;justify-content:space-between;align-items:center;padding:13px 19px;background:var(--bg-3);gap:12px;flex-wrap:wrap}
+.day .hd h4{font-size:15px}
+.day .hd .meta{font:11px var(--mono);color:var(--ink-3)}
+.day .bd{padding:15px 19px}
+.task{display:flex;gap:11px;align-items:flex-start;padding:7px 0;font-size:14px;border-bottom:1px solid rgba(35,44,55,.6)}
+.task:last-child{border-bottom:0}
+.task input{margin-top:4px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.task label{cursor:pointer;color:var(--ink-2)}
+.task input:checked+label{color:var(--ink-3);text-decoration:line-through}
+.task .t{font:10px var(--mono);color:var(--ink-3);margin-left:auto;flex-shrink:0;padding-left:10px}
+
+footer{border-top:1px solid var(--line);padding-top:24px;color:var(--ink-3);font-size:13px}
+footer a{color:var(--ink-2)}
+.srcs{font-size:13px;color:var(--ink-2)}
+.srcs li{margin-bottom:7px;margin-left:18px}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  nav a{display:inline-block;margin-right:4px}
+  main{padding:28px 20px 80px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div class="brand">BluePond.AI <em>Prep HQ</em></div>
+  <div class="date">Campus hiring · 7 Aug 2026</div>
+  <a href="#reality"><span class="n">01</span>Reality check</a>
+  <a href="#known"><span class="n">02</span>What we know</a>
+  <a href="#plan"><span class="n">03</span>2-day plan</a>
+  <hr>
+  <a href="#dsa"><span class="n">04</span>DSA &amp; Python</a>
+  <a href="#dbms"><span class="n">05</span>DBMS / SQL</a>
+  <a href="#llm"><span class="n">06</span>LLM / RAG / Agentic AI</a>
+  <a href="#sysdesign"><span class="n">07</span>System design</a>
+  <a href="#coding"><span class="n">08</span>Coding practice</a>
+  <hr>
+  <a href="#interview"><span class="n">09</span>Likely rounds</a>
+  <a href="#sources"><span class="n">10</span>Sources</a>
+</nav>
+
+<main>
+
+<div class="hero">
+  <h1>BluePond.AI — <em>campus hiring</em>, 7 Aug 2026</h1>
+  <div class="sub">Engineer Trainee. Built from the actual JD and your BluePond-tailored resume — not from a leaked or guessed OA paper, because none exists publicly for this company. Treat every "likely" label literally: it means inferred from JD language and general startup-hiring patterns, not confirmed.</div>
+  <div class="countdown">
+    <div class="cd next"><div class="v">~34h</div><div class="l">to event</div></div>
+    <div class="cd"><div class="v">2</div><div class="l">prep days</div></div>
+    <div class="cd"><div class="v">0</div><div class="l">confirmed OA reports</div></div>
+  </div>
+</div>
+
+<section id="reality">
+  <h2><span class="num">01</span>Reality check</h2>
+  <div class="callout warn">
+    <strong>No format is confirmed.</strong> I searched GfG interview-experiences, Glassdoor, LeetCode Discuss, LinkedIn, and BluePond.AI's own careers page (<code>bluepond.ai/joinus</code>). There are zero public interview reports for BluePond.AI — it's a small, US-based (Basking Ridge, NJ) Insurtech startup founded 2024, and this looks like a first or early campus drive at SASTRA. You also confirmed you haven't received any placement-cell details on format yet.
+  </div>
+  <p style="color:var(--ink-2);font-size:14.5px">
+    That means there is no predicted paper here, and no fabricated "past BluePond questions." Everything below is built from two things that <em>are</em> real: the official JD text, and your own tailored resume. The plan below covers both a written-round scenario and a straight-to-interview scenario, since either is plausible for a startup this size.
+  </p>
+</section>
+
+<section id="known">
+  <h2><span class="num">02</span>What we actually know</h2>
+  <p class="lede">Straight from the JD (<code>Companies/BLUEPOND.AI/Bluepond.AI JD-Engineer Trainee.pdf</code>) — this is the only ground-truth source. Confidence: <span class="badge b-a">A — official JD text</span>.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>Company <span class="badge b-a">A</span></h4>
+      <p>AI-first Insurtech. Builds GenAI platforms for P&amp;C insurance underwriting — document understanding, risk analysis, workflow automation. Stack: Python backend, modern frontend, Azure cloud, event-driven &amp; modular architecture, multi-tenant.</p>
+    </div>
+    <div class="card">
+      <h4>Explicit requirements <span class="badge b-a">A</span></h4>
+      <ul>
+        <li>Strong DS, databases, system concepts</li>
+        <li>Comfortable in Python</li>
+        <li>Clear understanding of APIs / backend systems</li>
+        <li>Working understanding of LLMs — how they function, prompt design, RAG, agentic AI</li>
+        <li>Ability to "think in systems, not just functions"</li>
+        <li>Willingness to learn insurance domain concepts</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Your angle <span class="badge b-a">A</span></h4>
+      <p>Your resume is unusually well-matched to this JD — RAG, agentic AI (LangGraph), vector DBs, prompt engineering are your strongest section, not a weak spot to cram. The gap to close is <b>DSA/DBMS fluency under interview pressure</b> and <b>insurance-domain vocabulary</b>, which you have zero exposure to.</p>
+    </div>
+    <div class="card">
+      <h4>What's <em>not</em> stated <span class="badge b-c">unconfirmed</span></h4>
+      <p>No OA platform named, no round count, no timing, no coding-test presence. Do not assume Codility/HackerRank/SHL — nothing points to any of them.</p>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <h2><span class="num">03</span>2-day plan</h2>
+  <p class="lede">Today is 5 Aug (night), event is 7 Aug. Prioritized per your call: DSA/Python fundamentals → LLM/RAG/Agentic AI depth → system design. Insurance-domain vocabulary and mock rounds get the last slot each day, not the first — fundamentals decay fastest under pressure, domain trivia doesn't.</p>
+
+  <div class="day">
+    <div class="hd"><h4>Tonight — 5 Aug</h4><span class="meta">~2h</span></div>
+    <div class="bd">
+      <div class="task"><input type="checkbox" id="t1"><label for="t1">Read §04 DSA/Python concept cards + do all drill Qs (don't skip the "why" on misses)</label><span class="t">45m</span></div>
+      <div class="task"><input type="checkbox" id="t2"><label for="t2">Solve Coding Q1 (§08) cold, no hints, then check</label><span class="t">25m</span></div>
+      <div class="task"><input type="checkbox" id="t3"><label for="t3">Read §06 LLM/RAG concept cards — these should feel like a refresher, not new material</label><span class="t">30m</span></div>
+      <div class="task"><input type="checkbox" id="t4"><label for="t4">Sleep. Cramming past midnight costs more than it gives back two days out.</label><span class="t">—</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>6 Aug — full day</h4><span class="meta">~5h spread out</span></div>
+    <div class="bd">
+      <div class="task"><input type="checkbox" id="t5"><label for="t5">§05 DBMS/SQL cards + drills</label><span class="t">40m</span></div>
+      <div class="task"><input type="checkbox" id="t6"><label for="t6">Coding Q2 + Q3 (§08), timed 25 min each</label><span class="t">50m</span></div>
+      <div class="task"><input type="checkbox" id="t7"><label for="t7">§07 System design cards — event-driven, modular, multi-tenant, API design</label><span class="t">40m</span></div>
+      <div class="task"><input type="checkbox" id="t8"><label for="t8">Rehearse project defense answers out loud (§06) for RLM, A.R.G.U.S-V, FOMC — 2 min each, no notes</label><span class="t">30m</span></div>
+      <div class="task"><input type="checkbox" id="t9"><label for="t9">Re-read your own resume once, cover to cover, as if an interviewer will</label><span class="t">15m</span></div>
+      <div class="task"><input type="checkbox" id="t10"><label for="t10">Skim §09 likely rounds + §10 sources so nothing surprises you tomorrow</label><span class="t">15m</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="hd"><h4>7 Aug — morning of</h4><span class="meta">~30m</span></div>
+    <div class="bd">
+      <div class="task"><input type="checkbox" id="t11"><label for="t11">Re-run every drill Q you missed (§04–07), nothing new</label><span class="t">20m</span></div>
+      <div class="task"><input type="checkbox" id="t12"><label for="t12">One clean pass of the project-defense lines — don't first-draft them live</label><span class="t">10m</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="dsa">
+  <h2><span class="num">04</span>DSA &amp; Python fundamentals</h2>
+  <p class="lede">The JD says "strong fundamentals in data structures" and "comfortable programming in Python" — read literally, not "DSA grind." Expect these to surface as live-coding or rapid-fire conceptual questions, not LeetCode Hard.</p>
+
+  <div class="grid2">
+    <div class="card"><h4>Arrays vs. linked lists</h4><p>O(1) random access vs O(1) insert/delete at a known node. Know when Python's <code>list</code> (dynamic array) beats a manual linked structure — almost always, unless you need O(1) mid-sequence insert/delete at scale.</p></div>
+    <div class="card"><h4>Hash maps</h4><p><code>dict</code> in Python — average O(1) lookup/insert, O(n) worst case on pathological collisions. This is your single highest-yield tool for turning O(n²) brute force into O(n).</p></div>
+    <div class="card"><h4>Two pointers / sliding window</h4><p>For any "contiguous subarray/substring satisfying X" problem — converts an O(n²) nested loop into O(n) by moving one boundary instead of restarting.</p></div>
+    <div class="card"><h4>Recursion &amp; stack depth</h4><p>Every recursive call is a stack frame. Know the base case first, always. Python's default recursion limit (~1000) matters if you reach for recursion under pressure — mention iterative fallback if asked.</p></div>
+    <div class="card"><h4>Time/space complexity</h4><p>Be able to state Big-O for anything you write, unprompted. Nested loop over n → O(n²). Single hash-map pass → O(n) time, O(n) space. This is table-stakes, not a bonus.</p></div>
+    <div class="card"><h4>Python idioms</h4><p>List/dict comprehensions, <code>enumerate</code>, <code>zip</code>, unpacking, <code>collections.Counter</code>/<code>defaultdict</code>. Writing idiomatic Python under pressure signals "comfortable," not just "can write Python."</p></div>
+    <div class="card"><h4>Mutable default args</h4><p>Classic Python gotcha: <code>def f(x, cache=[])</code> shares one list across all calls. Know it, because it's cheap interview ammunition for "have you actually used Python."</p></div>
+    <div class="card"><h4>OOP basics</h4><p>Class vs instance attributes, <code>__init__</code>, inheritance, when composition beats inheritance. Your resume claims OOAD — be ready to justify a design choice, not just define terms.</p></div>
+  </div>
+
+  <h3>Drill</h3>
+  <div class="q">
+    <div class="stem"><span class="tag">Complexity</span>What's the time complexity of checking whether two strings are anagrams using a <code>Counter</code> comparison?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>O(n)</b><span class="why">Building each Counter is O(n); comparing two Counters is O(k) where k is alphabet size (constant for fixed charset). Sorting both strings instead would be O(n log n) — worse, and a common "correct but suboptimal" answer.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Data structures</span>You need O(1) average lookup, insertion, and deletion, and don't care about order. Which Python structure?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b><code>set</code> (or <code>dict</code> if you need associated values)</b><span class="why">A list gives O(n) lookup/delete. A set is a hash table — the right default whenever membership testing dominates.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Python gotcha</span>Why is <code>def append_to(item, target=[]):</code> dangerous?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Default mutable arguments are evaluated once, at function definition time</b><span class="why">Every call that doesn't pass <code>target</code> explicitly shares and mutates the <em>same</em> list object across calls. Fix: default to <code>None</code>, then <code>target = target or []</code> inside the body.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Recursion</span>What's the space complexity of a naive recursive Fibonacci(n) call, and why does it matter separately from time?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>O(n) space (call stack depth), O(2ⁿ) time</b><span class="why">Space is bounded by the deepest single branch of the recursion tree, not the total number of calls. This is why "it's exponential" alone is an incomplete answer — interviewers listen for whether you separate the two axes.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">OOP</span>When would you prefer composition over inheritance?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>When the relationship is "has-a" not "is-a," or when you need to swap behavior at runtime</b><span class="why">Inheritance locks in a hierarchy at design time and leaks parent implementation details. Composition (e.g. a class holding a strategy object) is more flexible and is the default in most modern Python/backend design — good to say explicitly given the JD's OOAD mention.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Sliding window</span>Given an array, find the length of the longest subarray with sum ≤ K. What's the pattern and complexity?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Variable-size sliding window, O(n) time, O(1) space</b><span class="why">Expand the right boundary, and while the running sum exceeds K, shrink from the left. Each index enters and leaves the window at most once, so total work is O(n) despite looking nested.</span></div>
+  </div>
+</section>
+
+<section id="dbms">
+  <h2><span class="num">05</span>DBMS / SQL fundamentals</h2>
+  <p class="lede">JD says "databases" explicitly. Given the product is document-heavy insurance data on Azure, expect both relational (structured policy/claims records) and possibly NoSQL/vector reasoning (your RAG background covers the latter already).</p>
+
+  <div class="grid2">
+    <div class="card"><h4>Normalization</h4><p>1NF/2NF/3NF in one sentence each: no repeating groups → no partial dependency on a composite key → no transitive dependency on non-key columns. Know <em>why</em> you'd denormalize anyway (read-heavy analytics, avoiding join cost).</p></div>
+    <div class="card"><h4>Joins</h4><p>INNER vs LEFT/RIGHT vs FULL OUTER. Be able to write one from memory involving a claims/policy-style two-table schema — this is the most likely live-SQL ask.</p></div>
+    <div class="card"><h4>Indexes</h4><p>Speed up reads, cost writes and storage. B-tree default; know that indexing every column isn't "faster," it's a trade-off you should be able to articulate.</p></div>
+    <div class="card"><h4>Transactions &amp; ACID</h4><p>Atomicity, Consistency, Isolation, Durability. For an insurance platform processing claims, this is a natural "why does this matter here" follow-up — a half-committed claim update is a real business problem, not a textbook abstraction.</p></div>
+    <div class="card"><h4>SQL vs NoSQL vs vector DB</h4><p>You already know this cold from LanceDB/Redis work — be ready to generalize it: structured transactional data → relational; flexible/nested docs → NoSQL; semantic similarity search → vector DB. Map it explicitly to "insurance documents" if asked.</p></div>
+  </div>
+
+  <h3>Drill</h3>
+  <div class="q">
+    <div class="stem"><span class="tag">SQL</span>Write a query returning each policyholder's name and their total claim amount, including policyholders with zero claims.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><pre>SELECT p.name, COALESCE(SUM(c.amount), 0) AS total_claims
+FROM policyholders p
+LEFT JOIN claims c ON c.policyholder_id = p.id
+GROUP BY p.name;</pre><span class="why">LEFT JOIN keeps policyholders with no matching claims rows; COALESCE turns the resulting NULL sum into 0. INNER JOIN here would silently drop zero-claim customers — a real correctness bug in an insurance context.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Indexing</span>You index a column that's updated on almost every write. What's the trade-off?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Faster reads on that column, slower writes</b><span class="why">Every INSERT/UPDATE now also has to update the index structure. On a write-heavy table, an unnecessary index can dominate write latency — the right answer is "it depends on read:write ratio," not "always index."</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">ACID</span>Why does isolation matter for a claims-processing system specifically?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Prevents two concurrent claim updates from reading stale intermediate state</b><span class="why">E.g. two adjusters processing the same claim simultaneously — without proper isolation you can get lost updates or dirty reads, which in an insurance payout context is a direct financial/compliance risk, not just a bug.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Data modeling</span>Would you store unstructured insurance PDFs (policy docs) in the relational DB directly?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>No — store the file in blob/object storage (e.g. Azure Blob), keep a reference/metadata row in the relational DB, and index extracted text/embeddings in a vector store</b><span class="why">This is exactly the architecture your RLM and A.R.G.U.S-V projects already implement — say so. It shows you're not reciting theory, you've built this pattern.</span></div>
+  </div>
+</section>
+
+<section id="llm">
+  <h2><span class="num">06</span>LLM / RAG / Agentic AI — your strongest section</h2>
+  <p class="lede">The JD asks for a "working understanding" — your resume shows you've actually built this, three times over. The risk here isn't knowledge, it's <em>articulating it crisply under pressure</em> instead of rambling through a project. Practice saying these out loud, not just reading them.</p>
+
+  <div class="grid2">
+    <div class="card"><h4>How an LLM generates text</h4><p>Autoregressive next-token prediction over a learned probability distribution, conditioned on all prior tokens (context window). Temperature/top-p control sampling randomness. Be ready for "what is a token" and "what is the context window" as bare-bones checks.</p></div>
+    <div class="card"><h4>RAG, precisely</h4><p>Retrieve relevant chunks (via embedding similarity search over a vector store) → inject them into the prompt as context → generate grounded on that context instead of parametric memory alone. Core benefit: reduces hallucination, adds fresh/private knowledge without retraining.</p></div>
+    <div class="card"><h4>Embeddings &amp; semantic search</h4><p>Text → dense vector such that semantically similar text lands close in vector space (cosine/dot-product similarity). This is what LanceDB/Redis-as-vector-store are doing in your projects.</p></div>
+    <div class="card"><h4>Agentic AI</h4><p>An LLM that doesn't just respond once, but plans, calls tools/functions, observes results, and iterates — vs. a single-shot prompt-response. LangGraph gives you explicit state machines/graphs over this loop instead of an implicit agent loop.</p></div>
+    <div class="card"><h4>Prompt engineering, scoped</h4><p>Structuring prompts for reliable, parseable output — role/system prompts, few-shot examples, explicit output schemas, token-efficiency. Not "magic phrasing," it's treating the prompt as an API contract.</p></div>
+    <div class="card"><h4>Where this maps to insurance</h4><p>Document understanding (policy PDFs → structured fields), underwriting assistance (risk signals from unstructured text), claims triage (classify/summarize incoming claims). Your FOMC project — dense jargon-heavy docs → structured queryable data — is explicitly "the same class of problem," per your own resume. Say that line almost verbatim if asked why you're a fit.</p></div>
+  </div>
+
+  <h3>Drill</h3>
+  <div class="q">
+    <div class="stem"><span class="tag">RAG</span>Why does RAG reduce hallucination compared to asking the base model directly?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>It grounds generation in retrieved, verifiable source text instead of relying purely on the model's parametric memory</b><span class="why">The model still generates language, but it's summarizing/synthesizing given context rather than recalling (and possibly misremembering) facts baked into its weights during training.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Agentic AI</span>What's the concrete difference between a single-shot RAG pipeline and an agentic system, in terms of control flow?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Single-shot: one retrieve → one generate. Agentic: the model can decide to retrieve again, call a different tool, or decompose the task into subtasks, based on intermediate results</b><span class="why">This is literally what your RLM project benchmarks — it explicitly beat single-shot RAG on multi-step queries because it could re-explore instead of committing to one retrieval pass.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Vector search</span>What does cosine similarity measure, and why is it preferred over Euclidean distance for text embeddings?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>The angle between two vectors, ignoring magnitude</b><span class="why">Embedding magnitude often correlates with things like text length rather than semantic content, so comparing direction (cosine) is more robust than raw distance for meaning-similarity.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Prompt engineering</span>Give one concrete technique for making an LLM's output reliably parseable by downstream code.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Force a structured output schema — e.g. explicit JSON schema in the system prompt, or function/tool-calling if the API supports it — plus 1–2 few-shot examples of the exact format</b><span class="why">"Just ask it nicely for JSON" is a weak answer; naming schema-constrained generation or function calling shows you've actually shipped this, which you have.</span></div>
+  </div>
+
+  <h3>Project-defense rehearsal — say these out loud, 2 min each, no notes</h3>
+  <div class="q">
+    <div class="stem"><span class="tag">RLM</span>"Walk me through the Recursive Language Model project."</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal talking points</button>
+    <div class="ans">Problem: fixed context windows limit how much a single LLM call can reason over for large documents/video. Approach: treat the prompt itself as an environment the root LLM explores via a REPL, recursively dispatching sub-model calls instead of stuffing everything into one context. Concretely: an orchestrator decomposes a query, an event-driven task queue dispatches to executor agents, each searches a LanceDB store of Whisper transcripts + CLIP frame embeddings. Result: beat single-shot RAG on all 3 multi-step temporal/cross-modal stress tests. Close with: shipped with docker-compose GPU deploy and a real pytest unit/integration/e2e suite — not just a notebook demo.</div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">A.R.G.U.S-V</span>"What did A.R.G.U.S-V do, and what was your specific contribution?"</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal talking points</button>
+    <div class="ans">End-to-end platform: LangGraph-orchestrated agentic pipeline ingests long-form YouTube video, answers deep NL queries over it. Your core piece: the RAG layer — multimodal retrieval, semantic search, Redis-backed caching turning unstructured video into structured query-ready data. Plus CI/CD for automated build/deploy, and prompt engineering to keep agent scope/output structured. If pushed on "why LangGraph specifically": explicit graph-based state control over the agent loop vs. an implicit black-box agent framework.</div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">FOMC</span>"Why is the FOMC project relevant to an insurance company?"</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal talking points</button>
+    <div class="ans">Multimodal Python/NLP system over dense, jargon-heavy domain documents (Fed transcripts, audio, visual signals) → structured, queryable output. Explicitly the same problem shape as insurance: unstructured policy/claims documents full of domain jargon that underwriters need turned into structured, actionable data. This is your strongest one-line pitch for "why BluePond" — use it.</div>
+  </div>
+</section>
+
+<section id="sysdesign">
+  <h2><span class="num">07</span>System design fundamentals</h2>
+  <p class="lede">JD's own words: "think in systems, not just functions." Given their stated architecture (event-driven, modular, multi-tenant, Azure), expect conceptual questions, not a full whiteboard design round — an Engineer Trainee round rarely does a senior-level system-design interview, but should be able to reason about these terms correctly.</p>
+
+  <div class="grid2">
+    <div class="card"><h4>Event-driven architecture</h4><p>Components communicate via events/messages (queue or pub-sub) instead of direct synchronous calls. Decouples producers from consumers, improves scalability and fault isolation — a slow consumer doesn't block the producer.</p></div>
+    <div class="card"><h4>Modularity</h4><p>System decomposed into components with clear boundaries and single responsibilities, communicating through well-defined interfaces. Lets teams build/deploy/scale pieces independently — directly tied to "building platforms, not just features."</p></div>
+    <div class="card"><h4>Multi-tenancy</h4><p>One deployed system serves multiple customers (tenants) with logically isolated data/config, sharing infrastructure. Core question to be ready for: "how do you keep Tenant A's data from leaking into Tenant B's queries" — row-level tenant_id scoping, separate schemas, or separate DBs, each a real trade-off.</p></div>
+    <div class="card"><h4>REST API design basics</h4><p>Resource-oriented URLs, correct HTTP verbs (GET/POST/PUT/DELETE), status codes that mean something (200/201/400/401/404/500), statelessness. JD explicitly names "clear understanding of APIs" — don't fumble a basic REST question.</p></div>
+    <div class="card"><h4>Scalability levers</h4><p>Horizontal (more instances) vs vertical (bigger instance) scaling, caching (you already know this from Redis), load balancing, async processing for slow operations (e.g. document analysis) instead of blocking the request thread.</p></div>
+  </div>
+
+  <h3>Drill</h3>
+  <div class="q">
+    <div class="stem"><span class="tag">Event-driven</span>Why would BluePond process an uploaded insurance document asynchronously via an event queue rather than synchronously in the API request?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>Document/LLM analysis is slow and variable-latency — blocking the HTTP request would time out or tie up server resources</b><span class="why">Instead: API accepts the upload, emits an event, returns immediately (e.g. 202 Accepted), and a background worker processes it, updating status the client can poll or get notified on. This is the same event-driven task-queue pattern your own RLM project already uses.</span></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Multi-tenancy</span>Name two ways to isolate tenant data in a shared database, and one trade-off each.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>(1) Shared schema with a <code>tenant_id</code> column on every table — cheap, simple, but a missing WHERE clause anywhere is a data leak. (2) Separate schema/DB per tenant — strong isolation, but higher operational overhead as tenant count grows.</b></div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">REST</span>A client requests a resource that doesn't exist. A client sends malformed input. What status codes, and why does the distinction matter?</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal answer</button>
+    <div class="ans"><b>404 Not Found vs 400 Bad Request</b><span class="why">Collapsing both into a generic error (or worse, 200 with an error body) makes the API impossible to handle programmatically on the client side — a real backend-hygiene signal interviewers check for.</span></div>
+  </div>
+</section>
+
+<section id="coding">
+  <h2><span class="num">08</span>Coding practice</h2>
+  <div class="callout">
+    These are <b>not</b> predicted BluePond questions — there is no source for that. They're fundamentals-level practice sized to what "strong DS fundamentals + comfortable in Python" plausibly means for a trainee round, solvable in 20–25 min each.
+  </div>
+
+  <div class="q">
+    <div class="stem"><span class="tag">Q1 · Hash map</span><b>Group Anagrams.</b> Given a list of strings, group the ones that are anagrams of each other. E.g. <code>["eat","tea","tan","ate","nat","bat"]</code> → <code>[["eat","tea","ate"],["tan","nat"],["bat"]]</code>.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal approach</button>
+    <div class="ans">Key each word by its sorted-character tuple (or a 26-length character-count tuple for O(k) instead of O(k log k) keying). Group into a <code>defaultdict(list)</code> by that key, one pass. <b>O(n·k log k)</b> time with sorted keys (n words, avg length k), <b>O(n·k)</b> space.</div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Q2 · Sliding window</span><b>Longest substring without repeating characters.</b> Given a string, return the length of the longest substring with all unique characters.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal approach</button>
+    <div class="ans">Variable sliding window with a set/dict tracking the last-seen index of each character. Expand right; if the current char was seen inside the current window, jump the left boundary past its last occurrence. Track max window size seen. <b>O(n)</b> time, <b>O(min(n, charset))</b> space.</div>
+  </div>
+  <div class="q">
+    <div class="stem"><span class="tag">Q3 · Two pointers / stack</span><b>Valid parentheses / balanced brackets.</b> Given a string of <code>(){}[]</code>, determine if it's balanced.</div>
+    <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal approach</button>
+    <div class="ans">Push opening brackets onto a stack. On a closing bracket, pop and check it matches the corresponding opener; mismatch or empty-stack-pop → invalid. Valid iff the stack is empty at the end. <b>O(n)</b> time, <b>O(n)</b> space worst case. Classic "do you actually know when to reach for a stack" check.</div>
+  </div>
+</section>
+
+<section id="interview">
+  <h2><span class="num">09</span>Likely rounds <span class="badge b-c">unconfirmed</span></h2>
+  <p class="lede">Inferred from the JD's shape and how small AI-startups typically run a first/early campus drive — not sourced from any BluePond-specific report. Don't over-anchor on the exact structure; anchor on being ready for each <em>category</em> regardless of order.</p>
+  <table>
+    <tr><th>Likely category</th><th>What to expect</th></tr>
+    <tr><td>Screening (maybe written, maybe skipped)</td><td>If present: basic DS/Python/SQL MCQs or a short coding problem. If absent: goes straight to interview.</td></tr>
+    <tr><td>Technical interview</td><td>Live coding (§08-level), DSA/Python/DBMS rapid-fire (§04–05), and near-certainly a deep dive into your LLM/RAG/agentic projects (§06) since that's your headline differentiator on the resume.</td></tr>
+    <tr><td>System-thinking discussion</td><td>Given the JD's explicit "think in systems" line — expect a conceptual discussion (§07), not necessarily a formal whiteboard design.</td></tr>
+    <tr><td>HR / culture fit</td><td>"Why insurtech," "why BluePond," willingness to learn a new domain, team-leadership story (you have a strong one — SIH team lead).</td></tr>
+  </table>
+  <div class="callout">Have one clean answer ready for <b>"why insurance, given none of your projects are insurance-specific"</b> — bridge honestly through FOMC (dense jargon-heavy documents → structured data) rather than overclaiming domain knowledge you don't have.</div>
+</section>
+
+<section id="sources">
+  <h2><span class="num">10</span>Sources</h2>
+  <ul class="srcs">
+    <li><b>Official JD</b> — <code>Companies/BLUEPOND.AI/Bluepond.AI JD-Engineer Trainee.pdf</code> (primary source for all "confirmed" content)</li>
+    <li><b>Your tailored resume</b> — <code>Companies/BLUEPOND.AI/S_SAI_KUMAR_Bluepond.pdf</code></li>
+    <li>bluepond.ai/joinus — checked directly; no process details published</li>
+    <li>Web search across GfG interview-experiences, Glassdoor, LinkedIn, Crunchbase/CBInsights (company background only) — zero interview reports found for BluePond.AI as of 5 Aug 2026</li>
+    <li>SASTRA placement channels — no BluePond-specific drive announcement found via search; you confirmed no placement-cell communication received yet</li>
+  </ul>
+  <div class="callout warn" style="margin-top:20px">If the placement cell sends format details before 7 Aug, that supersedes everything on this page — re-check before the event.</div>
+</section>
+
+<footer>
+  Built 5 Aug 2026 for the 7 Aug BluePond.AI Engineer Trainee campus drive. No fabricated OA content — every claim here traces to the JD, your resume, or an explicit "unconfirmed" label.
+</footer>
+
+</main>
+</div>
+</body>
+</html>
