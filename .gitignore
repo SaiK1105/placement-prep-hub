@@ -15,6 +15,9 @@
 Companies/**/*.pdf
 Companies/**/*.docx
 Companies/**/*.doc
+# LaTeX resume sources contain phone/email in plaintext - never publish
+Companies/**/*.tex
+**/*resume_source.tex
 
 # Copyrighted books and tool metadata
 Placement Training/APTITUDE/
