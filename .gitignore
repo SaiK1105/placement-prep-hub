@@ -33,3 +33,5 @@ desktop.ini
 
 # Extracted text of third-party assessment papers (same content as the PDFs)
 Companies/**/sample_paper_text.txt
+# Raw screenshots + verbatim transcripts of real proprietary OA content - study material, not for redistribution
+Companies/**/PYQ*/
