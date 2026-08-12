@@ -60,44 +60,121 @@ function showPage(id) {
 <body>
 <header>
   <h1>Comcast OA — Crash Prep</h1>
-  <div class="subtitle">Built from two real GeeksforGeeks candidate reports for Comcast's on-campus Development Engineer drive. PPT + OA tomorrow, 8:45 AM — this is a tonight-only crash session, prioritized by what both reports independently confirm.</div>
+  <div class="subtitle">Updated with direct placement-cell/senior intel received the evening before (higher confidence than the older GfG reports, which are kept below as background). PPT + OA tomorrow, 8:45 AM — this is a tonight-only crash session.</div>
   <div style="margin-top:8px">
-    <span class="badge">PPT + OA: 8:45 AM tomorrow</span><span class="badge">2 real reports, cross-checked</span><span class="badge">Confidence: B</span>
+    <span class="badge">PPT + OA: 8:45 AM tomorrow</span><span class="badge">2 rounds: computer-based, then 1-on-1</span><span class="badge">Coding: 2 DSA + 1 SQL</span><span class="badge">This drive: AI role, not mass hiring</span><span class="badge">Confidence: A (fresh intel) + B (old GfG)</span>
   </div>
   <nav>
     <button data-page="plan" onclick="showPage('plan')">Tonight's Plan</button>
+    <button data-page="aiml" onclick="showPage('aiml')">★ AI / ML / DL</button>
     <button data-page="sql" onclick="showPage('sql')">SQL Drill</button>
     <button data-page="cs" onclick="showPage('cs')">CS Fundamentals</button>
     <button data-page="coding" onclick="showPage('coding')">Coding</button>
-    <button data-page="interview" onclick="showPage('interview')">Interview + HR</button>
+    <button data-page="interview" onclick="showPage('interview')">Interview</button>
     <button data-page="sources" onclick="showPage('sources')">Sources</button>
   </nav>
 </header>
 <main>
 
 <section id="plan" class="page active">
+  <div class="card good">
+    <h2>Confirmed format — fresh intel</h2>
+    <p>Received the evening before the drive. This <b>supersedes</b> the older GfG reports where they conflict.</p>
+    <ul>
+      <li><b>2 rounds only</b> — computer-based test, then a one-on-one interview. (Older reports described 3 rounds; that's outdated.)</li>
+      <li><b>Round 1 = MCQ + coding</b>, computer-based.</li>
+      <li><b>Coding: exactly 3 problems — 2 DSA + 1 SQL.</b></li>
+      <li><b>MCQs span every subject</b> — DSA, CN, OS, aptitude, <b>Java, C, C++</b>, and more.</li>
+      <li><b>Round 2 = one-on-one</b>, interviewer-dependent: could be resume-driven, or straight subject basics. Prepare both.</li>
+    </ul>
+  </div>
   <div class="card note">
-    <h2>Reality check</h2>
-    <p>No leaked 2026 SASTRA paper exists. Two independent GfG reports (different years, both "Development Engineer, on-campus") agree on the shape: <b>SQL-heavy technical round, CS-fundamentals MCQ block, light coding.</b> Section count varies between reports (6-7 vs 9) — treat the topic list as reliable, the exact count as not.</p>
+    <h2>The big shift — this is an AI role</h2>
+    <p>Last cycle was <b>mass hiring</b>. This time Comcast is reportedly looking for people with <b>AI knowledge — building agents to automate things.</b> So expect AI/ML/DL questions to appear, and expect the round structure or question mix to differ from every past report.</p>
+    <p style="color:var(--accent2);margin-top:8px"><b>This is the single best break you've had all season.</b> Agentic AI is the strongest thing on your resume — A.R.G.U.S-V is literally LangGraph agent orchestration, and you reproduced a recursive-LLM paper with a benchmarked baseline. Most candidates in that room will be improvising on this section. Do not under-sell it.</p>
   </div>
   <div class="grid">
-    <div class="kpi"><strong>OA shape</strong>6-9 sections: MCQs on DBMS/OS/CN/Linux/DS/SQL, some aptitude/logical reasoning, 1-2 easy-medium coding problems</div>
-    <div class="kpi"><strong>Highest weight</strong>SQL joins &amp; subqueries — appears explicitly in <em>both</em> reports, in both the OA and the technical interview</div>
-    <div class="kpi"><strong>Coding tier</strong>Easy-medium only: palindrome checks, "second max in array," sorting complexity — not LeetCode Hard</div>
-    <div class="kpi"><strong>Near-certain HR Q</strong>"Are you willing to relocate to Chennai?" — appeared in both reports, have a real answer ready</div>
+    <div class="kpi"><strong>Round 1</strong>MCQ (all subjects) + 3 coding: 2 DSA, 1 SQL — computer-based</div>
+    <div class="kpi"><strong>Round 2</strong>One-on-one. Interviewer-dependent: resume deep-dive OR subject basics</div>
+    <div class="kpi"><strong>New wildcard</strong>AI/ML/DL questions — role pivot to agent-building automation</div>
+    <div class="kpi"><strong>Your edge</strong>Agentic AI + RAG + a from-scratch transformer. Lead with these when given any opening</div>
   </div>
 
-  <h3>Tonight (allocate what you have before sleep)</h3>
+  <h3>Tonight — revised priority</h3>
   <table>
-    <tr><th>Block</th><th>Time</th><th>Do</th></tr>
-    <tr><td>1</td><td>35 min</td><td>SQL drill (§ SQL Drill) — joins and subqueries cold, then check</td></tr>
-    <tr><td>2</td><td>30 min</td><td>CS fundamentals rapid-fire (§ CS Fundamentals) — DBMS/OS/CN/DS/Linux</td></tr>
-    <tr><td>3</td><td>25 min</td><td>2 coding problems (§ Coding), timed 12 min each</td></tr>
-    <tr><td>4</td><td>10 min</td><td>Rehearse the relocation + "why Comcast" answers out loud (§ Interview + HR)</td></tr>
-    <tr><td>—</td><td>—</td><td><b>Sleep.</b> PPT + OA is 8:45 AM — a rested brain beats one more hour of MCQs.</td></tr>
+    <tr><th>#</th><th>Time</th><th>Do</th><th>Why</th></tr>
+    <tr><td>1</td><td>30 min</td><td><b>§ AI / ML / DL</b> — new section, read + say answers out loud</td><td>New highest-value area; it's also your strength</td></tr>
+    <tr><td>2</td><td>25 min</td><td><b>§ SQL Drill</b> — 1 of your 3 coding problems is guaranteed SQL</td><td>Confirmed, guaranteed marks</td></tr>
+    <tr><td>3</td><td>25 min</td><td><b>§ Coding</b> — 2 DSA problems, timed 12 min each</td><td>Confirmed 2 DSA problems</td></tr>
+    <tr><td>4</td><td>30 min</td><td><b>§ CS Fundamentals</b> — now includes Java/C/C++ output traps</td><td>MCQs span all subjects</td></tr>
+    <tr><td>5</td><td>10 min</td><td><b>§ Interview</b> — rehearse the agentic-AI pitch out loud</td><td>Round 2 may open on your resume</td></tr>
+    <tr><td>—</td><td>—</td><td colspan="2"><b>Sleep.</b> 8:45 AM report time — rested beats one more hour of MCQs.</td></tr>
   </table>
   <h3>Before you leave tomorrow</h3>
-  <p style="color:var(--muted);font-size:14px">Skim §CS Fundamentals and §SQL Drill once more, nothing new. Re-read your own resume once — the technical interview goes straight into your projects.</p>
+  <p style="color:var(--muted);font-size:14px">Skim § AI/ML/DL and § SQL Drill only. Nothing new. Re-read your own resume once — if the interviewer goes resume-first, you want your own project details loaded, not recalled cold.</p>
+</section>
+
+<section id="aiml" class="page">
+  <h2>AI / ML / DL — the new priority</h2>
+  <div class="card good">
+    <p>Comcast is reportedly hiring for <b>AI / agent-building</b> this cycle, so expect this material in both the MCQs and the interview. <b>This section is your advantage</b> — you've built agentic systems, a RAG pipeline with a benchmarked baseline, and a transformer from scratch. Read this to sharpen recall and phrasing, not to learn it.</p>
+  </div>
+
+  <h3>Agents &amp; automation — the reason they're hiring</h3>
+  <div class="q">
+    <b>What is an AI agent, vs. a single LLM call?</b>
+    <details><summary>Reveal</summary><p>An agent <b>plans, calls tools, observes the result, and iterates</b> in a loop until a goal is met — instead of a one-shot prompt→response. Key components: an LLM as the reasoning core, tool/function calling, memory (short-term context + long-term store), and a control loop. <b>Your line:</b> "In A.R.G.U.S-V I orchestrated retrieval agents with LangGraph, which gives you an explicit state graph over that loop rather than an opaque agent framework."</p></details>
+  </div>
+  <div class="q">
+    <b>How would you build an agent to automate a business workflow?</b>
+    <details><summary>Reveal</summary><p>Define the goal and success criteria → expose the systems as <b>tools with typed schemas</b> (APIs, DB queries) → let the LLM plan and select tools → validate every output before it takes effect → add a human-in-the-loop gate for irreversible actions → log every step for auditability. <b>Say the safety part out loud</b> — for a company automating real operations, "what happens when the agent is wrong" is the mature answer that separates you from a candidate reciting LangChain tutorials.</p></details>
+  </div>
+  <div class="q">
+    <b>What is RAG and why use it?</b>
+    <details><summary>Reveal</summary><p>Retrieval-Augmented Generation: embed a query → semantic search over a vector store → inject retrieved chunks into the prompt → generate grounded in that context. Benefits: reduces hallucination, adds private/fresh knowledge <b>without retraining</b>, and gives you citable sources. <b>Your line:</b> "I reproduced a recursive-LM paper and benchmarked it against a single-shot RAG baseline — 3/3 vs 0/3 on multi-step queries."</p></details>
+  </div>
+  <div class="q">
+    <b>Fine-tuning vs. RAG vs. prompt engineering — when do you pick each?</b>
+    <details><summary>Reveal</summary><p><b>Prompting</b>: cheapest, no training, first thing to try. <b>RAG</b>: when the model needs knowledge it doesn't have (private/changing data) — no weight updates. <b>Fine-tuning</b>: when you need to change behaviour, style, or format consistently, not just add facts. Rule of thumb: <b>RAG for knowledge, fine-tuning for behaviour.</b> Very common interview question.</p></details>
+  </div>
+  <div class="q">
+    <b>What are embeddings and vector databases?</b>
+    <details><summary>Reveal</summary><p>Embeddings map text/images to dense vectors where semantic similarity ≈ geometric closeness (cosine similarity). Vector DBs (LanceDB, Pinecone, FAISS, Redis) index these for fast approximate nearest-neighbour search. <b>Cosine over Euclidean</b> because magnitude often tracks text length, not meaning. You've used LanceDB and Redis — name them.</p></details>
+  </div>
+  <div class="q">
+    <b>Hallucination — what causes it, how do you reduce it?</b>
+    <details><summary>Reveal</summary><p>Cause: the model predicts plausible tokens from parametric memory with no grounding or truth check. Mitigations: RAG grounding, citation requirements, lower temperature, structured/schema-constrained output, self-consistency checks, and validation against a source of truth before acting.</p></details>
+  </div>
+
+  <h3>Core ML — likely MCQ territory</h3>
+  <div class="grid">
+    <div class="q"><b>Supervised vs Unsupervised vs Reinforcement</b>Supervised: labelled data (classification/regression). Unsupervised: no labels, find structure (clustering, PCA). RL: agent learns from reward signal through interaction.</div>
+    <div class="q"><b>Overfitting vs Underfitting</b>Overfit: low train error, high test error — memorised noise. Underfit: high error both — model too simple. Fixes for overfit: more data, regularisation (L1/L2), dropout, early stopping, cross-validation.</div>
+    <div class="q"><b>Bias-Variance tradeoff</b>High bias = underfitting (too simple). High variance = overfitting (too sensitive to training data). Total error = bias² + variance + irreducible noise.</div>
+    <div class="q"><b>Train / Validation / Test</b>Train: fit weights. Validation: tune hyperparameters, select model. Test: final unbiased estimate, touched <b>once</b>. Leaking test into tuning is the classic mistake.</div>
+    <div class="q"><b>Precision vs Recall</b>Precision = TP/(TP+FP) — of what I flagged, how much was right. Recall = TP/(TP+FN) — of what existed, how much did I catch. F1 = harmonic mean. Accuracy misleads on imbalanced data.</div>
+    <div class="q"><b>L1 vs L2 regularisation</b>L1 (Lasso): drives weights to exactly zero → feature selection. L2 (Ridge): shrinks weights smoothly, doesn't zero them.</div>
+    <div class="q"><b>Gradient descent</b>Iteratively step weights opposite the loss gradient. Batch (all data), Stochastic (one sample), Mini-batch (standard compromise). Learning rate too high → diverges; too low → crawls.</div>
+    <div class="q"><b>Confusion matrix</b>TP / FP / FN / TN. Be able to compute precision, recall, accuracy from a given matrix — a very common MCQ format.</div>
+  </div>
+
+  <h3>Deep learning — you have a real edge here</h3>
+  <div class="q">
+    <b>Explain the transformer architecture / self-attention.</b>
+    <details><summary>Reveal</summary><p>Self-attention lets every token attend to every other token directly: compute <b>Query, Key, Value</b> projections, score = softmax(QKᵀ/√d_k), output = score·V. Multi-head runs several attention subspaces in parallel. Positional encodings inject order (attention itself is permutation-invariant). Advantage over RNNs: <b>parallelisable</b> and no long-range dependency decay. <b>Your line:</b> "I implemented this from first principles in PyTorch — MLP blocks, single- and multi-head attention, full decoder stack, no high-level model libraries — and trained a 13M-parameter model on The Pile to coherent generation."</p></details>
+  </div>
+  <div class="q">
+    <b>Why √d_k in the attention scaling?</b>
+    <details><summary>Reveal</summary><p>Dot products grow with dimension; large values push softmax into saturated regions where gradients vanish. Dividing by √d_k keeps variance ~1 so gradients stay usable. A great "did you actually implement it" discriminator — and you did.</p></details>
+  </div>
+  <div class="grid">
+    <div class="q"><b>Activation functions</b>ReLU: max(0,x), cheap, can "die". Sigmoid: (0,1), saturates/vanishing gradient. Tanh: (-1,1), zero-centred. Softmax: converts logits to a probability distribution over classes.</div>
+    <div class="q"><b>Vanishing / exploding gradients</b>Deep nets multiply gradients through layers → shrink to 0 or blow up. Fixes: ReLU, residual/skip connections, batch/layer norm, careful init, gradient clipping.</div>
+    <div class="q"><b>CNN vs RNN vs Transformer</b>CNN: spatial/local features (images). RNN/LSTM: sequential, has memory, hard to parallelise. Transformer: attention-based, parallel, dominant for sequences now.</div>
+    <div class="q"><b>Dropout</b>Randomly zeroes activations during training to prevent co-adaptation; disabled at inference (weights scaled). A regularisation technique.</div>
+    <div class="q"><b>Batch normalisation</b>Normalises layer inputs per mini-batch → faster, more stable training, mild regularisation. LayerNorm (per-sample) is what transformers use instead.</div>
+    <div class="q"><b>Epoch vs Batch vs Iteration</b>Epoch: one full pass over the dataset. Batch: samples per weight update. Iteration: one update. iterations/epoch = dataset size ÷ batch size.</div>
+  </div>
 </section>
 
 <section id="sql" class="page">
@@ -164,7 +241,23 @@ WHERE salary < (SELECT MAX(salary) FROM employees);</pre>
 
 <section id="cs" class="page">
   <h2>CS Fundamentals — rapid fire</h2>
-  <p style="color:var(--muted);font-size:14px">Both reports confirm MCQs on DBMS, OS, CN, Linux, DS. This is recall speed, not derivation — treat it as a 30-minute refresh, not new learning.</p>
+  <p style="color:var(--muted);font-size:14px">Confirmed MCQ scope: <b>DSA, CN, OS, aptitude, Java, C, C++</b> and more. Recall speed, not derivation — a 30-minute refresh, not new learning. Language traps are below the core topics.</p>
+
+  <h3>Java / C / C++ — output traps (newly confirmed in scope)</h3>
+  <div class="grid">
+    <div class="q"><b>Java — <code>==</code> vs <code>.equals()</code></b><code>==</code> compares references; <code>.equals()</code> compares content. <code>new String("a") == new String("a")</code> is <b>false</b>. But string <i>literals</i> are interned, so <code>"a" == "a"</code> is <b>true</b>. Classic MCQ.</div>
+    <div class="q"><b>Java — Integer caching</b><code>Integer a=127, b=127; a==b</code> → <b>true</b> (cached -128..127). <code>Integer a=128, b=128; a==b</code> → <b>false</b>. Pure trap question.</div>
+    <div class="q"><b>Java — overloading vs overriding</b>Overloading: same name, different params, resolved at <b>compile</b> time. Overriding: subclass redefines a parent method, resolved at <b>runtime</b> (dynamic dispatch).</div>
+    <div class="q"><b>Java — String immutability</b>Strings are immutable; every "modification" makes a new object. Use <code>StringBuilder</code> for loops of concatenation (else O(n²)).</div>
+    <div class="q"><b>C — <code>i++</code> vs <code>++i</code></b>Post-increment returns the old value then increments; pre-increment increments then returns. <code>int i=5; printf("%d", i++ + ++i);</code> is <b>undefined behaviour</b> — multiple modifications between sequence points.</div>
+    <div class="q"><b>C — pointer arithmetic</b><code>ptr+1</code> advances by <code>sizeof(*ptr)</code> bytes, not 1 byte. Array name decays to a pointer to its first element; <code>sizeof(arr)</code> on an array gives total bytes, but on a pointer gives pointer size.</div>
+    <div class="q"><b>C — integer division &amp; promotion</b><code>5/2 == 2</code> (int division), <code>5/2.0 == 2.5</code>. Mixing signed/unsigned promotes to unsigned — <code>-1 &lt; 1u</code> is <b>false</b>.</div>
+    <div class="q"><b>C++ — pass by value/reference/pointer</b>Value: copies. Reference (<code>&amp;</code>): alias, no copy, can't be null/reseated. Pointer: can be null, can be reassigned. Prefer <code>const&amp;</code> for large read-only params.</div>
+    <div class="q"><b>C++ — virtual functions</b><code>virtual</code> enables runtime polymorphism via the vtable. A base class with virtual methods needs a <b>virtual destructor</b>, else deleting via base pointer leaks the derived part.</div>
+    <div class="q"><b>C++ — static vs dynamic allocation</b>Stack: automatic, scope-bound, fast. Heap (<code>new</code>/<code>malloc</code>): manual lifetime, must free/delete. Prefer smart pointers (<code>unique_ptr</code>, <code>shared_ptr</code>) in modern C++.</div>
+  </div>
+
+  <h3>Core subjects</h3>
   <div class="grid">
     <div class="q"><b>DBMS — Normalization</b>1NF: no repeating groups. 2NF: no partial dependency on a composite key. 3NF: no transitive dependency on a non-key column. Know why you'd denormalize anyway (read-heavy, avoid join cost).</div>
     <div class="q"><b>DBMS — ACID</b>Atomicity, Consistency, Isolation, Durability. Isolation levels: Read Uncommitted → Read Committed → Repeatable Read → Serializable, each fixing a specific anomaly (dirty read, non-repeatable read, phantom read).</div>
@@ -205,10 +298,17 @@ WHERE salary < (SELECT MAX(salary) FROM employees);</pre>
 </section>
 
 <section id="interview" class="page">
-  <h2>Technical interview + HR — rehearse these tonight</h2>
+  <h2>Round 2 — the one-on-one</h2>
+  <div class="card note">
+    <p><b>Confirmed: it's interviewer-dependent.</b> They may go deep on your resume, or they may just drill subject basics. Prepare both — don't walk in assuming it's a resume chat.</p>
+  </div>
+  <div class="q">
+    <b>★ If they open on AI / agents — this is your round to win</b>
+    <details><summary>Reveal talking points</summary><p>They're hiring for agent-building automation. Lead with <b>A.R.G.U.S-V</b>: LangGraph-orchestrated retrieval agents over multimodal video, Redis caching for repeat-query latency, CI/CD, modular service boundaries. Then <b>RLM</b>: reproduced a research paper into a working distributed orchestrator/worker system and <b>benchmarked it against a single-shot RAG baseline, 3/3 vs 0/3</b> on multi-step queries. Then the <b>from-scratch transformer</b> if they want depth on fundamentals. Three distinct proof points — most candidates will have zero.</p></details>
+  </div>
   <div class="q">
     <b>"Are you willing to relocate to Chennai?"</b>
-    <details><summary>Reveal note</summary><p>Appeared in <em>both</em> independent reports — near-certain. Comcast's India development center is in Chennai. Have a direct "yes" ready, don't hesitate on it live.</p></details>
+    <details><summary>Reveal note</summary><p>Appeared in <em>both</em> older reports. Comcast's India development center is in Chennai. Have a direct "yes" ready — your resume already states "open to any work location and to variable/overtime schedules."</p></details>
   </div>
   <div class="q">
     <b>"Describe two data structures with a real-time example, and which is best for frequent insertions/deletions."</b>
@@ -230,6 +330,10 @@ WHERE salary < (SELECT MAX(salary) FROM employees);</pre>
 
 <section id="sources" class="page">
   <h2>Sources</h2>
+  <div class="card good">
+    <p><b>Primary — fresh intel, evening of 7 Aug 2026 (Confidence A).</b> Direct word-of-mouth from the placement network: 2 rounds (computer-based MCQ + coding, then one-on-one); coding is 3 problems = 2 DSA + 1 SQL; MCQs span DSA/CN/OS/aptitude/Java/C/C++; round 2 is interviewer-dependent (resume or subject basics). Last cycle was mass hiring — <b>this cycle targets AI knowledge for building automation agents</b>, so AI/ML/DL content is likely and the format may shift from all prior reports. This supersedes the GfG reports below wherever they conflict.</p>
+  </div>
+  <p style="color:var(--muted);font-size:13.5px"><b>Background — older GfG reports (Confidence B).</b> Different years, "Development Engineer, on-campus". Useful for topic flavour and the interview/HR questions, but their round structure is now known to be out of date.</p>
   <ul>
     <li><a href="https://www.geeksforgeeks.org/interview-experiences/comcast-interview-experience-for-development-engineer-on-campus-2023/">GfG — Comcast Interview Experience for Development Engineer (On-Campus) 2023</a> — OA: 6-7 sections, 2 coding (easy-medium), MCQs on DBMS/DS/OS/CN/Java/SpringBoot/Python; ~150 shortlisted; tech round covered palindrome, second-max-element, sorting complexity, SQL joins/subqueries; HR covered Chennai relocation.</li>
     <li><a href="https://www.geeksforgeeks.org/interview-experiences/comcast-interview-experience-on-campus/">GfG — Comcast Interview Experience | On-Campus</a> — OA described as 9 sections (Quant, Logical Reasoning, Linux, SQL, Guess-the-Output, Network Security); ~150 shortlisted; technical-HR round asked for 5 live SQL queries (joins/subqueries), DS-with-example, resume questions; HR covered Chennai relocation, salary, motivation.</li>
