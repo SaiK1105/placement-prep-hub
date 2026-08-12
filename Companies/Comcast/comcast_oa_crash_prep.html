@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comcast OA — Crash Prep, 8 Aug 2026</title>
+<style>
+:root {
+  --bg: #0b0f14; --panel: #111822; --panel2: #16202d;
+  --ink: #eef6ff; --muted: #aec1d2; --accent: #6fe3c1; --accent2: #c7f59b;
+  --warn: #ffd166; --bad: #ff9aa2; --line: #2a3a4d; --code: #071019;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.55; }
+header { padding: 26px 20px 16px; background: linear-gradient(120deg, #0f1722, #1a1f2e); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+h1 { margin: 0 0 8px; font-size: clamp(24px, 4vw, 38px); }
+.subtitle { color: var(--muted); max-width: 900px; font-size: 14.5px; }
+.badge { display: inline-block; border: 1px solid var(--line); background: #101820; color: var(--accent2); padding: 4px 10px; border-radius: 999px; margin: 3px 5px 3px 0; font-size: 12.5px; }
+nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+nav button { background: var(--panel2); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; cursor: pointer; font: inherit; font-size: 13px; }
+nav button.active, nav button:hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(111,227,193,.15) inset; }
+main { max-width: 1080px; margin: 0 auto; padding: 20px; }
+.page { display: none; animation: fade .15s ease-in; }
+.page.active { display: block; }
+@keyframes fade { from { opacity: .4; } to { opacity: 1; } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
+.note { border-left: 4px solid var(--warn); }
+.good { border-left: 4px solid var(--accent2); }
+h2 { margin: 8px 0 10px; font-size: 24px; }
+h3 { margin: 16px 0 8px; color: var(--accent); font-size: 16px; }
+a { color: var(--accent); }
+ul { padding-left: 20px; } li { margin: 5px 0; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; vertical-align: top; font-size: 13.5px; }
+th { background: #1a2634; color: var(--accent2); text-align: left; }
+code, pre { font-family: "Cascadia Code", Consolas, monospace; font-size: 13px; }
+pre { background: var(--code); border: 1px solid var(--line); color: #e9f7ff; padding: 12px; border-radius: 10px; overflow-x: auto; }
+code { background: var(--code); padding: 1px 5px; border-radius: 4px; color: var(--accent2); }
+.q { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 10px 0; background: #0f1722; }
+.q .meta { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+details { margin-top: 8px; border: 1px dashed var(--line); border-radius: 10px; padding: 8px 10px; background: rgba(255,255,255,.02); }
+summary { cursor: pointer; color: var(--warn); font-size: 13.5px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.kpi { background: #0f1722; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-size: 13.5px; }
+.kpi strong { display:block; color: var(--accent2); font-size: 18px; }
+.footer { color: var(--muted); font-size: 12.5px; margin: 24px 0; }
+@media print { nav { display: none; } .page { display: block !important; } }
+</style>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('button[data-page="' + id + '"]').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>Comcast OA — Crash Prep</h1>
+  <div class="subtitle">Built from two real GeeksforGeeks candidate reports for Comcast's on-campus Development Engineer drive. PPT + OA tomorrow, 8:45 AM — this is a tonight-only crash session, prioritized by what both reports independently confirm.</div>
+  <div style="margin-top:8px">
+    <span class="badge">PPT + OA: 8:45 AM tomorrow</span><span class="badge">2 real reports, cross-checked</span><span class="badge">Confidence: B</span>
+  </div>
+  <nav>
+    <button data-page="plan" onclick="showPage('plan')">Tonight's Plan</button>
+    <button data-page="sql" onclick="showPage('sql')">SQL Drill</button>
+    <button data-page="cs" onclick="showPage('cs')">CS Fundamentals</button>
+    <button data-page="coding" onclick="showPage('coding')">Coding</button>
+    <button data-page="interview" onclick="showPage('interview')">Interview + HR</button>
+    <button data-page="sources" onclick="showPage('sources')">Sources</button>
+  </nav>
+</header>
+<main>
+
+<section id="plan" class="page active">
+  <div class="card note">
+    <h2>Reality check</h2>
+    <p>No leaked 2026 SASTRA paper exists. Two independent GfG reports (different years, both "Development Engineer, on-campus") agree on the shape: <b>SQL-heavy technical round, CS-fundamentals MCQ block, light coding.</b> Section count varies between reports (6-7 vs 9) — treat the topic list as reliable, the exact count as not.</p>
+  </div>
+  <div class="grid">
+    <div class="kpi"><strong>OA shape</strong>6-9 sections: MCQs on DBMS/OS/CN/Linux/DS/SQL, some aptitude/logical reasoning, 1-2 easy-medium coding problems</div>
+    <div class="kpi"><strong>Highest weight</strong>SQL joins &amp; subqueries — appears explicitly in <em>both</em> reports, in both the OA and the technical interview</div>
+    <div class="kpi"><strong>Coding tier</strong>Easy-medium only: palindrome checks, "second max in array," sorting complexity — not LeetCode Hard</div>
+    <div class="kpi"><strong>Near-certain HR Q</strong>"Are you willing to relocate to Chennai?" — appeared in both reports, have a real answer ready</div>
+  </div>
+
+  <h3>Tonight (allocate what you have before sleep)</h3>
+  <table>
+    <tr><th>Block</th><th>Time</th><th>Do</th></tr>
+    <tr><td>1</td><td>35 min</td><td>SQL drill (§ SQL Drill) — joins and subqueries cold, then check</td></tr>
+    <tr><td>2</td><td>30 min</td><td>CS fundamentals rapid-fire (§ CS Fundamentals) — DBMS/OS/CN/DS/Linux</td></tr>
+    <tr><td>3</td><td>25 min</td><td>2 coding problems (§ Coding), timed 12 min each</td></tr>
+    <tr><td>4</td><td>10 min</td><td>Rehearse the relocation + "why Comcast" answers out loud (§ Interview + HR)</td></tr>
+    <tr><td>—</td><td>—</td><td><b>Sleep.</b> PPT + OA is 8:45 AM — a rested brain beats one more hour of MCQs.</td></tr>
+  </table>
+  <h3>Before you leave tomorrow</h3>
+  <p style="color:var(--muted);font-size:14px">Skim §CS Fundamentals and §SQL Drill once more, nothing new. Re-read your own resume once — the technical interview goes straight into your projects.</p>
+</section>
+
+<section id="sql" class="page">
+  <h2>SQL Drill — the highest-confidence topic</h2>
+  <p style="color:var(--muted);font-size:14px">Both reports call out SQL explicitly, including "write 5 queries, joins + subqueries" live in the technical interview. Assume you'll be asked to write SQL by hand, not just recognize it in an MCQ.</p>
+
+  <div class="q">
+    <div class="meta">Schema: employees(id, name, dept_id, salary, manager_id), departments(id, name)</div>
+    <b>Q1.</b> List each department's name with its average salary, only for departments with more than 3 employees.
+    <details><summary>Reveal answer</summary>
+      <pre>SELECT d.name, AVG(e.salary) AS avg_salary
+FROM departments d
+JOIN employees e ON e.dept_id = d.id
+GROUP BY d.name
+HAVING COUNT(e.id) > 3;</pre>
+      <p>HAVING filters after GROUP BY (WHERE can't reference an aggregate). Common trap: using WHERE COUNT(...) — that fails.</p>
+    </details>
+  </div>
+  <div class="q">
+    <div class="meta">Same schema</div>
+    <b>Q2.</b> Find employees who earn more than their own manager.
+    <details><summary>Reveal answer</summary>
+      <pre>SELECT e.name
+FROM employees e
+JOIN employees m ON e.manager_id = m.id
+WHERE e.salary > m.salary;</pre>
+      <p>Self-join — the same table joined to itself via manager_id → id. This exact shape ("compare a row to a related row in the same table") is a classic Comcast-style ask.</p>
+    </details>
+  </div>
+  <div class="q">
+    <div class="meta">Same schema</div>
+    <b>Q3.</b> List employees who earn more than the average salary of their own department, using a subquery (not a window function).
+    <details><summary>Reveal answer</summary>
+      <pre>SELECT e.name
+FROM employees e
+WHERE e.salary > (
+  SELECT AVG(e2.salary) FROM employees e2 WHERE e2.dept_id = e.dept_id
+);</pre>
+      <p>Correlated subquery — the inner query re-runs per outer row, referencing the outer row's dept_id. This is the "subqueries" half of "joins and subqueries" — practice this shape specifically.</p>
+    </details>
+  </div>
+  <div class="q">
+    <div class="meta">Same schema</div>
+    <b>Q4.</b> List departments with no employees at all.
+    <details><summary>Reveal answer</summary>
+      <pre>SELECT d.name
+FROM departments d
+LEFT JOIN employees e ON e.dept_id = d.id
+WHERE e.id IS NULL;</pre>
+      <p>LEFT JOIN + IS NULL is the standard "find the missing side" pattern — an INNER JOIN here would silently drop empty departments instead of surfacing them.</p>
+    </details>
+  </div>
+  <div class="q">
+    <div class="meta">Same schema</div>
+    <b>Q5.</b> Get the second-highest salary in the company without using LIMIT/OFFSET.
+    <details><summary>Reveal answer</summary>
+      <pre>SELECT MAX(salary) AS second_highest
+FROM employees
+WHERE salary < (SELECT MAX(salary) FROM employees);</pre>
+      <p>Nested MAX — a very common "gotcha" SQL question precisely because LIMIT/OFFSET isn't portable across every DB engine.</p>
+    </details>
+  </div>
+</section>
+
+<section id="cs" class="page">
+  <h2>CS Fundamentals — rapid fire</h2>
+  <p style="color:var(--muted);font-size:14px">Both reports confirm MCQs on DBMS, OS, CN, Linux, DS. This is recall speed, not derivation — treat it as a 30-minute refresh, not new learning.</p>
+  <div class="grid">
+    <div class="q"><b>DBMS — Normalization</b>1NF: no repeating groups. 2NF: no partial dependency on a composite key. 3NF: no transitive dependency on a non-key column. Know why you'd denormalize anyway (read-heavy, avoid join cost).</div>
+    <div class="q"><b>DBMS — ACID</b>Atomicity, Consistency, Isolation, Durability. Isolation levels: Read Uncommitted → Read Committed → Repeatable Read → Serializable, each fixing a specific anomaly (dirty read, non-repeatable read, phantom read).</div>
+    <div class="q"><b>OS — Deadlock</b>Four necessary conditions: mutual exclusion, hold-and-wait, no preemption, circular wait. Break any one → no deadlock.</div>
+    <div class="q"><b>OS — Process vs Thread</b>Process: own memory space, heavyweight context switch. Thread: shares memory with siblings, lightweight switch. Threads within a process share heap/data, each has its own stack.</div>
+    <div class="q"><b>OS — Paging vs Segmentation</b>Paging: fixed-size blocks, no external fragmentation, may have internal fragmentation. Segmentation: variable-size logical units, opposite trade-off.</div>
+    <div class="q"><b>CN — TCP vs UDP</b>TCP: connection-oriented, reliable, ordered, slower (3-way handshake). UDP: connectionless, no guarantee, faster — used where speed beats reliability (video/voice).</div>
+    <div class="q"><b>CN — OSI layers</b>Physical → Data Link → Network → Transport → Session → Presentation → Application ("Please Do Not Throw Sausage Pizza Away"). Know which layer does what: IP=Network, TCP/UDP=Transport, HTTP=Application.</div>
+    <div class="q"><b>CN — DNS</b>Resolves domain name → IP address, hierarchical (root → TLD → authoritative), cached at multiple levels (browser, OS, resolver).</div>
+    <div class="q"><b>DS — Array vs Linked List</b>Array: O(1) random access, O(n) insert/delete mid-sequence. Linked List: O(n) access, O(1) insert/delete at a known node. Know when each wins.</div>
+    <div class="q"><b>DS — Stack vs Queue use cases</b>Stack: LIFO — undo, recursion/call stack, balanced-brackets. Queue: FIFO — BFS, task scheduling, print spooling. This exact question ("describe two data structures with a real example") was asked verbatim in one report.</div>
+    <div class="q"><b>Linux — basic commands</b><code>grep</code> (search text), <code>chmod</code> (permissions), <code>ps</code>/<code>top</code> (processes), <code>kill -9</code> (force-terminate), <code>chmod 755</code> means owner rwx, group/others r-x.</div>
+    <div class="q"><b>Linux — permissions</b><code>rwxr-xr--</code> reads as owner=rwx, group=r-x, others=r--. Numeric: r=4, w=2, x=1, sum per triplet.</div>
+  </div>
+</section>
+
+<section id="coding" class="page">
+  <h2>Coding — easy-medium, matching reported topics</h2>
+  <p style="color:var(--muted);font-size:14px">Not predicted verbatim questions — practice problems in the same shape as what both reports named: palindrome check, "second maximum element," sorting complexity.</p>
+  <div class="q">
+    <b>Q1 · Palindrome check</b> — Given a string, determine if it's a palindrome, ignoring case and non-alphanumeric characters.
+    <details><summary>Reveal approach</summary>
+      <p>Two pointers from both ends, skip non-alphanumeric, compare lowercased chars, converge to the middle. O(n) time, O(1) space. The named report explicitly expects a two-pointer solution — don't reach for string reversal + comparison, name the two-pointer approach out loud.</p>
+    </details>
+  </div>
+  <div class="q">
+    <b>Q2 · Second maximum element</b> — Given an array, find the second-largest element without sorting.
+    <details><summary>Reveal approach</summary>
+      <p>Single pass, track <code>max1</code> and <code>max2</code>. If current &gt; max1: max2 = max1, max1 = current. Else if current &gt; max2 and current != max1: max2 = current. O(n) time, O(1) space — sorting would be O(n log n), a slower "correct but suboptimal" answer they're explicitly testing for.</p>
+    </details>
+  </div>
+  <div class="q">
+    <b>Q3 · Sorting complexity, cold</b> — State time/space complexity (best/avg/worst) for Bubble Sort, Merge Sort, Quick Sort, and when you'd pick each.
+    <details><summary>Reveal answer</summary>
+      <p>Bubble: O(n²) all cases, O(1) space — never use it, know why it's bad. Merge: O(n log n) all cases, O(n) space — stable, good for linked lists / external sorting. Quick: O(n log n) avg, O(n²) worst (bad pivot), O(log n) space — fastest in practice, in-place. "Different sorting algorithms, be good at time/space complexity" was named directly in one report.</p>
+    </details>
+  </div>
+</section>
+
+<section id="interview" class="page">
+  <h2>Technical interview + HR — rehearse these tonight</h2>
+  <div class="q">
+    <b>"Are you willing to relocate to Chennai?"</b>
+    <details><summary>Reveal note</summary><p>Appeared in <em>both</em> independent reports — near-certain. Comcast's India development center is in Chennai. Have a direct "yes" ready, don't hesitate on it live.</p></details>
+  </div>
+  <div class="q">
+    <b>"Describe two data structures with a real-time example, and which is best for frequent insertions/deletions."</b>
+    <details><summary>Reveal talking points</summary><p>Stack (undo history) vs Queue (print job scheduling), or Array (fixed lookup table) vs Linked List (frequent insert/delete — this is literally the follow-up they ask: linked list wins for O(1) insert/delete at a known node, array wins for O(1) random access).</p></details>
+  </div>
+  <div class="q">
+    <b>Live SQL — 5 queries, joins + subqueries</b>
+    <details><summary>Reveal note</summary><p>Re-run §SQL Drill Q1-Q5 from a blank editor tonight, not just read the answers. Being asked to type SQL live under a stranger's gaze is a different skill from recognizing the right query in an MCQ.</p></details>
+  </div>
+  <div class="q">
+    <b>Resume deep-dive — expect this to go straight into your projects</b>
+    <details><summary>Reveal note</summary><p>Your resume leads with RAG/agentic AI/multimodal work — be ready to explain A.R.G.U.S-V or the RLM reproduction in plain terms a non-ML interviewer can follow, not just the jargon. If they're evaluating for Dev Engineer/SDET/DevOps roles, they may probe more on your CI/CD, Docker, and pytest lines than the ML internals — have both registers ready.</p></details>
+  </div>
+  <div class="q">
+    <b>"Where do you see yourself in 5 years" / higher-education plans</b>
+    <details><summary>Reveal note</summary><p>Standard HR filler in both reports — keep it short, growth-within-the-company framed, no rehearsed-sounding speech.</p></details>
+  </div>
+</section>
+
+<section id="sources" class="page">
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://www.geeksforgeeks.org/interview-experiences/comcast-interview-experience-for-development-engineer-on-campus-2023/">GfG — Comcast Interview Experience for Development Engineer (On-Campus) 2023</a> — OA: 6-7 sections, 2 coding (easy-medium), MCQs on DBMS/DS/OS/CN/Java/SpringBoot/Python; ~150 shortlisted; tech round covered palindrome, second-max-element, sorting complexity, SQL joins/subqueries; HR covered Chennai relocation.</li>
+    <li><a href="https://www.geeksforgeeks.org/interview-experiences/comcast-interview-experience-on-campus/">GfG — Comcast Interview Experience | On-Campus</a> — OA described as 9 sections (Quant, Logical Reasoning, Linux, SQL, Guess-the-Output, Network Security); ~150 shortlisted; technical-HR round asked for 5 live SQL queries (joins/subqueries), DS-with-example, resume questions; HR covered Chennai relocation, salary, motivation.</li>
+    <li>No SASTRA-specific or 2026-batch report found. No past-paper folder for Comcast in this repo. Your resume: <code>Companies/Comcast/comcast_resume_source.tex</code>.</li>
+  </ul>
+  <div class="footer">Built 7 Aug 2026, night before PPT + OA (8:45 AM). Two convergent real sources, no fabricated content.</div>
+</section>
+
+</main>
+</body>
+</html>
