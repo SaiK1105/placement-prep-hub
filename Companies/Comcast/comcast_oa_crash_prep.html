@@ -67,6 +67,7 @@ function showPage(id) {
   <nav>
     <button data-page="plan" onclick="showPage('plan')">Tonight's Plan</button>
     <button data-page="aiml" onclick="showPage('aiml')">★ AI / ML / DL</button>
+    <button data-page="projects" onclick="showPage('projects')">★ Project Defense</button>
     <button data-page="sql" onclick="showPage('sql')">SQL Drill</button>
     <button data-page="cs" onclick="showPage('cs')">CS Fundamentals</button>
     <button data-page="coding" onclick="showPage('coding')">Coding</button>
@@ -107,7 +108,7 @@ function showPage(id) {
     <tr><td>2</td><td>25 min</td><td><b>§ SQL Drill</b> — 1 of your 3 coding problems is guaranteed SQL</td><td>Confirmed, guaranteed marks</td></tr>
     <tr><td>3</td><td>25 min</td><td><b>§ Coding</b> — 2 DSA problems, timed 12 min each</td><td>Confirmed 2 DSA problems</td></tr>
     <tr><td>4</td><td>30 min</td><td><b>§ CS Fundamentals</b> — now includes Java/C/C++ output traps</td><td>MCQs span all subjects</td></tr>
-    <tr><td>5</td><td>10 min</td><td><b>§ Interview</b> — rehearse the agentic-AI pitch out loud</td><td>Round 2 may open on your resume</td></tr>
+    <tr><td>5</td><td>25 min</td><td><b>★ § Project Defense</b> — say each project out loud, 60-90 sec, no notes</td><td>Round 2 will go deep on these for an AI role</td></tr>
     <tr><td>—</td><td>—</td><td colspan="2"><b>Sleep.</b> 8:45 AM report time — rested beats one more hour of MCQs.</td></tr>
   </table>
   <h3>Before you leave tomorrow</h3>
@@ -174,6 +175,110 @@ function showPage(id) {
     <div class="q"><b>Dropout</b>Randomly zeroes activations during training to prevent co-adaptation; disabled at inference (weights scaled). A regularisation technique.</div>
     <div class="q"><b>Batch normalisation</b>Normalises layer inputs per mini-batch → faster, more stable training, mild regularisation. LayerNorm (per-sample) is what transformers use instead.</div>
     <div class="q"><b>Epoch vs Batch vs Iteration</b>Epoch: one full pass over the dataset. Batch: samples per weight update. Iteration: one update. iterations/epoch = dataset size ÷ batch size.</div>
+  </div>
+</section>
+
+<section id="projects" class="page">
+  <h2>Project Defense — say these out loud tonight</h2>
+  <div class="card good">
+    <p>For an AI role, round 2 will very likely go deep on these three. <b>Reading them is not preparation — saying them out loud is.</b> Aim for a 60-90 second answer per project, then let them ask follow-ups.</p>
+  </div>
+
+  <div class="card note">
+    <h3 style="margin-top:0">The GitHub question — handle it cleanly</h3>
+    <p><b>Public and verifiable:</b> <code>rlm-agent-orchestrator</code> and <code>A.R.G.U.S-V</code> are both on your GitHub. Two of three resume projects check out on their own.</p>
+    <p><b>The transformer is local-only.</b> If asked "can I see the code?" — answer directly, no apology:</p>
+    <p style="color:var(--accent2);margin-top:6px">"That one's local — I built it to learn the mathematics rather than to ship, so I never packaged it up. Happy to walk you through the architecture now, or send it across after."</p>
+    <p style="margin-top:8px">Then <b>prove it with depth.</b> Nobody who hasn't implemented attention can answer the questions below fluently — your recall <em>is</em> the evidence. Don't get defensive; get specific.</p>
+    <p style="margin-top:8px;color:var(--muted);font-size:13.5px">Bonus artifact if agents come up: your <code>portfolio</code> repo is a multi-provider <b>tool-calling agent harness</b>, live at saik.co.in — a fourth agent project, not on the resume but worth naming.</p>
+  </div>
+
+  <h3>1 · Transformer From Scratch — expect the deepest scrutiny</h3>
+  <div class="q">
+    <b>"Why build it from scratch instead of using HuggingFace?"</b>
+    <details><summary>Reveal</summary><p>"To learn the mathematics rather than the API. Calling <code>from_pretrained</code> teaches you an interface; implementing attention, the decoder stack and the training loop teaches you why the architecture works — and that's what lets me debug or modify a model instead of only consuming one." Confident, not defensive. This is a <em>strength</em>, not an admission.</p></details>
+  </div>
+  <div class="q">
+    <b>"Walk me through one forward pass."</b>
+    <details><summary>Reveal</summary><p>Token IDs → embedding lookup → add positional encoding → N decoder blocks, each = [LayerNorm → causal multi-head self-attention → residual add] then [LayerNorm → feed-forward MLP → residual add] → final LayerNorm → linear projection to vocab size → softmax → next-token distribution. Name the residual connections and the norms — that's the detail that separates "read a blog" from "built it."</p></details>
+  </div>
+  <div class="q">
+    <b>"What are Q, K, V — intuitively?"</b>
+    <details><summary>Reveal</summary><p>Query = what this token is looking for. Key = what each token offers as a label. Value = the actual content passed along. Score every Query against every Key (dot product), softmax to weights, take a weighted sum of Values. It's a differentiable soft dictionary lookup — analogy lands well in interviews.</p></details>
+  </div>
+  <div class="q">
+    <b>"Why multi-head instead of one big attention head?"</b>
+    <details><summary>Reveal</summary><p>Each head learns a different relation type in its own subspace — one may track syntax, another coreference, another position-local patterns. One head forces a single averaged attention pattern; multiple heads let the model attend to several things at once, then concatenate and project.</p></details>
+  </div>
+  <div class="q">
+    <b>"What is causal masking and why do you need it?"</b>
+    <details><summary>Reveal</summary><p>For a decoder-only LM, position <i>i</i> must not see positions &gt; <i>i</i>, else the model trivially cheats by reading the answer. Implemented by setting the upper-triangular entries of the attention score matrix to −∞ <b>before</b> softmax, so they become zero weight. Saying "−∞ before softmax, not zero after" signals you actually wrote it.</p></details>
+  </div>
+  <div class="q">
+    <b>"Why positional encoding at all?"</b>
+    <details><summary>Reveal</summary><p>Self-attention is permutation-invariant — it's a weighted sum, so "dog bites man" and "man bites dog" would be identical without position information. Sinusoidal encodings are fixed and extrapolate to unseen lengths; learned embeddings are trainable but capped at trained context length.</p></details>
+  </div>
+  <div class="q">
+    <b>"Why BPE tokenization instead of word-level or character-level?"</b>
+    <details><summary>Reveal</summary><p>Word-level explodes vocabulary size and breaks on out-of-vocabulary words. Char-level gives tiny vocab but very long sequences (attention is O(n²) in sequence length). BPE merges frequent character pairs into subwords — bounded vocab, no OOV, reasonable sequence lengths. The practical middle ground.</p></details>
+  </div>
+  <div class="q">
+    <b>"825 GB of The Pile — how did you actually handle that?"</b>
+    <details><summary>Reveal</summary><p>Preprocessed into <b>HDF5 shards</b> — you can't hold it in RAM, so you tokenize once offline, store as fixed-width arrays on disk, and memory-map batches during training. Emphasise the engineering: the data pipeline is most of the real work in training an LM, and it's the part most candidates have never touched.</p></details>
+  </div>
+  <div class="q">
+    <b>"13M parameters — where does that number come from?"</b>
+    <details><summary>Reveal</summary><p>Roughly: embedding (vocab × d_model) + per-layer [attention: 4 × d_model² for Q,K,V,O] + [FFN: 8 × d_model², since the hidden layer is typically 4× d_model, twice] × n_layers. Be ready to state <b>your</b> config — d_model, n_layers, n_heads, context length. If you don't recall exact numbers, say so and give the shape of the calculation; that's far better than inventing a figure.</p></details>
+  </div>
+  <div class="q">
+    <b>"How did you know it was actually working?" — the killer question</b>
+    <details><summary>Reveal</summary><p>Training loss falling and validation loss tracking it, not diverging. Sanity checks: can it overfit a tiny batch to near-zero loss (proves gradients flow)? Does generated text move from noise → real words → grammatical fragments → coherent text? Your resume claims "coherent text generation" — describe what that looked like concretely. <b>Have a real answer here</b>; "the loss went down" alone is weak.</p></details>
+  </div>
+  <div class="q">
+    <b>"What was the hardest bug?"</b>
+    <details><summary>Reveal</summary><p>Answer with a real one — mask shape/broadcasting errors, forgetting to scale by √d_k, wrong LayerNorm placement, or an off-by-one in target shifting are all classic. A specific, honest debugging story is one of the strongest credibility signals you can give, especially with no public repo.</p></details>
+  </div>
+
+  <h3>2 · Recursive Language Model (RLM)</h3>
+  <div class="q">
+    <b>"What's the core idea of the paper you reproduced?"</b>
+    <details><summary>Reveal</summary><p>Instead of stuffing everything into one fixed context window, the root model treats its input as an <b>external environment it explores</b>, issuing recursive sub-model calls to examine pieces on demand. Sidesteps the context-length ceiling and the "lost in the middle" degradation of very long prompts.</p></details>
+  </div>
+  <div class="q">
+    <b>"Why a distributed orchestrator/worker architecture?"</b>
+    <details><summary>Reveal</summary><p>Sub-model calls are independent, so they parallelise — orchestrator decomposes and dispatches, workers execute against the LanceDB store and return results. Also isolates failure and lets you scale workers separately from the planner. Same event-driven decoupling reasoning that applies to any queue-based system.</p></details>
+  </div>
+  <div class="q">
+    <b>⚠ "3/3 versus 0/3 — that's only three queries. Is that meaningful?"</b>
+    <details><summary>Reveal — prepare this one, it's your weakest point</summary><p><b>Be honest and get ahead of it:</b> "It's a stress test, not a statistical claim — three hand-built multi-step queries designed specifically to break single-shot retrieval, where the answer requires combining information the baseline can only fetch once. It demonstrates a failure mode cleanly; it isn't a benchmark with error bars, and I'd want a much larger eval set to claim a general performance number."</p><p style="margin-top:6px">Conceding the limit yourself reads as scientific maturity. Defending N=3 as if it were significant reads as not understanding evaluation — a bad look for an AI role.</p></details>
+  </div>
+  <div class="q">
+    <b>"What specifically made those queries hard for single-shot RAG?"</b>
+    <details><summary>Reveal</summary><p>Multi-step / cross-referencing questions where the retrieval target for step 2 depends on the answer to step 1. One retrieval pass can't know what to fetch second, so it returns plausible-but-insufficient context. That's precisely what recursive exploration fixes.</p></details>
+  </div>
+
+  <h3>3 · A.R.G.U.S-V</h3>
+  <div class="q">
+    <b>"Why LangGraph rather than a standard agent framework?"</b>
+    <details><summary>Reveal</summary><p>LangGraph gives an <b>explicit state graph</b> over the agent loop — you define nodes and transitions, so control flow is inspectable and debuggable, with deterministic cycles and checkpointing. A generic agent executor hides the loop and is far harder to reason about when it misbehaves. For production automation, that observability is the point — <b>tie this straight to Comcast's agent-automation use case.</b></p></details>
+  </div>
+  <div class="q">
+    <b>"How does multimodal retrieval work here?"</b>
+    <details><summary>Reveal</summary><p>Two signals from the same video: speech → transcription → text embeddings; visual frames → frame embeddings. Both indexed in LanceDB, both searchable, results fused so a natural-language question can hit either modality. Be ready for "how do you align them?" — timestamps are the shared key.</p></details>
+  </div>
+  <div class="q">
+    <b>"What did the Redis cache key on, and what did it buy you?"</b>
+    <details><summary>Reveal</summary><p>Cut repeat-query latency by caching results for previously-seen queries/embeddings. Be prepared for the follow-up: <b>how do you invalidate it</b> when the underlying video index changes? Even "I'd key by content hash so a re-index naturally misses" is a solid answer if you didn't implement invalidation.</p></details>
+  </div>
+  <div class="q">
+    <b>"What happens when a video is longer than the context window?"</b>
+    <details><summary>Reveal</summary><p>That's exactly why retrieval exists rather than dumping the transcript in — chunk, embed, retrieve only relevant segments. Natural bridge to your RLM work: "this constraint is what led me into the recursive-LM paper next."</p></details>
+  </div>
+
+  <div class="card good">
+    <h3 style="margin-top:0">The through-line — use it if they ask "tell me about yourself"</h3>
+    <p>"I build AI systems that turn unstructured data into something queryable. I went bottom-up on it — implemented a transformer from scratch to understand the mathematics, built a production multimodal retrieval platform with LangGraph agents, then reproduced and benchmarked a research paper on recursive LMs. So I've seen the stack from the attention math up to orchestrating agents in a deployed system."</p>
+    <p style="margin-top:6px;color:var(--muted);font-size:13.5px">That arc — fundamentals → applied system → research reproduction — is a stronger story than any single project, and it maps directly onto "we need people who can build agents to automate things."</p>
   </div>
 </section>
 
