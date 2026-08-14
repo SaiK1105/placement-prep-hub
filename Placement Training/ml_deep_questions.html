@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ML Deep Questions — the second-layer answers</title>
+<style>
+:root{
+  --bg:#0b0f14; --panel:#111822; --panel2:#16202d;
+  --ink:#eef6ff; --muted:#aec1d2; --accent:#6fe3c1; --accent2:#c7f59b;
+  --warn:#ffd166; --bad:#ff9aa2; --line:#2a3a4d; --code:#071019;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",system-ui,Arial,sans-serif}
+header{padding:26px 20px 16px;background:linear-gradient(120deg,#0f1722,#14282a);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+h1{font-size:clamp(22px,3.6vw,34px);margin-bottom:8px}
+.sub{color:var(--muted);max-width:900px;font-size:14.5px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+nav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 11px;cursor:pointer;font:inherit;font-size:13px}
+nav button.active,nav button:hover{border-color:var(--accent);box-shadow:0 0 0 2px rgba(111,227,193,.15) inset}
+main{max-width:1000px;margin:0 auto;padding:20px}
+.page{display:none}.page.active{display:block}
+h2{font-size:22px;margin:6px 0 12px}
+h3{color:var(--accent);font-size:15.5px;margin:18px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 18px;margin:13px 0}
+.note{border-left:4px solid var(--warn)}
+.good{border-left:4px solid var(--accent2)}
+.q{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:#0f1722;overflow:hidden}
+.q .stem{padding:13px 16px;font-size:14.5px}
+.q .tag{display:block;font:10px ui-monospace,monospace;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px}
+.q button{background:none;border:0;border-top:1px solid var(--line);width:100%;text-align:left;padding:9px 16px;color:var(--warn);font:12px ui-monospace,monospace;cursor:pointer;letter-spacing:.05em}
+.q button:hover{background:var(--panel2)}
+.q .ans{display:none;padding:14px 16px;border-top:1px solid var(--line);background:#0a0d11;font-size:14px;color:var(--muted)}
+.q .ans.on{display:block}
+.q .ans b{color:var(--accent2)}
+.q .ans .key{display:block;margin-top:8px;color:var(--accent);font-size:13.5px}
+code{font-family:ui-monospace,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:4px;color:var(--accent2);font-size:13px}
+pre{background:var(--code);border:1px solid var(--line);padding:11px 13px;border-radius:9px;overflow-x:auto;font:12.5px/1.55 ui-monospace,Consolas,monospace;color:#e9f7ff;margin:9px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#1a2634;color:var(--accent2)}
+ul{padding-left:20px}li{margin:5px 0}
+.footer{color:var(--muted);font-size:12.5px;margin:26px 0}
+@media(max-width:800px){main{padding:14px}}
+</style>
+<script>
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('button[data-p="'+id+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>ML Deep Questions — the second-layer answers</h1>
+  <div class="sub">Not "what is overfitting." This is the <b>why / derive / compare</b> layer interviewers escalate to once you've shown you know the basics — the exact layer that ended the Comcast technical round. Built for the AI-role drives still live: MathCo, Sigmoid, and anything AI-adjacent.</div>
+  <nav>
+    <button data-p="core" class="active" onclick="show('core')">Bias-Variance &amp; Regularization</button>
+    <button data-p="eval" onclick="show('eval')">Evaluation Metrics</button>
+    <button data-p="trees" onclick="show('trees')">Trees &amp; Ensembles</button>
+    <button data-p="models" onclick="show('models')">SVM · KNN · Bayes</button>
+    <button data-p="unsup" onclick="show('unsup')">Unsupervised &amp; PCA</button>
+    <button data-p="opt" onclick="show('opt')">Optimization &amp; Theory</button>
+    <button data-p="tactics" onclick="show('tactics')">★ When You Blank</button>
+  </nav>
+</header>
+<main>
+
+<section id="core" class="page active">
+  <h2>Bias-Variance &amp; Regularization</h2>
+  <div class="card note"><b>This cluster is the most-escalated topic in ML interviews.</b> Everyone can define overfitting. The separator is whether you can decompose the error and explain <em>why</em> each fix works.</div>
+
+  <div class="q"><div class="stem"><span class="tag">Derive</span>Decompose the expected prediction error into bias, variance, and noise. Why is there a tradeoff?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">For squared loss, expected test error at a point decomposes as:
+  <pre>E[(y - f̂(x))²]  =  Bias[f̂(x)]²  +  Var[f̂(x)]  +  σ²</pre>
+  <b>Bias</b> = error from wrong assumptions — how far your average prediction (over many training sets) is from truth. <b>Variance</b> = how much your prediction changes if you retrain on a different sample. <b>σ²</b> = irreducible noise, the floor you can never beat.
+  <span class="key">Why they trade off: both are controlled by model flexibility. A more flexible model fits the training data more closely — that reduces systematic error (bias) but makes the fit more sensitive to which particular points you sampled (variance). You're moving along one axis, so pushing one down pushes the other up.</span>
+  <b>The line that lands:</b> "Total error is U-shaped in complexity — the goal isn't minimizing bias or variance, it's minimizing their sum."</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">★ Classic killer</span>Why does L1 regularization produce sparse weights but L2 doesn't?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">Two ways to answer — give the geometric one, then the calculus one if pushed.
+  <br><br><b>Geometric:</b> Regularization = minimizing loss subject to a constraint region. L1's region (|w₁|+|w₂| ≤ t) is a <b>diamond with corners on the axes</b>; L2's (w₁²+w₂² ≤ t) is a <b>circle</b>. The optimum sits where the loss contours first touch the region. A diamond's corners stick out, so contours very often touch at a corner — and a corner means <b>some coordinate is exactly zero</b>. A circle has no corners, so the touch point almost never lands exactly on an axis.
+  <br><br><b>Calculus:</b> The L2 penalty gradient is <code>2w</code> — it shrinks proportionally, so as w → 0 the pushing force → 0 too, and you approach zero asymptotically without arriving. The L1 penalty gradient is <code>λ·sign(w)</code> — <b>constant magnitude regardless of how small w is</b>. That constant push drives weights fully to zero and pins them there.
+  <span class="key">One-liner: "L2 shrinks with a force proportional to w, so it never quite reaches zero. L1 shrinks with a constant force, so it does."</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Why does regularization reduce overfitting at all?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">It <b>shrinks the effective hypothesis space</b>. Large weights let a model produce sharp, wiggly decision surfaces that chase individual training points. Penalizing weight magnitude makes those solutions expensive, so the optimizer prefers smoother functions that can't contort to fit noise.
+  <span class="key">Bayesian framing (strong answer if they push): regularization is a <b>prior</b>. L2 = Gaussian prior on the weights; L1 = Laplace prior. Minimizing regularized loss is exactly MAP estimation instead of MLE.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Compare</span>High bias vs high variance — how do you diagnose which you have, and what's the fix for each?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>Diagnose by comparing training error to validation error:</b>
+  <table><tr><th></th><th>High bias (underfit)</th><th>High variance (overfit)</th></tr>
+  <tr><td>Training error</td><td>High</td><td>Low</td></tr>
+  <tr><td>Val error</td><td>High, close to train</td><td>High, big gap from train</td></tr>
+  <tr><td>Fix</td><td>Bigger/more complex model, more features, less regularization, train longer</td><td>More data, more regularization, fewer features, simpler model, early stopping, dropout/ensembling</td></tr></table>
+  <span class="key">The trap: "get more data" only helps <b>variance</b>. More data does nothing for a model too simple to represent the pattern — that's the single most common wrong answer here.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Why k-fold cross-validation instead of one train/test split? What does k control?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">A single split gives a <b>high-variance estimate</b> — your score depends on which points happened to land in test. k-fold averages over k splits, so every point is used for validation exactly once, giving a lower-variance estimate and using all data for training across folds.
+  <span class="key"><b>k controls a bias-variance tradeoff in the estimate itself.</b> Large k (→ LOOCV): each model trains on nearly all data, so the estimate is nearly unbiased, but folds are highly correlated → high variance, and it's expensive. Small k (e.g. 5): cheaper, lower variance, but each model sees less data → pessimistically biased. k=5 or 10 is the standard compromise.</span>
+  Use <b>stratified</b> k-fold for classification (preserves class ratios per fold) and <b>time-series split</b> for temporal data — never shuffle time series, that leaks the future.</div></div>
+</section>
+
+<section id="eval" class="page">
+  <h2>Evaluation Metrics</h2>
+  <div class="q"><div class="stem"><span class="tag">★ Very common</span>Why is accuracy a bad metric on imbalanced data? What do you use instead?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">With 99% negatives, a model that predicts "negative" for everything scores <b>99% accuracy</b> and is completely useless — it never finds a single positive. Accuracy is dominated by the majority class.
+  <span class="key">Use <b>precision, recall, F1</b> (per-class), <b>PR-AUC</b>, or a confusion matrix. Match the metric to the cost: for fraud/disease detection, <b>recall</b> matters most (missing a positive is expensive); for spam filtering, <b>precision</b> matters most (false positives are expensive).</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Define + why</span>Precision vs recall. Why is F1 the <em>harmonic</em> mean and not the arithmetic mean?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>Precision</b> = TP/(TP+FP) — of what I flagged, how much was right. <b>Recall</b> = TP/(TP+FN) — of what was actually there, how much did I catch.
+  <br><br><b>Why harmonic:</b> the harmonic mean is dominated by the smaller value, so it <b>punishes imbalance</b>. Consider precision=1.0, recall=0.0 (you made one correct prediction and missed everything else). Arithmetic mean = 0.5 — misleadingly decent. Harmonic mean = 0 — correctly says the model is useless.
+  <span class="key">"F1 forces you to be good at both. You can't game it by maxing one and ignoring the other."</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>What does ROC-AUC actually measure? When does it mislead?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">ROC plots TPR vs FPR across <b>all thresholds</b>. AUC has an exact probabilistic meaning: <b>the probability that a randomly chosen positive is ranked above a randomly chosen negative.</b> AUC = 0.5 is random ranking; 1.0 is perfect separation. Because it sweeps thresholds, it measures <b>ranking quality</b> independent of where you set the cutoff.
+  <span class="key"><b>When it misleads:</b> on severe class imbalance. FPR = FP/(FP+TN) has a huge TN in the denominator, so even a large absolute number of false positives barely moves FPR — ROC-AUC stays flatteringly high. <b>Use PR-AUC instead</b>, since precision uses FP/(TP+FP) and has no TN term, making it sensitive to exactly the failure you care about.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Applied</span>You lower the classification threshold from 0.5 to 0.3. What happens to precision and recall, and why?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">You now predict "positive" more readily → you catch more true positives but also admit more false positives.
+  <br><b>Recall goes up</b> (FN decreases). <b>Precision goes down</b> (FP increases). That's the precision-recall tradeoff, and it's why a single threshold-free number (AUC) exists at all.
+  <span class="key">Threshold choice is a business decision, not a modeling one — set it by the relative cost of FP vs FN.</span></div></div>
+</section>
+
+<section id="trees" class="page">
+  <h2>Trees &amp; Ensembles</h2>
+  <div class="q"><div class="stem"><span class="tag">★ Killer compare</span>Bagging vs boosting — what does each reduce, and why?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">This is <b>the</b> ensemble question and the answer is one word each.
+  <table><tr><th></th><th>Bagging (Random Forest)</th><th>Boosting (AdaBoost, GBM, XGBoost)</th></tr>
+  <tr><td>Reduces</td><td><b>Variance</b></td><td><b>Bias</b></td></tr>
+  <tr><td>Training</td><td><b>Parallel</b> — independent models</td><td><b>Sequential</b> — each fixes the last one's errors</td></tr>
+  <tr><td>Base learners</td><td>Deep/complex (low bias, high variance)</td><td>Weak/shallow stumps (high bias, low variance)</td></tr>
+  <tr><td>Data</td><td>Bootstrap samples</td><td>Reweighted (or residuals) each round</td></tr>
+  <tr><td>Overfitting risk</td><td>Low — more trees never hurts</td><td>Higher — too many rounds overfits</td></tr></table>
+  <span class="key"><b>Why bagging cuts variance:</b> averaging n i.i.d. estimators divides variance by n. The trees are individually high-variance but their errors partially cancel. <b>Why boosting cuts bias:</b> each new learner is fit specifically to what the ensemble still gets wrong, so the combined model becomes progressively more expressive.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Random Forest already bootstraps rows. Why also randomly subsample <em>features</em> at each split?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">Because averaging only kills variance if the trees are <b>decorrelated</b>. Variance of the mean of n correlated variables with pairwise correlation ρ is <code>ρσ² + (1-ρ)σ²/n</code> — as n→∞ the second term vanishes but <b>ρσ² remains</b>. So correlation puts a floor on how much averaging can help.
+  <span class="key">If one feature is very predictive, every bootstrapped tree would split on it first and all trees would look alike (high ρ). Forcing each split to consider only a random feature subset breaks that, lowering ρ and pushing the variance floor down. That's the entire difference between Random Forest and plain bagged trees.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Compare</span>Entropy vs Gini impurity — what's the actual difference, and does it matter?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><pre>Gini    = 1 - Σ pᵢ²
+Entropy = - Σ pᵢ log₂(pᵢ)</pre>
+  Both measure node impurity, both are 0 when pure and maximal at a uniform split. In practice they <b>produce very similar trees</b> — the honest answer is that the choice rarely matters.
+  <span class="key">The real distinction worth stating: <b>Gini is cheaper</b> (no logarithm), which is why it's sklearn's default. Entropy penalizes impurity slightly more aggressively and comes from information theory (information gain = reduction in entropy).</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Why do decision trees overfit so easily, and how do you stop it?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">A fully grown tree keeps splitting until every leaf is pure — it can memorize the training set exactly, giving <b>zero training error and terrible generalization</b>. They're high-variance because a small change in data changes the split structure.
+  <span class="key">Fixes: <b>pre-pruning</b> (max_depth, min_samples_split, min_samples_leaf), <b>post-pruning</b> (cost-complexity pruning), or ensembling (Random Forest) — which is really just accepting the variance and averaging it away.</span></div></div>
+</section>
+
+<section id="models" class="page">
+  <h2>SVM · KNN · Naive Bayes</h2>
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>Explain the kernel trick. Why is it a "trick"?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">SVM's optimization depends on the data <b>only through dot products</b> <code>xᵢ·xⱼ</code>. To handle non-linear boundaries you'd map to a higher-dimensional space φ(x) and work there — but φ(x) can be enormous or even infinite-dimensional (RBF), so computing it explicitly is impossible.
+  <span class="key">The trick: a kernel function computes <code>K(xᵢ,xⱼ) = φ(xᵢ)·φ(xⱼ)</code> <b>directly from the original inputs, without ever constructing φ(x)</b>. You get the geometry of the high-dimensional space at the cost of a low-dimensional computation. That's why it's a trick — you never visit the space you're implicitly working in.</span>
+  Common kernels: linear, polynomial, <b>RBF/Gaussian</b> (infinite-dimensional feature space), sigmoid. Valid kernels must satisfy Mercer's condition (produce a PSD kernel matrix).</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>What is SVM actually maximizing, and what does the C parameter control?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">It maximizes the <b>margin</b> — the distance from the decision boundary to the nearest points of either class (the <b>support vectors</b>). A wider margin is a more confident, better-generalizing separator; only the support vectors determine the boundary, so the rest of the data can be discarded.
+  <span class="key"><b>C is the soft-margin penalty</b> — how much you punish misclassified/inside-margin points. <b>Small C</b> = wide margin, more violations tolerated → more regularization, higher bias. <b>Large C</b> = narrow margin, few violations tolerated → fits training data hard, higher variance. C is inversely a regularization strength.</span></div></div>
+
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>Why does KNN break down in high dimensions?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">The <b>curse of dimensionality</b>. As dimensions grow, volume grows exponentially, so any fixed number of points becomes vanishingly sparse. Critically, <b>distances concentrate</b> — the ratio between the nearest and farthest neighbor approaches 1:
+  <pre>lim(d→∞)  (dist_max - dist_min) / dist_min  →  0</pre>
+  <span class="key">When everything is roughly equidistant, "nearest neighbor" carries no information — the entire premise of KNN collapses. This is why you reduce dimensionality (PCA, feature selection) before distance-based methods.</span>
+  Also worth saying: KNN is a <b>lazy learner</b> — no training phase, all cost at inference (O(n·d) per query), and it requires feature scaling since raw magnitude dominates Euclidean distance.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>Why is Naive Bayes "naive," and why does it work well anyway?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">"Naive" = it assumes all features are <b>conditionally independent given the class</b>. That's almost always false in reality ("New" and "York" in text are obviously dependent).
+  <span class="key"><b>Why it still works:</b> classification only needs the <em>argmax</em> over classes, not calibrated probabilities. The independence assumption badly distorts the probability estimates, but it often distorts them <b>in the same direction for every class</b> — so the ranking, and therefore the predicted label, stays correct. Its probability outputs are poorly calibrated; its decisions are frequently fine.</span>
+  Also: it needs very little data, trains in one pass, and is a strong text-classification baseline. Mention <b>Laplace smoothing</b> to handle unseen feature/class combinations that would otherwise zero out the whole product.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Compare</span>Generative vs discriminative models — give the distinction and examples.</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>Discriminative</b> models learn <code>P(y|x)</code> directly — the decision boundary only. Logistic regression, SVM, neural nets, random forests.
+  <br><b>Generative</b> models learn the joint <code>P(x,y)</code> (via <code>P(x|y)</code> and <code>P(y)</code>), then apply Bayes' rule to get <code>P(y|x)</code>. Naive Bayes, GMMs, LDA, and — relevant to your work — <b>LLMs</b>, which model the distribution of the data itself.
+  <span class="key">Because generative models model the data distribution, they can <b>sample new data</b>; discriminative ones can't. Discriminative usually wins on pure classification accuracy given enough data (they optimize exactly the thing you're scored on); generative can do better with little data since the modeling assumptions act as a prior.</span></div></div>
+</section>
+
+<section id="unsup" class="page">
+  <h2>Unsupervised &amp; PCA</h2>
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>What is PCA actually doing? What do the eigenvectors and eigenvalues mean?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">PCA finds an orthogonal basis where the axes are ordered by how much <b>variance</b> the data has along them. You compute the covariance matrix and take its <b>eigenvectors</b> (the principal component directions) and <b>eigenvalues</b> (the variance captured along each). Keep the top k, project onto them, and you've reduced dimensionality while retaining the most variation.
+  <span class="key"><b>The elegant fact worth stating:</b> maximizing retained variance and minimizing squared reconstruction error are <b>the same objective</b> — total variance is fixed, so whatever you don't keep becomes reconstruction error. Two framings, one solution.</span>
+  Musts: <b>scale features first</b> (PCA chases variance, so an unscaled large-magnitude feature dominates spuriously). Components are <b>uncorrelated</b> by construction. Downside: components are linear combinations of all originals, so they're <b>not interpretable</b> — that's the real cost of PCA.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Does k-means always converge? Does it find the global optimum?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>It always converges, but only to a local optimum.</b>
+  <br>Convergence: each of the two steps (assign points to nearest centroid; move centroid to the mean of its points) can only decrease or hold the within-cluster sum of squares. The objective is bounded below by 0 and there are finitely many assignments, so it must terminate.
+  <span class="key">But the objective is <b>non-convex</b>, so the result depends on initialization — bad seeds give bad clusters. Fixes: run multiple restarts and keep the best (<code>n_init</code>), or use <b>k-means++</b> seeding, which spreads initial centroids apart probabilistically.</span>
+  <b>Its assumptions</b> (a great follow-up to volunteer): it implicitly assumes clusters are <b>spherical, similarly sized, and equally dense</b>, because it uses Euclidean distance to a centroid. It fails badly on elongated or nested shapes — use DBSCAN or GMM there.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Applied</span>How do you choose k in k-means?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>Elbow method</b> — plot within-cluster sum of squares vs k and look for the bend where added clusters stop paying off. (WCSS decreases monotonically — at k=n it's zero — so you can't just minimize it.)
+  <br><b>Silhouette score</b> — measures how close each point is to its own cluster vs the next nearest, in [-1,1]; pick the k that maximizes it. Usually more reliable than the elbow, which is often ambiguous.
+  <span class="key">Also valid and worth saying: <b>domain knowledge</b>. If the business needs 5 customer segments, k=5 — the metric doesn't override the use case.</span></div></div>
+</section>
+
+<section id="opt" class="page">
+  <h2>Optimization &amp; Theory</h2>
+  <div class="q"><div class="stem"><span class="tag">Compare</span>Batch vs mini-batch vs stochastic gradient descent — why is mini-batch the default?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>Batch</b> uses all n samples per update: accurate gradient, very slow per step, and memory-heavy. <b>SGD</b> uses one sample: fast, noisy, high-variance updates. <b>Mini-batch</b> (32–512) sits between.
+  <span class="key">Mini-batch wins for two reasons: it <b>vectorizes efficiently on GPUs</b> (one sample wastes parallel hardware), and its gradient noise is a <b>feature, not a bug</b> — the noise helps escape sharp local minima and saddle points, and is associated with flatter minima that generalize better.</span>
+  Follow-up: <b>momentum</b> accumulates a velocity term to damp oscillation across ravines; <b>Adam</b> combines momentum with per-parameter adaptive learning rates (RMSProp), which is why it's the common default.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Why</span>Why do you need feature scaling? Which algorithms need it and which don't?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">Any algorithm using <b>distances</b> or <b>gradient descent</b> is sensitive to feature magnitude. If income (0–100,000) and age (0–100) are raw, income dominates every Euclidean distance and the loss surface becomes a stretched ravine that gradient descent zig-zags down slowly.
+  <table><tr><th>Needs scaling</th><th>Doesn't</th></tr>
+  <tr><td>KNN, SVM, k-means, PCA, neural nets, ridge/lasso, logistic regression (for convergence speed)</td><td>Decision trees, Random Forest, gradient-boosted trees</td></tr></table>
+  <span class="key">Why trees don't care: they split on <b>thresholds within a single feature</b> ("is age &gt; 30"), which is invariant to monotonic rescaling. They never compare across features on a common scale.</span>
+  <b>Standardization</b> (z-score, mean 0 std 1) vs <b>normalization</b> (min-max to [0,1]) — standardization for roughly-Gaussian data and when outliers exist; min-max when you need a bounded range.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">★ Deep</span>MLE vs MAP — what's the relationship, and how does it connect to regularization?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans"><b>MLE</b> picks parameters maximizing the likelihood of the observed data: <code>argmax P(D|θ)</code>. <b>MAP</b> maximizes the posterior: <code>argmax P(D|θ)·P(θ)</code> — likelihood times a <b>prior</b>.
+  <span class="key">The connection interviewers want: <b>MAP = MLE + regularization</b>. Taking logs turns the product into a sum, so the log-prior becomes an additive penalty term. A <b>Gaussian</b> prior on weights yields exactly the <b>L2</b> penalty; a <b>Laplace</b> prior yields exactly <b>L1</b>. So regularization isn't an ad-hoc hack — it's Bayesian inference with a prior belief that weights should be small.</span>
+  MAP → MLE as data grows, since the likelihood eventually swamps the prior.</div></div>
+
+  <div class="q"><div class="stem"><span class="tag">Applied</span>How do you handle imbalanced datasets?</div>
+  <button onclick="this.nextElementSibling.classList.toggle('on')">Reveal</button>
+  <div class="ans">Four families, and a good answer names the tradeoff of each:
+  <ul>
+  <li><b>Resampling</b> — oversample minority (risks overfitting duplicates) or undersample majority (discards real data)</li>
+  <li><b>SMOTE</b> — synthesizes new minority points by interpolating between neighbors instead of duplicating; can create unrealistic points in overlapping regions</li>
+  <li><b>Class weights</b> — penalize minority errors more in the loss (<code>class_weight='balanced'</code>). Often the cleanest fix: no data distortion.</li>
+  <li><b>Threshold tuning</b> — keep the model, move the decision cutoff using the PR curve</li>
+  </ul>
+  <span class="key">And always: <b>change the metric</b> (PR-AUC, F1, recall — not accuracy) and use <b>stratified</b> splits so folds keep the class ratio.</span>
+  <b>Critical detail:</b> resample only the <b>training</b> fold, never the validation/test set — otherwise you leak synthetic data into evaluation and your scores become fiction.</div></div>
+</section>
+
+<section id="tactics" class="page">
+  <h2>★ When you blank in the room</h2>
+  <div class="card note"><b>This is the part that actually cost you the Comcast round</b> — not missing knowledge so much as not producing it under pressure. Tactics matter as much as content.</div>
+
+  <h3>Say the structure, then fill it</h3>
+  <div class="card">Even when the precise answer won't come, the <em>shape</em> usually will. "There's a tradeoff here between X and Y" or "this decomposes into two terms" buys you seconds and often unlocks the detail. Interviewers score reasoning, not instant recall.</div>
+
+  <h3>Anchor to something you've actually built</h3>
+  <div class="card good">Your strongest asset is that you've shipped real systems. Route abstract questions through them:
+  <ul>
+  <li>Overfitting → "In the transformer I trained, I watched validation loss diverge from training loss — that's the signal."</li>
+  <li>Evaluation → "In the RLM benchmark I ran 3 multi-step stress queries against a single-shot RAG baseline; I'd want a much larger eval set to claim a real number."</li>
+  <li>Embeddings/similarity → your LanceDB vector search work.</li>
+  <li>Bias-variance → the tradeoff between a small model that underfits and a large one memorizing a small corpus.</li>
+  </ul>
+  Concrete beats textbook, and it plays to your actual edge.</div>
+
+  <h3>"I don't remember the formula, but here's the intuition"</h3>
+  <div class="card">Far stronger than silence, and far stronger than confidently wrong. Most interviewers accept intuition and move on; some will even give you the formula and ask you to reason from it — which turns a dead end into a live question you can win.</div>
+
+  <h3>Don't let one bad answer cascade</h3>
+  <div class="card">You noted round 2 went worse than round 1. A common cause is that one stumble consumes your attention for the next several questions. Reset explicitly — "let me think about that one properly" — answer it, and let it go. Each question is scored on its own.</div>
+
+  <h3>The 10 highest-frequency deep questions, ranked</h3>
+  <div class="card"><ol>
+  <li>Bias-variance decomposition and the tradeoff</li>
+  <li>Why L1 gives sparsity and L2 doesn't</li>
+  <li>Bagging vs boosting — what each reduces</li>
+  <li>Precision/recall/F1, and why accuracy fails on imbalance</li>
+  <li>What ROC-AUC measures and when PR-AUC is better</li>
+  <li>The kernel trick</li>
+  <li>Curse of dimensionality and its effect on KNN</li>
+  <li>What PCA does; eigenvectors/eigenvalues</li>
+  <li>Why k-means only reaches a local optimum, and its shape assumptions</li>
+  <li>Why Naive Bayes works despite a false assumption</li>
+  </ol>
+  Cover these ten cold and you clear the layer that ended the Comcast round.</div>
+
+  <div class="footer">Built 13 Aug 2026 after the Comcast interviews. Targeted at the second-layer questions, not ML fundamentals — the material where the ceiling actually was. Applies to MathCo, Sigmoid, and any AI-role drive still live.</div>
+</section>
+
+</main>
+</body>
+</html>
