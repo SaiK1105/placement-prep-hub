@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infosys + Amazon — Prep HQ (18 &amp; 19 Aug)</title>
+<style>
+:root{--bg:#0b0f14;--panel:#111822;--panel2:#16202d;--ink:#eef6ff;--muted:#aec1d2;
+--accent:#6fe3c1;--accent2:#c7f59b;--warn:#ffd166;--bad:#ff9aa2;--line:#2a3a4d;--code:#071019}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",system-ui,Arial,sans-serif}
+header{padding:24px 20px 14px;background:linear-gradient(120deg,#101a24,#14282a);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+h1{font-size:clamp(21px,3.4vw,31px);margin-bottom:7px}
+.sub{color:var(--muted);max-width:900px;font-size:14px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+nav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 11px;cursor:pointer;font:inherit;font-size:13px}
+nav button.active,nav button:hover{border-color:var(--accent);box-shadow:0 0 0 2px rgba(111,227,193,.15) inset}
+main{max-width:1020px;margin:0 auto;padding:18px}
+.page{display:none}.page.active{display:block}
+h2{font-size:21px;margin:6px 0 11px}
+h3{color:var(--accent);font-size:15.5px;margin:17px 0 7px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 17px;margin:12px 0}
+.urgent{border-left:4px solid var(--bad);background:#1d1216}
+.note{border-left:4px solid var(--warn)}
+.good{border-left:4px solid var(--accent2)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#1a2634;color:var(--accent2)}
+code{font-family:ui-monospace,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:4px;color:var(--accent2);font-size:12.5px}
+pre{background:var(--code);border:1px solid var(--line);padding:11px 13px;border-radius:8px;overflow-x:auto;font:12.5px/1.55 ui-monospace,Consolas,monospace;color:#e9f7ff;margin:9px 0}
+ul,ol{padding-left:20px}li{margin:5px 0}
+.q{border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin:9px 0;background:#0f1722;font-size:14px}
+.q b{color:var(--accent2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px}
+.big{font-size:16px;font-weight:600;color:var(--warn)}
+.pill{display:inline-block;font:10.5px ui-monospace,monospace;padding:2px 8px;border-radius:999px;border:1px solid var(--line);margin-left:7px;vertical-align:middle}
+.p-hi{color:var(--bad);border-color:var(--bad)}
+.p-md{color:var(--warn);border-color:var(--warn)}
+.p-ok{color:var(--accent2);border-color:var(--accent2)}
+.p-lo{color:var(--muted)}
+.drill{border:1px solid var(--line);border-radius:11px;background:#0f1722;padding:13px 15px;margin:11px 0}
+.drill h4{font-size:14px;color:var(--accent2);margin-bottom:6px}
+.drill button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 12px;cursor:pointer;font:inherit;font-size:12.5px;margin-top:4px}
+.drill button:hover{border-color:var(--accent)}
+.ans{display:none;margin-top:9px;padding:9px 12px;border-left:3px solid var(--accent);background:#0b1420;border-radius:0 8px 8px 0;font-size:13.5px}
+.ans.on{display:block}
+.footer{color:var(--muted);font-size:12.5px;margin:24px 0}
+@media(max-width:800px){main{padding:13px}}
+</style>
+<script>
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelector('button[data-p="'+id+'"]').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function rev(n){document.getElementById('a'+n).classList.toggle('on')}
+function revAll(){document.querySelectorAll('.ans').forEach(a=>a.classList.add('on'))}
+</script>
+</head>
+<body>
+<header>
+  <h1>Infosys (18 Aug) + Amazon (19 Aug) — Prep HQ</h1>
+  <div class="sub">Two drives, two days, one evening each. Built 17 Aug from the <b>official on-disk Infosys docs</b> plus cross-checked web research — the <code>Placement material/INFOSYS/</code> folder is <b>2014-2018 vintage and unusable for format</b>, the same staleness trap as the TCS material.</div>
+  <nav>
+    <button data-p="strat" class="active" onclick="show('strat')">🔴 Strategy</button>
+    <button data-p="fmt" onclick="show('fmt')">Format &amp; Confidence</button>
+    <button data-p="delta" onclick="show('delta')">★ What's New vs TCS</button>
+    <button data-p="pseudo" onclick="show('pseudo')">★ Pseudocode Drill</button>
+    <button data-p="misc" onclick="show('misc')">Puzzles + Grammar</button>
+    <button data-p="spcode" onclick="show('spcode')">SP/PP Coding (later)</button>
+    <button data-p="plan" onclick="show('plan')">The 3-Day Plan</button>
+    <button data-p="amzn" onclick="show('amzn')">Amazon (19th)</button>
+    <button data-p="src" onclick="show('src')">Sources</button>
+  </nav>
+</header>
+<main>
+
+<section id="strat" class="page active">
+  <h2>🔴 The one fact that changes how you sit this exam</h2>
+
+  <div class="card urgent">
+    <p class="big">Infosys has SECTIONAL CUT-OFFS. TCS did not.</p>
+    <p style="margin-top:7px">Every section is <b>independently qualifying</b>. A brilliant quant score cannot rescue a failed pseudocode section — you are rejected on the weak section regardless of your total.</p>
+    <p style="margin-top:7px"><b>What this means:</b> your TCS strategy was <i>maximise total marks</i>. That strategy is <b>wrong here</b> and will get you rejected. The correct strategy is <b>clear every floor first, optimise second</b>. Spend your last minutes in your <em>weakest</em> section, not your most profitable one.</p>
+  </div>
+
+  <div class="card urgent">
+    <p class="big">Each section is SEPARATELY TIMED — you cannot bank time.</p>
+    <p style="margin-top:7px">The per-section clocks are wildly uneven, and that's the whole pacing game:</p>
+    <table style="margin-top:8px">
+      <tr><th>Section</th><th>Q</th><th>Time</th><th>Per question</th><th>Verdict</th></tr>
+      <tr><td>Technical / Mathematical</td><td>10</td><td>35 min</td><td><b>3.5 min</b></td><td style="color:var(--accent2)">Luxurious — slow down, get them right</td></tr>
+      <tr><td>Logical Ability</td><td>15</td><td>25 min</td><td>1.7 min</td><td style="color:var(--warn)">Hardest section, adequate time</td></tr>
+      <tr><td>Verbal</td><td>20</td><td>20 min</td><td><b>60 sec</b></td><td style="color:var(--bad)">Brutal — pure pace</td></tr>
+      <tr><td>Pseudo Code</td><td>5</td><td>10 min</td><td>2 min</td><td style="color:var(--accent2)">Comfortable if you can trace</td></tr>
+      <tr><td>Puzzle Solving</td><td>4</td><td>10 min</td><td>2.5 min</td><td style="color:var(--accent2)">Fine — but easy to overrun</td></tr>
+      <tr><td>English Grammar</td><td>5</td><td>10 min</td><td>2 min</td><td style="color:var(--accent2)">Generous</td></tr>
+      <tr><td>English Writing</td><td>1</td><td>10 min</td><td>10 min</td><td style="color:var(--accent2)">One essay</td></tr>
+    </table>
+    <p style="margin-top:9px"><b>The two that decide your day:</b> <b>Verbal at 60 seconds a question</b> is the only genuinely rushed section — you must answer on instinct and never re-read. Meanwhile <b>Maths gets 3.5 minutes a question</b>, which is enormous; rushing there is pure self-harm. Most people carry panic from Verbal into whatever follows. Don't.</p>
+  </div>
+
+  <div class="card note">
+    <p class="big">✏️ Correction: the test is NON-adaptive.</p>
+    <p style="margin-top:7px">An earlier source said adaptive; PrepInsta's syllabus page states <b>non-adaptive</b> explicitly, and the fixed per-section timing table supports that. So: <b>a hard question does not mean you're scoring well</b>, and there's no calibration effect from opening accuracy. Treat it as a fixed paper — skip freely within a section and come back, because a hard question costs you the same as an easy one either way.</p>
+  </div>
+
+  <div class="grid">
+    <div class="q"><b>No negative marking</b>Consistent across sources. Never leave a blank — a guess is free expected value. Same as TCS.</div>
+    <div class="q"><b>Stationery IS allowed</b>Straight from the official guidelines PDF. Rough paper is permitted — <b>use it</b>. Pseudocode tracing and puzzles are far more accurate on paper than in your head.</div>
+    <div class="q"><b>No calculators</b>Explicitly banned in the official doc, along with phones and smart watches. Mental/paper arithmetic only.</div>
+    <div class="q"><b>On-campus, in a lab</b>Not remote. Carry <b>govt photo ID + college ID</b>. Login within <b>15 minutes</b> of your slot or you may forfeit it.</div>
+    <div class="q"><b>Desk must be bare</b>The guidelines specify no writing or pictures on the desk or wall. Minor, but it's a listed proctoring check.</div>
+    <div class="q"><b>Don't switch out of the screen</b>Explicitly listed. Close Teams/Skype/everything beforehand. Alt-tabbing may flag you.</div>
+  </div>
+
+  <div class="card note">
+    <p><b>Role tiering:</b> this drive covers <b>SE (~3.6 LPA) / SP (~6.5) / PP (~9.5)</b> in one sitting. No source documents exactly how the split is decided, but every account points the same way: <b>the technical sections (pseudocode, and coding if present) are what move you up a tier.</b> Quant and verbal get you <em>through</em>; pseudocode decides <em>which offer</em>. That is why pseudocode gets the biggest block tonight despite being only ~5 questions.</p>
+  </div>
+</section>
+
+<section id="fmt" class="page">
+  <h2>Format — with honest confidence labels</h2>
+  <div class="card note"><p>Neither official PDF on disk says <b>anything</b> about sections or timing — they cover system requirements, dress code, and eligibility only. Everything in this table is web research, cross-checked across independent sources. Where sources disagreed, I've said so rather than picked one.</p></div>
+
+  <h3>Sections <span class="pill p-md">Confidence B — section list consistent across sources</span></h3>
+  <table>
+    <tr><th>Section</th><th>Questions</th><th>Notes</th></tr>
+    <tr><td>Mathematical / Quantitative Ability</td><td>~10</td><td>Number series, TSD, time &amp; work, P&amp;C, probability, P&amp;L, ratio, averages, DI</td></tr>
+    <tr><td>Analytical / Logical Reasoning</td><td>~15</td><td>Syllogisms, coding-decoding, blood relations, <b>data sufficiency</b>, direction sense, seating</td></tr>
+    <tr><td>Verbal Ability</td><td>~20</td><td>Sentence completion, error detection, RC, synonyms/antonyms, rearrangement</td></tr>
+    <tr><td><b>Pseudocode</b></td><td><b>~5</b></td><td><b>MCQ output-tracing. You do NOT write code.</b> C/C++ flavoured</td></tr>
+    <tr><td><b>Puzzle Solving</b></td><td><b>~4</b></td><td>Sudoku-type, missing number, pattern, mathematical arrangement</td></tr>
+    <tr><td>English Grammar</td><td>~5</td><td>A discrete section — error detection, prepositions, tenses</td></tr>
+    <tr><td>English Writing (essay)</td><td>1</td><td>Long-form production task</td></tr>
+    <tr><td><b>Total</b></td><td><b>~60</b></td><td></td></tr>
+  </table>
+
+  <div class="card good">
+    <p class="big">✅ Resolved: 120 minutes, 60 questions, individually timed sections.</p>
+    <p style="margin-top:7px">The earlier 95/110/130 spread came from sources quoting partial section lists. The <b>120-minute</b> figure has a per-section breakdown whose arithmetic actually reconciles (25+35+20+10+10+10+10), which is a good sign it's a real table rather than a scrape. Full pacing table is on the <b>Strategy</b> tab — read it, it's the most actionable thing on this page.</p>
+    <p style="margin-top:7px">One source also states the OLT pattern is <b>the same for on-campus, off-campus and referral drives</b>. That raises confidence this applies to your sitting.</p>
+  </div>
+
+  <div class="card good">
+    <p class="big">✅ Resolved: the Regular OLT contains NO coding. Coding is a separate sitting.</p>
+    <p style="margin-top:7px">Tomorrow's OLT is the 7-section MCQ + essay paper above. The SP/DSE coding test is a <b>separate ~3-hour exam</b> held afterwards for candidates being considered for the premium tiers. So <b>you do not need to write code tomorrow</b> — pseudocode tracing is the only code-shaped thing on the paper.</p>
+    <p style="margin-top:7px">See the <b>SP/PP Coding</b> tab for what that later round looks like, because it's worth knowing now — it overlaps heavily with your Amazon prep.</p>
+  </div>
+</section>
+
+<section id="delta" class="page">
+  <h2>★ What's actually new — you sat TCS yesterday</h2>
+  <div class="card good"><p>You prepped quant, reasoning, verbal and long-form writing on <b>15 Aug</b> and sat them on the <b>17th</b>. That work is <b>36 hours old</b>. Re-studying it tonight would be the single biggest waste of your remaining hours.</p></div>
+
+  <h3>✅ Already warm — do NOT re-study</h3>
+  <table>
+    <tr><th>Infosys section</th><th>Covered by</th></tr>
+    <tr><td>Mathematical / Quantitative</td><td>TCS Numerical Ability — same topic list almost exactly</td></tr>
+    <tr><td>Logical Reasoning</td><td>TCS Reasoning Ability — including the data-sufficiency work you targeted</td></tr>
+    <tr><td>Verbal Ability</td><td>TCS Verbal — sentence completion is a shared format</td></tr>
+    <tr><td>English Writing (essay)</td><td>TCS Email Writing — different wrapper, same production skill and structure discipline</td></tr>
+  </table>
+  <p style="color:var(--muted);font-size:13.5px;margin-top:8px">One caveat: TCS <em>de</em>-prioritised probability and clocks/calendar because they hadn't appeared in two years. <b>Infosys does list probability and P&amp;C.</b> If you skipped them for TCS, that's a 15-minute gap to close.</p>
+
+  <h3>🔴 Genuinely new — this is where tonight goes</h3>
+  <div class="grid">
+    <div class="q"><b>Pseudocode <span class="pill p-hi">biggest block</span></b>Never practised. MCQ output-tracing of C-like code. Only ~5 questions, but it's the section most likely to tier you into SP/PP instead of SE. Highest marks-per-minute-of-study on the paper.</div>
+    <div class="q"><b>Puzzle Solving <span class="pill p-md">new format</span></b>Sudoku-type, missing-number, pattern arrangements. TCS reasoning didn't test these. Cheap to learn — mostly about recognising the four or five recurring shapes.</div>
+    <div class="q"><b>English Grammar <span class="pill p-md">discrete section</span></b>TCS verbal never tested grammar in isolation. Error detection, prepositions, tenses. Has its own cut-off, so it can sink you on its own.</div>
+    <div class="q"><b>Probability &amp; P&amp;C <span class="pill p-lo">gap-fill</span></b>Only if you skipped them for TCS on the "not asked in two years" advice. Infosys lists them explicitly.</div>
+  </div>
+</section>
+
+<section id="pseudo" class="page">
+  <h2>★ Pseudocode drill — 10 traced questions</h2>
+  <div class="card note">
+    <p><b>Format reminder:</b> you are given a C-like block and asked what it prints. <b>You never write code.</b> Every answer below has been executed and verified, not eyeballed.</p>
+    <p style="margin-top:7px"><b>Method — use paper (it's allowed):</b> draw a column per variable, one row per loop iteration, and fill it in. Tracing in your head is where people lose this section. On ~5 questions with a sectional cut-off, one careless trace is expensive.</p>
+    <button onclick="revAll()" style="background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 13px;cursor:pointer;font:inherit;font-size:13px;margin-top:6px">Reveal all answers</button>
+  </div>
+
+  <div class="drill"><h4>Q1 — XOR swap</h4>
+<pre>int a = 5, b = 3;
+a = a ^ b;
+b = a ^ b;
+a = a ^ b;
+print(a, b);</pre>
+  <button onclick="rev(1)">Show answer</button>
+  <div class="ans" id="a1"><b>3 5</b> — the classic XOR swap idiom. It exchanges the two values without a temp variable. Recognise the three-line shape on sight and you don't need to trace it at all.</div></div>
+
+  <div class="drill"><h4>Q2 — alternating sign accumulation</h4>
+<pre>int arr[] = {2, 4, 6, 8, 10};
+int s = 0;
+for(i = 0; i &lt; 5; i++) {
+    if(i % 2 == 0) s = s + arr[i];
+    else           s = s - arr[i];
+}
+print(s);</pre>
+  <button onclick="rev(2)">Show answer</button>
+  <div class="ans" id="a2"><b>6</b> — the condition tests the <em>index</em>, not the value. +2 −4 +6 −8 +10 = 6. Misreading <code>i%2</code> as "even elements" is the trap.</div></div>
+
+  <div class="drill"><h4>Q3 — recursion</h4>
+<pre>int f(int n) {
+    if(n &lt;= 1) return n;
+    return f(n-1) + f(n-2);
+}
+print(f(6));</pre>
+  <button onclick="rev(3)">Show answer</button>
+  <div class="ans" id="a3"><b>8</b> — Fibonacci with f(0)=0, f(1)=1. Sequence: 0,1,1,2,3,5,<b>8</b>. Build the table upward from the base case; never expand the recursion tree by hand.</div></div>
+
+  <div class="drill"><h4>Q4 — loop with a non-unit step</h4>
+<pre>int i = 0, c = 0;
+while(i &lt; 20) {
+    if(i % 3 == 0) c++;
+    i = i + 2;
+}
+print(c);</pre>
+  <button onclick="rev(4)">Show answer</button>
+  <div class="ans" id="a4"><b>4</b> — i takes 0,2,4,…,18. Of those, divisible by 3: 0, 6, 12, 18. Note <b>0 counts</b> — forgetting that 0 % 3 == 0 is the most common miss here.</div></div>
+
+  <div class="drill"><h4>Q5 — character counting</h4>
+<pre>char s[] = "INFOSYS";
+int c = 0;
+for(i = 0; s[i] != '\0'; i++)
+    if(s[i]=='S' || s[i]=='O' || s[i]=='I') c++;
+print(c);</pre>
+  <button onclick="rev(5)">Show answer</button>
+  <div class="ans" id="a5"><b>4</b> — I·N·F·O·S·Y·S → I(1) + O(1) + S(2) = 4. The duplicate S is the point; count occurrences, not distinct letters.</div></div>
+
+  <div class="drill"><h4>Q6 — triangular nested loop</h4>
+<pre>int c = 0;
+for(i = 1; i &lt;= 4; i++)
+    for(j = i; j &lt;= 4; j++)
+        c++;
+print(c);</pre>
+  <button onclick="rev(6)">Show answer</button>
+  <div class="ans" id="a6"><b>10</b> — inner loop starts at <code>i</code>, not 0, so iterations are 4+3+2+1 = 10. Any <code>j = i</code> inner loop is a triangular number: n(n+1)/2.</div></div>
+
+  <div class="drill"><h4>Q7 — pointer vs value parameter</h4>
+<pre>void f(int *x, int y) {
+    *x = *x + 10;
+    y  = y  + 10;
+}
+int a = 5, b = 5;
+f(&amp;a, b);
+print(a, b);</pre>
+  <button onclick="rev(7)">Show answer</button>
+  <div class="ans" id="a7"><b>15 5</b> — <code>x</code> is a pointer so the write reaches the caller's <code>a</code>. <code>y</code> is a copy, so <code>b</code> is untouched. This pass-by-reference vs pass-by-value contrast is <b>the single most common Infosys pseudocode question type</b> — expect a version of it.</div></div>
+
+  <div class="drill"><h4>Q8 — in-place array mutation</h4>
+<pre>int a[] = {1, 2, 3, 4, 5};
+for(i = 0; i &lt; 4; i++)
+    a[i+1] = a[i+1] + a[i];
+print(a[4]);</pre>
+  <button onclick="rev(8)">Show answer</button>
+  <div class="ans" id="a8"><b>15</b> — the array is modified as it's read, producing a running prefix sum: 1, 3, 6, 10, <b>15</b>. The trap is using the <em>original</em> values on the right-hand side. Always re-read the array as mutated.</div></div>
+
+  <div class="drill"><h4>Q9 — digit reversal</h4>
+<pre>int n = 1234, r = 0;
+while(n &gt; 0) {
+    r = r * 10 + n % 10;
+    n = n / 10;
+}
+print(r);</pre>
+  <button onclick="rev(9)">Show answer</button>
+  <div class="ans" id="a9"><b>4321</b> — <code>n % 10</code> peels the last digit, <code>n / 10</code> is <b>integer</b> division and drops it. Memorise this four-line shape as "reverse the digits"; it appears constantly.</div></div>
+
+  <div class="drill"><h4>Q10 — bit counting</h4>
+<pre>int n = 29;
+int c = 0;
+while(n &gt; 0) {
+    c = c + (n &amp; 1);
+    n = n &gt;&gt; 1;
+}
+print(c);</pre>
+  <button onclick="rev(10)">Show answer</button>
+  <div class="ans" id="a10"><b>4</b> — 29 in binary is 11101, which has four 1-bits. <code>n &amp; 1</code> reads the lowest bit, <code>n &gt;&gt; 1</code> discards it. This is the standard population-count loop.</div></div>
+
+  <div class="card good">
+    <h3 style="margin-top:0">The five shapes that cover most of this section</h3>
+    <ol>
+      <li><b>Pointer vs value</b> — does the change escape the function? (Q7)</li>
+      <li><b>Integer division truncates</b> — <code>7/2 == 3</code>, and digit-peeling loops rely on it (Q9)</li>
+      <li><b>In-place mutation while iterating</b> — later reads see earlier writes (Q8)</li>
+      <li><b>Loop bounds and step</b> — off-by-one, non-unit steps, inner loops starting at <code>i</code> (Q4, Q6)</li>
+      <li><b>Bitwise idioms</b> — XOR swap, <code>&amp;1</code> / <code>&gt;&gt;1</code> bit walking (Q1, Q10)</li>
+    </ol>
+    <p style="margin-top:8px">If you can name which shape a question is within ten seconds, you'll clear this section. That recognition is worth more than tracing speed.</p>
+  </div>
+</section>
+
+<section id="misc" class="page">
+  <h2>Puzzles + Grammar — the two cheap sections</h2>
+
+  <h3>Puzzle Solving <span class="pill p-md">~4 questions</span></h3>
+  <div class="q">
+    <b>The recurring shapes:</b>
+    <ul>
+      <li><b>Missing number in a series</b> — test differences first, then ratios, then squares/cubes, then alternating series. Most are one of those four.</li>
+      <li><b>Number grid / sudoku-type</b> — find the row or column with the most constraints and start there, never the top-left.</li>
+      <li><b>Pattern completion</b> — check rotation, reflection, and element-count separately rather than looking at the figure as a whole.</li>
+      <li><b>Mathematical arrangement</b> — placing digits to satisfy a sum. Work from the most constrained position (usually the carry).</li>
+    </ul>
+    <b>Time rule:</b> ~4 questions, and they're the easiest section to sink 8 minutes into for one mark. Give any single puzzle <b>90 seconds</b>, then guess and move — there's no negative marking, and the sectional cut-off on 4 questions is low.
+  </div>
+
+  <h3>English Grammar <span class="pill p-md">~5 questions, own cut-off</span></h3>
+  <div class="q">
+    Discrete section, so it can fail you on its own despite being small. The reliable earners:
+    <ul>
+      <li><b>Subject-verb agreement</b> — find the true subject; ignore everything between it and the verb ("The <u>box</u> of chocolates <u>is</u>…").</li>
+      <li><b>Tense consistency</b> — one timeframe per sentence unless a marker says otherwise.</li>
+      <li><b>Prepositions</b> — these are pure memorisation and the most commonly tested item. Skim a standard list once tonight.</li>
+      <li><b>Parallel structure</b> — items in a list must share a form ("reading, writing, and <s>to speak</s> speaking").</li>
+      <li><b>Modifier placement</b> — the modifier attaches to whatever it sits next to.</li>
+    </ul>
+  </div>
+
+  <h3>English Writing (essay) <span class="pill p-ok">warm from TCS</span></h3>
+  <div class="q">
+    Same production skill as the TCS email, different wrapper. Structure carries the marks: <b>intro stating your position → 2 body paragraphs, one idea each → conclusion that resolves rather than repeats.</b> Short grammatical sentences beat long ambitious ones. Leave 60 seconds to proofread for tense and agreement — the same two errors that cost marks in the grammar section cost marks here.
+  </div>
+</section>
+
+<section id="spcode" class="page">
+  <h2>SP / PP coding round — the separate sitting</h2>
+  <div class="card note"><p><b>Not tomorrow.</b> This is the round that decides whether you land SE, DSE, SP or PP. It's a separate ~3-hour exam after the OLT. Included here because knowing the target now changes how you spend the 18th.</p></div>
+
+  <h3>What one candidate actually sat <span class="pill p-md">first-hand, Jan 2026, 500+ candidates</span></h3>
+  <table>
+    <tr><th>Slot</th><th>Problem type reported</th><th>Maps to</th></tr>
+    <tr><td><b>Easy</b></td><td>Query-based operations on a 2D list — <i>lengthy statement, careful parsing required</i></td><td>Simulation / matrix indexing</td></tr>
+    <tr><td><b>Medium</b></td><td><b>Two-pointer and sliding window</b></td><td style="color:var(--accent2)">Exactly your Amazon patterns</td></tr>
+    <tr><td><b>Hard</b></td><td>Graph problem combined with <b>state-based DP</b></td><td>BFS/DFS + DP on states</td></tr>
+    <tr><td><b>Complex</b></td><td>Tree problem with range queries, difficult edge cases</td><td>Segment tree / tree DP</td></tr>
+  </table>
+  <p style="color:var(--muted);font-size:13.5px">A separate HackWithInfy account (July 2025) reports the variant as <b>3 questions in 3 hours</b> (Easy/Medium/Hard). Expect 3–4 problems, ~3 hours, one clearly beyond you.</p>
+
+  <div class="card urgent">
+    <p class="big">The tiering is explicit — difficulty solved maps to salary band.</p>
+    <table style="margin-top:8px">
+      <tr><th>What you solve</th><th>Reported outcome</th></tr>
+      <tr><td>Easy + Medium</td><td>DSE — ~7 LPA</td></tr>
+      <tr><td>+ Hard</td><td>SP L3 — ~11 LPA</td></tr>
+      <tr><td>+ Complex</td><td>SP L2 ~16 LPA, or SP L3 higher band ~21 LPA</td></tr>
+    </table>
+    <p style="margin-top:9px">Reported guidance: <b>solve at least 3 of 4 to stay competitive.</b> Note the shape of this — the Easy and Medium are effectively the entry ticket, not the prize. The band is decided by whether you land the Hard.</p>
+  </div>
+
+  <div class="card urgent">
+    <p class="big">"Passing sample test cases does not guarantee acceptance."</p>
+    <p style="margin-top:7px">Direct from the candidate account — hidden tests and edge cases decide it. <b>This is your exact TCS failure mode from this morning</b>, in a round worth ₹7–21 LPA. Same discipline applies: verify the output contract character by character, and test 0 / empty / single-element before submitting.</p>
+  </div>
+
+  <div class="card good">
+    <p class="big">The useful coincidence</p>
+    <p style="margin-top:7px">The reported <b>Medium is two-pointer + sliding window</b> — the same two patterns that top Amazon's frequency list, and the same ones your Comcast OA already tested. The <b>Hard is graph + DP</b>, and your Viasat round was BFS.</p>
+    <p style="margin-top:7px"><b>So the 18th does double duty.</b> The Amazon block that evening is also your SP-round prep. That's the strongest argument for spending it on sliding window, two pointers, hashing and BFS rather than broadening — those four patterns are now load-bearing for two separate outcomes.</p>
+    <p style="margin-top:7px">The one gap this exposes: <b>state-based DP</b> sits in the Hard slot, and DP is your known thin spot. That's not a tonight problem or an 18th problem — but if you clear the OLT and get called for this round, DP is the single thing standing between SP L3 and SP L2.</p>
+  </div>
+</section>
+
+<section id="plan" class="page">
+  <h2>The three-day plan</h2>
+  <div class="card urgent">
+    <p class="big">Reality: you get one evening per exam.</p>
+    <p style="margin-top:7px">TCS was this morning. Infosys is tomorrow, Amazon the day after. There is no version of this where you cover everything — the plan below deliberately <b>abandons breadth</b> and protects the few things that actually move the outcome.</p>
+  </div>
+
+  <h3>Tonight — 17 Aug, ~3h 15m <span class="pill p-hi">Infosys</span></h3>
+  <table>
+    <tr><th>#</th><th>Time</th><th>What</th><th>Why</th></tr>
+    <tr><td>1</td><td><b>60 min</b></td><td><b>Pseudocode.</b> The 10 drills on this page, on paper, tracing properly. Then name the five shapes without looking.</td><td>Never practised, and it's the section that tiers you into SP/PP</td></tr>
+    <tr><td>2</td><td><b>35 min</b></td><td><b>Puzzles.</b> Missing-number series and one number-grid set. Practise the 90-second abandon rule.</td><td>New format, cheap to learn, easy to lose time in</td></tr>
+    <tr><td>3</td><td><b>30 min</b></td><td><b>Grammar.</b> Prepositions list, subject-verb agreement, tenses. Error-detection practice.</td><td>Own cut-off — can sink you alone despite being 5 questions</td></tr>
+    <tr><td>4</td><td><b>25 min</b></td><td><b>Probability + P&amp;C</b> — only if you skipped them for TCS.</td><td>TCS said skip; Infosys lists them</td></tr>
+    <tr><td>5</td><td><b>25 min</b></td><td><b>Light quant/reasoning refresh.</b> Re-read the formula list. Nothing new.</td><td>36 hours old — needs a touch, not a rebuild</td></tr>
+    <tr><td>—</td><td>—</td><td><b>Stop by 22:30.</b> You sat a 191-minute exam this morning.</td><td></td></tr>
+  </table>
+  <div class="card note"><b>If tonight collapses:</b> protect #1 and #3. Pseudocode is your upside; grammar is your downside risk.</div>
+
+  <div class="card good">
+    <p class="big">Before you sleep — 3 minutes, highest value on this page</p>
+    <p style="margin-top:7px">Read the <b>pacing table</b> on the Strategy tab until you can recite three numbers: <b>Verbal 60 seconds a question</b>, <b>Maths 3.5 minutes a question</b>, <b>sections are separately timed</b>. Walking in knowing that is worth more than another ten puzzle drills, because it prevents the one unforced error the format invites — rushing the generous sections after getting flustered in the tight one.</p>
+  </div>
+
+  <h3>Tomorrow — 18 Aug <span class="pill p-hi">Infosys exam, then Amazon</span></h3>
+  <ul>
+    <li><b>Before the exam:</b> re-read the Strategy tab. Three things — <b>clear every sectional floor</b>, <b>use the paper</b> (stationery is allowed), and <b>don't rush Maths</b>.</li>
+    <li><b>Remember:</b> no coding tomorrow. The paper is MCQ + one essay. Pseudocode is read-and-trace only.</li>
+    <li><b>Evening, ~2h 30m:</b> Amazon — sliding window, two pointers, hashing, BFS, plus the output-contract drill. This block <b>doubles as SP-round prep</b> (see the SP/PP Coding tab), so it's the highest-leverage session of the three days.</li>
+    <li><b>~20 min:</b> read the 16 Leadership Principles once, properly.</li>
+  </ul>
+
+  <h3>19 Aug <span class="pill p-hi">Amazon OA</span></h3>
+  <ul>
+    <li><b>Morning:</b> one timed coding problem to warm up. Do not learn anything new.</li>
+    <li>Re-read the output-contract rule immediately before starting.</li>
+  </ul>
+</section>
+
+<section id="amzn" class="page">
+  <h2>Amazon SDE Intern — 19 Aug</h2>
+  <div class="card note"><p><b>No official docs on disk</b> — only your tailored resume. Everything here is web research, so confidence is lower than the Infosys page. Verify against <a href="https://www.1point3acres.com/interview/company/Amazon" style="color:var(--accent)">1point3acres</a> before you sit it; that forum carries the most current real questions.</p></div>
+
+  <h3>Format</h3>
+  <table>
+    <tr><th>Part</th><th>Time</th><th>What</th></tr>
+    <tr><td><b>Coding</b></td><td>70–90 min</td><td>2 problems, medium. Intern set reported slightly easier than SDE-1.</td></tr>
+    <tr><td>Work Simulation</td><td>~20–30 min</td><td>"Day in the life" — emails and messages, you choose responses. Weights <b>Ownership</b> and <b>Bias for Action</b>.</td></tr>
+    <tr><td>Work Style Survey</td><td>~10–15 min</td><td>Agree/disagree against the 16 Leadership Principles. Not right/wrong, but consistency matters.</td></tr>
+  </table>
+
+  <div class="card good">
+    <h3 style="margin-top:0">You are better positioned here than you think</h3>
+    <p>The four highest-frequency Amazon patterns are <b>arrays/strings, sliding window, two pointers, and hash-map frequency counting</b> — reported in over 90% of OAs. Your <b>Comcast</b> OA was literally a k-moving-average (sliding window) plus a consecutive-frequency count (hashing). Your <b>Viasat</b> round was BFS. You've cleared three coding rounds in six days. <b>Don't broaden — sharpen what's already warm.</b></p>
+  </div>
+
+  <div class="card urgent">
+    <p class="big">Your highest-probability way to lose a solved problem</p>
+    <p style="margin-top:7px">On the TCS Easy this morning your <b>logic was correct</b> and the output format was wrong — you printed a Python dict repr <code>{1: 1, 2: 1}</code> where <code>{1:1,2:1}</code> was required. Exact-match hidden tests failed every case.</p>
+    <p style="margin-top:7px"><b>Amazon is also exact-match.</b> The rule, drilled until reflexive:</p>
+    <pre>#  NEVER print a container directly
+print(d)                                   # {1: 1, 2: 1}   WRONG
+print([50, 60])                            # [50, 60]       WRONG
+
+#  Build the string yourself
+print("{" + ",".join(f"{k}:{v}" for k,v in d.items()) + "}")
+print("[" + ",".join(map(str, xs)) + "]")</pre>
+    <p style="margin-top:7px">Before submitting <b>any</b> problem: re-read the required output format, then compare it character by character against one line of your actual output.</p>
+  </div>
+
+  <h3>Deprioritise <span class="pill p-lo">deliberately</span></h3>
+  <p style="color:var(--muted);font-size:13.8px">DP is a known thin spot, and Amazon does ask "basic DP" — but it is far less frequent than the big four. With one evening, spending it on DP trades a high-probability gain for a low-probability one. <b>Skip it.</b> Same for topological sort and advanced graph work.</p>
+
+  <h3>Work Simulation / Leadership Principles</h3>
+  <div class="q">
+    Not a personality test to game — but not free either. Two things reliably help:
+    <ul>
+      <li><b>Bias for Action:</b> when a scenario offers "gather more data" vs "act now with what you have", Amazon's culture favours acting and iterating. Escalating or waiting reads as weak.</li>
+      <li><b>Ownership:</b> never pick the option that hands the problem to another team. "Not my job" is the wrong answer in every scenario.</li>
+      <li><b>Be consistent.</b> The survey repeats similar statements to detect contradictions. Answer as one coherent person, not as who you think they want per-question.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="src" class="page">
+  <h2>Sources</h2>
+
+  <h3>Confidence A — official, on disk, read directly 17 Aug</h3>
+  <ul>
+    <li><code>Companies/Infosys/Infosys_Assessment_Guidelines.pdf</code> — <b>logistics only.</b> System requirements, lab/ID rules, stationery allowed, no calculators, 15-minute login window, behavioural rules. <b>Zero format information.</b></li>
+    <li><code>Companies/Infosys/Infosys Campus Recruitment Program_Elgibility Criteria_.pdf</code> — 10th/12th 60%, B.Tech 68% or 6.0 CGPA, no active backlogs. Your 8.48 clears comfortably.</li>
+  </ul>
+
+  <h3>Confidence B — web, cross-checked across independent sources</h3>
+  <ul>
+    <li><a href="https://prepinsta.com/infosys/recruitment-process/" style="color:var(--accent)">PrepInsta — Infosys recruitment process</a></li>
+    <li><a href="https://prepinsta.com/infosys/aptitude-test-pattern/" style="color:var(--accent)">PrepInsta — Infosys aptitude test pattern</a></li>
+    <li><a href="https://www.placementpreparation.io/infosys/syllabus-and-test-pattern/" style="color:var(--accent)">PlacementPreparation — syllabus &amp; test pattern</a></li>
+    <li><a href="https://faceprep.in/article/infosys-recruitment-pattern-important-topics-and-about-the-company/" style="color:var(--accent)">FacePrep — recruitment pattern &amp; topics</a></li>
+    <li><a href="https://www.jobtestprep.com/amazon-online-assessment" style="color:var(--accent)">JobTestPrep — Amazon OA</a> · <a href="https://www.prepterminal.com/amazon-sde-online-assessment" style="color:var(--accent)">PrepTerminal — Amazon SDE OA</a></li>
+    <li><a href="https://www.1point3acres.com/interview/post/7678143" style="color:var(--accent)">1point3acres — Amazon SDE Intern OA 2026</a> (first-hand)</li>
+  </ul>
+
+  <h3>Confidence D — on disk but STALE, do not use for format</h3>
+  <ul>
+    <li><code>Placement material/INFOSYS/</code> — ~50 files, but dated <b>2014–2018</b>. Same trap as the TCS material, which was 2018–2020 and badly out of date. Usable as raw quant/verbal practice questions only.</li>
+  </ul>
+
+  <h3>Rejected</h3>
+  <p style="color:var(--muted);font-size:13.5px">papersadda.com, assessfy.com, knoffcampusjobs.com, campusmonk.in, shadecoder.com, entri.app, tamiltech.in — AI-generated SEO aggregators, excluded per standing rule.</p>
+
+  <h3>What I could not confirm</h3>
+  <ul>
+    <li><b>Total duration</b> — 95 / 110 / 130 minutes all reported. Plan for 95.</li>
+    <li><b>Whether a live coding round sits inside this campus sitting</b> for SP/PP tiering, or follows separately.</li>
+    <li><b>Exactly how SE/SP/PP is decided</b> from one test. No source documents the mechanism.</li>
+  </ul>
+
+  <div class="footer">Built 17 Aug 2026. All 10 pseudocode answers executed and verified, not eyeballed. If your placement cell sent a pattern document, <b>it supersedes this page entirely</b>.</div>
+</section>
+
+</main>
+</body>
+</html>

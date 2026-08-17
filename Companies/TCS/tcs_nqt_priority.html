@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TCS NQT — Priority Order &amp; Coding Bank</title>
+<style>
+:root{--bg:#0b0f14;--panel:#111822;--panel2:#16202d;--ink:#eef6ff;--muted:#aec1d2;
+--accent:#6fe3c1;--accent2:#c7f59b;--warn:#ffd166;--bad:#ff9aa2;--line:#2a3a4d;--code:#071019}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI",system-ui,Arial,sans-serif}
+header{padding:24px 20px 14px;background:linear-gradient(120deg,#101a24,#14282a);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+h1{font-size:clamp(21px,3.4vw,31px);margin-bottom:7px}
+.sub{color:var(--muted);max-width:900px;font-size:14px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+nav button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 11px;cursor:pointer;font:inherit;font-size:13px}
+nav button.active,nav button:hover{border-color:var(--accent);box-shadow:0 0 0 2px rgba(111,227,193,.15) inset}
+main{max-width:1020px;margin:0 auto;padding:18px}
+.page{display:none}.page.active{display:block}
+h2{font-size:21px;margin:6px 0 11px}
+h3{color:var(--accent);font-size:15.5px;margin:17px 0 7px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 17px;margin:12px 0}
+.urgent{border-left:4px solid var(--bad);background:#1d1216}
+.note{border-left:4px solid var(--warn)}
+.good{border-left:4px solid var(--accent2)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#1a2634;color:var(--accent2)}
+code{font-family:ui-monospace,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:4px;color:var(--accent2);font-size:12.5px}
+ul,ol{padding-left:20px}li{margin:5px 0}
+.q{border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin:9px 0;background:#0f1722;font-size:14px}
+.q b{color:var(--accent2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px}
+.big{font-size:16px;font-weight:600;color:var(--warn)}
+.rank{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:10px 0;background:var(--panel)}
+.rank .n{font:700 26px/1 ui-monospace,monospace;color:var(--accent);flex-shrink:0;width:32px}
+.rank .body{flex:1}
+.rank h4{font-size:15.5px;margin-bottom:5px}
+.rank p{font-size:13.8px;color:var(--muted)}
+.pill{display:inline-block;font:10.5px ui-monospace,monospace;padding:2px 8px;border-radius:999px;border:1px solid var(--line);margin-left:7px;vertical-align:middle}
+.p-hi{color:var(--bad);border-color:var(--bad)}
+.p-md{color:var(--warn);border-color:var(--warn)}
+.p-lo{color:var(--muted)}
+.footer{color:var(--muted);font-size:12.5px;margin:24px 0}
+@media(max-width:800px){main{padding:13px}}
+</style>
+<script>
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelector('button[data-p="'+id+'"]').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+</script>
+</head>
+<body>
+<header>
+  <h1>TCS NQT — Priority Order &amp; Coding Bank</h1>
+  <div class="sub">Your on-disk TCS material is <b>2018-2020 era and the pattern has changed substantially</b> — the old "20-minute coding round, print the area of a circle" format is gone. This page uses the <b>verified 2026 pattern</b> and re-ranks everything against it.</div>
+  <nav>
+    <button data-p="traps" class="active" onclick="show('traps')">🔴 Exam Traps</button>
+    <button data-p="order" onclick="show('order')">★ Priority Order</button>
+    <button data-p="pattern" onclick="show('pattern')">2026 Pattern</button>
+    <button data-p="verbal" onclick="show('verbal')">★ Verbal (Email + Recall)</button>
+    <button data-p="coding" onclick="show('coding')">Coding Bank</button>
+    <button data-p="plan" onclick="show('plan')">2-Day Plan (17th)</button>
+    <button data-p="src" onclick="show('src')">Sources</button>
+  </nav>
+</header>
+<main>
+
+<section id="traps" class="page active">
+  <h2>🔴 Operational traps — worth more than any topic</h2>
+  <div class="card urgent">
+    <p class="big">1. You cannot edit your code after compiling it.</p>
+    <p style="margin-top:7px">Straight from 2025 candidates: <i>"if you write a code and compile it and you find some errors then you <b>cannot edit the code. You need to reset the code and type again.</b> You cannot even copy your previous code and paste it."</i></p>
+    <p style="margin-top:7px"><b>What this means for you:</b> compiling is nearly one-shot. Do <b>not</b> use the compiler as a debugger — the usual write-a-bit/compile/fix loop will destroy you here. Write the <b>whole</b> solution, <b>dry-run it on paper</b> against the sample input, re-read it line by line, <em>then</em> compile. This is the single highest-value habit to rehearse in the next two days.</p>
+  </div>
+
+  <div class="card urgent">
+    <p class="big">2. You CAN switch between Foundation sections — most people don't know.</p>
+    <p style="margin-top:7px">Reported directly: <i>"Many students were not aware that they can switch between the sections for Foundation sections hence wasted time."</i> Start with your <b>strongest</b> Foundation section, bank the marks, then move. Don't grind Numerical in order while Verbal marks go unclaimed.</p>
+  </div>
+
+  <div class="card note">
+    <p class="big">3. Advanced sections are "Fill Up the Box" — no options.</p>
+    <p style="margin-top:7px">Most Advanced Quant/Reasoning questions have <b>no multiple choice</b> — you type the answer directly. So back-solving from options, plugging in choices, and elimination <b>do not work</b> there. You must actually compute. Budget accordingly: these are marked <b>Hard</b>.</p>
+  </div>
+
+  <div class="grid">
+    <div class="q"><b>No negative marking (2026)</b>Confirmed across sources. So <b>never leave a blank</b> in any MCQ section — a guess is strictly free expected value.</div>
+    <div class="q"><b>Each coding question has its own timer</b>You can't bank time from Q1 to Q2. <b>Your pattern:</b> Easy = <b>35 min</b>, Medium = <b>55 min</b>. Both are generous — the risk is a careless first compile, not the clock.</div>
+    <div class="q"><b>Q2 may give no sample I/O</b>Q1 came with sample input/output plus 2 open + 5 hidden test cases. <b>Q2 gave only the problem statement</b> — so you must construct your own test cases mentally.</div>
+    <div class="q"><b>Compiler issues are common</b>Multiple candidates reported them. Keep your code simple and standard — avoid exotic library calls that may not be available.</div>
+    <div class="q"><b>Languages allowed</b>C, C++, Java, Python, Perl. <b>Pick Python</b> — your primary, and the fewest lines typed matters a lot when retyping after a reset.</div>
+    <div class="q"><b>2 minutes of instructions</b>At the start. Read them — the platform's rules may have changed again.</div>
+  </div>
+</section>
+
+<section id="order" class="page">
+  <h2>★ Priority order for your two days</h2>
+  <p style="color:var(--muted);font-size:14px">Ranked by <b>marks-per-minute-of-study</b>, weighted for what you personally are already good and bad at — not just by exam weight.</p>
+
+  <div class="rank"><div class="n">1</div><div class="body">
+    <h4>Advanced Coding <span class="pill p-hi">90 of 191 min · 47% of the exam</span></h4>
+    <p><b>Nothing else is close.</b> Two problems get <b>90 minutes</b> — nearly half the exam — and your performance here is a primary driver of whether you're shortlisted for <b>Prime / Digital vs Ninja</b>. Per your official pattern: <b>Easy (35 min) + Medium (55 min)</b>, each separately timed. This is where the drive is won.<br><br>
+    <b>Your angle:</b> you just cleared two coding OAs in a week (Comcast: k-moving-average + consecutive frequency count; Viasat: BFS). Your implementation fluency is genuinely better than it was in July. Spend the time on <b>writing clean code first-try without compiler help</b>, not on learning new algorithms.</p>
+  </div></div>
+
+  <div class="rank"><div class="n">2</div><div class="body">
+    <h4>Verbal — Email Writing + Passage Recall <span class="pill p-hi">9 min + 8×2 min · production tasks</span></h4>
+    <p><b>Moved up from last place after seeing your official pattern.</b> These aren't MCQs — you <em>produce</em> the answer, which means technique and a memorised template convert directly into marks. Email Writing alone is a <b>9-minute single item</b>, and Passage Recall is really a <b>memory test</b> (30s to read, text then disappears, 90s to write).<br><br>
+    <b>Why this beats Numerical for study time:</b> both are formats you've likely never practised, and both are heavily rubric-scored (keyword coverage, structure, salutation/sign-off). An hour spent here converts to marks far more reliably than an hour of extra percentage sums. See the <b>★ Verbal</b> tab for the template and the 30-second reading method.</p>
+  </div></div>
+
+  <div class="rank"><div class="n">3</div><div class="body">
+    <h4>Numerical Ability <span class="pill p-hi">20 Q · 25 min · Easy-Medium</span></h4>
+    <p>Highest-yield MCQ section: large question count, difficulty only easy-medium, and it's pure formula recall you can cram in hours. <b>Not asked in the past two years:</b> Probability, Clocks &amp; Calendar — deprioritise both here (though probability <em>does</em> appear in Advanced Quant).<br><br>
+    <b>Focus:</b> percentages, profit &amp; loss, ratio/proportion, time &amp; work, speed-time-distance, averages, ages, series &amp; progressions, mensuration, LCM/HCF, plus <b>Data Interpretation</b> (pie/tabular/graphical).</p>
+  </div></div>
+
+  <div class="rank"><div class="n">4</div><div class="body">
+    <h4>Reasoning Ability <span class="pill p-md">20 Q · 25 min · Medium</span></h4>
+    <p>Same question count as Numerical but a notch harder. Contains <b>Data Sufficiency</b> — which your own mistake log flags as a recurring weak spot from the Prodapt prep. That makes it worth targeted revision rather than general practice.<br><br>
+    <b>Focus:</b> seating arrangements, blood relations, directional sense, coding-decoding, number/letter series, syllogisms, statement-conclusion, <b>data sufficiency</b>, and cube folding / paper cuts (visual reasoning, easy to lose marks on if you've never practised them).</p>
+  </div></div>
+
+  <div class="rank"><div class="n">5</div><div class="body">
+    <h4>Advanced Quant + Advanced Reasoning <span class="pill p-md">15 Q · 25 min · HARD · FUB</span></h4>
+    <p>Ranked below Foundation despite being "advanced" because it's only 15 questions in 25 minutes and is explicitly <b>Hard</b> — the marks-per-study-hour is poor. <b>But</b> it's a differentiator for the Prime/Digital tier, so don't skip it entirely.<br><br>
+    <b>Highest-value topics here</b> (things that don't appear in Foundation): <b>permutation &amp; combination, probability, logarithms, partnership, progressions</b>. Remember: <b>no options</b> — you must compute exactly.</p>
+  </div></div>
+
+  <div class="rank"><div class="n">6</div><div class="body">
+    <h4>Verbal — Sentence Completion only <span class="pill p-lo">20 items · 25 sec each</span></h4>
+    <p>The MCQ part of Verbal genuinely is last for study time — fast, mechanical, and hard to improve in two days. Practise <b>pace</b>, not content: predict the answer before reading the options. <b>(The other two Verbal parts are ranked #2 — see above.)</b></p>
+  </div></div>
+
+  <div class="card good">
+    <p><b>If you only get one evening:</b> #1 (write 3-4 problems start-to-finish with zero compiler help) and #2 (rehearse one email + one passage-recall drill). Those two cover <b>90 of 191 minutes</b> of the exam and the two formats you're least practised at.</p>
+  </div>
+</section>
+
+<section id="pattern" class="page">
+  <h2>✅ YOUR official pattern</h2>
+  <div class="card good"><p>Supplied by you from the official document — this <b>overrides</b> every researched estimate elsewhere on this page. <b>81 items · 191 minutes.</b></p></div>
+  <table>
+    <tr><th>Group</th><th>Items</th><th>Duration</th></tr>
+    <tr><td>Numerical Ability</td><td>20</td><td>25 min</td></tr>
+    <tr><td>Reasoning Ability</td><td>20</td><td>25 min</td></tr>
+    <tr><td>Advanced Quantitative and Reasoning Ability</td><td>14</td><td>25 min</td></tr>
+    <tr><td>Verbal Ability</td><td>25</td><td>26 min</td></tr>
+    <tr><td><b>Advanced Coding — Easy</b></td><td><b>1</b></td><td><b>35 min</b></td></tr>
+    <tr><td><b>Advanced Coding — Medium</b></td><td><b>1</b></td><td><b>55 min</b></td></tr>
+    <tr><td><b>Total</b></td><td><b>81</b></td><td><b>191 min</b></td></tr>
+  </table>
+
+  <h3>Verbal Ability — the breakdown that changes everything</h3>
+  <table>
+    <tr><th>Section</th><th>Items</th><th>Duration per question</th></tr>
+    <tr><td>Sentence Completion</td><td>20</td><td>25 seconds</td></tr>
+    <tr><td>Instruction</td><td>1</td><td>25 seconds</td></tr>
+    <tr><td><b>Passage Recall</b></td><td><b>4+4</b></td><td><b>120 sec (30s read, 90s write) — text disappears after the 30s</b></td></tr>
+    <tr><td>Instruction</td><td>1</td><td>15 seconds</td></tr>
+    <tr><td><b>Email Writing</b></td><td><b>1</b></td><td><b>540 seconds (9 minutes)</b></td></tr>
+  </table>
+
+  <div class="card urgent">
+    <p class="big">Two corrections to what I told you earlier:</p>
+    <p style="margin-top:7px"><b>1. Coding is easier than I said.</b> It's <b>Easy (35 min) + Medium (55 min)</b> — there is no "Hard" problem. My earlier "2 hard problems" framing came from generic NQT sources and was wrong for your drive. 35 minutes for an easy problem is generous; the Medium at 55 minutes is the real one.</p>
+    <p style="margin-top:7px"><b>2. Verbal is not a normal verbal section.</b> It contains <b>no reading comprehension MCQs</b>. Instead it has two writing/memory tasks: <b>Passage Recall</b> (read for 30s, the text is then <em>removed</em>, write from memory for 90s) and <b>Email Writing</b> (9 minutes on one item). I had Verbal ranked last for study time — <b>that was wrong</b>, and it's fixed in the priority order.</p>
+  </div>
+
+  <div class="q">
+    <b>Also note:</b> Advanced Quant and Advanced Reasoning are a <b>single combined group of 14 items in 25 min</b> (not 15). And there's no separately-timed "Foundation vs Advanced" split shown — the groups are listed flat, so don't assume you can hop between Numerical and Verbal unless the on-screen instructions say so. <b>Read the instructions at the start</b> and find out.
+  </div>
+</section>
+
+<section id="verbal" class="page">
+  <h2>★ Verbal — two unusual formats worth real prep</h2>
+  <div class="card note"><p>This section is <b>26 minutes</b> and contains no reading-comprehension MCQs. Two of its three parts are <b>production</b> tasks (you write), not recognition tasks (you pick). Those reward preparation far more than ordinary verbal questions do — which is why this moved up the priority order.</p></div>
+
+  <h3>1 · Email Writing — 9 minutes, one item</h3>
+  <div class="card good">
+    <p>The single longest-duration item in the entire Verbal section. You're given a <b>scenario plus a set of keywords/phrases</b> that <b>must all appear</b> in your email. Marking is largely mechanical: keyword coverage, correct email structure, grammar, and length.</p>
+  </div>
+  <div class="q">
+    <b>The template — memorise this shape:</b>
+    <pre style="background:var(--code);border:1px solid var(--line);padding:11px;border-radius:8px;overflow-x:auto;font:12.5px/1.6 ui-monospace,Consolas,monospace;color:#e9f7ff;margin:9px 0">Dear [Name / Sir / Madam],
+
+[1 — Purpose] I am writing to ...
+
+[2 — Body] ... weave in EVERY given keyword here ...
+           ... 2-3 sentences, one idea each ...
+
+[3 — Action/Close] I would be grateful if you could ...
+                   Please let me know if you need any further details.
+
+Regards,
+[Your Name]</pre>
+  </div>
+  <div class="q">
+    <b>How to spend the 9 minutes:</b>
+    <ol>
+      <li><b>0:00-1:00</b> — Read the scenario. <b>Write the keyword list down</b> (on rough sheet) and tick each as you use it.</li>
+      <li><b>1:00-6:30</b> — Write the email using the template. Aim <b>80-120 words</b> unless told otherwise.</li>
+      <li><b>6:30-8:00</b> — <b>Check every keyword is present.</b> This is the most mechanically-scored part — missing one is a guaranteed lost mark.</li>
+      <li><b>8:00-9:00</b> — Proofread: tense consistency, subject-verb agreement, spelling, capital letters.</li>
+    </ol>
+  </div>
+  <div class="q">
+    <b>Rules that cost marks:</b>
+    <ul>
+      <li><b>Use every single keyword</b> — inflected forms are usually fine (<i>inform → informed</i>) but keep them recognisable.</li>
+      <li>Always include salutation <b>and</b> sign-off. A missing "Regards," is free marks lost.</li>
+      <li>Stay <b>formal</b> — no contractions (<i>I am</i>, not <i>I'm</i>), no slang, no emojis.</li>
+      <li>Don't pad to hit a word count — grammar errors cost more than brevity.</li>
+      <li>Keep sentences short. Short sentences are easier to keep grammatical under time pressure.</li>
+    </ul>
+  </div>
+
+  <h3>2 · Passage Recall — 30s read, then the text vanishes, 90s write</h3>
+  <div class="card urgent">
+    <p class="big">This is a memory test disguised as a verbal question.</p>
+    <p style="margin-top:7px">You get <b>30 seconds</b> to read, the passage is then <b>removed from the screen</b>, and you have <b>90 seconds</b> to write. You cannot re-read. Most people fail this by reading normally and retaining nothing specific.</p>
+  </div>
+  <div class="q">
+    <b>What to do in the 30 seconds — do NOT read for pleasure, read for capture:</b>
+    <ol>
+      <li><b>Scan for the skeleton first:</b> Who? What happened? Where/When? Why?</li>
+      <li><b>Grab concrete anchors</b> — names, numbers, dates, places. These are what recall questions ask about, and they're the first things memory loses.</li>
+      <li><b>If a rough sheet is allowed, jot 4-6 keywords immediately</b> — not sentences, just anchors: <code>Ravi · 2019 · Delhi · 40% rise · export ban</code>. That skeleton regenerates the whole passage later.</li>
+      <li><b>Read the first and last sentence carefully</b> — they usually carry the main idea and conclusion.</li>
+    </ol>
+  </div>
+  <div class="q">
+    <b>In the 90 seconds of writing:</b> lead with the main idea in one sentence, then the supporting facts in the order they appeared. Use your own words — paraphrase is fine and faster than reconstructing exact phrasing. <b>Write something for every item</b>; partial recall scores, blank does not.
+  </div>
+
+  <h3>3 · Sentence Completion — 20 items at 25 seconds each</h3>
+  <div class="q">
+    Fast and mechanical. <b>25 seconds is not long</b> — roughly, read the sentence once, pick, move.<br><br>
+    <b>Method:</b> read the full sentence first and predict the missing word <em>before</em> looking at the options — then find the closest match. Predicting first stops good-looking distractors from anchoring you.<br><br>
+    <b>Watch for:</b> connectives that flip meaning (<i>however, although, despite, nevertheless</i> = contrast; <i>therefore, thus, hence</i> = consequence). Getting the direction right usually eliminates half the options instantly.<br><br>
+    <b>No negative marking → never leave one blank.</b> If you're stuck at 20 seconds, guess and move.
+  </div>
+</section>
+
+<section id="coding" class="page">
+  <h2>Coding bank — extracted from your files</h2>
+  <p style="color:var(--muted);font-size:14px">~55 problems found across <code>TCS ninja/6Phrase - 2019 - TCS - Coding Section.pdf</code>, <code>TCS NQT Model Programming Coding Questions Paper.pdf</code> and <code>TCS Coding Programming Questions 2018-2019.pdf</code>. Re-sorted by how well they match the <b>modern</b> 90-minute format.</p>
+
+  <div class="card good">
+    <h3 style="margin-top:0">Tier A — closest to today's exam <span class="pill p-hi">practise these</span></h3>
+    <p>Set-2 style problems. These are the shape of a modern medium/hard NQT question — real data structures and multi-step logic.</p>
+    <ul>
+      <li><b>Balanced parentheses</b> — return count if balanced, −1 if not (stack)</li>
+      <li><b>Reverse the second half of a linked list</b> (odd length → middle counts as second half)</li>
+      <li><b>Merge two sorted linked lists</b> into one sorted list</li>
+      <li><b>Reverse a linked list</b> — both recursive and iterative</li>
+      <li><b>Merge sort using pointers</b></li>
+      <li><b>Search a 2D matrix</b> for a target, return coordinates, (−1,−1) if absent</li>
+      <li><b>Merge two arrays removing duplicates</b> — output merged set + total count</li>
+      <li><b>Count occurrences of a digit</b> in a number (<code>isOccured(num1, num2)</code>)</li>
+      <li><b>Find and replace a substring</b> within a string</li>
+      <li><b>Print/count all numbers less than a key</b> in an array</li>
+      <li><b>Sort an array into two halves</b> — first ascending, second descending</li>
+      <li><b>Remove vowels from a string</b> using pointers / via a function call</li>
+      <li><b>Largest or second-largest</b> among N inputs</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Tier B — plausible as the easier Q1 <span class="pill p-md">skim, don't drill</span></h3>
+    <ul>
+      <li>String palindrome · number palindrome (5-digit, print YES/NO uppercase)</li>
+      <li>String reversal without library functions · string compare without <code>strcmp</code></li>
+      <li>Sum of all primes in a range (bounds exclusive) · sum of odd numbers in a range</li>
+      <li>Nth Fibonacci / Fibonacci series to N terms</li>
+      <li>Armstrong number · perfect number · prime check (print √n if prime else 0.00)</li>
+      <li>Binary↔decimal, decimal↔octal, binary↔octal conversions</li>
+      <li>GCD and LCM of two numbers</li>
+      <li>Square root without <code>sqrt()</code></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Tier C — outdated, skip <span class="pill p-lo">2019 era only</span></h3>
+    <p>Area of circle/triangle from given dimensions, hypotenuse, factorial, leap year, temperature conversion, reverse digits, command-line-argument programs. These were the <em>whole</em> coding round in 2019. Today they'd be a warm-up at best — and command-line arguments <b>are no longer used</b> (input comes from STDIN).</p>
+  </div>
+
+  <div class="card note">
+    <h3 style="margin-top:0">Formatting rules TCS actually enforces</h3>
+    <p>Marks are genuinely lost here, and the old papers are consistent about it:</p>
+    <ul>
+      <li><b>Read from STDIN, write to STDOUT.</b> No command-line arguments.</li>
+      <li><b>Print nothing extra</b> — no "Enter a number:" prompts. Hidden test cases do exact matching, so a stray prompt fails everything.</li>
+      <li><b>Case matters</b> — YES/NO in uppercase when specified.</li>
+      <li><b>Float precision</b> — "exactly 2 decimal places" means <code>f"{x:.2f}"</code>, and never scientific notation.</li>
+      <li><b>Edge cases they actually test:</b> 0! = 1 was a hidden test case in a real factorial question. Always handle 0, empty input, and single-element cases.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="plan" class="page">
+  <h2>Two-day plan — 15 &amp; 16 Aug, exam 17 Aug</h2>
+  <div class="card note"><b>Reality check:</b> the 11-day DP plan from 5 Aug largely didn't happen — the last week went to Comcast interviews, Cognizant and Viasat. That's fine and it was the right trade. Don't try to recover it now; two days before the exam is for <b>sharpening what you have</b>, not learning new patterns.</div>
+
+  <div class="card good">
+    <p class="big">Exam is 17 Aug — you have two full prep days.</p>
+    <p style="margin-top:7px">That's enough to do this properly: <b>Day 1 builds the unfamiliar skills, Day 2 consolidates and rehearses under time.</b> The timed run on Day 2 is the part that wasn't possible on a one-day plan, and it's what turns knowing the format into performing in it.</p>
+  </div>
+
+  <h3>Day 1 — today, 15 Aug (afternoon + evening, ~4 h)</h3>
+  <p style="color:var(--muted);font-size:13.5px">Today is about the things you've <b>never practised</b>. Priority-ordered, so a shortened day still covers what matters.</p>
+  <table>
+    <tr><th>#</th><th>Time</th><th>What</th><th>Why today</th></tr>
+    <tr><td>1</td><td><b>90 min</b></td><td><b>3-4 Tier-A coding problems in Python, compiler CLOSED.</b> Write the full solution in a plain editor, dry-run on paper against your own test cases, only then run. Suggested: balanced parentheses · merge two sorted linked lists · 2D matrix search returning coordinates · merge-arrays-and-dedupe.</td><td>47% of the exam; rehearses the no-edit-after-compile constraint</td></tr>
+    <tr><td>2</td><td><b>50 min</b></td><td><b>One full email</b> from a made-up scenario with 5 keywords, timed at 9 min, using the template. Then <b>3 passage-recall drills</b>: open any article, read 30 s, close it, write for 90 s.</td><td>Production formats you've never done — highest marks-per-hour</td></tr>
+    <tr><td>3</td><td><b>45 min</b></td><td><b>Numerical formula sweep</b> — percentages, P&amp;L, ratio, time &amp; work, speed-time-distance, averages, ages, progressions, mensuration, LCM/HCF. <b>Skip probability and clocks/calendar.</b></td><td>Recall work — better done early so Day 2 can refresh it</td></tr>
+    <tr><td>4</td><td><b>35 min</b></td><td><b>Data sufficiency</b> specifically — your logged weak spot from the Prodapt papers. Just this one topic.</td><td>Known weakness, and it needs a night's sleep to consolidate</td></tr>
+    <tr><td>—</td><td>—</td><td><b>Stop by ~10 pm.</b></td><td></td></tr>
+  </table>
+
+  <h3>Day 2 — tomorrow, 16 Aug (full day, ~5 h)</h3>
+  <table>
+    <tr><th>#</th><th>Time</th><th>What</th><th>Why</th></tr>
+    <tr><td>1</td><td><b>60 min</b></td><td><b>2 more coding problems, compiler closed</b> — one easy (35-min budget), one medium (55-min budget), timed separately to match the real split. Pick from Tier A you haven't done.</td><td>Second exposure is what makes the habit stick</td></tr>
+    <tr><td>2</td><td><b>50 min</b></td><td><b>Reasoning sweep</b> — seating arrangements, blood relations, coding-decoding, series, syllogisms, and one cube-folding / paper-cuts set if you've never seen them.</td><td>20 questions at medium difficulty</td></tr>
+    <tr><td>3</td><td><b>40 min</b></td><td><b>Advanced Quant</b> — permutation &amp; combination, probability, logarithms. Compute <b>exact</b> answers; these are Fill-Up-the-Box with nothing to back-solve from.</td><td>Prime/Digital differentiator</td></tr>
+    <tr><td>4</td><td><b>45 min</b></td><td><b>★ Timed rehearsal.</b> Back-to-back under a clock, no pausing: 20 sentence-completion items at 25 s each → 2 passage recalls → one 9-minute email. Then score your own email against the keyword list.</td><td>The single highest-value thing the extra day buys you</td></tr>
+    <tr><td>5</td><td><b>30 min</b></td><td><b>Light revision only</b> — re-read the Exam Traps tab, the numerical formula list, and the email template. Nothing new.</td><td>Consolidation, not learning</td></tr>
+    <tr><td>—</td><td>—</td><td><b>Stop by 9 pm and sleep early.</b> 191 minutes of sustained concentration needs a rested brain far more than one extra hour of sums.</td><td></td></tr>
+  </table>
+  <div class="card note"><b>If a day collapses:</b> protect Day 1 #1 and #2, and Day 2 #4. Those three cover the 90-minute coding block, both unfamiliar production formats, and one rehearsal under real time pressure.</div>
+
+  <h3>Exam day (17 Aug) — the six rules</h3>
+  <ol>
+    <li><b>Read the opening instructions.</b> They tell you whether you can switch between sections — your pattern lists the groups flat, so this is genuinely unknown until you're in. If you can switch, start with your strongest.</li>
+    <li><b>Never leave a blank.</b> No negative marking, so an unanswered MCQ is strictly worse than a guess.</li>
+    <li><b>Coding: the compiler is a verifier, not a debugger.</b> Write it fully, dry-run on paper, then compile. You cannot edit after compiling — you have to reset and retype from scratch.</li>
+    <li><b>Use Python.</b> Fewest characters to retype if you're forced to reset, and it's your primary language.</li>
+    <li><b>Print nothing extra.</b> No "Enter a number:" prompts — hidden tests do exact matching. Watch uppercase YES/NO and <code>.2f</code> precision when specified.</li>
+    <li><b>Email: tick every keyword before you submit.</b> That's the most mechanically-scored thing on the paper, and the easiest to lose by forgetting one.</li>
+  </ol>
+</section>
+
+<section id="src" class="page">
+  <h2>Sources</h2>
+  <h3>Confidence A — your own files (first-hand material)</h3>
+  <ul>
+    <li><code>Placement material/TCS/TCS ninja/6Phrase - 2019 - TCS - Coding Section.pdf</code> — ~55 coding problems in two sets, plus the 2019 platform rules (STDIN/STDOUT, hidden test cases, no command-line args).</li>
+    <li><code>TCS NQT Model Programming Coding Questions Paper.pdf</code> · <code>TCS Coding Programming Questions 2018-2019.pdf</code> — older command-line-argument style problems and C preprocessor MCQs.</li>
+    <li><b>Note:</b> <code>Tcs nqt 2020 solutions.pdf</code> (36 pages) is a <b>scanned image PDF</b> — zero extractable text. It's the most recent file in the folder and remains unread; worth opening manually if you want more.</li>
+  </ul>
+  <h3>Confidence A — verified 2026 pattern</h3>
+  <ul>
+    <li><b>College-hosted official syllabus PDF</b> (gita.edu.in) — full section/time/question breakdown, per-section topic lists, difficulty ratings, and the 2025-batch candidate tips that produced every trap on the first tab. This is the backbone of this page.</li>
+    <li>Cross-checked against multiple independent pattern write-ups for the 190-minute / ~82-question structure and the no-negative-marking rule.</li>
+  </ul>
+  <h3>What I could not confirm</h3>
+  <ul>
+    <li>Whether Advanced Coding is <b>2 or 3</b> problems — the syllabus says 3, 2025 candidates report 2.</li>
+    <li>Whether your specific drive uses the standard NQT or a campus variant. If your placement cell sent a pattern, that supersedes this page.</li>
+  </ul>
+  <div class="footer">Built 14 Aug 2026, plan updated 15 Aug for the <b>17 Aug</b> drive. Coding bank extracted from your own files; pattern verified independently because the on-disk material is 6+ years stale.</div>
+</section>
+
+</main>
+</body>
+</html>

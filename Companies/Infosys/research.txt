@@ -1,0 +1,184 @@
+INFOSYS — CAMPUS DRIVE 18 AUG 2026 — RESEARCH NOTES
+Compiled 17 Aug 2026. Drive is "Regular Campus Hiring" covering ALL THREE roles
+(SE / SP / PP), per the candidate.
+
+═══════════════════════════════════════════════════════════════════════
+CONFIDENCE A — ON-DISK OFFICIAL DOCS (read directly, 17 Aug)
+═══════════════════════════════════════════════════════════════════════
+Companies/Infosys/Infosys_Assessment_Guidelines.pdf   (2 pages)
+Companies/Infosys/Infosys Campus Recruitment Program_Elgibility Criteria_.pdf
+
+CRITICAL: NEITHER DOCUMENT CONTAINS ANY FORMAT INFORMATION.
+The "Assessment Guidelines" PDF is logistics only:
+  - Test conducted in college campus labs (NOT remote)
+  - i3+/4GB RAM/Chromium browser; system-check link provided
+  - Carry govt photo ID + college ID
+  - Desk/wall must be clear of writing or pictures
+  - No phones, CALCULATORS, or smart watches
+  - STATIONERY IS ALLOWED  <-- rough work on paper is permitted
+  - Close Teams/Skype/all apps; do not switch out of the screen
+  - Login within 15 min of slot start
+  - College dress code; no headphones; malpractice = cancellation
+
+Eligibility: 10th 60%, 12th 60%, B.Tech 68% or 6.0/10 CGPA, no active backlogs.
+Candidate CGPA 8.48 -> clears comfortably. (See memory: eligibility already
+confirmed across all live drives; do not re-flag.)
+
+═══════════════════════════════════════════════════════════════════════
+CONFIDENCE B — WEB RESEARCH, MULTIPLE INDEPENDENT SOURCES AGREE
+═══════════════════════════════════════════════════════════════════════
+Structure: ~7 sections, ~60 questions total.
+
+  Mathematical / Quantitative Ability   ~10 Q
+  Analytical / Logical Reasoning        ~15 Q
+  Verbal Ability                        ~20 Q
+  Pseudocode                            ~5 Q
+  Puzzle Solving                        ~4 Q
+  English Grammar                       ~5 Q
+  English Writing (essay)               1 Q
+
+AGREED ACROSS SOURCES (treat as reliable):
+  * NO NEGATIVE MARKING on MCQ sections
+  * SECTIONAL CUT-OFFS APPLY — every section is independently qualifying.
+    >>> THIS IS THE SINGLE MOST IMPORTANT STRATEGIC FACT. <<<
+    Unlike TCS, a strong section cannot rescue a weak one. Failing any one
+    section can end the drive regardless of total score.
+  * Adaptive test pattern reported for 2026 (questions harden as you answer
+    correctly). Implication: early accuracy matters more than late volume.
+  * PSEUDOCODE IS MCQ, NOT WRITING CODE. You read a C-like block, trace it,
+    and predict the output. No compiler, no typing code.
+
+═══════════════════════════════════════════════════════════════════════
+RESOLVED ON SECOND RESEARCH PASS (17 Aug, ~16:00)
+═══════════════════════════════════════════════════════════════════════
+DURATION: 120 MINUTES, 60 QUESTIONS. Per-section table below reconciles
+arithmetically (25+35+20+10+10+10+10 = 120), which the earlier 95/110/130
+figures did not. Sections are INDIVIDUALLY TIMED — no banking time.
+
+  Technical / Mathematical Ability   10 Q   35 min   (3.5 min/Q - luxurious)
+  Logical Ability                    15 Q   25 min   (1.7 min/Q - HARDEST section)
+  Verbal                             20 Q   20 min   (60 sec/Q - BRUTAL, only rushed section)
+  Pseudo Code                         5 Q   10 min   (2 min/Q)
+  Puzzle Solving                      4 Q   10 min   (2.5 min/Q)
+  English Grammar                     5 Q   10 min   (2 min/Q)
+  English Writing (essay)             1 Q   10 min
+
+PACING INSIGHT: Verbal at 60 s/Q is the only genuinely rushed section.
+Maths at 3.5 min/Q is enormous. Rushing Maths is self-harm; the real risk is
+carrying Verbal panic into the next section.
+
+** CORRECTION: THE TEST IS NON-ADAPTIVE. ** An earlier source said adaptive;
+PrepInsta's syllabus page states non-adaptive explicitly, and fixed
+per-section timings support it. Consequence: a hard question does NOT signal
+you are scoring well, and there is no opening-accuracy calibration effect.
+Skip and return freely within a section.
+
+CODING: THE REGULAR OLT CONTAINS NO CODING. Confirmed — the 7-section paper
+above is the whole sitting. The SP/DSE coding test is a SEPARATE ~3-hour exam
+held afterwards for premium-tier consideration.
+
+ONE SOURCE STATES the OLT pattern is identical for on-campus, off-campus and
+referral drives. Raises confidence this applies to the campus sitting.
+
+Also reported: "Logical Reasoning is the most difficult section."
+
+───────────────────────────────────────────────────────────────────────
+SP / DSE CODING ROUND (SEPARATE SITTING, AFTER THE OLT)
+───────────────────────────────────────────────────────────────────────
+First-hand account, off-campus Jan 2026, offline test centre, 500+ candidates,
+4 problems:
+  Easy    - query-based operations on a 2D list; LENGTHY statement, careful
+            parsing required
+  Medium  - TWO-POINTER + SLIDING WINDOW
+  Hard    - GRAPH combined with STATE-BASED DP
+  Complex - TREE with range queries, difficult edge cases
+Guidance: solve at least 3 of 4 to stay competitive.
+
+TIERING (explicit, from the same account):
+  Easy + Medium  -> DSE      ~7 LPA
+  + Hard         -> SP L3    ~11 LPA
+  + Complex      -> SP L2    ~16 LPA  /  SP L3 higher band ~21 LPA
+
+Candidate quote: "passing sample test cases does not guarantee final
+acceptance" — hidden tests and edge cases decide it. THIS IS EXACTLY THE
+TCS FAILURE MODE FROM 17 AUG. Same discipline required.
+
+HackWithInfy variant (July 2025): 3 questions / 3 hours (Easy/Med/Hard),
+two slots, medium-to-hard overall.
+
+>>> STRATEGIC OVERLAP: the reported Medium (two-pointer + sliding window) is
+    identical to Amazon's top-frequency patterns, and the Hard (graph) matches
+    the Viasat BFS round already cleared. The 18 Aug Amazon block therefore
+    doubles as SP-round prep. The one exposed gap is STATE-BASED DP, which is
+    the known thin spot — relevant only if he reaches this round.
+
+Salary tiers reported: SE ~3.6 LPA, SP ~6.5 LPA, PP ~9.5 LPA.
+Role assignment from a single combined test is NOT documented in any source
+found. Assume coding/pseudocode strength drives the tiering upward.
+
+TOPIC LISTS (consistent across sources):
+  Quant     — number series, time-speed-distance, time & work, P&C,
+              probability, profit & loss, ratio & proportion, averages,
+              simplification, data interpretation
+  Reasoning — syllogisms, coding-decoding, blood relations, DATA SUFFICIENCY,
+              direction sense, statement & conclusion, seating arrangement,
+              logical word sequence
+  Verbal    — sentence completion, error detection, reading comprehension,
+              synonyms/antonyms, sentence rearrangement, prepositions,
+              conjunctions, tenses
+  Pseudocode— loops, operators, conditionals, arrays, functions, RECURSION,
+              pointers, basic data structures (C/C++ flavoured)
+  Puzzle    — sudoku-type, missing number in series, pattern puzzles,
+              mathematical arrangements
+
+═══════════════════════════════════════════════════════════════════════
+CONFIDENCE D — ON-DISK PAST PAPERS: TREAT AS STALE
+═══════════════════════════════════════════════════════════════════════
+Placement material/INFOSYS/ contains ~50 files, but dated 2014-2018
+(filenames: "infosys written questions-10-03-2018", "Infosys interview
+experience 2014", "Infosys Placement Papers 2014").
+
+This is the SAME staleness trap that made the on-disk TCS material
+misleading — TCS material was 2018-2020 and the pattern had "changed
+substantially". Do not build the plan from these. Usable only for raw
+quant/verbal practice questions, NOT for format.
+
+═══════════════════════════════════════════════════════════════════════
+STRATEGIC READ — DELTA FROM THE TCS NQT (SAT 17 AUG, ONE DAY EARLIER)
+═══════════════════════════════════════════════════════════════════════
+ALREADY WARM from yesterday's TCS prep (do not re-study):
+  - Quantitative ability          (TCS Numerical Ability, prepped 15 Aug)
+  - Logical reasoning incl. data sufficiency (TCS Reasoning, prepped 15 Aug)
+  - Verbal / sentence completion  (TCS Verbal, prepped 15 Aug)
+  - Long-form writing             (TCS Email Writing ~= Infosys Essay)
+
+GENUINELY NEW — this is where tonight's hours must go:
+  1. PSEUDOCODE (MCQ output-tracing)  <-- never practised, and it is the
+     section most likely to tier him into SP/PP rather than SE
+  2. PUZZLE SOLVING (sudoku/pattern/missing-number)  <-- not a TCS format
+  3. ENGLISH GRAMMAR as a discrete section (error detection, prepositions,
+     tenses)  <-- TCS verbal did not test grammar in isolation
+
+NOTE ON THE CANDIDATE'S KNOWN FAILURE MODE (TCS, 17 Aug): on the TCS Easy
+coding question the logic was correct but the OUTPUT FORMAT was wrong
+(printed a Python dict repr `{1: 1, 2: 1}` where `{1:1,2:1}` was required).
+Infosys pseudocode is MCQ so that specific trap does not apply here — but it
+DOES apply directly to the Amazon OA on 19 Aug.
+
+═══════════════════════════════════════════════════════════════════════
+SOURCES
+═══════════════════════════════════════════════════════════════════════
+Official on-disk (Confidence A):
+  Companies/Infosys/Infosys_Assessment_Guidelines.pdf
+  Companies/Infosys/Infosys Campus Recruitment Program_Elgibility Criteria_.pdf
+
+Web (Confidence B — cross-checked, prefer the first two):
+  https://prepinsta.com/infosys/recruitment-process/
+  https://prepinsta.com/infosys/aptitude-test-pattern/
+  https://www.placementpreparation.io/infosys/syllabus-and-test-pattern/
+  https://faceprep.in/article/infosys-recruitment-pattern-important-topics-and-about-the-company/
+  https://prepinsta.com/infosys-sp-and-dse/recruitment-process/
+
+REJECTED as AI-generated SEO aggregators (per standing rule — do not cite):
+  papersadda.com, assessfy.com, knoffcampusjobs.com, campusmonk.in,
+  shadecoder.com, entri.app, tamiltech.in

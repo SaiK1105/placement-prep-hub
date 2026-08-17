@@ -1,0 +1,105 @@
+AMAZON — SDE INTERN OA, 19 AUG 2026 — RESEARCH NOTES
+Compiled 17 Aug 2026. Role confirmed by candidate: SDE INTERN.
+
+═══════════════════════════════════════════════════════════════════════
+ON-DISK
+═══════════════════════════════════════════════════════════════════════
+Companies/Amazon/amazon_resume_source.tex — tailored resume only.
+NO official assessment guidelines, NO JD, NO past papers on disk.
+Everything below is web research. Treat accordingly.
+
+═══════════════════════════════════════════════════════════════════════
+CONFIDENCE B — FORMAT (multiple independent sources agree on the shape)
+═══════════════════════════════════════════════════════════════════════
+Amazon SDE Intern OA is a multi-part single sitting:
+
+  1. CODING CHALLENGE
+     - 2 problems
+     - 70-90 minutes total (sources report both; 70 min is the more common
+       figure for intern, 90 min for full-time SDE)
+     - Difficulty: medium. Intern set reported slightly easier than SDE-1.
+     - Platform runs your code against visible + hidden tests.
+
+  2. WORK SIMULATION  (~20-30 min)
+     - "Day in the life at Amazon" — you receive emails/messages and choose
+       responses. Scenario-based, no coding.
+     - Reported to weight OWNERSHIP and BIAS FOR ACTION most heavily.
+
+  3. WORK STYLE SURVEY / ASSESSMENT  (~10-15 min)
+     - Agree/disagree statements mapped to the 16 Leadership Principles.
+     - Not scored as right/wrong but IS used; consistency matters.
+
+═══════════════════════════════════════════════════════════════════════
+CODING PATTERNS — HIGH FREQUENCY (consistent across sources)
+═══════════════════════════════════════════════════════════════════════
+Reported as appearing in >90% of Amazon OAs:
+  * ARRAYS + STRINGS            (appear constantly — highest priority)
+  * SLIDING WINDOW
+  * TWO POINTERS
+  * HASHING / HASH MAP frequency counting
+
+Also reported for 2026 specifically:
+  * BFS / DFS graph traversal
+  * DSU (Disjoint Set Union)     <-- newer, reported in 2026 OAs
+  * Basic DP
+  * Heaps / priority queue
+  * Topological sort, shortest path
+
+Two real 2026 SDE-Intern OA questions reported (March 2026):
+  - "Warehouse Robots"
+  - "Most Common Product Pair" (frequency analysis over pairs)
+Both are Amazon-flavoured story wrappers over standard patterns —
+consistent with the note that Amazon dresses hashing/counting problems in
+warehouse/inventory/delivery narratives.
+
+═══════════════════════════════════════════════════════════════════════
+CANDIDATE-SPECIFIC READ
+═══════════════════════════════════════════════════════════════════════
+STRENGTHS (recent, verified):
+  - Coding rounds cleared in 3 consecutive assessments 12-17 Aug:
+    Comcast (k-moving-average + consecutive frequency count),
+    Viasat (BFS/graph), TCS NQT (Advanced Coding Medium, closed-compiler).
+  - Comcast's problems were literally sliding-window + hashing frequency
+    counting — the two highest-frequency Amazon patterns. Directly warm.
+  - Viasat was BFS. Also directly relevant.
+
+KNOWN RISK — carried over from TCS on 17 Aug:
+  ** OUTPUT-CONTRACT PRECISION. ** On the TCS Easy he had correct logic but
+  printed a Python dict repr `{1: 1, 2: 1}` where `{1:1,2:1}` was required.
+  Exact-match hidden tests failed everything.
+  Amazon OAs are also exact-match. This is the highest-probability way he
+  loses a problem he has actually solved. MUST be drilled.
+  Rule: never print() a container; build the output string explicitly.
+
+KNOWN GAP:
+  - DP fluency is thin (see memory: one derived DP problem != DP readiness).
+    Amazon does ask "basic DP" but it is far less frequent than
+    arrays/strings/sliding-window/hashing. Given ~1 evening of prep,
+    DO NOT spend it on DP. Spend it on the >90% patterns.
+
+═══════════════════════════════════════════════════════════════════════
+TIME REALITY
+═══════════════════════════════════════════════════════════════════════
+Infosys is 18 Aug, Amazon is 19 Aug. Realistically Amazon gets ONE evening
+(18 Aug, after the Infosys test) plus the morning of the 19th.
+That is not enough to broaden coverage. It IS enough to:
+  - re-run the 4 highest-frequency patterns
+  - drill output formatting
+  - read the 16 Leadership Principles once
+Plan accordingly; do not attempt breadth.
+
+═══════════════════════════════════════════════════════════════════════
+SOURCES
+═══════════════════════════════════════════════════════════════════════
+  https://www.jobtestprep.com/amazon-online-assessment
+  https://www.prepterminal.com/amazon-sde-online-assessment
+  https://leetcode.com/discuss/post/7710904/          (SDE2 Feb 2026, format)
+  https://www.1point3acres.com/interview/post/7678143 (SDE Intern OA 2026)
+  https://www.glassdoor.co.in/Interview/Amazon-SDE-intern-Interview-Questions-EI_IE6036.0,6_KO7,17.htm
+
+Recommended live check before the OA (real, recent, first-hand):
+  - 1point3acres Amazon forum (most current actual OA questions)
+  - LeetCode "Amazon" tag, filtered to last 6 months, Medium
+
+REJECTED as AI-generated SEO aggregators (do not cite):
+  papersadda.com, shadecoder.com, dev.to reposts of the above
