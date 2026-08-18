@@ -214,3 +214,36 @@ Web (Confidence B — cross-checked, prefer the first two):
 REJECTED as AI-generated SEO aggregators (per standing rule — do not cite):
   papersadda.com, assessfy.com, knoffcampusjobs.com, campusmonk.in,
   shadecoder.com, entri.app, tamiltech.in
+
+
+═══════════════════════════════════════════════════════════════════
+OFFICIAL SAMPLE-PAPER ANALYSIS (17 Aug ~17:00) — CONFIDENCE A
+Placement-cell material: 4 HackWithInfy practice PDFs (25 problems) +
+"Level up Question.pdf" (1301 pp, 237+ problems w/ solutions, ~24%
+duplicated chapter, CN/OS/DS MCQ block pp.509-534).
+═══════════════════════════════════════════════════════════════════
+CALIBRATION: official "EASY" tier includes lazy-segment-tree range ops
+(verified directly against the PDF). Practice bank = HWI competition
+stock, harder than the Jan 2026 exam account. Train from these; judge
+exam questions by constraints, not tier labels.
+
+PATTERN WEIGHT (both corpora): grid/matrix BFS-DFS >> DP (partition,
+grid-path, LIS-variant) > trees w/ subtree queries (house specialty) >
+segment/range (HWI-tier) > strings/stack. SLIDING WINDOW NEARLY ABSENT
+from official material (1/25 + ~6 hits) despite the Jan account naming
+it the Medium — cover the union, weight official.
+
+CONSTRAINTS AS ORACLE: default n,q<=1e5; frequent deliberate small caps
+(N<=200..1000) signalling O(n^2) intended. Read constraints first.
+
+OUTPUT TRAPS CONFIRMED: "sum of answers to all queries mod 1e9+7" as a
+single aggregate (5/17 stdin problems); literal sentinel strings incl.
+punctuation; floats to exactly 2 or 6 dp; -1 sentinels; per-problem
+format inconsistency; raw stdin/stdout, no function stubs.
+PYTHON: at 1e5 lines use sys.stdin.read().split(); mod at every step.
+
+LC MAPPINGS of archetypes: 994, 63, 1043, 992/340, 45.
+RECOGNIZE-AND-SKIP (= the Complex in costume): lazy segtree, XOR basis,
+matrix expo, DSU-on-tree, rerooting.
+MCQ block (CN/OS/DS) = interview-round signal; its answer key visibly
+second-guesses itself in places — verify before trusting.

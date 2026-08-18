@@ -56,6 +56,7 @@ document.querySelector('button[data-p="'+id+'"]').classList.add('active');window
   <div class="sub">Rebuilt 17 Aug from the <b>official Infosys pre-placement slides</b>. Round 1 is a <b>pure coding test</b> — 4 questions, answer 3, 3 hours. The earlier version of this page was built around a 7-section aptitude paper; <b>that was wrong and has been removed.</b> Slides supersede all web research.</div>
   <nav>
     <button data-p="fmt" class="active" onclick="show('fmt')">🔴 Official Format</button>
+    <button data-p="intel" onclick="show('intel')">📊 Paper Intel</button>
     <button data-p="bands" onclick="show('bands')">★ Band Strategy</button>
     <button data-p="prep" onclick="show('prep')">★ What to Drill</button>
     <button data-p="output" onclick="show('output')">Output Contract</button>
@@ -92,6 +93,72 @@ document.querySelector('button[data-p="'+id+'"]').classList.add('active');window
   <div class="card note">
     <p class="big">Roles in this drive: DSE and SP L1/L2/L3. No Systems Engineer.</p>
     <p style="margin-top:7px">The job-roles slide lists only <b>Digital Specialist Engineer</b> and <b>Specialist Programmer Levels 1-3</b>. There is no SE/₹3.6 LPA track here, which is why there's no mass-hiring aptitude screen. This is the premium drive — everyone in the room is competing on code.</p>
+  </div>
+</section>
+
+<section id="intel" class="page">
+  <h2>📊 What the official sample papers actually say</h2>
+  <div class="card note"><p><b>Corpus:</b> 25 tiered problems across the four HackWithInfy practice PDFs, plus a 1301-page "Level up" file holding <b>237+ problems with solutions</b> in Python/Java/C++/C (about a quarter of it is one chapter duplicated verbatim, and pages ~509–534 are a CN/OS/DS MCQ block — see below). All of it came from the placement cell, so this is <b>official material: Confidence A</b>, the same tier as the slides.</p></div>
+
+  <div class="card urgent">
+    <p class="big">Calibration shock: the official "EASY" is a segment-tree problem.</p>
+    <p style="margin-top:7px">Verified against the PDF directly: sample question <b>"1. EASY"</b> is range arithmetic-progression assignment + range-sum queries — a lazy-propagation segment tree, with the answer output as <i>"the sum of answers to all type 2 queries, modulo 10⁹+7"</i>. The practice bank is HackWithInfy competition stock and runs <b>harder than the Jan 2026 exam account</b> (whose Easy was 2D-list simulation). Expect the real paper between the two — and <b>never let the tier label anchor you tomorrow; judge each question by its constraints</b>.</p>
+  </div>
+
+  <h3>Pattern frequencies — both corpora combined</h3>
+  <table>
+    <tr><th>Pattern</th><th>HWI sets (25 Q)</th><th>Level-up density (keyword hits)</th><th>Verdict</th></tr>
+    <tr><td><b>Grid/matrix + BFS/DFS</b></td><td>3</td><td>315 matrix · 182 graph</td><td style="color:var(--bad)"><b>#1 focus tonight</b></td></tr>
+    <tr><td><b>DP</b> (partition / grid paths / LIS variants)</td><td>6</td><td>high (dp[i][j] everywhere)</td><td style="color:var(--bad)"><b>#2 focus tonight</b></td></tr>
+    <tr><td><b>Trees + subtree queries</b></td><td>4</td><td>84</td><td style="color:var(--warn)">House specialty — learn to recognize</td></tr>
+    <tr><td>Segment tree / range queries</td><td>4</td><td>6</td><td style="color:var(--warn)">HWI-tier; one Fenwick template, no more</td></tr>
+    <tr><td>Strings</td><td>1</td><td>165</td><td>Mid</td></tr>
+    <tr><td>Stack (incl. monotonic)</td><td>1</td><td>113</td><td>Mid</td></tr>
+    <tr><td>Sorting / greedy</td><td>3</td><td>262 · 24</td><td>Mid — usually a sub-step</td></tr>
+    <tr><td><b>Sliding window / two pointers</b></td><td><b>1</b></td><td><b>~6</b></td><td style="color:var(--accent2)">Surprisingly rare in official material</td></tr>
+    <tr><td>DSU / Union-Find</td><td>1</td><td>3</td><td>Rare</td></tr>
+  </table>
+
+  <div class="card note">
+    <p><b>The sliding-window surprise:</b> the Jan 2026 candidate reported the Medium as two-pointer + sliding window, but the official bank barely features it — it votes for <b>grids, DP and trees</b>. Both signals are real; tonight's plan covers the union, weighted toward the official papers since they're this drive's own material.</p>
+  </div>
+
+  <h3>Constraints tell you the intended solution — read them first</h3>
+  <div class="q">
+    Default ceiling is <b>n, q ≤ 10⁵</b> (→ O(n log n) or O(n)) with values to 10⁹. But a big minority of problems deliberately cap <b>N ≤ 200–1000</b> — the 2026 set's MSS-with-swaps is N ≤ 500, Lock &amp; Parity is N ≤ 200. Small N is the setter telling you <b>O(n²) is intended</b>. Tomorrow: constraints first, then choose the approach — don't hunt for cleverness the limits don't demand.
+  </div>
+
+  <h3>Output-contract traps — your TCS failure mode, now with receipts</h3>
+  <div class="q">
+    <ul>
+      <li><b>"Sum of answers to all queries, mod 10⁹+7"</b> — one aggregated integer, <b>not</b> per-query lines. Appears in <b>5 of 17</b> stdin-style HWI problems. The single most repeated trap in the corpus.</li>
+      <li><b>Literal sentinel strings</b> baked into expected output: <code>"Hamiltonian path does not exist"</code>, <code>"X Score not found."</code> — exact match, punctuation included.</li>
+      <li><b>Floats to exactly 2 or 6 decimals</b> (<code>53.33</code>, <code>0.504000</code>) → <code>f"{x:.2f}"</code> / <code>f"{x:.6f}"</code>.</li>
+      <li><b>-1 sentinels</b> for impossible cases, recurring across BFS/reachability problems.</li>
+      <li><b>Format is not standardized between problems</b> — space-separated vs line-separated varies. Re-read the Output Format block <em>every</em> problem.</li>
+      <li>Raw <b>stdin/stdout</b> throughout — no LeetCode-style function stubs (one set layers a <code>get_ans</code> signature on top; one of its problems says "YES" per query in the text but actually wants the <b>count</b> of YES queries as a single integer).</li>
+    </ul>
+  </div>
+  <div class="q">
+    <b>Python-specific:</b> at n, q ≤ 10⁵, <code>input()</code> is dangerously slow. Template: <code>import sys; data = sys.stdin.read().split()</code>, walk an index pointer, batch output with <code>print("\n".join(out))</code>. Apply <code>% 1000000007</code> at every accumulation, not once at the end.
+  </div>
+
+  <h3>What else to practice beyond the sample papers</h3>
+  <div class="q">
+    <b>LeetCode mappings of the official archetypes</b> — same shape, instant feedback:
+    <ul>
+      <li>Rotting Oranges (994) = the multi-source grid-infection sample</li>
+      <li>Unique Paths II (63) = grid DP with blockers + mod</li>
+      <li>Partition Array for Maximum Sum (1043) ≈ the partition-DP family</li>
+      <li>Subarrays with K Different Integers (992) / Longest Substring with At Most K Distinct (340) = the one sliding-window sample</li>
+      <li>Jump Game II (45) = min-jumps reachability family</li>
+    </ul>
+  </div>
+  <div class="q">
+    <b>Recognize-and-skip list</b> — patterns present in the bank that are NOT learnable by tomorrow: lazy-propagation segment trees, XOR linear basis, matrix exponentiation, DSU-on-tree, rerooting. If tomorrow's paper shows one, that's the Complex slot wearing a costume. <b>Drop it</b> — that's what the 3-of-4 rule is for.
+  </div>
+  <div class="q">
+    <b>The MCQ block (CN / OS / Data Structures, pp. 509–534)</b> is not Round 1 material — it signals the <b>interview round</b>, matching the HackWithInfy account (DSA, SQL, OOPs, OS, DBMS). Park it until you clear tomorrow. Note: its answer key visibly second-guesses itself in places — don't trust it blindly.
   </div>
 </section>
 
@@ -145,6 +212,10 @@ document.querySelector('button[data-p="'+id+'"]').classList.add('active');window
     <tr><td><b>Hard</b></td><td><b>Graph + state-based DP</b></td><td style="color:var(--warn)">Half warm — Viasat was BFS; the DP half is the gap</td></tr>
     <tr><td><b>Complex</b></td><td>Tree with range queries, difficult edge cases</td><td style="color:var(--bad)">Out of reach tomorrow — drop it</td></tr>
   </table>
+
+  <div class="card note">
+    <p><b>Update from the official sample papers</b> (📊 Paper Intel tab): the slot table above is one candidate's account. The official practice bank votes differently — grids/BFS, DP and trees dominate, and sliding window is nearly absent from it. Tonight's plan covers the union of both signals.</p>
+  </div>
 
   <div class="card good">
     <h3 style="margin-top:0">You are in far better shape than the calendar suggests</h3>
@@ -210,15 +281,17 @@ print(" ".join(map(str, xs)))                                  ✓</pre>
 
   <table>
     <tr><th>#</th><th>Time</th><th>What</th><th>Why</th></tr>
-    <tr><td>1</td><td><b>50 min</b></td><td><b>Sliding window + two pointers.</b> 3-4 problems: longest substring without repeats, min-size subarray ≥ target, two-sum on sorted, in-place dedupe. Timed, no hints.</td><td>Locks the Medium — the difference between an offer and nothing</td></tr>
-    <tr><td>2</td><td><b>45 min</b></td><td><b>Graph traversal.</b> BFS on a grid (shortest path), DFS connected components, BFS on adjacency list. Write the visited-set pattern from memory.</td><td>Half the Hard, and Viasat already proved you can</td></tr>
-    <tr><td>3</td><td><b>45 min</b></td><td><b>State-based DP — one shape only.</b> BFS where state is <code>(cell, keys_held)</code> or <code>(node, moves_left)</code>. Do one such problem properly rather than five DP patterns badly.</td><td>The band decider. Narrow beats broad tonight.</td></tr>
-    <tr><td>4</td><td><b>25 min</b></td><td><b>Output-contract drill.</b> Take 4 output specs, produce exact-match strings. No algorithm — pure formatting.</td><td>Closes this morning's TCS leak before it costs ₹7 LPA</td></tr>
-    <tr><td>5</td><td><b>15 min</b></td><td><b>Read the Band Strategy tab.</b> Memorise the running order: read all 4 → Easy → Medium → Hard → drop Complex.</td><td>The plan must be automatic; you won't reason well at hour three</td></tr>
+    <tr><td>1</td><td><b>45 min</b></td><td><b>Multi-source grid BFS.</b> Solve the official sample (infection spread over a grid, -1 if unreachable — LC 994's shape) end-to-end in Python with fast stdin.</td><td>#1 evidence-weighted pattern, and Viasat already proved the skill</td></tr>
+    <tr><td>2</td><td><b>40 min</b></td><td><b>Grid DP with blockers + mod 10⁹+7</b> (Unique Paths II archetype, from the Level-up bank). Apply the mod at every accumulation.</td><td>#2 pattern and the corpus's dominant output trap, drilled together</td></tr>
+    <tr><td>3</td><td><b>45 min</b></td><td><b>Partition DP.</b> The mex-teams official sample or LC 1043. One problem done properly.</td><td>6 of 25 official problems are DP — the band decider</td></tr>
+    <tr><td>4</td><td><b>30 min</b></td><td><b>Sliding window with ≤k distinct</b> (official sample / LC 340).</td><td>Keeps the Jan-account Medium covered, doubles as Amazon prep</td></tr>
+    <tr><td>5</td><td><b>30 min</b></td><td><b>Read-only:</b> the 2026 set's 4 questions + one tree-subtree problem. Practise 10-minute spec extraction on the long "Food Stamps" statement.</td><td>Choosing 3-of-4 is a reading skill; trees are the house specialty</td></tr>
+    <tr><td>6</td><td><b>25 min</b></td><td><b>Output-contract + fast-IO drill:</b> <code>sys.stdin.read().split()</code> template, mod hygiene, <code>.2f</code>/<code>.6f</code> floats, literal sentinels, aggregated-sum outputs.</td><td>The confirmed trap — this closes the TCS leak</td></tr>
+    <tr><td>7</td><td><b>10 min</b></td><td><b>Re-read the Band Strategy tab.</b></td><td>The running order must be automatic at hour three</td></tr>
     <tr><td>—</td><td>—</td><td><b>Stop by 22:30.</b> You sat a 191-minute exam this morning and tomorrow is three hours of hard focus.</td><td></td></tr>
   </table>
 
-  <div class="card note"><b>If tonight collapses:</b> protect #1 and #4. The Medium plus clean output is a DSE offer. Everything above that is upside.</div>
+  <div class="card note"><b>If tonight collapses:</b> protect #1, #2 and #6 — one BFS, one DP-with-mod, and clean output. That combination banks the floor and closes the known leak. Everything else is upside.</div>
 
   <h3>Tomorrow — 18 Aug</h3>
   <ul>
@@ -272,6 +345,10 @@ print(" ".join(map(str, xs)))                                  ✓</pre>
 
   <h3>Confidence A — official on-disk PDFs</h3>
   <ul>
+    <li><b>HackWithInfy Practice Questions 2025 Parts 1–3 + 2026 Part 1</b> — 25 tiered problems (EASY→COMPLEX), the basis of the 📊 Paper Intel tab. Note: the 2025 Part 2 PDF has corrupted superscripts in constraints, and 2026 Part 1 has scrambled multi-column extraction order.</li>
+    <li><b>Level up Question.pdf</b> — 1301 pages, 237+ problems with mixed-language solutions; ~24% is one chapter duplicated verbatim; pp. ~509–534 are a CN/OS/DS MCQ block (interview-round signal, not Round 1).</li>
+    <li><b>Job Description SP L1–L3.docx</b> — AI-in-software-engineering, cloud/DevSecOps across levels; explicitly expects "demonstrated consistency on competitive coding platforms".</li>
+    <li><code>IMPORTANT INSTRUCTIONS FOR CANDIDATES.pdf</code> — admin only (grade-average calculation rules).</li>
     <li><code>Infosys_Assessment_Guidelines.pdf</code> — logistics only: campus lab, photo ID + college ID, 15-minute login window, no phones/calculators/smart watches, <b>stationery allowed</b>, no screen-switching.</li>
     <li><code>Infosys Campus Recruitment Program_Elgibility Criteria_.pdf</code> — 68% or 6.0 CGPA for B.Tech, no active backlogs. Your 8.48 clears comfortably.</li>
   </ul>
