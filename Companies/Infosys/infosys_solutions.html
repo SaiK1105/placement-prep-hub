@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infosys Round 1 — Sample Paper Solutions</title>
+<style>
+:root{--bg:#0b0f14;--panel:#111822;--ink:#eef6ff;--muted:#aec1d2;--accent:#6fe3c1;
+--accent2:#c7f59b;--warn:#ffd166;--bad:#ff9aa2;--line:#2a3a4d;--code:#071019}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 "Segoe UI",system-ui,Arial,sans-serif}
+header{padding:22px 20px;background:linear-gradient(120deg,#101a24,#14282a);border-bottom:1px solid var(--line)}
+h1{font-size:clamp(20px,3.2vw,28px);margin:0 0 6px}
+.sub{color:var(--muted);font-size:13.5px;max-width:880px}
+main{max-width:980px;margin:0 auto;padding:16px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:13px;margin:12px 0;padding:0 16px}
+summary{cursor:pointer;padding:13px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary h2{display:inline;font-size:17px;color:var(--accent2)}
+summary::before{content:"▸ ";color:var(--accent)}
+details[open] summary::before{content:"▾ "}
+.inner{padding:2px 0 14px}
+h3{color:var(--accent);font-size:15.5px;margin:20px 0 6px;border-top:1px solid var(--line);padding-top:14px}
+strong{color:var(--accent2)}
+code{font-family:ui-monospace,Consolas,monospace;background:var(--code);padding:1px 5px;border-radius:4px;color:var(--accent2);font-size:12.5px}
+pre{background:var(--code);border:1px solid var(--line);padding:11px 13px;border-radius:8px;overflow-x:auto;font-size:12.3px;line-height:1.5}
+pre code{background:none;padding:0;color:#e9f7ff}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left}
+th{background:#1a2634;color:var(--accent2)}
+a{color:var(--accent)}
+.footer{color:var(--muted);font-size:12.5px;margin:22px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Infosys Round 1 — Sample Paper Solutions &amp; Walkthroughs</h1>
+  <div class="sub">All 25 problems from the official practice PDFs + the tutored Level-up problem. Built overnight 17→18 Aug.
+  Solutions marked <b>Verified</b> were run against the papers' own sample cases. <a href="infosys_prep_hq.html">← back to Prep HQ</a></div>
+</header>
+<main>
+<details open><summary><h2>Read me first</h2></summary><div class="inner"><p><strong>How to use this page (5 minutes, morning of 18 Aug):</strong> skim the <em>Start Here</em> tier verdicts, re-read the
+two problems you solved yourself, then read ONLY the walkthroughs for the 2026 set — it's the freshest
+signal. Do not attempt to absorb Hard/Complex editorials over breakfast; their job is recognition, not mastery.</p>
+<p><strong>Honesty contract:</strong> every solution marked <em>Verified</em> was executed against the PDF's own sample cases
+tonight. Where a correct verified solution wasn't achievable, you get an approach sketch that says so —
+nothing here is untested code dressed up as working. Several PDFs have genuine defects (scrambled
+multi-column text, corrupted superscript constraints, one Input Format copy-pasted from the wrong
+problem); each editorial flags what was reconstructed.</p>
+<p><strong>The one-line strategy:</strong> read all 4 → bank Easy+Medium → attack the Hard → drop the Complex.
+Judge by constraints, never tier labels. <code>% MOD</code> on every accumulating line. Never <code>print()</code> a container.</p></div></details>
+<details open><summary><h2>Solved by you tonight — re-read these first</h2></summary><div class="inner"><h3>Grid Invasion (multi-source BFS) — 2025 P1 EASY #5</h3>
+<p><strong>Solved live in tutoring, 17 Aug.</strong> Wave spreads from ALL 'A' cells at once; answer = the largest
+shortest-distance any 'E' sits from its nearest 'A'; -1 if any 'E' is never reached.
+<strong>Pattern:</strong> multi-source BFS, level = seconds.
+<strong>Key insight:</strong> seed the queue with every 'A' simultaneously — one BFS still gives each cell its
+distance to the NEAREST source. Count fresh 'E' cells up front; if converted count falls short, print -1.
+<strong>Verified:</strong> all 3 official samples ✓, degenerate grids ✓, 1000×1000 stress in 0.80s ✓.
+<strong>Trap:</strong> mark visited when you PUSH, not when you pop; and <code>list.pop(0)</code> is TLE — use <code>deque.popleft()</code>.</p>
+<pre><code class="language-python">from collections import deque
+
+import sys
+input = sys.stdin.readline
+def Solve(n,m,grid):
+        n = len(grid)
+        m = len(grid[0])
+        q = deque()
+        visited = [[0]*m for _ in range(n)]
+        cntFresh = 0
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 'A':
+                    q.append((i,j,0))
+                    visited[i][j] = 1
+                else:
+                    visited[i][j] = 0
+                if grid[i][j] == 'E':
+                    cntFresh+=1
+        tm = 0
+        drow = [-1,0,1,0]
+        dcol = [0,-1,0,1]
+        cnt = 0
+        while q:
+            r,c,t = q.popleft()
+            tm = max(tm,t)
+            for i in range(0,4):
+                nrow = r+drow[i]
+                ncol = c+dcol[i]
+                if 0&lt;=nrow&lt;n and 0&lt;=ncol&lt;m and grid[nrow][ncol] == 'E' and visited[nrow][ncol] == 0:
+                    q.append((nrow,ncol,t+1))
+                    visited[nrow][ncol] = 1
+                    cnt +=1
+        if cnt!=cntFresh :
+            return -1
+        return tm
+
+n = int(input())
+m = int(input())
+grid = [input().strip() for _ in range(n)]
+print(Solve(n,m,grid))```
+
+### Unique Paths With Blockers (grid DP + mod) — Level-up Q9 &quot;Hard&quot;
+**Solved live in tutoring, 17 Aug.** Count down/right paths avoiding walls, mod 1e9+7.
+**Pattern:** grid-counting DP, row-major fill.
+**Key insight:** ways(i,j) = ways(above) + ways(left); a wall holds 0 and vanishes from the arithmetic.
+BFS can't count paths — its visited flag discards every arrival after the first.
+**Verified:** all 3 samples ✓ (2, 1, 0), 1000×1000 open grid in 0.44s ✓.
+**Trap:** `% MOD` on every sum — Python won't overflow, it will TLE on 600-digit integers instead.
+```python
+import sys
+input = sys.stdin.readline
+
+MOD = 10**9 + 7
+
+m, n = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(m)]
+
+dp = [[0]*n for _ in range(m)]
+dp[0][0] = 1
+
+for i in range(m):
+    for j in range(n):
+        if grid[i][j] == 1:
+            dp[i][j] = 0
+            continue
+        if i == 0 and j == 0:
+            continue
+        top = dp[i-1][j] if i &gt; 0 else 0
+        left = dp[i][j-1] if j &gt; 0 else 0
+        dp[i][j] = (top + left) % MOD
+
+print(dp[m-1][n-1])
+</code></pre></div></details>
+<details ><summary><h2>2026 practice set + 2025 Part 2 (freshest signal — full treatment)</h2></summary><div class="inner"><h1>Infosys OA Editorials — Set B (2026 Practice Set + P2)</h1>
+<hr />
+<h3>Food Stamps — 2026 Easy</h3>
+<p><strong>Problem in one paragraph:</strong> N food types, buy up to M meals total (any mix), i-th purchase of type-i food's t-th time gives <code>v[i] - d[i]*(t-1)</code> taste points; maximize total points, never forced to buy a food with negative marginal points since M is a cap, not a quota. Reconstruction note: the PDF interleaves "Input Format"/"Constraints" between Case 2 and Case 3 — the statement, samples, and format were reassembled from context; no numeric values needed guessing.</p>
+<p><strong>Pattern:</strong> binary search on a value threshold to pick the top-M elements out of N decreasing arithmetic sequences (classic "top-K across many APs").</p>
+<p><strong>Key insight:</strong> A naive max-heap simulation is O(M log N) and M can be 1e9 — too slow. Instead binary-search the cutoff value T such that the count of all (item, purchase) pairs with value ≥ T is ≥ M; sum of an AP prefix is closed-form, so counting/summing per item is O(1) and one binary-search pass is O(N). If even all non-negative-value purchases (T=0) don't reach M, just take all of them — never take negative-value purchases since M is only an upper bound.</p>
+<p><strong>Walkthrough:</strong> Case 3 — v=[5,7,9], d=[2,4,6], m=5. Threshold search settles at T=3: values ≥4 are {9,7,5} (3 picks), values ≥3 add three more 3's (one per item's 2nd purchase) → cnt(3)=6 ≥5, cnt(4)=3 &lt;5. So take the 3 items above T=3 (sum 21) plus (5-3)=2 more picks at value exactly 3 (sum 6) → 27. Matches expected output.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def solve(n, m, v, d):
+    def count_and_sum(T):
+        total_cnt = 0
+        total_sum = 0
+        for vi, di in zip(v, d):
+            k = (vi - T) // di + 1
+            if k &lt; 0:
+                k = 0
+            if k &gt; 0:
+                total_cnt += k
+                total_sum += k * vi - di * (k * (k - 1) // 2)
+        return total_cnt, total_sum
+
+    cnt0, sum0 = count_and_sum(0)
+    if cnt0 &lt;= m:
+        return sum0
+
+    lo, hi = 0, max(v)
+    while lo &lt; hi:
+        mid = (lo + hi + 1) // 2
+        c, _ = count_and_sum(mid)
+        if c &gt;= m:
+            lo = mid
+        else:
+            hi = mid - 1
+    T = lo
+    cntT1, sumT1 = count_and_sum(T + 1)
+    remaining = m - cntT1
+    return sumT1 + remaining * T
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    m = int(data[idx]); idx += 1
+    v = [int(data[idx + i]) for i in range(n)]; idx += n
+    d = [int(data[idx + i]) for i in range(n)]; idx += n
+    print(solve(n, m, v, d))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(N log(max V)) time, O(1) extra space.
+<strong>Trap:</strong> don't simulate purchase-by-purchase — M up to 1e9 makes a heap loop TLE; also never let the count function go into negative-value territory when the positive supply already falls short of M.</p>
+<p><strong>Verified:</strong> Case1 → 5 ✓, Case2 → 12 ✓, Case3 → 27 ✓ (all three sample cases matched exactly).</p>
+<hr />
+<h3>MSS with Exactly K Swaps — 2026 Easy/Medium</h3>
+<p><strong>Problem in one paragraph:</strong> Array of length N (≤500) and integer K; perform exactly K swap operations (any two indices, repeats allowed and cancel in pairs, so it's "at most K useful swaps"); maximize the maximum subarray sum of the final array. Reconstruction note: Case 2's sample (k=0, a=[5,-1,5]) has its actual expected output missing/misplaced in the scrambled PDF — the "Output: 2 / sum of [2]" text directly following it is a duplicate of Case 3's explanation, not Case 2's real answer. I treated Case 2 as unverifiable from the source and instead sanity-checked my program on it directly.</p>
+<p><strong>Key insight:</strong> For a fixed target subarray <code>[l, r]</code>, the best you can do with ≤K swaps is: sort the subarray ascending and everything outside it descending, then greedily replace the smallest inside elements with the largest outside elements one pair at a time, only while the outside value beats the inside value and swaps remain (classic exchange argument — this is optimal for that fixed range). The overall answer is the max over all O(N²) choices of <code>[l, r]</code>.</p>
+<p><strong>Walkthrough:</strong> Case 1 — n=3, k=1, a=[1,-5,2]. Try <code>[l,r]=[1,1]</code> wait, best range is the single index 1 (0-indexed) initially -5: outside={1,2} desc=[2,1], swap -5↔2 (2&gt;-5, beneficial) → subarray value becomes 2, one swap used. But trying <code>[l,r]=[0,2]</code> (whole array) inside sorted=[-5,1,2], outside=[] (nothing to swap in) → sum=-2. Trying <code>[l,r]=[2,2]</code> alone =2 already, no swap needed. Best over all ranges after applying the swap rule is 3, achieved at <code>[l,r]=[1,2]</code> (inside=[-5,2] sorted=[-5,2], outside=[1], swap -5↔1 → subarray becomes [1,2] sum=3). Matches expected output 3.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def solve(n, k, a):
+    best = -10**18
+    for l in range(n):
+        for r in range(l, n):
+            inside = sorted(a[l:r+1])
+            outside = sorted(a[:l] + a[r+1:], reverse=True)
+            s = sum(inside)
+            swaps = 0
+            ii = 0
+            for oi in range(len(outside)):
+                if swaps &gt;= k or ii &gt;= len(inside):
+                    break
+                if outside[oi] &gt; inside[ii]:
+                    s += outside[oi] - inside[ii]
+                    swaps += 1
+                    ii += 1
+                else:
+                    break
+            best = max(best, s)
+    return best
+
+def main():
+    data = sys.stdin.read().split()
+    n = int(data[0]); k = int(data[1])
+    a = [int(x) for x in data[2:2+n]]
+    print(solve(n, k, a))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(N² · N log N) as written (sorts inside the double loop) — correct but not tuned; for N=500 this is safe for a 3-hour exam only if the judge's time limit is generous. A faster O(N² log N) version (incrementally maintaining sorted inside/outside sets as <code>r</code> grows via <code>bisect.insort</code>) is the upgrade path if TLE is observed.
+<strong>Trap:</strong> the swap pool is the <em>whole array outside <code>[l,r]</code></em>, not just adjacent elements — and stop swapping the instant the best outside value no longer beats the worst inside value, even if swaps remain (extra swaps can only be forced to be no-ops via the "double-swap cancels" rule, never harmful, but also never helpful once no beneficial pair remains).</p>
+<p><strong>Verified:</strong> Case1 (k=1, a=[1,-5,2]) → 3 ✓. Case3 (k=0, a=[1,-5,2]) → 2 ✓. Case2 as literally given (k=0, a=[5,-1,5]) is not reliably reconstructable from the scrambled source; my program returns 9 (the whole-array sum, correct by direct hand-check since k=0 means no rearrangement is possible) — treat this as a self-derived check, not a matched official sample.</p>
+<hr />
+<h3>Lock &amp; Key Parity — 2026 Hard</h3>
+<p><strong>Problem in one paragraph:</strong> N locks (≤200) in a row, each with value L[i]; assign key j to lock i only if j&lt;i and L[j]≠L[i], at cost |L[j]-L[i]|; each key/lock used at most once; a chosen assignment set is valid only if <code>even_count ≥ odd_count</code> (by parity of cost) and at least one assignment is made; minimize total cost, or -1 if impossible. Reconstruction note: this problem's explanation blocks are correctly ordered in the source but its "Input Format/Constraints" box is sandwiched mid-explanation by the scramble — content itself was intact, just needed reordering.</p>
+<p><strong>Pattern:</strong> every collapse-to-one-edge exchange argument — all costs are strictly positive, so adding assignments never lowers the sum.</p>
+<p><strong>Key insight:</strong> Since |L[j]-L[i]| is always ≥1 (L[j]≠L[i] required) and the parity constraint <code>even ≥ odd</code> is already satisfied by a <em>single</em> even-cost assignment (1 even ≥ 0 odd), and every extra assignment only adds positive cost, the minimum-cost valid set is always just the single cheapest valid pair (j&lt;i, L[j]≠L[i]) whose |diff| is even. If no even-parity pair exists at all, no valid set can exist (a lone odd assignment always violates <code>even≥odd</code>, and stacking more odds only makes it worse) → answer -1.</p>
+<p><strong>Walkthrough:</strong> Case 1 — L=[41,54,15,4,54,4]. Every even-cost pair's cost is computed; the cheapest is (1→3): |41-15|=26 (even). No even pair costs less than 26 (next-cheapest even pairs are 50). So answer = 26, exactly matching the sample's chosen single assignment.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def solve(n, L):
+    best = None
+    for i in range(n):
+        for j in range(i):
+            if L[j] == L[i]:
+                continue
+            diff = abs(L[j] - L[i])
+            if diff % 2 == 0:
+                if best is None or diff &lt; best:
+                    best = diff
+    return best if best is not None else -1
+
+def main():
+    data = sys.stdin.read().split()
+    n = int(data[0])
+    L = [int(x) for x in data[1:1 + n]]
+    print(solve(n, L))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(N²) — trivially fine for N≤200.
+<strong>Trap:</strong> don't build a full min-cost matching/flow model — the positive-cost + "single edge already satisfies the parity inequality" observation collapses the whole assignment problem to "cheapest even-parity pair, or -1."</p>
+<p><strong>Verified:</strong> Case1 → 26 ✓, Case2 → 30 ✓, Case3 → 24 ✓ (all three sample cases matched exactly).</p>
+<hr />
+<h3>Layer-Split Path Maximization with Penalties — 2026 Complex</h3>
+<p><strong>Problem in one paragraph:</strong> Undirected graph, N,M ≤1e5, each node has a layer 1..K and a value; find a simple path whose layer sequence is non-decreasing, maximizing (sum of values on path) − Σ(layer jump)² over each strict layer increase along the path. This section of the source read cleanly (no scramble artifacts noticed).</p>
+<p><strong>Approach sketch (not tested — Complex tier, skip if time-constrained):</strong>
+- Because the path's layers must be non-decreasing, only edges that go from a lower-or-equal layer to a higher-or-equal layer are ever usable in a valid path direction; this induces a DAG-like traversal order <em>except</em> when multiple nodes share the exact same layer and are connected — those same-layer components can still contain cycles in the original graph, and a <em>simple path</em> restricted to a general graph with cycles is NP-hard in general. The tractable version (and almost certainly the intended one) assumes you only need the best simple path within each same-layer connected component (likely small/tree-like in the intended test data) combined with a longest-path DP across layer-strata.
+- Core recurrence (assuming same-layer components are trees, i.e. no exploitable cycles): process nodes in increasing layer order; <code>best[u]</code> = max value obtainable ending exactly at <code>u</code>. Within a layer, propagate along same-layer tree edges without penalty (still must stay simple — a single DFS/BFS "best chain ending at each node" walk works because it's a tree). When moving from layer x to a strictly greater layer y via an edge, the arriving value is <code>best[u] + V[v] - (y-x)^2</code>.
+- Take <code>best[u]</code> as candidates going both directions per component, similar to "diameter of a tree with weighted node values", then relax cross-layer edges in increasing-layer topological order (Dijkstra-like relaxation but on a DAG so a single sorted-by-layer pass suffices).
+- Answer = max over all nodes of <code>best[u]</code> (a path can be a single node).</p>
+<p><strong>Complexity:</strong> O((N+M) log K) if implemented as a layered DAG longest-path relaxation; the same-layer-cycle case (if it occurs in real test data) would need SCC condensation first, adding O(N+M) — feasible but meaningfully more code than budget allowed here.</p>
+<p><strong>Trap:</strong> don't forget a path can be a single node (Case 3 shows the optimal answer skips connecting negative-value neighbors entirely) — always include the empty-penalty single-node values as base cases in the DP.</p>
+<hr />
+<h3>Range-AP Assignment (Segment Overwrite) — P2 Easy</h3>
+<p><strong>Problem in one paragraph:</strong> Array A of length N; Q queries each assign <code>A[l+i] = x + i*y</code> for <code>i = 0..r-l</code> (an arithmetic progression written into a range, overwriting anything previously there); after all queries, output the sum of A mod 1e9+7. Reconstruction note: this problem's constraints use corrupted exponent glyphs (<code>10!</code>, <code>10"</code>); read as the standard <code>10^5</code> for N/q and <code>10^9</code> for A[i] bounds, consistent with the sample sizes and the mod-1e9+7 requirement.</p>
+<p><strong>Pattern:</strong> offline reverse-order interval overwrite using a DSU "next unclaimed index" pointer — every index ends up with the value from the <em>last</em> query that touched it, so process queries newest→oldest and only fill indices nobody has claimed yet.</p>
+<p><strong>Key insight:</strong> A naive lazy-segment-tree "assign AP over range" also works, but the DSU trick is simpler: walk queries backward, and for each query use <code>find()</code> to jump straight to the next still-unclaimed index inside <code>[l, r]</code>, assign it, then union it forward past itself so the next <code>find()</code> skips it. Each index is claimed exactly once, so total work is O((N+Q) α(N)).</p>
+<p><strong>Walkthrough:</strong> Sample 1 — A=[5,5,5,0,3], queries in order Q1..Q5. Reverse order: Q5 <code>(3,4,8,9)</code> claims indices 3,4 → A[3]=8, A[4]=17. Q4 <code>(2,4,9,6)</code> — index 4 already claimed, only index 2 free → A[2]=9. Q3 <code>(2,3,8,0)</code> — indices 2,3 already claimed, nothing free. Q2 <code>(0,1,6,5)</code> claims 0,1 → A[0]=6, A[1]=11. Q1 <code>(0,2,1,2)</code> — all of 0,1,2 already claimed, nothing free. Final A=[6,11,9,8,17], sum=51. Matches expected output.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+MOD = 10**9 + 7
+
+def solve(n, A, queries):
+    parent = list(range(n + 1))
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    claimed_value = [None] * n
+    for (l, r, x, y) in reversed(queries):
+        p = find(l)
+        while p &lt;= r:
+            claimed_value[p] = (x + (p - l) * y) % MOD
+            parent[p] = p + 1
+            p = find(p + 1)
+
+    total = 0
+    for i in range(n):
+        total += claimed_value[i] if claimed_value[i] is not None else A[i]
+    return total % MOD
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(n)]; idx += n
+    q = int(data[idx]); idx += 1
+    queries = []
+    for _ in range(q):
+        l, r, x, y = (int(data[idx + i]) for i in range(4))
+        idx += 4
+        queries.append((l, r, x, y))
+    print(solve(n, A, queries))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O((N+Q) α(N)) time, O(N) space.
+<strong>Trap:</strong> process queries in <em>reverse</em> order — a forward pass with a naive DSU skip-pointer would let later queries incorrectly "skip" cells that earlier queries hadn't actually locked in yet; also remember the AP offset <code>i</code> is relative to that specific query's <code>l</code>, not the array's global index.</p>
+<p><strong>Verified:</strong> Sample1 → 51 ✓, Sample2 → 37 ✓, Sample3 → 16 ✓ (all three sample cases matched exactly).</p>
+<hr />
+<h3>Three-Operation Sum Maximization — P2 Medium</h3>
+<p><strong>Problem in one paragraph:</strong> N operations (≤1e5, corrupted-exponent constraint read as <code>10^5</code>); at each step choose one of: subtract B[i] from sum, or decrement X,Y by 1 then add A[i]<em>X</em>Y<em>Z (post-decrement values), or decrement Y,Z by 1 then add A[i]</em>X<em>Y</em>Z (post-decrement) — X,Y,Z must stay ≥0 throughout; maximize final sum mod 1e9+7. Reconstruction note: the same corrupted-exponent constraints appear here (<code>10#</code>, <code>10$</code>); the true bound on X,Y,Z (which drives DP feasibility) could not be confidently recovered — it could plausibly be as small as <code>10^2</code>–<code>10^3</code> or as large as <code>10^5</code>, and that distinction changes which algorithm is even viable, so this is flagged rather than guessed.</p>
+<p><strong>Approach sketch (not tested — feasibility depends on the unrecoverable X/Y/Z bound, skip if time-constrained):</strong>
+- State only needs "how many type-2 ops used so far" (<code>j</code>, which reduces both X and Y) and "how many type-3 ops used so far" (<code>k</code>, which reduces both Y and Z) — at any point, current X = X₀−j, Y = Y₀−j−k, Z = Z₀−k, so the DP state <code>(i, j, k)</code> fully determines X,Y,Z, and the DP is <code>dp[i][j][k] = max(dp[i-1][j][k] - B[i], dp[i-1][j-1][k] + A[i]*(X0-j)*(Y0-j-k)*Z, dp[i-1][j][k-1] + A[i]*X*(Y0-j-k)*(Z0-k))</code> with <code>j≤X0, k≤Z0, j+k≤Y0</code>.
+- If X0,Y0,Z0 are small (say ≤ a few hundred), this DP is O(N·X0·Z0) and directly codeable/testable. If they can be up to 1e5, this blows up to O(N·1e10) and needs a genuinely different (likely greedy/exchange or convex-optimization) argument that wasn't derivable in the time available here.
+- Given the ambiguity, verify the real constraint on X/Y/Z from the actual exam screen before committing to either path.</p>
+<p><strong>Complexity:</strong> O(N · X0 · min(Y0,Z0)) if the small-bound reading is correct; otherwise unresolved.
+<strong>Trap:</strong> the multiplier uses the <em>post-decrement</em> X,Y,Z (confirmed by every sample's explanation, e.g. Sample 3 op2: X,Y drop to 2,2 first, <em>then</em> <code>A[2]*X*Y*Z</code> uses the new 2,2 not the old 3,3) — an off-by-one on decrement-then-multiply vs multiply-then-decrement silently produces a wrong-but-plausible number.</p>
+<hr />
+<h3>Beautiful-Set Tree Queries — P2 Hard</h3>
+<p><strong>Problem in one paragraph:</strong> Rooted tree of N nodes (≤1e5, exponent corrupted, read as <code>10^5</code>) with per-node colors; a "beautiful set" is a set of nodes pairwise in ancestor/descendant relation (i.e., a vertical chain) with all-distinct colors; each of Q queries gives a node <code>s</code>, answer = size of the largest beautiful set using only nodes in <code>subtree(s)</code>; output the sum over all queries mod 1e9+7. <strong>Flagged as instructed:</strong> this problem's "Input Format" section in the source is a verbatim copy-paste of the <em>previous</em> (three-operation) problem's format — it describes N/X/Y/Z/A/B, which does not match this problem at all. The real format was reverse-engineered from the worked sample: line 1 = n; next n lines = parent array p[1..n] (p[1]=0); next n lines = color[1..n]; next line = q; next q lines = query node s. This reconstruction was cross-checked against all three samples' raw number sequences and matches exactly.</p>
+<p><strong>Approach sketch (not tested — Hard tier, genuinely advanced technique, skip if time-constrained):</strong> Since any two nodes in a beautiful set must be ancestor/descendant, a beautiful set is exactly a set of distinct colors chosen along one root-to-descendant path starting at <code>s</code> and going down into its subtree — so <code>answer(s)</code> = the maximum number of <em>distinct colors</em> seen along any downward path starting at <code>s</code>. This is the classic "distinct colors on a root-to-node path, answer per node" problem, normally solved with one of:
+- <strong>DSU-on-tree / small-to-large merging</strong> of <code>std::set</code>-like structures bottom-up (maintain, per node, the count of distinct colors reachable on the best downward chain, merging children's best chains and keeping only the better one plus dedup by color using a global "last seen depth per color" trick) — O(N log²N).
+- <strong>Long-path decomposition</strong>: since it's really "longest distinct-color chain downward," decompose the tree into heavy/long chains and merge with a Fenwick tree keyed by color, taking O(N log N) with careful bookkeeping.
+Both are well beyond what can be written and verified from scratch in this session; ship this as a known-pattern skip and revisit only if the actual approach (DSU-on-tree distinct-count) is already memorized cold.</p>
+<p><strong>Complexity:</strong> O(N log²N) with DSU-on-tree, or O(N log N) with long-path decomposition — both nontrivial to implement correctly under exam pressure.
+<strong>Trap:</strong> the "input format" printed for this problem in official material may be wrong/copy-pasted (as seen here) — always sanity-check the declared format against the worked sample's raw numbers before coding blind.</p></div></details>
+<details ><summary><h2>2025 Part 1 — Easy &amp; Medium tier (full editorials)</h2></summary><div class="inner"><h1>Infosys Round 1 — Editorials (EASY + MEDIUM, 9 problems)</h1>
+<p>Grid-invasion multi-source BFS (EASY #5) is skipped — already solved separately.
+HARD tier (#11–14) skipped per scope.</p>
+<hr />
+<h3>1. Range AP-assign + range sum — EASY</h3>
+<p><strong>Problem in one paragraph:</strong> Array A of n integers, q queries. Type-1 (1,l,r) overwrites A[i] for i in [l,r] with <code>(i-l+1)*A[l]</code> — i.e. it stamps an arithmetic progression starting at the <em>original</em> A[l] with common difference A[l] over the range, using the value A[l] had <strong>at the moment the query runs</strong> (so queries can chain/overwrite each other). Type-2 (2,l,r) asks for the sum over [l,r]. Output the sum of all type-2 answers mod 1e9+7. No statement ambiguity beyond that "replace" must be read as happening left-to-right in query order (query 2 in sample 1 re-stamps a sub-range already stamped by query 1, and the later stamp wins).</p>
+<p><strong>Pattern:</strong> Segment tree with lazy propagation, where the lazy tag is "assign this whole range to an AP with first term <code>a</code> and common difference <code>d</code>" (not a single value).</p>
+<p><strong>Key insight:</strong> A plain range-assign segment tree only supports one constant per range; here the assigned shape is a <em>linear function of position</em>, so the lazy tag must carry <code>(a, d)</code> and the push-down must recompute each child's <code>a</code> by offsetting with <code>d * (child_start - range_start)</code>. Range-sum under a pushed AP tag is a closed-form arithmetic series sum, so both push-down and the sum query stay O(log n) per node touched, giving O((n+q) log n) overall.</p>
+<p><strong>Walkthrough:</strong> Sample 1: A=[1,4,5,1,6,7,8] (1-indexed). Query1 (1,1,6): A[l]=A[1]=1, stamps positions 1..6 with 1,2,3,4,5,6 → A=[1,2,3,4,5,6,8]... but the sample's own trace shows A[l] read as 1 giving A=[1,4,8,12,16,20,24] — meaning A[l] is fixed to the <em>first</em> element's original value 1, and step = A[1] = 1? That doesn't match either; the PDF's own worked trace uses A[l]=A[1]=1 but produces multiples of 4. Re-reading: the samples' actual arithmetic (1,4,8,12,16,20,24) is <code>(i-l+1)*A[l]</code> with A[l] evaluated as A[1]=1 is wrong by inspection — it's consistent with A[l]=4 (A[2] in the <em>original</em> array, since the PDF is 0-indexed in prose but the query itself says l=1..6 meaning 1-indexed range starting at the <em>second</em> element in a 0-indexed array). This is a genuine 0-index/1-index inconsistency in the PDF between the query format text and the worked example — treat the queries as 0-indexed (matches Sample 2/3 which use <code>l=0</code>) and trust the worked numeric trace over the "index l to r inclusive, 1&lt;=l" constraint line.</p>
+<p><strong>Solution (Python, tested):</strong> Not implemented — full segment-tree-with-AP-lazy machinery plus resolving the 0/1-index ambiguity from the PDF is not exam-critical to hand-derive under time pressure.</p>
+<p><strong>Approach sketch:</strong>
+- Pattern: segment tree, lazy tag = <code>(a, d)</code> meaning "this range currently forms <code>a, a+d, a+2d, ...</code>"; <code>NONE</code> tag means untouched.
+- Push-down: splitting a tagged range at <code>mid</code> gives left tag <code>(a, d)</code> unchanged and right tag <code>(a + d*(mid-start+1), d)</code>.
+- Node sum under tag <code>(a,d)</code> over <code>len</code> elements: <code>len*a + d*len*(len-1)//2</code>, mod 1e9+7 (careful: only reduce mod at the sum step, not on <code>a</code>/<code>d</code>, since they're needed exactly for further pushdown, or carry them mod p too since only relative differences matter for sums — reducing mod p throughout is safe since p is odd and division by 2 for <code>len*(len-1)//2</code> should be done before modding, or use modular inverse of 2).
+- Complexity: O((n+q) log n) time, O(n) space.
+- Full implementation not exam-critical — skip-tier; if it appears tomorrow, fall back to a Fenwick-tree "difference of differences" trick only works for <em>additive</em> range updates, not overwrite-with-AP, so the segment tree above is the real requirement — budget it only if problem 1 is your best-scoring option among the three you must pick.</p>
+<p><strong>Complexity:</strong> O((n+q) log n) time, O(n) space (design target; not verified by execution).</p>
+<p><strong>Trap:</strong> The l/r indexing convention flips between 1-indexed prose and 0-indexed sample queries — infer it from the worked trace, not the constraint line, before coding on the real paper.</p>
+<hr />
+<h3>2. Maximum-sum subarray with ≤ k distinct elements — EASY</h3>
+<p><strong>Problem in one paragraph:</strong> Given array A (values can be negative) and integer k, find the maximum sum of a contiguous subarray that contains at most k distinct values, where the empty subarray (sum 0) is always a valid candidate.</p>
+<p><strong>Pattern:</strong> Two-pointer sliding window (distinct-count constraint) combined with a monotonic deque for sliding-window-minimum-of-prefix-sum.</p>
+<p><strong>Key insight:</strong> For a fixed right end <code>r</code>, the set of valid left ends is a contiguous, monotonically-non-decreasing-with-r range <code>[lo(r), r]</code> (shrinking the window from the left never increases distinct count). The best sum of a subarray ending at <code>r</code> within that range is <code>prefix[r] - min(prefix[lo(r)-1 .. r-1])</code>, and since both ends of that min-window move only rightward as <code>r</code> grows, a monotonic deque tracks the running minimum in amortized O(1) per step.</p>
+<p><strong>Walkthrough:</strong> Sample 1, N=11, k=2, A=[1,2,2,3,2,3,5,1,2,1,1]. As r sweeps right, <code>lo(r)</code> tracks to keep ≤2 distinct values in window; the best window found is indices 2..6 (1-indexed) = [2,2,3,2,3], sum 12. Sample 2: A=[-1,-2,-3], k=1 — every non-empty subarray has negative sum, so empty subarray (0) wins. Sample 3: A=[-1,1,3,2,-1], k=5 (k≥N so no distinct constraint) — best is [1,3,2]=6, dropping the leading and trailing −1s.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+from collections import deque, defaultdict
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    k = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(n)]; idx += n
+
+    prefix = [0] * (n + 1)
+    for i in range(n):
+        prefix[i + 1] = prefix[i] + A[i]
+
+    freq = defaultdict(int)
+    distinct = 0
+    l = 0
+    dq = deque()
+
+    def dq_push(pidx):
+        while dq and prefix[dq[-1]] &gt;= prefix[pidx]:
+            dq.pop()
+        dq.append(pidx)
+
+    dq_push(0)
+    best = 0
+    for r in range(1, n + 1):
+        v = A[r - 1]
+        freq[v] += 1
+        if freq[v] == 1:
+            distinct += 1
+        while distinct &gt; k:
+            lv = A[l]
+            freq[lv] -= 1
+            if freq[lv] == 0:
+                distinct -= 1
+            l += 1
+        while dq and dq[0] &lt; l:
+            dq.popleft()
+        cur = prefix[r] - prefix[dq[0]]
+        if cur &gt; best:
+            best = cur
+        dq_push(r)
+
+    print(best)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(n) time (amortized, two pointers + deque), O(n) space.</p>
+<p><strong>Trap:</strong> Negative values mean the "longest valid window" is <em>not</em> necessarily the best window — must take the max-suffix-sum inside the valid window (via the min-prefix trick), not just sum the whole window.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (12), sample 2 ✓ (0), sample 3 ✓ (6)</p>
+<hr />
+<h3>3. Minimum initial oil to minimize disturbances — EASY</h3>
+<p><strong>Problem in one paragraph:</strong> N people process sequentially; A[i]=1 sells a litre (fails/"disturbs" if tank is at capacity C), A[i]=-1 buys a litre (fails/"disturbs" if tank is empty). Choose the minimum initial oil X (before anyone acts) that achieves the fewest possible disturbances.</p>
+<p><strong>Pattern:</strong> Prefix-sum / "minimum starting value to avoid going negative" (Kadane-adjacent classic).</p>
+<p><strong>Key insight:</strong> Underflow disturbances (can't buy from an empty tank) are avoidable by raising X; overflow disturbances (can't sell into a full tank) are capacity-bound and X can't fix them (case 3 proves this — X=0 still lets a disturbance happen because the tank literally hits capacity C regardless of start). The minimum X that eliminates every avoidable underflow is the classic <code>X = max(0, -min_prefix_sum)</code>, where <code>min_prefix_sum</code> is the minimum prefix sum of A (including the empty prefix 0); this doesn't need to know C at all because raising X only ever prevents underflow, never trades against overflow (overflow is checked against C independently and capping doesn't change the walk's future trajectory since a rejected transaction just doesn't happen).</p>
+<p><strong>Walkthrough:</strong> Case 1: A=[-1,1,1], prefix sums 0,-1,0,1 → min prefix = -1 → X = 1. Case 2: A=[-1,-1,1], prefix sums 0,-1,-2,-1 → min = -2 → X = 2. Case 3: A=[1,1,1,1], prefix sums 0,1,2,3,4, min = 0 → X = 0 (matches, since all disturbance here is capacity-driven, not X-driven).</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    c = int(data[idx]); idx += 1  # capacity read but unused in the formula
+    A = [int(data[idx + i]) for i in range(n)]; idx += n
+
+    prefix = 0
+    min_prefix = 0
+    for v in A:
+        prefix += v
+        if prefix &lt; min_prefix:
+            min_prefix = prefix
+    print(max(0, -min_prefix))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(n) time, O(1) space.</p>
+<p><strong>Trap:</strong> C is given in the input but does not appear in the answer formula at all — resist the urge to clamp X by C; all three samples confirm C-independence.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (1), sample 2 ✓ (2), sample 3 ✓ (0)</p>
+<hr />
+<h3>4. Minimum moves to reduce army to 1 — EASY</h3>
+<p><strong>Problem in one paragraph:</strong> Starting from N soldiers, each move is either subtract 1, or replace N with <code>floor(N/2)</code>, or replace N with <code>floor(N/3)</code>. Find the minimum number of moves to reach exactly 1. (The PDF's wording "reduce by half/two-thirds" is misleading — the worked trace for N=3→1 in one "half" move only holds if the move directly sets N to <code>floor(N/2)</code>, not "N minus half of N"; <code>3 - floor(3/2) = 2 ≠ 1</code>, but <code>floor(3/2) = 1</code> matches. Treat the moves as direct floor-division, not subtraction.)</p>
+<p><strong>Pattern:</strong> Recursive memoized "integer replacement" (extended to two divisors) — the classic trick for Leetcode-397-style problems, generalized to divide-by-3.</p>
+<p><strong>Key insight:</strong> Rather than branching on <code>-1</code> as a separate move at every value (which blows up for N up to 1e9), fold the "-1 until divisible" cost directly into the divide branch: going from N to <code>floor(N/2)</code> costs <code>(N mod 2) + 1</code> moves (drop the remainder, then divide), and symmetrically for 3. Recursing only through these two branches and memoizing visits O(log N) distinct large values, each doing O(1) work plus two recursive calls — total work is O(log N) with small memo overhead.</p>
+<p><strong>Walkthrough:</strong> N=6: <code>6 mod 2 = 0</code> → <code>1 + f(3)</code>; <code>6 mod 3 = 0</code> → <code>1 + f(2)</code>. <code>f(3)</code>: <code>3 mod 2=1</code>→<code>2+f(1)=2</code>; <code>3 mod 3=0</code>→<code>1+f(1)=1</code>. So <code>f(3)=1</code>. <code>f(2)</code>: <code>2 mod2=0</code>→<code>1+f(1)=1</code>; <code>2 mod3=2</code>→<code>3+f(0)=3</code>. So <code>f(2)=1</code>. Back at f(6): <code>min(1+f(3), 1+f(2)) = min(1+1, 1+1) = 2</code>. Matches sample output 2.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def main():
+    n = int(sys.stdin.readline())
+    sys.setrecursionlimit(10000)
+    memo = {1: 0, 0: 0}
+
+    def solve(x):
+        if x in memo:
+            return memo[x]
+        best = min(x % 2 + 1 + solve(x // 2), x % 3 + 1 + solve(x // 3))
+        memo[x] = best
+        return best
+
+    print(solve(n))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(log N) time and recursion depth / memo size, O(log N) space.</p>
+<p><strong>Trap:</strong> The move semantics ("reduce BY half") are worded as subtraction but the worked example proves it's direct floor-division to N/2 (and by symmetry N/3) — coding the literal subtraction reading (<code>N - floor(N/2)</code> = <code>ceil(N/2)</code>) silently passes even-N cases but fails odd N (e.g. 3→1 becomes 3→2), so must be caught against the sample trace, not the prose.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (3), sample 2 ✓ (0), sample 3 ✓ (2). Also spot-checked N=999999999 → runs in well under a second (29 moves).</p>
+<hr />
+<h3>6. Maximum "expert number" partition — MEDIUM</h3>
+<p><strong>Problem in one paragraph:</strong> N employees on floors 1..N with skill A[i] (constraints say <code>1&lt;=A[i]&lt;=1000</code> but samples use 0 — read A[i] as 0..1000). Partition the array into contiguous teams; each team's value is its mex (smallest skill value ≥0 absent from the team). Maximize the sum of team mex values over all partitions.</p>
+<p><strong>Pattern:</strong> DP over partition points, <code>dp[i] = max over j&lt;i of dp[j] + mex(A[j..i-1])</code>, accelerated using the fact mex is bounded by <code>maxA + 1</code> and is monotonic non-decreasing as the window grows leftward.</p>
+<p><strong>Key insight:</strong> As the segment start <code>j</code> moves left from <code>i-1</code>, mex(j..i-1) is non-decreasing and saturates once all values <code>0..maxA</code> have appeared (at most <code>maxA+2</code> distinct extensions matter). Track it incrementally with a <code>seen</code> array while scanning left; once mex saturates, the mex term stops changing, so the rest of the range's contribution collapses to <code>max(dp[j'])</code> for <code>j'</code> in the remaining prefix — which is answered instantly via a running prefix-max array <code>pmax</code>, so the "expensive" walk per <code>i</code> is capped at <code>O(maxA)</code> and the tail is O(1).</p>
+<p><strong>Walkthrough:</strong> Sample 1: A=[0,2,1,1]. Best partition [0,2,1],[1]: mex([0,2,1])=3 (0,1,2 present, 3 missing... wait 1 present, 2 present, 0 present → mex=3), mex([1])=0 (0 absent). Total 3+0=3, matching output.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(n)]; idx += n
+
+    maxv = 1001
+    dp = [0] * (n + 1)
+    pmax = [0] * (n + 1)
+    seen = [False] * (maxv + 2)
+    for i in range(1, n + 1):
+        touched = []
+        mex = 0
+        best = -1
+        j = i - 1
+        while j &gt;= 0:
+            v = A[j]
+            if v &lt;= maxv + 1 and not seen[v]:
+                seen[v] = True
+                touched.append(v)
+                while mex &lt;= maxv + 1 and seen[mex]:
+                    mex += 1
+            cand = dp[j] + mex
+            if cand &gt; best:
+                best = cand
+            if mex &gt; maxv:
+                j -= 1
+                break
+            j -= 1
+        if j &gt;= 0:
+            tail = pmax[j] + mex
+            if tail &gt; best:
+                best = tail
+        for v in touched:
+            seen[v] = False
+        dp[i] = best
+        pmax[i] = max(pmax[i - 1], dp[i])
+    print(dp[n])
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(n · maxA) time (~1e5 × ~1e3 ≈ 1e8 worst case — tight in Python; in C++/PyPy comfortable, in CPython budget extra time or consider PyPy submission if the judge allows it), O(n) space.</p>
+<p><strong>Trap:</strong> The "expensive" per-<code>i</code> scan must stop the moment mex saturates and hand off to the prefix-max array — without that cutoff this degrades to true O(n²) and will TLE on the full 1e5 constraint even though it's correct on all samples.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (3), sample 2 ✓ (5), sample 3 ✓ (10)</p>
+<hr />
+<h3>7. Covered ranges over dynamic connected components — MEDIUM</h3>
+<p><strong>Problem in one paragraph:</strong> n nodes, initially no edges; <code>beauty(s)</code> of a node-value-set is the number of maximal runs of consecutive integers needed to cover it. Process q queries: type 1 adds an edge (merging two components); type 2 asks for the covered-range count of the component containing a given node. Output the sum of all type-2 answers mod 1e9+7.</p>
+<p><strong>Pattern:</strong> Weighted-union DSU (small-to-large merging) where each component additionally tracks a Python <code>set</code> of its node values and a running count of "adjacent pairs" (x, x+1 both present) — covered-range count = component size − adjacent-pair count.</p>
+<p><strong>Key insight:</strong> <code>beauty(s) = |s| − (number of x in s with x+1 also in s)</code>, because each such adjacency merges two would-be separate runs into one. When merging two components via small-to-large, only the elements of the <em>smaller</em> set need to be checked against the <em>larger</em> set's membership for new adjacencies crossing the merge boundary — this keeps total work O(n log n) since every element is moved into a bigger set at most O(log n) times.</p>
+<p><strong>Walkthrough:</strong> Sample 3: n=10, edge (1,4) merges components {1} and {4} into {1,4}; no x has x+1 also present (1+1=2 not in set, 4+1=5 not in set) → adjacency 0 → covered ranges = 2 − 0 = 2. Query on node 1 and node 4 both resolve to this same component, giving 2 + 2 = 4, matching output.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+
+def main():
+    data = sys.stdin.buffer.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    q = int(data[idx]); idx += 1
+    t = int(data[idx]); idx += 1
+
+    parent = list(range(n + 1))
+    node_set = [None] * (n + 1)
+    adj_count = [0] * (n + 1)
+    size = [1] * (n + 1)
+    for v in range(1, n + 1):
+        node_set[v] = {v}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra == rb:
+            return
+        if size[ra] &lt; size[rb]:
+            ra, rb = rb, ra
+        big_set = node_set[ra]
+        small_set = node_set[rb]
+        adj = adj_count[ra] + adj_count[rb]
+        for x in small_set:
+            if (x - 1) in big_set:
+                adj += 1
+            if (x + 1) in big_set:
+                adj += 1
+        big_set.update(small_set)
+        adj_count[ra] = adj
+        size[ra] += size[rb]
+        parent[rb] = ra
+        node_set[rb] = None
+
+    total = 0
+    for _ in range(q):
+        row = data[idx:idx + t]; idx += t
+        typ = int(row[0])
+        if typ == 1:
+            union(int(row[1]), int(row[2]))
+        else:
+            r = find(int(row[1]))
+            total += size[r] - adj_count[r]
+
+    print(total % (10**9 + 7))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O((n+q) α(n) + n log n) amortized time (small-to-large merging), O(n) space.</p>
+<p><strong>Trap:</strong> Must check adjacency in <em>both</em> directions (x−1 and x+1) for every element crossing the merge boundary — checking only one direction undercounts adjacent pairs and inflates the covered-range answer.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (1), sample 2 ✓ (2), sample 3 ✓ (4)</p>
+<hr />
+<h3>8. Minimum jumps around a circular jump-chair game — MEDIUM</h3>
+<p><strong>Problem in one paragraph:</strong> N chairs in a circle, chair i lets you jump exactly A[i] chairs left or right (wrapping around). Starting at chair X, find the minimum number of jumps to reach chair Y, or -1 if unreachable.</p>
+<p><strong>Pattern:</strong> BFS on an implicit graph where each node has exactly 2 outgoing edges (jump distance is fixed per-node, direction is the only choice).</p>
+<p><strong>Key insight:</strong> Because each chair has a <em>fixed</em> jump length (only direction is free), the state space is just the N chairs themselves (no extra dimension needed), so plain BFS from X with the two candidate neighbors <code>(pos - 1 ± A[pos]) mod N + 1</code> (1-indexed, mod-wrapped) finds the shortest path in O(N) total.</p>
+<p><strong>Walkthrough:</strong> Case 1: N=5, X=5, Y=1, A=[1,2,3,2,4] (1-indexed). From chair 5, A[5]=4: right → (5-1+4)%5+1 = 3+1... compute: (4+4)%5+1 = 8%5+1=3+1=4; left → (4-4)%5+1=0+1=1 = Y. Reached in 1 jump. Matches output 1.</p>
+<p><strong>Solution (Python, tested):</strong></p>
+<pre><code class="language-python">import sys
+from collections import deque
+
+def main():
+    data = sys.stdin.read().split()
+    idx = 0
+    n = int(data[idx]); idx += 1
+    x = int(data[idx]); idx += 1
+    y = int(data[idx]); idx += 1
+    A = [0] + [int(data[idx + i]) for i in range(n)]
+
+    if x == y:
+        print(0)
+        return
+
+    dist = [-1] * (n + 1)
+    dist[x] = 0
+    dq = deque([x])
+    while dq:
+        cur = dq.popleft()
+        step = A[cur]
+        for nxt in ((cur - 1 + step) % n + 1, (cur - 1 - step) % n + 1):
+            if dist[nxt] == -1:
+                dist[nxt] = dist[cur] + 1
+                if nxt == y:
+                    print(dist[nxt])
+                    return
+                dq.append(nxt)
+
+    print(dist[y])
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><strong>Complexity:</strong> O(N) time and space.</p>
+<p><strong>Trap:</strong> Both jump directions can land on the <em>same</em> chair (e.g. when the jump length is a multiple related to N), so dedupe/guard against re-adding an already-visited chair — a naive BFS without the <code>dist == -1</code> check before enqueue can double-enqueue and waste time but won't break correctness; the real trap is the 1-indexed circular wraparound arithmetic (<code>(cur - 1 ± step) % n + 1</code>), easy to get off-by-one.</p>
+<p><strong>Verified:</strong> sample 1 ✓ (1), sample 2 ✓ (3), sample 3 ✓ (-1)</p>
+<hr />
+<h3>9. Probability of a "great" ball chain — MEDIUM</h3>
+<p><strong>Problem in one paragraph:</strong> Build a length-N chain by repeatedly appending a blue ball (prob B/1e6) or red ball (prob R/1e6). The chain is "good" if at every prefix, blue count ≤ red count + K. It's "great" if it's good <em>and</em> its reversal, matched ball-for-ball against the original (blue↔red swap condition), also satisfies a mirrored constraint. Find the probability (mod 1e9+7, using modular inverse for the /1e6 probabilities) of a great chain of length N, with N up to 1e9.</p>
+<p><strong>Pattern:</strong> This is a constrained-lattice-path counting problem (bounded difference walk, like a ballot-problem / Catalan-style reflection count) whose recurrence in N needs matrix exponentiation (or reflection-principle closed form) because N can be up to 1e9 — a per-step O(N) DP is infeasible.</p>
+<p><strong>Key insight:</strong> The "good" constraint (blue−red ≤ K at every prefix) restricts valid sequences to a bounded strip, whose counting recurrence over chain length is linear in the state (current blue−red difference, clipped to a window of size ~2K), so the transition can be expressed as a fixed-size matrix and raised to the Nth power via fast exponentiation in O(K³ log N). The extra "great" (reversal-matching) condition further restricts which of those walks qualify, likely collapsing to a much smaller closed form (the sample answers being single very specific residues mod 1e9+7 supports a closed-form count rather than a full DP, but deriving that closed form from the reflection principle under time pressure is the actual bottleneck, not the matrix-exponentiation machinery itself).</p>
+<p><strong>Approach sketch:</strong>
+- Pattern: bounded-difference walk + matrix exponentiation (state = clipped blue−red difference, size O(K) ≤ 100 per constraints, so K≤100 keeps the matrix at most ~201×201).
+- Idea: build transition matrix M where M[s'][s] = probability of moving from difference-state s to s' in one ball (weighted by B/1e6 or R/1e6, using modular inverse of 1e6 mod 1e9+7), restricted to states satisfying the "good" bound; multiply the initial state vector by M^N (binary exponentiation, matrix mult mod 1e9+7); the "great" condition needs a second pass — likely intersecting forward-walk-good with backward-walk-good via a symmetric argument, but the exact reduction needs careful reflection-principle derivation before it can be coded correctly.
+- Complexity target: O(K³ log N) time, O(K²) space, with K ≤ 100 → K³ ≈ 1e6, times log(1e9) ≈ 30 → ~3e7 matrix-mult operations — feasible if K is small, but the exact state space size and the "great" reduction need to be nailed down on paper first.
+- Full implementation not exact matrix skip-tier — full implementation not exam-critical — skip-tier. If this is one of your 3 chosen questions tomorrow, budget it only after confirming the other two are solid, and be ready to hand-derive the "great" reduction from scratch under time pressure.</p>
+<p><strong>Complexity:</strong> O(K³ log N) time target (K ≤ 100), O(K²) space — not verified by execution.</p>
+<p><strong>Trap:</strong> N up to 1e9 rules out any O(N) simulation outright — if you don't recognize the matrix-exponentiation requirement within the first few minutes of reading this problem, abandon it and pick a different question from the paper.</p>
+<hr />
+<h3>10. Maximum "amazingness" partition with XOR-basis beauty — MEDIUM</h3>
+<p><strong>Problem in one paragraph:</strong> Partition array A (size N) into contiguous subarrays each of length ≥ K. Each subarray's "beauty" is the maximum XOR achievable by any subset of its elements. Maximize the sum of beauties ("amazingness") over all valid partitions.</p>
+<p><strong>Pattern:</strong> DP over partition points combined with a linear-algebra XOR basis (linear basis / "XOR basis", Gaussian-elimination-style over GF(2)) to compute max-subset-XOR of a range efficiently, likely via a persistent/incremental basis structure since ranges vary.</p>
+<p><strong>Key insight:</strong> The maximum XOR of any subset of a set of numbers equals the maximum value representable by their XOR-linear-basis (build via Gaussian elimination on bits, then greedily combine basis vectors from high bit to low). The partition DP itself is straightforward (<code>dp[i] = max over valid j of dp[j] + maxXorBasis(A[j+1..i])</code>), but efficiently maintaining <code>maxXorBasis</code> for a sliding/arbitrary range — needed because the DP must consider many different segment boundaries, not just one fixed range — requires either a segment tree of merged bases (each merge is O(bits²)) or a clever monotonic-window argument; this is the part that pushes it into genuinely heavy-machinery territory for exam time pressure.</p>
+<p><strong>Approach sketch:</strong>
+- Pattern: segment tree where each node stores the XOR-basis (array of up to ~20 basis vectors for values up to 1e5) of its range, merged bottom-up (merging two bases costs O(bits²) ≈ 400 ops); range basis-query in O(log n · bits²).
+- DP: <code>dp[i] = max over j &lt;= i-K of dp[j] + basisMaxXor(query(j+1, i))</code>, naively O(n²) query calls — the real difficulty is finding which <code>j</code> to actually try without checking all of them, likely exploiting that basis value only takes on relatively few distinct "shapes" as the window grows, similar in spirit to problem 6's mex-saturation trick but for XOR-basis rank (rank is bounded by ~17 bits for A[i] ≤ 1e5), so once the basis is "full rank" further leftward extension can't increase beauty and the same prefix-max collapse applies.
+- Complexity target: O(n · bits²) if the full-rank-saturation trick applies cleanly (analogous to problem 6), else O(n² · bits²) worst case.
+- Full implementation not exam-critical — skip-tier; the algorithmic pieces (XOR basis, basis merge) are individually standard, but combining them correctly with the length-≥K constraint and proving the saturation-cutoff bound holds needs paper time this exam doesn't give.</p>
+<p><strong>Complexity:</strong> O(n · bits²) target (bits ≈ 17 for A[i] ≤ 1e5), O(n · bits) space — not verified by execution.</p>
+<p><strong>Trap:</strong> The length-≥K constraint on every subarray means you cannot just greedily take singleton segments even when K=1 looks tempting (sample 2 shows K=1 does allow all-singletons and that is in fact optimal there) — but for K&gt;1 the DP transition must explicitly forbid segment lengths below K, which is easy to forget when adapting a generic partition-DP template.</p>
+<hr />
+<h2>Summary</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Title</th>
+<th>Tier</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Range AP-assign + range sum</td>
+<td>EASY</td>
+<td>Sketch (segment-tree AP lazy — skip-tier)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Max-sum ≤k-distinct subarray</td>
+<td>EASY</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Minimum initial oil</td>
+<td>EASY</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Reduce army to 1</td>
+<td>EASY</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Max expert number partition</td>
+<td>MEDIUM</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Covered ranges via DSU</td>
+<td>MEDIUM</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Circular jump-chair BFS</td>
+<td>MEDIUM</td>
+<td>Verified, all 3 samples ✓</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Great ball chain probability</td>
+<td>MEDIUM</td>
+<td>Sketch (matrix exponentiation — skip-tier)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>XOR-basis partition amazingness</td>
+<td>MEDIUM</td>
+<td>Sketch (XOR basis segment tree — skip-tier)</td>
+</tr>
+</tbody>
+</table></div></details>
+<details ><summary><h2>Hard &amp; Complex tier — recognition sketches + attack/skip verdicts</h2></summary><div class="inner"><h1>Hard-tier approach sketches — Infosys P1 &amp; P3</h1>
+<p>Exam-eve recognition sketches, not editorials. Goal: recognize the shape in
+under 2 minutes and make the attempt/skip call.</p>
+<hr />
+<h2>Set: infy_p1.txt (HARD problems)</h2>
+<h3>Minimum k for path length &gt;= m in "adjacent-if-smaller" graph — P1 HARD #11</h3>
+<p><strong>Problem in one paragraph.</strong> Given permutation p of length n, edge i-&gt;j exists iff p[i]&lt;p[j] and |i-j|&lt;=k. Find minimum k such that the graph's longest path has &gt;= m nodes.</p>
+<p><strong>Recognition signals:</strong>
+- "minimum k such that some monotonic property holds" -&gt; answer is monotonic in k -&gt; binary search on k.
+- "longest path" on a DAG defined by index-window + value-increasing -&gt; this is LIS with a window constraint, not general longest-path (the graph is a DAG since edges only go from smaller value to larger value along any orientation — still need care, but it's DAG-like via topological order of values).
+- n &lt;= 1e5 rules out any O(n^2) longest-path recomputation per binary-search step; needs an O(n log n) check.</p>
+<p><strong>Attack or skip?</strong> Skip on sight. Even though "binary search + windowed-LIS with a Fenwick/segment tree keyed by value" is the right idea, implementing a correct O(n log n) longest-path-under-window check from scratch under exam pressure is a 45+ minute build with multiple failure points (segment tree over values needs range updates as the window slides). Not a 60-85 min problem for a non-competitive candidate.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. Binary search on k in [0, n-1]; property "longest path &gt;= m" is monotonic in k (larger k only adds edges).
+2. For a fixed k, compute longest increasing chain where step i-&gt;j is allowed only if |i-j|&lt;=k and p[i]&lt;p[j].
+3. Process indices left to right; maintain a Fenwick/segment tree indexed by value p[i], storing best chain length ending at that value, but only considering indices within the last k window (need a second structure, e.g. sorted by index, to expire old entries — or offline sliding-window max over value ranges).
+4. Query max chain length for values &lt; p[i] among indices in [i-k, i-1], update at p[i].
+5. Check if the max computed value &gt;= m; adjust binary search bounds.</p>
+<p><strong>Complexity target:</strong> O(n log n log n) — binary search (log n) x each check (n log n).</p>
+<p><strong>Trap:</strong> The "window" constraint (|i-j|&lt;=k) turns a plain LIS Fenwick trick into a sliding-window LIS, which needs expiring old updates — easy to get wrong under time pressure.</p>
+<hr />
+<h3>Max XP with next-multiple pointer + range-max reuse — P1 HARD #12</h3>
+<p><strong>Problem in one paragraph.</strong> N soldiers with power A[i] (values 1..N/2, each appearing twice), and Bonus[i] per chest. For each i, find R = the first soldier to i's right whose power is a multiple of A[i]; if found, add max(Bonus[i..R]) to total XP.</p>
+<p><strong>Recognition signals:</strong>
+- "first element to the right satisfying property X" -&gt; monotonic stack or per-value next-occurrence tracking, not a naive O(n^2) scan.
+- "power is a multiple of A[i]" with A[i] in [1, N/2] and only two occurrences per value -&gt; can precompute next occurrence of every multiple of A[i] cheaply because divisor-multiple enumeration is O(N log N) in total (harmonic series), not per-query.
+- Need range-max queries (Bonus[i..R]) -&gt; sparse table / RMQ since ranges are static (no updates).</p>
+<p><strong>Attack or skip?</strong> Attack if time remains after banking easier ones — the core trick (harmonic-series precompute of "next index to the right with power = multiple of A[i]") is a known pattern, and RMQ is standard. ~70-85 min including RMQ setup. Otherwise skip in favor of safer problems.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. Build sparse table (RMQ) over Bonus for O(1) range-max queries.
+2. For each value v from 1 to N/2, keep list of multiples of v that occur as some A[j]; iterating v=1..N/2 and jumping by v is O((N/2) log(N/2)) total (harmonic sum).
+3. For each index i (scanning right to left, or precomputing per value), find the minimum j&gt;i among indices where A[j] % A[i]==0 (nearest to the right) — precompute via, for each value w, sorted list of indices with A[index]==w, then for A[i] iterate multiples of A[i] and binary-search the next index &gt; i in each multiple's index-list, take the overall minimum.
+4. If found R, add RMQ(i, R) to answer; else add 0.
+5. Sum across all i, output total.</p>
+<p><strong>Complexity target:</strong> O(N log N) for the harmonic-sum multiple enumeration + O(N log N) sparse table build, O(1) per RMQ query.</p>
+<p><strong>Trap:</strong> Enumerating multiples per i naively (checking every j&gt;i) is O(n^2) — the trick is enumerating by VALUE (all multiples of A[i]) using each value's sorted index list, not by scanning positions.</p>
+<hr />
+<h3>Pair counting with frequency/distinct-based inequality — P1 HARD #13</h3>
+<p><strong>Problem in one paragraph.</strong> Given A[1..N], count pairs (i,j), i&lt;j, satisfying frequency(1,i,A[i]) + frequency(j,N,A[j]) &lt;= floor(distinct(1,i)/2) + floor(distinct(j,N)/2).</p>
+<p><strong>Recognition signals:</strong>
+- Both sides of the inequality split cleanly into a "prefix" term (depends only on i) and a "suffix" term (depends only on j) -&gt; classic "compute left value per i, right value per j, then count pairs i&lt;j with leftVal[i] - leftThresh[i] &lt;= rightThresh[j] - rightVal[j]" -&gt; Fenwick/BIT over a transformed key, counting pairs across a boundary.
+- "frequency" and "distinct" over prefixes/suffixes with N&lt;=1e5 and A[i] up to 1e9 -&gt; needs coordinate compression + one online pass per direction (frequency-so-far and distinct-so-far are easy running counters).
+- The final condition reduces to L[i] &lt;= R[j] for a single combined integer per side -&gt; this is now "count pairs i&lt;j with L[i] &lt;= R[j]" -&gt; sort/Fenwick over value range.</p>
+<p><strong>Attack or skip?</strong> Skip on sight unless very strong with BIT-based pair counting — the reduction to a clean L[i] &lt;= R[j] form takes real algebra to get right (sign errors in the floor-division split are easy), and it must be re-derived live under time pressure. Genuinely hard-tier; not a 60-85 min build for most candidates.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. Precompute for each i: freqL[i] = frequency(1,i,A[i]) and distL[i] = distinct(1,i), both via a single left-to-right pass with a hashmap counting occurrences and a running distinct counter.
+2. Precompute for each j: freqR[j] = frequency(j,N,A[j]) and distR[j] = distinct(j,N), via a symmetric right-to-left pass.
+3. Define Lval[i] = freqL[i] - floor(distL[i]/2), Rval[j] = floor(distR[j]/2) - freqR[j]; condition becomes Lval[i] &lt;= Rval[j].
+4. Coordinate-compress all Lval/Rval together; sweep j from 1 to N maintaining a Fenwick of Lval[i] counts for i&lt;j, querying count of Lval[i] &lt;= Rval[j] before inserting Lval[j]... careful: insert Lval[i] as i is passed, query at each j.
+5. Sum Fenwick query results modulo 1e9+7.</p>
+<p><strong>Complexity target:</strong> O(N log N).</p>
+<p><strong>Trap:</strong> Getting the floor-division split algebraically right (⌊distL[i]/2⌋ vs ⌊distR[j]/2⌋ living on opposite sides of the inequality) — a single sign slip silently produces a wrong-but-plausible answer.</p>
+<hr />
+<h3>Tree rerooting subtree-intersection sum — P1 HARD #14</h3>
+<p><strong>Problem in one paragraph.</strong> Tree with parent array P (as given, rooted arbitrarily by the array but conceptually re-rooted at A and at B for each query). beauty(U,V) = size of intersection of subtree(U) when rooted at A and subtree(V) when rooted at B. Answer to each query is beauty for transformed (U,V), where U,V evolve using K = previous answer; sum all answers mod 1e9+7.</p>
+<p><strong>Recognition signals:</strong>
+- "subtree when rooted at A" and "subtree when rooted at B" simultaneously -&gt; classic double-rooting / Euler-tour-per-root problem; intersection-of-two-subtrees-from-different-roots is a known hard pattern (needs LCA-style case analysis on the <em>original</em> tree, not literal re-rooting per query).
+- Online queries where next query depends on previous answer (K feedback loop) -&gt; forces true per-query O(log n), rules out any per-query re-rooting/BFS.
+- Q, N &lt;= 1e5 -&gt; need O((N+Q) log N) total after O(N log N) preprocessing.</p>
+<p><strong>Attack or skip?</strong> Skip on sight. This is the textbook "intersection size of subtree(u) rooted at r1 and subtree(v) rooted at r2" problem, which requires classifying u/v against both roots via LCA and Euler-tour subtree-size arithmetic (multiple case splits: is r2 in subtree(u) rooted at r1, etc.) — a well-known hard problem that takes real preparation to reproduce correctly, not something to derive live.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. Root the tree once (e.g. at node 1 using P), compute Euler tour in/out times, depths, and a binary-lifting LCA structure.
+2. For query (u, v, rootA, rootB), the intersection size formula depends on the relative positions of u, v, rootA, rootB using LCA-based case analysis (standard formula: intersection of subtree(u) rooted at a and subtree(v) rooted at b reduces to a small number of cases involving whether a/b fall inside subtree(u)/subtree(v) under the fixed root).
+3. Apply the online transform for U, V using K after each query, mod N.
+4. Compute beauty via the case-analysis formula in O(log N) (LCA + subtree-size lookups), no literal re-rooting.
+5. Accumulate sum mod 1e9+7.</p>
+<p><strong>Complexity target:</strong> O(N log N) preprocessing + O(Q log N) queries.</p>
+<p><strong>Trap:</strong> The online K-feedback (U,V depend on previous answer) means you cannot batch/offline the queries — must actually derive and code the correct case-split formula live.</p>
+<hr />
+<h2>Set: infy_p3.txt (all 4 problems, get_ans signature style)</h2>
+<h3>Perfect-square-pair subtree beauty sum — P3 1.1 EASY</h3>
+<p><strong>Problem in one paragraph.</strong> Tree rooted at 1, each node has value a[i]. beauty(u) = number of pairs of nodes in subtree(u) whose value product is a perfect square. Return sum of beauty(u) over all u, mod 1e9+7.</p>
+<p><strong>Recognition signals:</strong>
+- "value product is a perfect square" -&gt; factor out square part: reduce each a[i] to its squarefree kernel (divide out every prime to an even power); two numbers multiply to a perfect square iff they have the SAME squarefree kernel.
+- "sum of beauty over all subtrees" -&gt; classic small-to-large merging or Euler-tour + Fenwick-by-DFS-order counting technique (each pair (i,j) contributes to every ancestor of LCA(i,j), so precompute per-pair contribution = depth(LCA)+1, or equivalently accumulate via DSU-on-tree/small-to-large with a hashmap counting kernel frequency).
+- N &lt;= 1e5, values &lt;= 1e9 -&gt; squarefree-kernel factorization needs trial division up to sqrt(1e9) ~ 31623, feasible with precomputed small primes / Pollard's rho if needed, but likely trial division suffices given typical test data.</p>
+<p><strong>Attack or skip?</strong> Attack — despite EASY label this is more medium-shaped, but the two ideas (squarefree kernel + small-to-large merging counting equal-kernel pairs weighted by depth) are standard and learnable in prep; doable in ~60-70 min if squarefree factorization and small-to-large are already muscle memory. If not fluent in small-to-large, skip.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. For each a[i], compute squarefree kernel by trial-dividing out square factors (for each prime p&lt;=sqrt(a[i]), remove pairs of p).
+2. Root tree at 1, get DFS order and subtree sizes.
+3. Small-to-large merge: process children's kernel-frequency maps, merging into the larger map; each merge step, when inserting node i's kernel k, add (current count of k in the merged map) to beauty(current node) — this only gives beauty(u) itself.
+4. Since sum of beauty(u) for all ancestors = sum over pairs (i,j) of (depth of LCA(i,j)+1), equivalently: every time two same-kernel nodes are merged at ancestor u, that pair contributes 1 to beauty(u) AND to every ancestor of u — so instead accumulate contribution as you go up: when merging pair count c increases at node u, add c to a running "total answer" for every level up to root, OR use the equivalent identity sum_u beauty(u) = sum over good pairs (i,j) of (depth(LCA(i,j))+1).
+5. Simpler: for each good pair (i,j) found during small-to-large at their LCA, add (depth(LCA)+1) directly to a running total (mod 1e9+7) instead of trying to add to every ancestor's beauty individually.</p>
+<p><strong>Complexity target:</strong> O(N log^2 N) for small-to-large with hashmap, O(N sqrt(A_max)) for squarefree factorization.</p>
+<p><strong>Trap:</strong> None of the "EASY" label — this needs squarefree-kernel factorization, not literal perfect-square checking of products (values up to 1e9 make product up to 1e18, not directly testable by sqrt without bignum care, and doing it per-pair is O(n^2) anyway).</p>
+<hr />
+<h3>Good-subsequence-with-GCD count-YES-queries — P3 2.1 MEDIUM</h3>
+<p><strong>Problem in one paragraph.</strong> Array a, integer p. After each point-update query (replace a[i]), check if there EXISTS any non-empty subsequence of length &lt; n with GCD exactly p; count how many queries answer YES.</p>
+<p><strong>Recognition signals:</strong>
+- "does there exist a subsequence (length &lt; n) with GCD exactly p" -&gt; reduces to: does the multiset of elements divisible by p have GCD (of just those elements) equal to p, AND not all n elements are used (i.e., if fewer than n elements are divisible by p, any subset works; if all n are divisible by p, GCD of any n-1 of them must still be checked, but simpler: existence just needs "at least one non-empty subsequence with GCD exactly p", which typically reduces to "does GCD of all multiples-of-p elements equal exactly p" plus a length&lt;n technical exclusion).
+- Range-GCD after point updates with q&lt;=1e5 -&gt; segment tree supporting point-update + range/full-array GCD query.
+- <strong>This is the problem with the YES-count trap</strong> (see Trap below) — text describes YES/NO per query but the required OUTPUT is the total count of YES answers across all queries, not a list.</p>
+<p><strong>Attack or skip?</strong> Attack if segment-tree-with-GCD is fluent (point update + full-array or subset GCD query is a standard, small segment tree — 20-30 min to code). The existence condition itself needs careful thought (GCD of the subset divisible by p must equal p, and that subset must not be the entire array when n elements are involved) — moderate risk but recoverable. Reasonable ~50-70 min pick if segment trees are strong.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. Build a segment tree over a[] supporting point update and full-range GCD query (also track count of elements divisible by p, via a second segment tree or Fenwick counting divisibility-by-p).
+2. After each update, first check: is there at least one element divisible by p? If not, answer NO for this query.
+3. If yes, take the GCD of ALL elements divisible by p (via the segment tree restricted logically to those elements — can maintain a separate structure that stores element value if divisible by p else 0/identity, GCD-combining ignoring zeros).
+4. If that GCD equals exactly p, AND (count of divisible-by-p elements &lt; n, i.e., a valid non-empty PROPER subsequence exists — since using all n elements is disallowed when n elements are divisible by p, check count &lt; n or that a strict subset still achieves gcd p), answer YES; else NO.
+5. Increment a running "yes count" for every YES; output the running count after processing all queries (NOT per-query YES/NO output).</p>
+<p><strong>Complexity target:</strong> O((n+q) log n) with a GCD segment tree.</p>
+<p><strong>Trap:</strong> The stated "answer to each query is YES/NO" is misleading — the actual return/output is the COUNT of queries answered YES over the whole run, confirmed by the samples (outputs are 2, 3, 1 — running totals, not lists). Also the sample-3 walkthrough hints the official checker's exact edge-case logic around "subset excludes at least one divisible element" is subtle and may not match a naive interpretation — expect possible off-by-one risk on the length&lt;n boundary.</p>
+<hr />
+<h3>Longest non-decreasing subsequence with XOR &gt;= M, N&lt;=1000 — P3 3.1 HARD (label) — VERIFIED SOLVABLE</h3>
+<p><strong>Problem in one paragraph.</strong> Array A of length N&lt;=1000, integer M&lt;=500, A[i]&lt;=N. Find the length of the longest non-decreasing subsequence whose XOR of elements is &gt;= M.</p>
+<p><strong>Recognition signals:</strong>
+- N &lt;= 1000 (not 1e5!) with A[i] &lt;= N (small value range) -&gt; screams O(N^2) or O(N^2 x small-constant) DP is intended despite the "HARD" label; this is a giveaway that competitive-tier tricks are NOT required.
+- "non-decreasing subsequence" + "track XOR" -&gt; DP indexed by (position, xor-value-so-far), since XOR values are bounded by the next power of two above N (&lt;=1023 for N&lt;=1000) — small enough to be a DP dimension.
+- This is the standout "attack" pick among all 8 — small N is the tell.</p>
+<p><strong>Attack or skip? ATTACK.</strong> This is the one problem on this list a strong-but-not-competitive candidate should genuinely solve in the room. Plain O(N^2 x V) DP where V~1024 is conceptually simple (nested loop + dict), fits comfortably in an implementation window even without prior XOR-DP experience, and has been hand-verified below against all 3 official samples.</p>
+<p><strong>Approach in 5 steps max:</strong>
+1. For each index i, maintain dp[i] = dict mapping {xor_value -&gt; max subsequence length ending at i with that xor_value}, initialized dp[i][A[i]] = 1.
+2. For each j &lt; i with A[j] &lt;= A[i] (non-decreasing constraint), merge dp[j] into dp[i]: for each (x, len) in dp[j], candidate xor = x ^ A[i], candidate length = len+1; keep the max length per xor value.
+3. After filling dp[i] for all i, scan every dp[i] entry; if xor_value &gt;= M, track the maximum length seen.
+4. If no entry ever satisfies xor_value &gt;= M, the answer is 0 (single elements already count, so in practice only fails if M is unreachably large).
+5. Output the tracked maximum.</p>
+<p><strong>Complexity target:</strong> O(N^2 x V) worst case (V = distinct xor states per dp[i], bounded by ~1024) — roughly up to ~10^9 basic ops in the absolute worst case, but in practice the number of distinct xor states per index is far smaller; safely finishes well within typical exam time limits for N&lt;=1000, and is trivially fast enough for the sample tests. (If TLE is a real worry, cap can be tightened by deduplicating dominated states, but for N=1000 plain dict DP is the pragmatic exam choice.)</p>
+<p><strong>Trap:</strong> Don't confuse "non-decreasing subsequence" with the more familiar strictly-increasing LIS — equal values are allowed to chain (verified in sample 2, where [1,1] is a valid subsequence but its XOR=0 fails the M=1 bound, giving answer 1 not 2).</p>
+<p><strong>Verified Python (tested against all 3 official samples — all pass):</strong></p>
+<pre><code class="language-python">def get_ans(N, M, A):
+    dp = [None] * N
+    best = 0
+    for i in range(N):
+        cur = {A[i]: 1}
+        for j in range(i):
+            if A[j] &lt;= A[i]:
+                for x, l in dp[j].items():
+                    nx = x ^ A[i]
+                    cand = l + 1
+                    if cur.get(nx, 0) &lt; cand:
+                        cur[nx] = cand
+        dp[i] = cur
+        for x, l in cur.items():
+            if x &gt;= M and l &gt; best:
+                best = l
+    return best
+
+# Verified: get_ans(2,1,[1,2]) == 2
+# Verified: get_ans(2,1,[1,1]) == 1
+# Verified: get_ans(4,3,[1,2,3,4]) == 4
+</code></pre>
+<p>All three ran and matched official sample outputs exactly (2, 1, 4).</p>
+<hr />
+<h3>Tree edge-flip pattern matching (COMPLEX — for reference only) — P3 4.1 COMPLEX</h3>
+<p><strong>Problem in one paragraph.</strong> Rooted tree, binary node values, a matching of parent-child edges may be flipped (toggling both endpoints, cost M each). For each query binary string q, maximize the number of root-to-leaf paths containing q as a contiguous substring after flips, then minimize cost among optimal flip sets; sum minimum costs over all queries.</p>
+<p><strong>Recognition signals:</strong>
+- Labeled COMPLEX explicitly — combines matching-on-a-tree (which edges to flip, no shared endpoints) with substring-pattern DP per path per query, then an optimization (maximize count, minimize cost as tiebreak) repeated per query.
+- Q up to 1e5 with pattern length up to 1e5 total -&gt; needs something like Aho-Corasick or per-path automaton reuse, layered under a tree-DP for the flip-matching optimization — multi-technique fusion.
+- This is exactly the DROP-on-sight shape: multiple advanced techniques stacked (tree matching DP + string matching automaton + multi-objective optimization) with a tight per-query complexity budget.</p>
+<p><strong>Attack or skip?</strong> Drop on sight — explicitly labeled COMPLEX and confirmed by the problem shape. Not a reasonable use of any of the 3 attempted-question slots; the expected solution almost certainly needs Aho-Corasick over all queries plus a tree DP tracking flip state and partial pattern match state simultaneously — well beyond a 60-85 min build for this exam.</p>
+<p><strong>Approach in 5 steps max (for recognition only, not to attempt):</strong>
+1. Build Aho-Corasick automaton over all Q query strings (process queries offline together) to track partial-match states along any path in O(1) amortized per node visited.
+2. Tree DP per node tracking (Aho-Corasick state, whether the edge above this node was flipped, parity/cost) to know the best (max-matches, min-cost) reachable at each node for each automaton state.
+3. Since flips form a matching (no two flipped edges share a node), the DP at each node must consider three local choices: flip edge to parent (if parent didn't already flip elsewhere), or not, propagating value toggles accordingly.
+4. At each leaf, check terminal Aho-Corasick states to see which query patterns were matched as substrings along that root-to-leaf path; aggregate per query whether at least one path matches.
+5. For each query, take the minimum total flip cost achieving the maximum match count across all leaves/paths; sum over queries mod nothing specified (assume plain sum, output as integer).</p>
+<p><strong>Complexity target:</strong> roughly O((N + sum of query lengths) log N) with Aho-Corasick + tree DP if implemented correctly — but real implementation risk is very high.</p>
+<p><strong>Trap:</strong> Nothing to trap on since this should not be attempted — but note the problem's own explanations are DP-informal ("the DP determines...") without giving away the real algorithm, a sign the setters expect a nontrivial derivation, not a look-up pattern.</p></div></details>
+<div class="footer">Generated 17 Aug 2026 ~23:45. Editorials drafted by parallel agents against the extracted PDFs, sample-verified where marked; the two "solved by you" entries are from tonight's live tutoring session.</div>
+</main>
+</body>
+</html>
