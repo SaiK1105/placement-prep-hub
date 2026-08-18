@@ -1,6 +1,38 @@
 INFOSYS — CAMPUS DRIVE 18 AUG 2026 — RESEARCH NOTES
-Compiled 17 Aug 2026. Drive is "Regular Campus Hiring" covering ALL THREE roles
-(SE / SP / PP), per the candidate.
+Compiled 17 Aug 2026.
+
+╔═════════════════════════════════════════════════════════════════════╗
+║  ** SUPERSEDING CORRECTION — OFFICIAL SLIDES, 17 AUG ~16:00 **      ║
+║                                                                     ║
+║  ROUND 1 IS A PURE CODING TEST. THERE IS NO APTITUDE PAPER.         ║
+║                                                                     ║
+║  From the official Infosys pre-placement slides:                    ║
+║    "The assessment consists of a set of 4 Questions, of which you   ║
+║     must answer 3 within a 3-hour timeframe."                       ║
+║    "Shortlisting for Specialist Programmer and Digital Specialist   ║
+║     Engineer role will happen basis the performance in the test."   ║
+║    Tiers: Easy / Medium / Hard / Complex                            ║
+║    Languages: C, C++, Java, Python, JavaScript                      ║
+║                                                                     ║
+║  ROLES IN THIS DRIVE — NO SYSTEMS ENGINEER:                         ║
+║    DSE      INR  7 LPA  (6.25 LPA + 75,000 joining bonus)           ║
+║    SP L1    INR 11 LPA  (10 LPA + 1 lakh joining bonus)             ║
+║    SP L2    INR 16 LPA                                              ║
+║    SP L3    INR 21 LPA                                              ║
+║    All post 6-month probation. Health 5L, life cover 30L.           ║
+║                                                                     ║
+║  EVERYTHING BELOW ABOUT THE 7-SECTION / 120-MINUTE OLT (maths,      ║
+║  logical, verbal, pseudocode MCQ, puzzle, grammar, essay) DESCRIBES ║
+║  THE SYSTEMS ENGINEER MASS-HIRING TRACK AND IS **NOT THIS DRIVE**.  ║
+║  Retained only as an audit trail. DO NOT PREP FROM IT.              ║
+║                                                                     ║
+║  The Jan 2026 first-hand account at the bottom of this file IS      ║
+║  correct and directly applicable — it describes this exact          ║
+║  4-question format. That section is the useful one.                 ║
+╚═════════════════════════════════════════════════════════════════════╝
+
+[superseded] Drive was initially described as "Regular Campus Hiring covering
+all three roles (SE/SP/PP)"; the slides show DSE + SP L1/L2/L3 only.
 
 ═══════════════════════════════════════════════════════════════════════
 CONFIDENCE A — ON-DISK OFFICIAL DOCS (read directly, 17 Aug)
